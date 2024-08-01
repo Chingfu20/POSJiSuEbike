@@ -43,7 +43,6 @@
               Login
             </a>
             <ul class="dropdown-menu" aria-labelledby="adminDropdown">
-              <li><a class="dropdown-item" href="customer/index.php">Sign In</a></li>
               <li><a class="dropdown-item" href="login.php">Admin</a></li>
             </ul>
           </li>
