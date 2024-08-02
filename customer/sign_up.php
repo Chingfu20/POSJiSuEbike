@@ -50,7 +50,7 @@
 </div>
     <script>
         document.getElementById('signInButton').addEventListener('click', function() {
-            window.location.href = 'customer/index.php';
+            window.location.href = 'index.php';
         });
     </script>
 </body>
