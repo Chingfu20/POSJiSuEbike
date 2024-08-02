@@ -16,6 +16,7 @@
                             </a>
                             <div class="collapse <?= ($page == 'products-create.php') || ($page == 'products.php') ? 'show':''; ?>" id="collapseProduct" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link <?= $page == 'products-create.php' ? 'active':''; ?>" href="products-create.php">Create Product</a>
                                     <a class="nav-link <?= $page == 'products.php' ? 'active':''; ?>" href="products.php">View Products</a>
                                 </nav>
                             </div>
