@@ -1,6 +1,6 @@
 <?php
 
-define('DB_SERVER',"u510162695_db_jisu_pos");
+define('DB_SERVER',"localhost");
 define('DB_USERNAME',"u510162695_db_jisu_pos");
 define('DB_PASSWORD',"1Db_jisu_pos");
 define('DB_DATABASE',"u510162695_db_jisu_pos");
