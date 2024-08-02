@@ -27,7 +27,7 @@
                                Create Order
                             </a>
 
-                            <a class="nav-link <?= $page == 'orders.php' ? 'active':''; ?>" href="orders_copy.php">
+                            <a class="nav-link <?= $page == 'orders.php' ? 'active':''; ?>" href="orders.php">
                                <div class="sb-nav-link-icon"><i class="fas fa-shopping-cart"></i></div>
                                Orders
                             </a>
