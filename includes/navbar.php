@@ -37,7 +37,7 @@
           <li class="nav-item">
             <a class="nav-link active" href="logout.php">Logout</a>
           </li>
-        <?php else: ?>
+          <?php else: ?>
           <li class="nav-item dropdown active">
             <a class="nav-link dropdown-toggle active" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Login
