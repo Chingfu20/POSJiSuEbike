@@ -146,8 +146,8 @@ foreach ($sessionProducts as $key => $item) :
                         <input type="text" id="totalAmount" class="form-control" value="" readonly />
                     </div>
                     <div class="col-md-4">
-                        <label for="amountPaid">Enter Amount</label>
-                        <input type="number" id="amountPaid" class="form-control" placeholder="Enter amount here" />
+                        <label>Enter Amount</label>
+                        <input type="number" id="amountPaid" class="form-control" value="" />
                     </div>
                     <div class="col-md-4">
                         <label>Change</label>
