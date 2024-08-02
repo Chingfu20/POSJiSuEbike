@@ -135,7 +135,8 @@ foreach ($sessionProducts as $key => $item) :
                             <select id="payment_mode" class="form-select">
                                 <option value="">-- Select Payment --</option>
                                 <option value="Cash Payment">Cash Payment</option>
-                             </select>
+                                <option value="Online Payment"></option>
+                            </select>
                         </div>
                         <div class="col-md-4">
                         <label>Enter Customer Phone Number</label>
