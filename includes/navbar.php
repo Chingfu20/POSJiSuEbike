@@ -45,6 +45,9 @@
             <ul class="dropdown-menu" aria-labelledby="adminDropdown">
               <li><a class="dropdown-item" href="login.php">Admin</a></li>
             </ul>
+            <ul class="dropdown-menu" aria-labelledby="adminDropdown">
+              <li><a class="dropdown-item" href="login.php">signin</a></li>
+            </ul>
           </li>
         <?php endif; ?>
       </ul>
