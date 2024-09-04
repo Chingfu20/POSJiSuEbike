@@ -185,8 +185,8 @@ document.getElementById('saveOrder').addEventListener('click', function() {
             });
         }
     });
-   
-document.getElementById('amountPaid').addEventListener('input', updateChange);
+
+    document.getElementById('amountPaid').addEventListener('input', updateChange);
 
         function updateTotalPrice(element) {
             const row = element.closest('tr');
