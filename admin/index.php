@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="icon" type="image/x-icon" href="assets/img/logo.jpg">
+<link rel="icon" type="image/x-icon" href="assets/img/logo.jpg">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JiSu Ebike</title>
@@ -13,22 +14,18 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <style>
         :root {
-            --background-light: #f0f2f5;
-            --color-light: #212529;
-            --primary-color-light: #4caf50;
+            --background-light: #f8f9fa;
+            --color-light: #343a40;
+            --primary-color-light: #007bff;
             --background-dark: #343a40;
             --color-dark: #f8f9fa;
             --primary-color-dark: #17a2b8;
-            --card-bg-light: #ffffff;
-            --card-bg-dark: #454d55;
-            --shadow-light: rgba(0, 0, 0, 0.1);
-            --shadow-dark: rgba(0, 0, 0, 0.3);
         }
 
         body {
             background-color: var(--background-light);
             color: var(--color-light);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: Arial, sans-serif;
             transition: background-color 0.3s, color 0.3s;
         }
 
@@ -38,34 +35,33 @@
         }
 
         .card {
-            background-color: var(--card-bg-light);
-            border: none;
-            border-radius: 12px;
-            box-shadow: 0 4px 8px var(--shadow-light);
+            border: 1px solid #ddd;
+            border-radius: 8px;
             margin-bottom: 20px;
-            transition: background-color 0.3s, box-shadow 0.3s;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            background-color: #fff;
+            transition: background-color 0.3s, border-color 0.3s;
         }
 
         .dark-mode .card {
-            background-color: var(--card-bg-dark);
-            box-shadow: 0 4px 8px var(--shadow-dark);
+            background-color: #495057;
+            border-color: #6c757d;
         }
 
         .card-header {
-            background-color: transparent;
-            color: var(--color-light);
+            background-color: var(--primary-color-light);
+            color: white;
+            padding: 12px;
             font-size: 1.25rem;
-            font-weight: bold;
-            border-bottom: none;
-            text-align: center;
         }
 
         .dark-mode .card-header {
-            color: var(--color-dark);
+            background-color: var(--primary-color-dark);
         }
 
         .card-body {
-            padding: 20px;
+            padding: 15px;
         }
 
         .chart-container {
@@ -80,8 +76,6 @@
 
         .toggle-container {
             margin: 10px 0;
-            display: flex;
-            justify-content: center;
         }
 
         .toggle-switch {
@@ -106,23 +100,23 @@
             bottom: 0;
             background-color: #ccc;
             transition: .4s;
-            border-radius: 30px;
+            border-radius: 15px;
         }
 
         .slider:before {
             position: absolute;
             content: "";
-            height: 26px;
-            width: 26px;
+            height: 22px;
+            width: 22px;
             border-radius: 50%;
-            left: 2px;
-            bottom: 2px;
+            left: 4px;
+            bottom: 4px;
             background-color: white;
             transition: .4s;
         }
 
         input:checked + .slider {
-            background-color: var(--primary-color-light);
+            background-color: var(--primary-color-dark);
         }
 
         input:checked + .slider:before {
@@ -135,7 +129,6 @@
             color: var(--color-light);
             padding: 10px;
             text-align: center;
-            border-top: 1px solid #ddd;
         }
 
         body.dark-mode footer {
@@ -149,12 +142,12 @@
 <?php include('includes/header.php'); ?>
 
 <div class="container-fluid">
-    <h1 class="mt-4 mb-4 text-center">Dashboard Overview</h1>
+    <h1 class="mt-4"></h1>
 
     <?php alertMessage(); ?>
 
     <div class="row">
-        <div class="col-md-4 mb-4">
+        <div class="col-md-4 mb-3">
             <div class="card">
                 <div class="card-header">Total Categories</div>
                 <div class="card-body chart-container">
@@ -163,7 +156,7 @@
             </div>
         </div>
 
-        <div class="col-md-4 mb-4">
+        <div class="col-md-4 mb-3">
             <div class="card">
                 <div class="card-header">Total Products</div>
                 <div class="card-body chart-container">
@@ -172,7 +165,7 @@
             </div>
         </div>
 
-        <div class="col-md-4 mb-4">
+        <div class="col-md-4 mb-3">
             <div class="card">
                 <div class="card-header">Total Customers</div>
                 <div class="card-body chart-container">
@@ -181,7 +174,7 @@
             </div>
         </div>
 
-        <div class="col-md-4 mb-4">
+        <div class="col-md-4 mb-3">
             <div class="card">
                 <div class="card-header">Monthly Sales Report</div>
                 <div class="card-body chart-container">
@@ -190,7 +183,7 @@
             </div>
         </div>
 
-        <div class="col-md-4 mb-4">
+        <div class="col-md-4 mb-3">
             <div class="card">
                 <div class="card-header">Today's Orders</div>
                 <div class="card-body chart-container">
@@ -199,7 +192,7 @@
             </div>
         </div>
 
-        <div class="col-md-4 mb-4">
+        <div class="col-md-4 mb-3">
             <div class="card">
                 <div class="card-header">Total Orders</div>
                 <div class="card-body chart-container">
@@ -260,10 +253,10 @@
             });
         };
 
-        createChart(document.getElementById("categoryChart"), "Categories", categoryCount, 'rgba(75, 192, 192, 0.2)', 'rgba(75, 192, 192, 1)');
+        createChart(document.getElementById("categoryChart"), "Categories", categoryCount, 'rgba(153, 102, 255, 0.2)', 'rgba(153, 102, 255, 1)');
         createChart(document.getElementById("productChart"), "Products", productCount, 'rgba(54, 162, 235, 0.2)', 'rgba(54, 162, 235, 1)');
         createChart(document.getElementById("customerChart"), "Customers", customerCount, 'rgba(255, 206, 86, 0.2)', 'rgba(255, 206, 86, 1)');
-        createChart(document.getElementById("salesChart"), "Sales (Total)", salesAmount, 'rgba(153, 102, 255, 0.2)', 'rgba(153, 102, 255, 1)');
+        createChart(document.getElementById("salesChart"), "Sales (Total)", salesAmount, 'rgba(75, 192, 192, 0.2)', 'rgba(75, 192, 192, 1)');
         createChart(document.getElementById("todayOrdersChart"), "Today's Orders", todayOrders, 'rgba(255, 99, 132, 0.2)', 'rgba(255, 99, 132, 1)');
         createChart(document.getElementById("totalOrdersChart"), "Total Orders", totalOrders, 'rgba(255, 0, 0, 0.2)', 'rgba(255, 0, 0, 1)');
 
