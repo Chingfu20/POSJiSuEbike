@@ -67,7 +67,7 @@ if(!isset($_SESSION['productItems'])){
                                                 <h5 style="font-size: 20px; line-height: 30px; margin: 0px; padding: 0;">Invoice Details</h5>
                                                 <p style="font-size: 14px; line-height: 20px; margin: 0px; padding: 0;">Invoice No.: <?= $invoiceNo; ?></p>
                                                 <p style="font-size: 14px; line-height: 20px; margin: 0px; padding: 0;">Invoice Date: <?= date('d M Y'); ?></p>
-                                                <p style="font-size: 14px; line-height: 20px; margin: 0px; padding: 0;">Address: 1st main road, Bangalore, India</p>
+                                                <p style="font-size: 14px; line-height: 20px; margin: 0px; padding: 0;">Address: Campo, Bantigue, Bantayan Island, Cebu</p>
                                             </td>
                                         </tr>
                                     </tbody>
