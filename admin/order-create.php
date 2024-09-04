@@ -172,6 +172,16 @@ foreach ($sessionProducts as $key => $item) :
 </div>
 
 <script>
+
+function validatePhoneNumber(input) {
+    // Remove non-digit characters
+    input.value = input.value.replace(/\D/g, '');
+    
+    // Ensure the input is exactly 11 digits
+    if (input.value.length > 11) {
+        input.value = input.value.slice(0, 11);
+    }
+}
     document.addEventListener('DOMContentLoaded', function () {
         function updateTotalAmount() {
             let totalAmount = 0;
@@ -210,16 +220,6 @@ foreach ($sessionProducts as $key => $item) :
                 }
             });
         });
-
-        function validatePhoneNumber(input) {
-    // Remove non-digit characters
-    input.value = input.value.replace(/\D/g, '');
-    
-    // Ensure the input is exactly 11 digits
-    if (input.value.length > 11) {
-        input.value = input.value.slice(0, 11);
-    }
-}
 
         document.getElementById('amountPaid').addEventListener('input', updateChange);
 
