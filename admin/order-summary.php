@@ -123,6 +123,10 @@ if(!isset($_SESSION['productItems'])){
                                         <td colspan="1" style="font-weight: bold;"><?= number_format($totalAmount, 0); ?></td>
                                     </tr>
                                     <tr>
+                                    <td colspan="4" align="end" style="font-weight: bold;">Amount:</td>
+                                    <td colspan="1" style="font-weight: bold;"><?= number_format($amount, 0); ?></td>
+                                    </tr>
+                                    <tr>
                                     <td colspan="4" align="end" style="font-weight: bold;">Change:</td>
                                     <td colspan="1" style="font-weight: bold;"><?= number_format($changeAmount, 0); ?></td>
                                     </tr>
