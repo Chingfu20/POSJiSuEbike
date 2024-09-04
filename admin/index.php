@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="icon" type="image/x-icon" href="assets/img/logo.jpg">
+<link rel="icon" type="image/x-icon" href="assets/img/logo.jpg">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JiSu Ebike</title>
@@ -141,61 +142,39 @@
 <?php include('includes/header.php'); ?>
 
 <div class="container-fluid">
-    <h1 class="mt-4">Dashboard</h1>
+    <h1 class="mt-4"></h1>
+
+    <?php alertMessage(); ?>
 
     <div class="row">
-        <!-- Summary Cards -->
-        <div class="col-md-2 mb-3">
+        <div class="col-md-4 mb-3">
             <div class="card">
-                <div class="card-body text-center">
-                    <h5>10</h5>
-                    <p>Total Categories</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-2 mb-3">
-            <div class="card">
-                <div class="card-body text-center">
-                    <h5>200</h5>
-                    <p>Total Products</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-2 mb-3">
-            <div class="card">
-                <div class="card-body text-center">
-                    <h5>1500</h5>
-                    <p>Total Customers</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-2 mb-3">
-            <div class="card">
-                <div class="card-body text-center">
-                    <h5>25</h5>
-                    <p>Today's Orders</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-2 mb-3">
-            <div class="card">
-                <div class="card-body text-center">
-                    <h5>120</h5>
-                    <p>Total Orders</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-2 mb-3">
-            <div class="card">
-                <div class="card-body text-center">
-                    <h5>$3000</h5>
-                    <p>Monthly Sales Report</p>
+                <div class="card-header">Total Categories</div>
+                <div class="card-body chart-container">
+                    <canvas id="categoryChart"></canvas>
                 </div>
             </div>
         </div>
 
-        <!-- Monthly Sales Line Chart -->
-        <div class="col-md-8 mb-3">
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-header">Total Products</div>
+                <div class="card-body chart-container">
+                    <canvas id="productChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-header">Total Customers</div>
+                <div class="card-body chart-container">
+                    <canvas id="customerChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
             <div class="card">
                 <div class="card-header">Monthly Sales Report</div>
                 <div class="card-body chart-container">
@@ -204,69 +183,83 @@
             </div>
         </div>
 
-        <!-- Orders Pie Chart -->
         <div class="col-md-4 mb-3">
             <div class="card">
-                <div class="card-header">Orders Distribution</div>
+                <div class="card-header">Today's Orders</div>
                 <div class="card-body chart-container">
-                    <canvas id="ordersChart"></canvas>
+                    <canvas id="todayOrdersChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-header">Total Orders</div>
+                <div class="card-body chart-container">
+                    <canvas id="totalOrdersChart"></canvas>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+<input type="hidden" id="categoryCount" value="<?= getCount('categories'); ?>">
+<input type="hidden" id="productCount" value="<?= getCount('products'); ?>">
+<input type="hidden" id="customerCount" value="<?= getCount('customers'); ?>">
+<input type="hidden" id="salesAmount" value="<?php
+    $totalSales = mysqli_query($conn, "SELECT SUM(total_amount) AS total_sales FROM orders");
+    echo $totalSales ? mysqli_fetch_assoc($totalSales)['total_sales'] : 0.00;
+?>">
+<input type="hidden" id="todayOrders" value="<?php
+    $todayDate = date('Y-m-d');
+    $todayOrders = mysqli_query($conn, "SELECT * FROM orders WHERE order_date='$todayDate'");
+    echo $todayOrders ? mysqli_num_rows($todayOrders) : 0;
+?>">
+<input type="hidden" id="totalOrders" value="<?= getCount('orders'); ?>">
+
 <?php include('includes/footer.php'); ?>
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        // Line Chart for Monthly Sales Report
-        const salesCtx = document.getElementById('salesChart').getContext('2d');
-        new Chart(salesCtx, {
-            type: 'line',
-            data: {
-                labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
-                datasets: [{
-                    label: 'Sales in $',
-                    data: [500, 700, 600, 800], // Replace with your data
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    fill: true,
-                    tension: 0.4
-                }]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
+        const categoryCount = document.getElementById("categoryCount").value;
+        const productCount = document.getElementById("productCount").value;
+        const customerCount = document.getElementById("customerCount").value;
+        const salesAmount = document.getElementById("salesAmount").value;
+        const todayOrders = document.getElementById("todayOrders").value;
+        const totalOrders = document.getElementById("totalOrders").value;
 
-        // Pie Chart for Orders Distribution
-        const ordersCtx = document.getElementById('ordersChart').getContext('2d');
-        new Chart(ordersCtx, {
-            type: 'pie',
-            data: {
-                labels: ['Completed', 'Pending', 'Cancelled'],
-                datasets: [{
-                    data: [100, 15, 5], // Replace with your data
-                    backgroundColor: ['#4CAF50', '#FFC107', '#FF5722'],
-                    borderColor: '#fff',
-                    borderWidth: 2
-                }]
-            },
+        const commonOptions = {
+            type: 'bar',
             options: {
                 responsive: true,
                 plugins: {
-                    legend: {
-                        position: 'right'
-                    }
+                    legend: { display: false }
                 }
             }
-        });
+        };
+
+        const createChart = (context, label, data, bgColor, brColor) => {
+            new Chart(context, {
+                ...commonOptions,
+                data: {
+                    labels: [label],
+                    datasets: [{
+                        data: [data],
+                        backgroundColor: bgColor,
+                        borderColor: brColor,
+                        borderWidth: 1
+                    }]
+                }
+            });
+        };
+
+        createChart(document.getElementById("categoryChart"), "Categories", categoryCount, 'rgba(153, 102, 255, 0.2)', 'rgba(153, 102, 255, 1)');
+        createChart(document.getElementById("productChart"), "Products", productCount, 'rgba(54, 162, 235, 0.2)', 'rgba(54, 162, 235, 1)');
+        createChart(document.getElementById("customerChart"), "Customers", customerCount, 'rgba(255, 206, 86, 0.2)', 'rgba(255, 206, 86, 1)');
+        createChart(document.getElementById("salesChart"), "Sales (Total)", salesAmount, 'rgba(75, 192, 192, 0.2)', 'rgba(75, 192, 192, 1)');
+        createChart(document.getElementById("todayOrdersChart"), "Today's Orders", todayOrders, 'rgba(255, 99, 132, 0.2)', 'rgba(255, 99, 132, 1)');
+        createChart(document.getElementById("totalOrdersChart"), "Total Orders", totalOrders, 'rgba(255, 0, 0, 0.2)', 'rgba(255, 0, 0, 1)');
+
     });
 </script>
 </body>
