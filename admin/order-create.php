@@ -13,10 +13,9 @@
             <input type="text" class="form-control" id="c_name" />
         </div>
         <div class="mb-3">
-            <label>Enter Customer Phone No.</label>
-            <input type="text" class="form-control" id="c_phone" />
-        </div>
-        <div class="mb-3">
+            <label for="c_phone">Enter Customer Phone No.</label>
+            <input type="text" class="form-control" id="c_phone" pattern="\d{11}" title="Please enter exactly 11 digits" maxlength="11" />
+       </div>
             <label>Enter Customer Email (optional)</label>
             <input type="text" class="form-control" id="c_email" />
         </div>
