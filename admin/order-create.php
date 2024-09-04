@@ -173,6 +173,7 @@ foreach ($sessionProducts as $key => $item) :
 
 <script>
 
+    document.addEventListener('DOMContentLoaded', function () {
         function updateTotalAmount() {
             let totalAmount = 0;
             document.querySelectorAll('.totalPrice').forEach(cell => {
