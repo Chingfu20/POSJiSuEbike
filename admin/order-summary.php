@@ -124,11 +124,13 @@ if(!isset($_SESSION['productItems'])){
                                     </tr>
                                     <tr>
                                     <td colspan="4" align="end" style="font-weight: bold;">Amount:</td>
-                                    <td colspan="1" style="font-weight: bold;"><?= number_format($enterAmount, 0); ?></td>
+                                    <td colspan="1" style="font-weight: bold;"><?= number_format($amountPaid, 0); ?></td>
+                                    <input type="number" id="amountPaid" class="form-control" value="0" class="form-control" min="0" />
                                     </tr>
                                     <tr>
                                     <td colspan="4" align="end" style="font-weight: bold;">Change:</td>
                                     <td colspan="1" style="font-weight: bold;"><?= number_format($changeAmount, 0); ?></td>
+                                    <input type="text" id="changeAmount" class="form-control" value="" readonly />
                                     </tr>
                                     <tr>
                                         <td colspan="5">Payment Mode: <?= isset($_SESSION['payment_mode']) ? $_SESSION['payment_mode'] : ''; ?></td>
