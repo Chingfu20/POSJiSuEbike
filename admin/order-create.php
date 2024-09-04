@@ -173,7 +173,6 @@ foreach ($sessionProducts as $key => $item) :
 
 <script>
 
-    document.addEventListener('DOMContentLoaded', function () {
         function updateTotalAmount() {
             let totalAmount = 0;
             document.querySelectorAll('.totalPrice').forEach(cell => {
@@ -225,16 +224,6 @@ foreach ($sessionProducts as $key => $item) :
 
         updateTotalAmount();
     });
-
-    function validatePhoneNumber(input) {
-    // Remove non-digit characters
-    input.value = input.value.replace(/\D/g, '11');
-    
-    // Ensure the input is exactly 11 digits
-    if (input.value.length > 11) {
-        input.value = input.value.slice(0, 11);
-    }
-}
 </script>
 
 <?php include('includes/footer.php'); ?>
