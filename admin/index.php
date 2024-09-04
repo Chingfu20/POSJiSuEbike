@@ -166,13 +166,13 @@
         </div>
 
         <div class="col-md-4 mb-3">
-    <div class="card">
-        <div class="card-header">Total Customers</div>
-        <div class="card-body d-flex justify-content-center align-items-center" style="height: 200px;">
-            <h2 id="customerCountText"></h2>
+            <div class="card">
+                <div class="card-header">Total Customers</div>
+                <div class="card-body chart-container">
+                    <canvas id="customerChart"></canvas>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
 
         <div class="col-md-4 mb-3">
             <div class="card">
@@ -202,6 +202,22 @@
         </div>
     </div>
 </div>
+
+<input type="hidden" id="categoryCount" value="<?= getCount('categories'); ?>">
+<input type="hidden" id="productCount" value="<?= getCount('products'); ?>">
+<input type="hidden" id="customerCount" value="<?= getCount('customers'); ?>">
+<input type="hidden" id="salesAmount" value="<?php
+    $totalSales = mysqli_query($conn, "SELECT SUM(total_amount) AS total_sales FROM orders");
+    echo $totalSales ? mysqli_fetch_assoc($totalSales)['total_sales'] : 0.00;
+?>">
+<input type="hidden" id="todayOrders" value="<?php
+    $todayDate = date('Y-m-d');
+    $todayOrders = mysqli_query($conn, "SELECT * FROM orders WHERE order_date='$todayDate'");
+    echo $todayOrders ? mysqli_num_rows($todayOrders) : 0;
+?>">
+<input type="hidden" id="totalOrders" value="<?= getCount('orders'); ?>">
+
+<?php include('includes/footer.php'); ?>
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -239,7 +255,7 @@
 
         createChart(document.getElementById("categoryChart"), "Categories", categoryCount, 'rgba(153, 102, 255, 0.2)', 'rgba(153, 102, 255, 1)');
         createChart(document.getElementById("productChart"), "Products", productCount, 'rgba(54, 162, 235, 0.2)', 'rgba(54, 162, 235, 1)');
-        document.getElementById("customerCountText").innerText = customerCount;
+        createChart(document.getElementById("customerChart"), "Customers", customerCount, 'rgba(255, 206, 86, 0.2)', 'rgba(255, 206, 86, 1)');
         createChart(document.getElementById("salesChart"), "Sales (Total)", salesAmount, 'rgba(75, 192, 192, 0.2)', 'rgba(75, 192, 192, 1)');
         createChart(document.getElementById("todayOrdersChart"), "Today's Orders", todayOrders, 'rgba(255, 99, 132, 0.2)', 'rgba(255, 99, 132, 1)');
         createChart(document.getElementById("totalOrdersChart"), "Total Orders", totalOrders, 'rgba(255, 0, 0, 0.2)', 'rgba(255, 0, 0, 1)');

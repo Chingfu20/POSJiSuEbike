@@ -1,7 +1,6 @@
 $(document).ready(function () {
 
     alertify.set('notifier', 'position', 'top-right');
-    document.getElementById("customerCountText").innerText = customerCount;
 
     function updateTotalPrice(element) {
         const row = element.closest('tr');
