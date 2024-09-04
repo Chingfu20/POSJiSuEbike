@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="icon" type="image/x-icon" href="assets/img/logo.jpg">
+<link rel="icon" type="image/x-icon" href="assets/img/logo.jpg">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JiSu Ebike</title>
@@ -35,10 +36,10 @@
 
         .card {
             border: 1px solid #ddd;
-            border-radius: 10px;
+            border-radius: 8px;
             margin-bottom: 20px;
             overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
             background-color: #fff;
             transition: background-color 0.3s, border-color 0.3s;
         }
@@ -51,10 +52,8 @@
         .card-header {
             background-color: var(--primary-color-light);
             color: white;
-            padding: 15px;
-            font-size: 1.5rem;
-            font-weight: bold;
-            text-align: center;
+            padding: 12px;
+            font-size: 1.25rem;
         }
 
         .dark-mode .card-header {
@@ -62,11 +61,11 @@
         }
 
         .card-body {
-            padding: 20px;
+            padding: 15px;
         }
 
         .chart-container {
-            height: 250px;
+            height: 200px;
             width: 100%;
         }
 
@@ -128,9 +127,8 @@
             margin-top: 20px;
             background-color: var(--background-light);
             color: var(--color-light);
-            padding: 15px;
+            padding: 10px;
             text-align: center;
-            font-size: 0.9rem;
         }
 
         body.dark-mode footer {
@@ -144,7 +142,7 @@
 <?php include('includes/header.php'); ?>
 
 <div class="container-fluid">
-    <h1 class="mt-4 mb-4 text-center">Dashboard</h1>
+    <h1 class="mt-4"></h1>
 
     <?php alertMessage(); ?>
 
