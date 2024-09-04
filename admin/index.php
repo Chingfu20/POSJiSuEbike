@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="icon" type="image/x-icon" href="assets/img/logo.jpg">
+<link rel="icon" type="image/x-icon" href="assets/img/logo.jpg">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JiSu Ebike</title>
@@ -134,17 +135,6 @@
             background-color: #1f1f1f;
             color: var(--color-dark);
         }
-
-        .metric-card {
-            text-align: center;
-            font-size: 2rem;
-            margin-bottom: 20px;
-            background-color: #fff;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
     </style>
 </head>
 <body>
@@ -152,39 +142,61 @@
 <?php include('includes/header.php'); ?>
 
 <div class="container-fluid">
-    <div class="row mb-4">
-        <div class="col-md-2 metric-card">
-            <div>Total Categories</div>
-            <div id="totalCategories"></div>
-        </div>
-        <div class="col-md-2 metric-card">
-            <div>Total Products</div>
-            <div id="totalProducts"></div>
-        </div>
-        <div class="col-md-2 metric-card">
-            <div>Total Customers</div>
-            <div id="totalCustomers"></div>
-        </div>
-        <div class="col-md-2 metric-card">
-            <div>Today's Orders</div>
-            <div id="todayOrdersMetric"></div>
-        </div>
-        <div class="col-md-2 metric-card">
-            <div>Total Orders</div>
-            <div id="totalOrdersMetric"></div>
-        </div>
-    </div>
-
     <h1 class="mt-4"></h1>
 
     <?php alertMessage(); ?>
 
     <div class="row">
-        <div class="col-md-12 mb-3">
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-header">Total Categories</div>
+                <div class="card-body chart-container">
+                    <canvas id="categoryChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-header">Total Products</div>
+                <div class="card-body chart-container">
+                    <canvas id="productChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-header">Total Customers</div>
+                <div class="card-body chart-container">
+                    <canvas id="customerChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
             <div class="card">
                 <div class="card-header">Monthly Sales Report</div>
                 <div class="card-body chart-container">
                     <canvas id="salesChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-header">Today's Orders</div>
+                <div class="card-body chart-container">
+                    <canvas id="todayOrdersChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-header">Total Orders</div>
+                <div class="card-body chart-container">
+                    <canvas id="totalOrdersChart"></canvas>
                 </div>
             </div>
         </div>
@@ -216,42 +228,37 @@
         const todayOrders = document.getElementById("todayOrders").value;
         const totalOrders = document.getElementById("totalOrders").value;
 
-        document.getElementById("totalCategories").textContent = categoryCount;
-        document.getElementById("totalProducts").textContent = productCount;
-        document.getElementById("totalCustomers").textContent = customerCount;
-        document.getElementById("todayOrdersMetric").textContent = todayOrders;
-        document.getElementById("totalOrdersMetric").textContent = totalOrders;
-
-        const salesCtx = document.getElementById("salesChart").getContext('2d');
-        new Chart(salesCtx, {
+        const commonOptions = {
             type: 'bar',
-            data: {
-                labels: ['Monthly Sales'],
-                datasets: [{
-                    label: 'Total Sales',
-                    data: [salesAmount],
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1
-                }]
-            },
             options: {
                 responsive: true,
                 plugins: {
                     legend: { display: false }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            callback: function(value) {
-                                return '$' + value.toLocaleString();
-                            }
-                        }
-                    }
                 }
             }
-        });
+        };
+
+        const createChart = (context, label, data, bgColor, brColor) => {
+            new Chart(context, {
+                ...commonOptions,
+                data: {
+                    labels: [label],
+                    datasets: [{
+                        data: [data],
+                        backgroundColor: bgColor,
+                        borderColor: brColor,
+                        borderWidth: 1
+                    }]
+                }
+            });
+        };
+
+        createChart(document.getElementById("categoryChart"), "Categories", categoryCount, 'rgba(153, 102, 255, 0.2)', 'rgba(153, 102, 255, 1)');
+        createChart(document.getElementById("productChart"), "Products", productCount, 'rgba(54, 162, 235, 0.2)', 'rgba(54, 162, 235, 1)');
+        createChart(document.getElementById("customerChart"), "Customers", customerCount, 'rgba(255, 206, 86, 0.2)', 'rgba(255, 206, 86, 1)');
+        createChart(document.getElementById("salesChart"), "Sales (Total)", salesAmount, 'rgba(75, 192, 192, 0.2)', 'rgba(75, 192, 192, 1)');
+        createChart(document.getElementById("todayOrdersChart"), "Today's Orders", todayOrders, 'rgba(255, 99, 132, 0.2)', 'rgba(255, 99, 132, 1)');
+        createChart(document.getElementById("totalOrdersChart"), "Total Orders", totalOrders, 'rgba(255, 0, 0, 0.2)', 'rgba(255, 0, 0, 1)');
 
     });
 </script>
