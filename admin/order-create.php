@@ -14,7 +14,7 @@
         </div>
         <div class="mb-3">
             <label>Enter Customer Phone No.</label>
-            <input type="text" class="form-control" id="c_phone" />
+            <input type="text" class="form-control" id="c_phone" value="0" class="form-control" min="0" />
         </div>
         <div class="mb-3">
             <label>Enter Customer Email (optional)</label>
