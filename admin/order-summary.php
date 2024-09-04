@@ -62,6 +62,7 @@ if(!isset($_SESSION['productItems'])){
                                                 <p style="font-size: 14px; line-height: 20px; margin: 0px; padding: 0;">Customer Name: <?= $cRowData['name'] ?> </p>
                                                 <p style="font-size: 14px; line-height: 20px; margin: 0px; padding: 0;">Customer Phone No.: <?= $cRowData['phone'] ?> </p>
                                                 <p style="font-size: 14px; line-height: 20px; margin: 0px; padding: 0;">Customer Email Id: <?= $cRowData['email'] ?> </p>
+                                                <p style="font-size: 14px; line-height: 20px; margin: 0px; padding: 0;">Customer Address: <?= $cRowData['address'] ?> </p>
                                             </td>
                                             <td align="end">
                                                 <h5 style="font-size: 20px; line-height: 30px; margin: 0px; padding: 0;">Invoice Details</h5>
