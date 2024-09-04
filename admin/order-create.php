@@ -175,7 +175,7 @@ foreach ($sessionProducts as $key => $item) :
 
 function validatePhoneNumber(input) {
     // Remove non-digit characters
-    input.value = input.value.replace(/\D/g, '');
+    input.value = input.value.replace(/\D/g, '11');
     
     // Ensure the input is exactly 11 digits
     if (input.value.length > 11) {
