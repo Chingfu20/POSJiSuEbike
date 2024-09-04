@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="icon" type="image/x-icon" href="assets/img/logo.jpg">
+<link rel="icon" type="image/x-icon" href="assets/img/logo.jpg">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JiSu Ebike</title>
@@ -141,116 +142,124 @@
 <?php include('includes/header.php'); ?>
 
 <div class="container-fluid">
-    <h1 class="mt-4">Dashboard</h1>
+    <h1 class="mt-4"></h1>
+
+    <?php alertMessage(); ?>
 
     <div class="row">
-        <!-- Summary Cards -->
-        <div class="col-md-3 mb-3">
-            <div class="card">
-                <div class="card-body text-center">
-                    <h5>1217</h5>
-                    <p>Students</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 mb-3">
-            <div class="card">
-                <div class="card-body text-center">
-                    <h5>42</h5>
-                    <p>Teachers</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 mb-3">
-            <div class="card">
-                <div class="card-body text-center">
-                    <h5>68</h5>
-                    <p>Employees</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 mb-3">
-            <div class="card">
-                <div class="card-body text-center">
-                    <h5>$4500</h5>
-                    <p>Earnings</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Earnings Line Chart -->
-        <div class="col-md-8 mb-3">
-            <div class="card">
-                <div class="card-header">Earnings (past 12 months)</div>
-                <div class="card-body chart-container">
-                    <canvas id="earningsChart"></canvas>
-                </div>
-            </div>
-        </div>
-
-        <!-- Employees Pie Chart -->
         <div class="col-md-4 mb-3">
             <div class="card">
-                <div class="card-header">Employees</div>
+                <div class="card-header">Total Categories</div>
                 <div class="card-body chart-container">
-                    <canvas id="employeeChart"></canvas>
+                    <canvas id="categoryChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-header">Total Products</div>
+                <div class="card-body chart-container">
+                    <canvas id="productChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-header">Total Customers</div>
+                <div class="card-body chart-container">
+                    <canvas id="customerChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-header">Monthly Sales Report</div>
+                <div class="card-body chart-container">
+                    <canvas id="salesChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-header">Today's Orders</div>
+                <div class="card-body chart-container">
+                    <canvas id="todayOrdersChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-header">Total Orders</div>
+                <div class="card-body chart-container">
+                    <canvas id="totalOrdersChart"></canvas>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+<input type="hidden" id="categoryCount" value="<?= getCount('categories'); ?>">
+<input type="hidden" id="productCount" value="<?= getCount('products'); ?>">
+<input type="hidden" id="customerCount" value="<?= getCount('customers'); ?>">
+<input type="hidden" id="salesAmount" value="<?php
+    $totalSales = mysqli_query($conn, "SELECT SUM(total_amount) AS total_sales FROM orders");
+    echo $totalSales ? mysqli_fetch_assoc($totalSales)['total_sales'] : 0.00;
+?>">
+<input type="hidden" id="todayOrders" value="<?php
+    $todayDate = date('Y-m-d');
+    $todayOrders = mysqli_query($conn, "SELECT * FROM orders WHERE order_date='$todayDate'");
+    echo $todayOrders ? mysqli_num_rows($todayOrders) : 0;
+?>">
+<input type="hidden" id="totalOrders" value="<?= getCount('orders'); ?>">
+
 <?php include('includes/footer.php'); ?>
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        // Line Chart for Earnings (past 12 months)
-        const earningsCtx = document.getElementById('earningsChart').getContext('2d');
-        new Chart(earningsCtx, {
-            type: 'line',
-            data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                datasets: [{
-                    label: 'Earnings in $',
-                    data: [2000, 2200, 1800, 2800, 2600, 2300, 2500, 2400, 2200, 2700, 2100, 3000], // Replace with your data
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    fill: true,
-                    tension: 0.4
-                }]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
+        const categoryCount = document.getElementById("categoryCount").value;
+        const productCount = document.getElementById("productCount").value;
+        const customerCount = document.getElementById("customerCount").value;
+        const salesAmount = document.getElementById("salesAmount").value;
+        const todayOrders = document.getElementById("todayOrders").value;
+        const totalOrders = document.getElementById("totalOrders").value;
 
-        // Pie Chart for Employees
-        const employeeCtx = document.getElementById('employeeChart').getContext('2d');
-        new Chart(employeeCtx, {
-            type: 'pie',
-            data: {
-                labels: ['Academic', 'Non-academic', 'Administration', 'Others'],
-                datasets: [{
-                    data: [42, 15, 8, 3], // Replace with your data
-                    backgroundColor: ['#4CAF50', '#FFC107', '#FF5722', '#9C27B0'],
-                    borderColor: '#fff',
-                    borderWidth: 2
-                }]
-            },
+        const commonOptions = {
+            type: 'bar',
             options: {
                 responsive: true,
                 plugins: {
-                    legend: {
-                        position: 'right'
-                    }
+                    legend: { display: false }
                 }
             }
-        });
+        };
+
+        const createChart = (context, label, data, bgColor, brColor) => {
+            new Chart(context, {
+                ...commonOptions,
+                data: {
+                    labels: [label],
+                    datasets: [{
+                        data: [data],
+                        backgroundColor: bgColor,
+                        borderColor: brColor,
+                        borderWidth: 1
+                    }]
+                }
+            });
+        };
+
+        createChart(document.getElementById("categoryChart"), "Categories", categoryCount, 'rgba(153, 102, 255, 0.2)', 'rgba(153, 102, 255, 1)');
+        createChart(document.getElementById("productChart"), "Products", productCount, 'rgba(54, 162, 235, 0.2)', 'rgba(54, 162, 235, 1)');
+        createChart(document.getElementById("customerChart"), "Customers", customerCount, 'rgba(255, 206, 86, 0.2)', 'rgba(255, 206, 86, 1)');
+        createChart(document.getElementById("salesChart"), "Sales (Total)", salesAmount, 'rgba(75, 192, 192, 0.2)', 'rgba(75, 192, 192, 1)');
+        createChart(document.getElementById("todayOrdersChart"), "Today's Orders", todayOrders, 'rgba(255, 99, 132, 0.2)', 'rgba(255, 99, 132, 1)');
+        createChart(document.getElementById("totalOrdersChart"), "Total Orders", totalOrders, 'rgba(255, 0, 0, 0.2)', 'rgba(255, 0, 0, 1)');
+
     });
 </script>
 </body>
