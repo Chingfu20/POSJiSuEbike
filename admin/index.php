@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link rel="icon" type="image/x-icon" href="assets/img/logo.jpg">
-
+    <link rel="icon" type="image/x-icon" href="assets/img/logo.jpg">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JiSu Ebike</title>
@@ -13,25 +12,16 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <style>
-        :root {
-            --background-light: #f8f9fa;
-            --color-light: #343a40;
-            --primary-color-light: #007bff;
-            --background-dark: #343a40;
-            --color-dark: #f8f9fa;
-            --primary-color-dark: #17a2b8;
-        }
-
         body {
-            background-color: var(--background-light);
-            color: var(--color-light);
+            background-color: #f8f9fa;
+            color: #343a40;
             font-family: Arial, sans-serif;
             transition: background-color 0.3s, color 0.3s;
         }
 
         .dark-mode {
-            background-color: var(--background-dark);
-            color: var(--color-dark);
+            background-color: #343a40;
+            color: #f8f9fa;
         }
 
         .card {
@@ -50,14 +40,14 @@
         }
 
         .card-header {
-            background-color: var(--primary-color-light);
+            background-color: #007bff;
             color: white;
             padding: 12px;
             font-size: 1.25rem;
         }
 
         .dark-mode .card-header {
-            background-color: var(--primary-color-dark);
+            background-color: #17a2b8;
         }
 
         .card-body {
@@ -116,7 +106,7 @@
         }
 
         input:checked + .slider {
-            background-color: var(--primary-color-dark);
+            background-color: #17a2b8;
         }
 
         input:checked + .slider:before {
@@ -125,15 +115,15 @@
 
         footer {
             margin-top: 20px;
-            background-color: var(--background-light);
-            color: var(--color-light);
+            background-color: #f8f9fa;
+            color: #343a40;
             padding: 10px;
             text-align: center;
         }
 
-        body.dark-mode footer {
+        .dark-mode footer {
             background-color: #1f1f1f;
-            color: var(--color-dark);
+            color: #f8f9fa;
         }
     </style>
 </head>
@@ -259,8 +249,11 @@
         createChart(document.getElementById("salesChart"), "Sales (Total)", salesAmount, 'rgba(75, 192, 192, 0.2)', 'rgba(75, 192, 192, 1)');
         createChart(document.getElementById("todayOrdersChart"), "Today's Orders", todayOrders, 'rgba(255, 99, 132, 0.2)', 'rgba(255, 99, 132, 1)');
         createChart(document.getElementById("totalOrdersChart"), "Total Orders", totalOrders, 'rgba(255, 0, 0, 0.2)', 'rgba(255, 0, 0, 1)');
-
     });
+
+    function toggleDarkMode() {
+        document.body.classList.toggle('dark-mode');
+    }
 </script>
 </body>
 </html>
