@@ -190,7 +190,17 @@ document.getElementById('saveOrder').addEventListener('click', function() {
         }
     });
 
-    function updateChange() {
+    document.addEventListener('DOMContentLoaded', function () {
+        function updateTotalAmount() {
+            let totalAmount = 0;
+            document.querySelectorAll('.totalPrice').forEach(cell => {
+                totalAmount += parseFloat(cell.textContent.replace(/,/g, ''));
+            });
+            document.getElementById('totalAmount').value = totalAmount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+            updateChange();
+        }
+
+        function updateChange() {
             const totalAmount = parseFloat(document.getElementById('totalAmount').value.replace(/,/g, ''));
             const amountPaid = parseFloat(document.getElementById('amountPaid').value) || 0;
             const change = amountPaid - totalAmount;
@@ -232,6 +242,7 @@ document.getElementById('saveOrder').addEventListener('click', function() {
 
         updateTotalAmount();
     });
+});
 </script>
 
 <?php include('includes/footer.php'); ?>
