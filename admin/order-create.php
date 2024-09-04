@@ -13,9 +13,9 @@
             <input type="text" class="form-control" id="c_name" />
         </div>
         <div class="mb-3">
-            <label>Enter Customer Phone No.</label>
-            <input type="text" class="form-control" id="c_phone" value="0" class="form-control" min="0" />
-        </div>
+    <label for="c_phone">Enter Customer Phone No.</label>
+    <input type="text" class="form-control" id="c_phone" pattern="\d{11}" maxlength="11" oninput="validatePhoneNumber(this)" title="Please enter exactly 11 digits" />
+</div>
         <div class="mb-3">
             <label>Enter Customer Email (optional)</label>
             <input type="text" class="form-control" id="c_email" />
@@ -210,6 +210,16 @@ foreach ($sessionProducts as $key => $item) :
                 }
             });
         });
+
+        function validatePhoneNumber(input) {
+    // Remove non-digit characters
+    input.value = input.value.replace(/\D/g, '');
+    
+    // Ensure the input is exactly 11 digits
+    if (input.value.length > 11) {
+        input.value = input.value.slice(0, 11);
+    }
+}
 
         document.getElementById('amountPaid').addEventListener('input', updateChange);
 
