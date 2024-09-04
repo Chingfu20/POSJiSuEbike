@@ -36,7 +36,7 @@
                         <tbody>
                             <?php
                             $displayId = 1; // Initialize display ID
-                            foreach($customers as $item) : ?>
+                            while($item = mysqli_fetch_assoc($customers)) : ?>
                             <tr>
                                 <td><?= $displayId++ ?></td> <!-- Display ID -->
                                 <td><?= htmlspecialchars($item['name']) ?></td>
@@ -57,7 +57,7 @@
                                     <a href="customers-delete.php?id=<?= urlencode($item['id']); ?>" class="btn btn-danger btn-sm">Delete</a>
                                 </td>
                             </tr>
-                            <?php endforeach; ?>
+                            <?php endwhile; ?>
                         </tbody>
                     </table>
                 </div>
