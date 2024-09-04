@@ -124,7 +124,7 @@ if(!isset($_SESSION['productItems'])){
                                     </tr>
                                     <tr>
                                     <td colspan="4" align="end" style="font-weight: bold;">Amount:</td>
-                                    <td colspan="1" style="font-weight: bold;"><?= number_format($amount, 0); ?></td>
+                                    <td colspan="1" style="font-weight: bold;"><?= number_format($enterAmount, 0); ?></td>
                                     </tr>
                                     <tr>
                                     <td colspan="4" align="end" style="font-weight: bold;">Change:</td>
