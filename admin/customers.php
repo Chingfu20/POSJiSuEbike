@@ -28,6 +28,7 @@
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Phone</th>
+                                <th>Address</th> <!-- New column for Address -->
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
@@ -41,6 +42,7 @@
                                 <td><?= htmlspecialchars($item['name']) ?></td>
                                 <td><?= htmlspecialchars($item['email']) ?></td>
                                 <td><?= htmlspecialchars($item['phone']) ?></td>
+                                <td><?= htmlspecialchars($item['address']) ?></td> <!-- Display Address -->
                                 <td>
                                     <?php
                                     if($item['status'] == 1){
