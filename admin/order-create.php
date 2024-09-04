@@ -147,7 +147,7 @@ foreach ($sessionProducts as $key => $item) :
                     </div>
                     <div class="col-md-4">
                         <label>Enter Amount</label>
-                        <input type="number" id="amountPaid" class="form-control" value="" />
+                        <input type="number" name="quantity" value="0" class="form-control" min="0" />
                     </div>
                     <div class="col-md-4">
                         <label>Change</label>
