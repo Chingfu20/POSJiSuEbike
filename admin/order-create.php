@@ -8,19 +8,24 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <div class="mb-3">
-            <label>Enter Customer Name</label>
-            <input type="text" class="form-control" id="c_name" />
-        </div>
-        <div class="mb-3">
-            <label>Enter Customer Phone No.</label>
-            <input type="text" class="form-control" id="c_phone" />
-        </div>
-        <div class="mb-3">
-            <label>Enter Customer Email (optional)</label>
-            <input type="text" class="form-control" id="c_email" />
-        </div>
-      </div>
+    <div class="mb-3">
+        <label>Enter Customer Name</label>
+        <input type="text" class="form-control" id="c_name" />
+    </div>
+    <div class="mb-3">
+        <label>Enter Customer Phone No.</label>
+        <input type="text" class="form-control" id="c_phone" />
+    </div>
+    <div class="mb-3">
+        <label>Enter Customer Email (optional)</label>
+        <input type="text" class="form-control" id="c_email" />
+    </div>
+    <div class="mb-3">
+        <label>Enter Customer Address</label>
+        <input type="text" class="form-control" id="c_address" />
+    </div>
+</div>
+
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary saveCustomer">Save</button>
