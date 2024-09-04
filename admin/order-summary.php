@@ -124,7 +124,7 @@ if(!isset($_SESSION['productItems'])){
                                     </tr>
                                     <tr>
                                     <td colspan="4" align="end" style="font-weight: bold;">Change:</td>
-                                    <td colspan="1" style="font-weight: bold;"><?= number_format($updateChange, 0); ?></td>
+                                    <td colspan="1" style="font-weight: bold;"><?= number_format($changeAmount, 0); ?></td>
                                     </tr>
                                     <tr>
                                         <td colspan="5">Payment Mode: <?= isset($_SESSION['payment_mode']) ? $_SESSION['payment_mode'] : ''; ?></td>
@@ -186,7 +186,36 @@ document.getElementById('saveOrder').addEventListener('click', function() {
         }
     });
 
-    document.getElementById('amountPaid').addEventListener('input', updateChange);
+    function updateChange() {
+            const totalAmount = parseFloat(document.getElementById('totalAmount').value.replace(/,/g, ''));
+            const amountPaid = parseFloat(document.getElementById('amountPaid').value) || 0;
+            const change = amountPaid - totalAmount;
+            document.getElementById('changeAmount').value = change > 0 ? change.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') : '0.00';
+        }
+
+        document.querySelectorAll('.increment').forEach(button => {
+            button.addEventListener('click', function () {
+                const qtyInput = this.parentElement.querySelector('.quantityInput');
+                let quantity = parseInt(qtyInput.value);
+                if (quantity < 999) {
+                    qtyInput.value = ++quantity;
+                    updateTotalPrice(this);
+                }
+            });
+        });
+
+        document.querySelectorAll('.decrement').forEach(button => {
+            button.addEventListener('click', function () {
+                const qtyInput = this.parentElement.querySelector('.quantityInput');
+                let quantity = parseInt(qtyInput.value);
+                if (quantity > 1) {
+                    qtyInput.value = --quantity;
+                    updateTotalPrice(this);
+                }
+            });
+        });
+
+        document.getElementById('amountPaid').addEventListener('input', updateChange);
 
         function updateTotalPrice(element) {
             const row = element.closest('tr');
