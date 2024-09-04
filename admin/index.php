@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <link rel="icon" type="image/x-icon" href="assets/img/logo.jpg">
+<link rel="icon" type="image/x-icon" href="assets/img/logo.jpg">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JiSu Ebike</title>
@@ -12,7 +12,6 @@
     <script src="https://cdn.jsdelivr.net/npm/alertifyjs/build/alertify.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
-
     <style>
         :root {
             --background-light: #f8f9fa;
@@ -40,7 +39,7 @@
             border-radius: 8px;
             margin-bottom: 20px;
             overflow: hidden;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
             background-color: #fff;
             transition: background-color 0.3s, border-color 0.3s;
         }
@@ -136,154 +135,132 @@
             background-color: #1f1f1f;
             color: var(--color-dark);
         }
-
-        .stat-card {
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            padding: 15px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .stat-card h3 {
-            margin: 10px 0;
-            font-size: 24px;
-        }
-
-        .stat-card p {
-            margin: 0;
-            font-size: 16px;
-        }
     </style>
 </head>
-
 <body>
 
-    <?php include('includes/header.php'); ?>
+<?php include('includes/header.php'); ?>
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-3">
-                <div class="stat-card">
-                    <h3 id="studentCount">1217</h3>
-                    <p>Students</p>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="stat-card">
-                    <h3 id="teacherCount">42</h3>
-                    <p>Teachers</p>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="stat-card">
-                    <h3 id="employeeCount">68</h3>
-                    <p>Employees</p>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="stat-card">
-                    <h3 id="earnings">$4500</h3>
-                    <p>Earnings</p>
+<div class="container-fluid">
+    <h1 class="mt-4"></h1>
+
+    <?php alertMessage(); ?>
+
+    <div class="row">
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-header">Total Categories</div>
+                <div class="card-body chart-container">
+                    <canvas id="categoryChart"></canvas>
                 </div>
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Earnings (past 12 months)</div>
-                    <div class="card-body chart-container">
-                        <canvas id="earningsChart"></canvas>
-                    </div>
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-header">Total Products</div>
+                <div class="card-body chart-container">
+                    <canvas id="productChart"></canvas>
                 </div>
             </div>
+        </div>
 
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-header">Employees</div>
-                    <div class="card-body chart-container">
-                        <canvas id="employeesChart"></canvas>
-                    </div>
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-header">Total Customers</div>
+                <div class="card-body chart-container">
+                    <canvas id="customerChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-header">Monthly Sales Report</div>
+                <div class="card-body chart-container">
+                    <canvas id="salesChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-header">Today's Orders</div>
+                <div class="card-body chart-container">
+                    <canvas id="todayOrdersChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-header">Total Orders</div>
+                <div class="card-body chart-container">
+                    <canvas id="totalOrdersChart"></canvas>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <input type="hidden" id="categoryCount" value="<?= getCount('categories'); ?>">
-    <input type="hidden" id="productCount" value="<?= getCount('products'); ?>">
-    <input type="hidden" id="customerCount" value="<?= getCount('customers'); ?>">
-    <input type="hidden" id="salesAmount" value="<?php
-        $totalSales = mysqli_query($conn, "SELECT SUM(total_amount) AS total_sales FROM orders");
-        echo $totalSales ? mysqli_fetch_assoc($totalSales)['total_sales'] : 0.00;
-    ?>">
-    <input type="hidden" id="todayOrders" value="<?php
-        $todayDate = date('Y-m-d');
-        $todayOrders = mysqli_query($conn, "SELECT * FROM orders WHERE order_date='$todayDate'");
-        echo $todayOrders ? mysqli_num_rows($todayOrders) : 0;
-    ?>">
-    <input type="hidden" id="totalOrders" value="<?= getCount('orders'); ?>">
+<input type="hidden" id="categoryCount" value="<?= getCount('categories'); ?>">
+<input type="hidden" id="productCount" value="<?= getCount('products'); ?>">
+<input type="hidden" id="customerCount" value="<?= getCount('customers'); ?>">
+<input type="hidden" id="salesAmount" value="<?php
+    $totalSales = mysqli_query($conn, "SELECT SUM(total_amount) AS total_sales FROM orders");
+    echo $totalSales ? mysqli_fetch_assoc($totalSales)['total_sales'] : 0.00;
+?>">
+<input type="hidden" id="todayOrders" value="<?php
+    $todayDate = date('Y-m-d');
+    $todayOrders = mysqli_query($conn, "SELECT * FROM orders WHERE order_date='$todayDate'");
+    echo $todayOrders ? mysqli_num_rows($todayOrders) : 0;
+?>">
+<input type="hidden" id="totalOrders" value="<?= getCount('orders'); ?>">
 
-    <?php include('includes/footer.php'); ?>
+<?php include('includes/footer.php'); ?>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const earningsChart = document.getElementById("earningsChart").getContext('2d');
-            const employeesChart = document.getElementById("employeesChart").getContext('2d');
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const categoryCount = document.getElementById("categoryCount").value;
+        const productCount = document.getElementById("productCount").value;
+        const customerCount = document.getElementById("customerCount").value;
+        const salesAmount = document.getElementById("salesAmount").value;
+        const todayOrders = document.getElementById("todayOrders").value;
+        const totalOrders = document.getElementById("totalOrders").value;
 
-            const earningsData = {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                datasets: [{
-                    label: 'Earnings in $',
-                    data: [1800, 2000, 2200, 2800, 2600, 2400, 2600, 2200, 2000, 2400, 2800, 3000],
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    borderWidth: 2
-                }]
-            };
+        const commonOptions = {
+            type: 'bar',
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        };
 
-            const employeesData = {
-                labels: ['Academic', 'Non-academic', 'Administration', 'Others'],
-                datasets: [{
-                    data: [42, 15, 8, 3],
-                    backgroundColor: ['#4caf50', '#2196f3', '#ffc107', '#ff5722'],
-                    hoverBackgroundColor: ['#388e3c', '#1976d2', '#ffa000', '#e64a19']
-                }]
-            };
-
-            new Chart(earningsChart, {
-                type: 'line',
-                data: earningsData,
-                options: {
-                    responsive: true,
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            ticks: {
-                                callback: function (value) {
-                                    return '$' + value;
-                                }
-                            }
-                        }
-                    }
+        const createChart = (context, label, data, bgColor, brColor) => {
+            new Chart(context, {
+                ...commonOptions,
+                data: {
+                    labels: [label],
+                    datasets: [{
+                        data: [data],
+                        backgroundColor: bgColor,
+                        borderColor: brColor,
+                        borderWidth: 1
+                    }]
                 }
             });
+        };
 
-            new Chart(employeesChart, {
-                type: 'doughnut',
-                data: employeesData,
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            position: 'top'
-                        }
-                    }
-                }
-            });
-        });
-    </script>
+        createChart(document.getElementById("categoryChart"), "Categories", categoryCount, 'rgba(153, 102, 255, 0.2)', 'rgba(153, 102, 255, 1)');
+        createChart(document.getElementById("productChart"), "Products", productCount, 'rgba(54, 162, 235, 0.2)', 'rgba(54, 162, 235, 1)');
+        createChart(document.getElementById("customerChart"), "Customers", customerCount, 'rgba(255, 206, 86, 0.2)', 'rgba(255, 206, 86, 1)');
+        createChart(document.getElementById("salesChart"), "Sales (Total)", salesAmount, 'rgba(75, 192, 192, 0.2)', 'rgba(75, 192, 192, 1)');
+        createChart(document.getElementById("todayOrdersChart"), "Today's Orders", todayOrders, 'rgba(255, 99, 132, 0.2)', 'rgba(255, 99, 132, 1)');
+        createChart(document.getElementById("totalOrdersChart"), "Total Orders", totalOrders, 'rgba(255, 0, 0, 0.2)', 'rgba(255, 0, 0, 1)');
+
+    });
+</script>
 </body>
-
 </html>
