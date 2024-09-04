@@ -13,9 +13,9 @@
             <input type="text" class="form-control" id="c_name" />
         </div>
         <div class="mb-3">
-    <label for="c_phone">Enter Customer Phone No.</label>
-    <input type="text" class="form-control" id="c_phone" pattern="\d{11}" maxlength="11" oninput="validatePhoneNumber(this)" title="Please enter exactly 11 digits" />
-</div>
+            <label>Enter Customer Phone No.</label>
+            <input type="text" class="form-control" id="c_phone" />
+        </div>
         <div class="mb-3">
             <label>Enter Customer Email (optional)</label>
             <input type="text" class="form-control" id="c_email" />
@@ -139,7 +139,7 @@ foreach ($sessionProducts as $key => $item) :
                         </div>
                         <div class="col-md-4">
                         <label>Enter Customer Phone Number</label>
-                        <input type="number" name="quantity" value="0" class="form-control" min="0" />
+                        <input type="number" id="cphone" class="form-control" value="" />
                         </div>
                         <div class="col-md-4">
                         <label>Total Amount</label>
@@ -147,7 +147,7 @@ foreach ($sessionProducts as $key => $item) :
                     </div>
                     <div class="col-md-4">
                         <label>Enter Amount</label>
-                        <input type="number" name="quantity" value="0" class="form-control" min="0" />
+                        <input type="number" id="amountPaid" class="form-control" value="" />
                     </div>
                     <div class="col-md-4">
                         <label>Change</label>
@@ -172,7 +172,6 @@ foreach ($sessionProducts as $key => $item) :
 </div>
 
 <script>
-
     document.addEventListener('DOMContentLoaded', function () {
         function updateTotalAmount() {
             let totalAmount = 0;
