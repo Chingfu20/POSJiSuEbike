@@ -186,7 +186,19 @@ document.getElementById('saveOrder').addEventListener('click', function() {
         }
     });
    
-});
+document.getElementById('amountPaid').addEventListener('input', updateChange);
+
+        function updateTotalPrice(element) {
+            const row = element.closest('tr');
+            const price = parseFloat(row.querySelector('td:nth-child(3)').textContent.replace(/,/g, ''));
+            const quantity = parseInt(row.querySelector('.quantityInput').value);
+            const totalPriceCell = row.querySelector('.totalPrice');
+            totalPriceCell.textContent = (price * quantity).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+            updateTotalAmount();
+        }
+
+        updateTotalAmount();
+    });
 </script>
 
 <?php include('includes/footer.php'); ?>
