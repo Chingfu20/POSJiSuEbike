@@ -5,16 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JiSu Ebike POS System</title>
     <link rel="stylesheet" href="login.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <?php 
     include('includes/header.php'); 
 
-    if (isset($_SESSION['loggedIn'])) {
+    if(isset($_SESSION['loggedIn'])){
         ?>
-        <script>window.location.href = 'admin/index.php';</script>
+        <script>window.location.href = 'index.php';</script>
         <?php
     }
     ?>
@@ -30,6 +28,7 @@
                         <div class="p-5">
                             <center><h4 class="text-dark mb-3">Login Admin</h4></center>
                             <form action="login-code.php" method="POST" class="login-form">
+                                
                                 <div class="mb-3">
                                     <label class="form-label">Enter Email</label>
                                     <input type="email" name="email" class="form-control" required />
@@ -50,27 +49,5 @@
             </div>
         </div>
     </div>
-
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const alertType = urlParams.get('alert');
-        const message = urlParams.get('message');
-        
-        if (alertType) {
-            Swal.fire({
-                icon: alertType === 'success' ? 'success' : 'error',
-                title: alertType === 'success' ? 'Logged In Successfully' : 'Error',
-                text: message || (alertType === 'success' ? 'You will be redirected shortly.' : 'An error occurred.'),
-                showConfirmButton: false,
-                timer: 1500
-            }).then(() => {
-                if (alertType === 'success') {
-                    window.location.href = 'admin/index.php';
-                }
-            });
-        }
-    });
-    </script>
 </body>
 </html>
