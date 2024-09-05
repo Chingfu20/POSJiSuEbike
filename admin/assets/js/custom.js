@@ -4,11 +4,10 @@ $(document).ready(function () {
 
     function updateTotalPrice(element) {
         const row = element.closest('tr');
-        const price = parseFloat(row.find('td:nth-child(3)').text());
-        const quantity = parseInt(row.find('.qty').val());
-        const totalPriceCell = row.find('.totalPrice');
-        totalPriceCell.text((price * quantity).toFixed(2));
-        updateChange();  // Update change whenever total price is updated
+        const price = parseFloat(row.querySelector('td:nth-child(3)').textContent);
+        const quantity = parseInt(row.querySelector('.quantityInput').value);
+        const totalPriceCell = row.querySelector('.totalPrice');
+        totalPriceCell.textContent = (price * quantity).toFixed(2);
     }
 
     $(document).on('click', '.increment', function () {
@@ -20,7 +19,7 @@ $(document).ready(function () {
             var qtyVal = currentValue + 1;
             $quantityInput.val(qtyVal);
             updateQuantity(productId, qtyVal);
-            updateTotalPrice($(this));
+            updateTotalPrice(this);
         }
     });
 
@@ -33,8 +32,9 @@ $(document).ready(function () {
             var qtyVal = currentValue - 1;
             $quantityInput.val(qtyVal);
             updateQuantity(productId, qtyVal);
-            updateTotalPrice($(this));
+            updateTotalPrice(this);
         } else if (currentValue == 1) {
+            // Optionally handle removing the item
             $quantityInput.val(0);
             updateQuantity(productId, 0);
         }
@@ -60,28 +60,22 @@ $(document).ready(function () {
         });
     }
 
-    function updateChange() {
-        const totalAmount = parseFloat($('#totalAmount').val().replace(/,/g, ''));
-        const amountPaid = parseFloat($('#amountPaid').val()) || 0;
-        const change = amountPaid - totalAmount;
-        $('#changeAmount').val(change > 0 ? change.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') : '0.00');
-    }
-
-    $(document).on('input', '#amountPaid', function () {
-        updateChange();
-    });
-
     // proceed to place order button click
     $(document).on('click', '.proceedToPlace', function () {
+
+        // console.log('proceedToPlace');
+
         var cphone = $('#cphone').val();
         var payment_mode = $('#payment_mode').val();
 
         if(payment_mode == ''){
+
             swal("Select Payment Mode","Select your payment mode","warning");
             return false;
         }
 
-        if(cphone == '' || !$.isNumeric(cphone)){
+        if(cphone == '' && !$.isNumeric(cphone)){
+
             swal("Enter Phone Number","Enter Valid Phone Number","warning");
             return false;
         }
@@ -100,7 +94,9 @@ $(document).ready(function () {
                 var res = JSON.parse(response);
                 if(res.status == 200){
                     window.location.href = "order-summary.php";
-                } else if(res.status == 404){
+
+                }else if(res.status = 404){
+
                     swal(res.message, res.message, res.status_type, {
                         buttons: {
                             catch: {
@@ -109,30 +105,42 @@ $(document).ready(function () {
                             },
                             cancel: "Cancel"
                         }
-                    }).then((value) => {
+                    })
+                    .then((value) => {
                         switch(value){
+
                             case "catch":
                                 $('#c_phone').val(cphone);
                                 $('#addCustomerModal').modal('show');
+                                // console.log('Pop the customer add modal');
                                 break;
                             default:
                         }
                     });
-                } else {
+
+                }else{
                     swal(res.message, res.message, res.status_type);
                 }
+
             }
-        });
+        })
+
+
     });
+
 
     // Add Customer to customers table
     $(document).on('click', '.saveCustomer', function () {
+
         var c_name = $('#c_name').val();
         var c_phone = $('#c_phone').val();
         var c_email = $('#c_email').val();
 
-        if(c_name != '' && c_phone != ''){
+
+        if(c_name != '' && c_phone != '' )
+        {
             if($.isNumeric(c_phone)){
+                
                 var data = {
                     'saveCustomerBtn': true,
                     'name': c_name,
@@ -146,23 +154,30 @@ $(document).ready(function () {
                     data: data,
                     success: function (response) {
                         var res = JSON.parse(response);
+
                         if(res.status == 200){
                             swal(res.message, res.message, res.status_type);
                             $('#addCustomerModal').modal('hide');
-                        } else {
+                            swal(res.message, res.message, res.status_type);
+                        }else{
                             swal(res.message, res.message, res.status_type);
                         }
+
                     }
                 });
-            } else {
-                swal("Enter Valid Phone Number", "", "warning");
+
+            }else{
+                swal("Enter Valid Phone Number", "","warning");
             }
-        } else {
-            swal("Please Fill required fields", "", "warning");
+        }
+        else
+        {
+            swal("Please Fill required fields", "","warning");
         }
     });
 
     $(document).on('click', '#saveOrder', function () {
+
         $.ajax({
             type: "POST",
             url: "orders-code.php",
@@ -171,20 +186,24 @@ $(document).ready(function () {
             },
             success: function (response) {
                 var res = JSON.parse(response);
+
                 if(res.status == 200){
-                    swal(res.message, res.message, res.status_type);
+                    swal(res.message,res.message,res.status_type);
                     $('#orderPlaceSuccessMessage').text(res.message);
                     $('#orderSuccessModal').modal('show');
-                } else {
-                    swal(res.message, res.message, res.status_type);
+
+                }else{
+                    swal(res.message,res.message,res.status_type);
                 }
             }
         });
+
     });
 
 });
 
 function printMyBillingArea() {
+         
     var divContents = document.getElementById("myBillingArea").innerHTML;
     var a = window.open('', '');
     a.document.write('<html><title>JiSu E-Bike POS System</title>');
@@ -198,15 +217,17 @@ function printMyBillingArea() {
 window.jsPDF = window.jspdf.jsPDF;
 var docPDF = new jsPDF();
 
-function downloadPDF(invoiceNo) {
+function downloadPDF(invoiceNo){
+
     var elementHTML = document.querySelector("#myBillingArea");
-    docPDF.html(elementHTML, {
-        callback: function() {
-            docPDF.save(invoiceNo + '.pdf');
-        },
+    docPDF.html( elementHTML, {
+        callback: function(){
+            docPDF.save(invoiceNo+'.pdf');
+        },  
         x: 15,
         y: 15,
         width: 170,
         windowWidth: 650
     });
+
 }
