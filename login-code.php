@@ -36,7 +36,7 @@ if (isset($_POST['loginBtn']))
 
                 ];
                     
-                redirect('admin/index.php','Logged In Successfully');
+                redirect('admin/login.php','Logged In Successfully');
                     
             }else{
                     redirect('login.php', 'Invalid Email Address');
