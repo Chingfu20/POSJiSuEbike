@@ -112,7 +112,7 @@ if(!isset($_SESSION['productItems'])){
                                         <td style="border-bottom: 1px solid #ccc;"><?= $row['name']; ?></td>
                                         <td style="border-bottom: 1px solid #ccc;"><?= number_format($row['price'], 0) ?></td>
                                         <td style="border-bottom: 1px solid #ccc;"><?= $row['quantity'] ?></td>
-                                        <td style="border-bottom: 1px solid #ccc;" class="fw-bold totalPrice">
+                                        <td style="border-bottom: 1px solid #ccc;" class="fw-bold">
                                             <?= number_format($row['price'] * $row['quantity'], 0) ?>
                                         </td>
                                     </tr>
@@ -120,19 +120,15 @@ if(!isset($_SESSION['productItems'])){
 
                                     <tr>
                                         <td colspan="4" align="end" style="font-weight: bold;">Grand Total:</td>
-                                        <td colspan="1" style="font-weight: bold;" id="totalAmountCell"><?= number_format($totalAmount, 0); ?></td>
+                                        <td colspan="1" style="font-weight: bold;"><?= number_format($totalAmount, 0); ?></td>
                                     </tr>
                                     <tr>
                                     <td colspan="4" align="end" style="font-weight: bold;">Amount:</td>
-                                    <td colspan="1" style="font-weight: bold;">
-                                        <input type="text" id="amountPaid" class="form-control" value="<?= number_format($amountPaid, 0); ?>">
-                                    </td>
+                                    <td colspan="1" style="font-weight: bold;"><?= number_format($amountPaid, 0); ?></td>
                                     </tr>
                                     <tr>
                                     <td colspan="4" align="end" style="font-weight: bold;">Change:</td>
-                                    <td colspan="1" style="font-weight: bold;">
-                                        <input type="text" id="changeAmount" class="form-control" value="<?= number_format($changeAmount, 0); ?>" readonly>
-                                    </td>
+                                    <td colspan="1" style="font-weight: bold;"><?= number_format($changeAmount, 0); ?></td>
                                     </tr>
                                     <tr>
                                         <td colspan="5">Payment Mode: <?= isset($_SESSION['payment_mode']) ? $_SESSION['payment_mode'] : ''; ?></td>
@@ -165,26 +161,87 @@ if(!isset($_SESSION['productItems'])){
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-    function updateTotalAmount() {
-        let totalAmount = 0;
-        document.querySelectorAll('.totalPrice').forEach(cell => {
-            totalAmount += parseFloat(cell.textContent.replace(/,/g, ''));
+document.getElementById('saveOrder').addEventListener('click', function() {
+
+    fetch('save_order.php', {
+        method: 'POST',
+        body: new FormData(document.querySelector('form')), 
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            Swal.fire({
+                title: 'Success!',
+                text: 'Order has been saved successfully.',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = 'orders.php';
+                }
+            });
+        } else {
+            Swal.fire({
+                title: 'Error!',
+                text: 'There was a problem saving the order.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        function updateTotalAmount() {
+            let totalAmount = 0;
+            document.querySelectorAll('.totalPrice').forEach(cell => {
+                totalAmount += parseFloat(cell.textContent.replace(/,/g, ''));
+            });
+            document.getElementById('totalAmount').value = totalAmount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+            updateChange();
+        }
+
+        function updateChange() {
+            const totalAmount = parseFloat(document.getElementById('totalAmount').value.replace(/,/g, ''));
+            const amountPaid = parseFloat(document.getElementById('amountPaid').value) || 0;
+            const change = amountPaid - totalAmount;
+            document.getElementById('changeAmount').value = change > 0 ? change.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') : '0.00';
+        }
+
+        document.querySelectorAll('.increment').forEach(button => {
+            button.addEventListener('click', function () {
+                const qtyInput = this.parentElement.querySelector('.quantityInput');
+                let quantity = parseInt(qtyInput.value);
+                if (quantity < 999) {
+                    qtyInput.value = ++quantity;
+                    updateTotalPrice(this);
+                }
+            });
         });
-        document.getElementById('totalAmountCell').textContent = totalAmount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
-        updateChange();
-    }
 
-    function updateChange() {
-        const totalAmount = parseFloat(document.getElementById('totalAmountCell').textContent.replace(/,/g, ''));
-        const amountPaid = parseFloat(document.getElementById('amountPaid').value.replace(/,/g, '')) || 0;
-        const change = amountPaid - totalAmount;
-        document.getElementById('changeAmount').value = change > 0 ? change.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') : '0.00';
-    }
+        document.querySelectorAll('.decrement').forEach(button => {
+            button.addEventListener('click', function () {
+                const qtyInput = this.parentElement.querySelector('.quantityInput');
+                let quantity = parseInt(qtyInput.value);
+                if (quantity > 1) {
+                    qtyInput.value = --quantity;
+                    updateTotalPrice(this);
+                }
+            });
+        });
 
-    document.getElementById('amountPaid').addEventListener('input', updateChange);
-    
-    updateTotalAmount();
+        document.getElementById('amountPaid').addEventListener('input', updateChange);
+
+        function updateTotalPrice(element) {
+            const row = element.closest('tr');
+            const price = parseFloat(row.querySelector('td:nth-child(3)').textContent.replace(/,/g, ''));
+            const quantity = parseInt(row.querySelector('.quantityInput').value);
+            const totalPriceCell = row.querySelector('.totalPrice');
+            totalPriceCell.textContent = (price * quantity).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+            updateTotalAmount();
+        }
+
+        updateTotalAmount();
+    });
 });
 </script>
 
