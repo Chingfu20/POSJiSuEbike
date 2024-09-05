@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JiSu Ebike POS System</title>
     <link rel="stylesheet" href="login.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <?php 
@@ -30,6 +28,7 @@
                         <div class="p-5">
                             <center><h4 class="text-dark mb-3">Login Admin</h4></center>
                             <form action="login-code.php" method="POST" class="login-form">
+                                
                                 <div class="mb-3">
                                     <label class="form-label">Enter Email</label>
                                     <input type="email" name="email" class="form-control" required />
@@ -50,23 +49,5 @@
             </div>
         </div>
     </div>
-
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        <?php if (isset($_SESSION['alert'])): ?>
-            Swal.fire({
-                icon: 'success',
-                title: '<?php echo $_SESSION['alert']; ?>',
-                showConfirmButton: false,
-                timer: 1500
-            }).then(() => {
-                <?php if ($_SESSION['alert'] == 'Logged In Successfully'): ?>
-                    window.location.href = 'admin/index.php';
-                <?php endif; ?>
-            });
-            <?php unset($_SESSION['alert']); ?>
-        <?php endif; ?>
-    });
-    </script>
 </body>
 </html>
