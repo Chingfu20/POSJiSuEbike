@@ -1,21 +1,5 @@
 <?php include('includes/header.php'); ?>
 
-<?php
-session_start(); // Start the session at the beginning of your PHP script
-
-// Assuming you already have logic to calculate $totalAmount and $amountPaid
-$totalAmount = 1000;  // Example total amount
-$amountPaid = 1500;   // Example amount paid
-$change = $amountPaid - $totalAmount; // Calculate the change
-
-// Store the values in session
-$_SESSION['total_amount'] = $totalAmount;
-$_SESSION['amount_paid'] = $amountPaid;
-$_SESSION['change'] = $change;
-
-// Proceed with the rest of your order creation logic
-?>
-
 <div class="modal fade" id="addCustomerModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -44,6 +28,7 @@ $_SESSION['change'] = $change;
     </div>
   </div>
 </div>
+
 
 <div class="container-fluid px-4">
     <div class="card mt-4 shadow-sm">
