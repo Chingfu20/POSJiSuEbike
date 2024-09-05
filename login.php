@@ -12,9 +12,9 @@
     <?php 
     include('includes/header.php'); 
 
-    if(isset($_SESSION['loggedIn'])){
+    if (isset($_SESSION['loggedIn'])) {
         ?>
-        <script>window.location.href = 'index.php';</script>
+        <script>window.location.href = 'admin/index.php';</script>
         <?php
     }
     ?>
@@ -30,7 +30,6 @@
                         <div class="p-5">
                             <center><h4 class="text-dark mb-3">Login Admin</h4></center>
                             <form action="login-code.php" method="POST" class="login-form">
-                                
                                 <div class="mb-3">
                                     <label class="form-label">Enter Email</label>
                                     <input type="email" name="email" class="form-control" required />
@@ -55,17 +54,18 @@
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         const urlParams = new URLSearchParams(window.location.search);
-        const alertMessage = urlParams.get('alert');
+        const alertType = urlParams.get('alert');
+        const message = urlParams.get('message');
         
-        if (alertMessage) {
+        if (alertType) {
             Swal.fire({
-                icon: alertMessage === 'success' ? 'success' : 'error',
-                title: alertMessage === 'success' ? 'Logged In Successfully' : 'Error',
-                text: alertMessage === 'success' ? 'You will be redirected shortly.' : 'There was an issue with your login.',
+                icon: alertType === 'success' ? 'success' : 'error',
+                title: alertType === 'success' ? 'Logged In Successfully' : 'Error',
+                text: message || (alertType === 'success' ? 'You will be redirected shortly.' : 'An error occurred.'),
                 showConfirmButton: false,
                 timer: 1500
             }).then(() => {
-                if (alertMessage === 'success') {
+                if (alertType === 'success') {
                     window.location.href = 'admin/index.php';
                 }
             });
