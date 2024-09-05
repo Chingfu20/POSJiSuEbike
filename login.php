@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JiSu Ebike POS System</title>
     <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <?php 
@@ -49,5 +51,26 @@
             </div>
         </div>
     </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const alertMessage = urlParams.get('alert');
+        
+        if (alertMessage) {
+            Swal.fire({
+                icon: alertMessage === 'success' ? 'success' : 'error',
+                title: alertMessage === 'success' ? 'Logged In Successfully' : 'Error',
+                text: alertMessage === 'success' ? 'You will be redirected shortly.' : 'There was an issue with your login.',
+                showConfirmButton: false,
+                timer: 1500
+            }).then(() => {
+                if (alertMessage === 'success') {
+                    window.location.href = 'admin/index.php';
+                }
+            });
+        }
+    });
+    </script>
 </body>
 </html>
