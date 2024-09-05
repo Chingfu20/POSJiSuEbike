@@ -123,36 +123,14 @@ if(!isset($_SESSION['productItems'])){
                                         <td colspan="1" style="font-weight: bold;"><?= number_format($totalAmount, 0); ?></td>
                                     </tr>
                                     <tr>
-    <td colspan="4" align="end" style="font-weight: bold;">Amount:</td>
-    <td colspan="1" style="font-weight: bold;">
-        <input type="text" id="amountPaid" class="form-control" value="<?= number_format($amountPaid, 0); ?>">
-    </td>
-</tr>
-<tr>
-    <td colspan="4" align="end" style="font-weight: bold;">Change:</td>
-    <td colspan="1" style="font-weight: bold;">
-        <input type="text" id="changeAmount" class="form-control" value="<?= number_format($changeAmount, 0); ?>" readonly>
-    </td>
-</tr>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const amountPaidInput = document.getElementById('amountPaid');
-        const changeAmountInput = document.getElementById('changeAmount');
-        const totalAmount = <?= $totalAmount; ?>; // Assuming total amount is available in PHP
-
-        function calculateChange() {
-            const amountPaid = parseFloat(amountPaidInput.value.replace(/,/g, '')) || 0;
-            const change = amountPaid - totalAmount;
-            changeAmountInput.value = change > 0 ? change.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') : '0.00';
-        }
-
-        // Trigger change calculation when the amount paid is updated
-        amountPaidInput.addEventListener('input', calculateChange);
-
-        // Trigger initial calculation on page load
-        calculateChange();
-    });
+                                    <td colspan="4" align="end" style="font-weight: bold;">Amount:</td>
+                                    <td colspan="1" style="font-weight: bold;"><?= number_format($amountPaid, 0); ?></td>
+                                    </tr>
+                                    <tr>
+                                    <td colspan="4" align="end" style="font-weight: bold;">Change:</td>
+                                    <td colspan="1" style="font-weight: bold;"><?= number_format($changeAmount, 0); ?></td>
+                                    </tr>
+                                    <tr>
                                         <td colspan="5">Payment Mode: <?= isset($_SESSION['payment_mode']) ? $_SESSION['payment_mode'] : ''; ?></td>
                                     </tr>
                                 </tbody>
