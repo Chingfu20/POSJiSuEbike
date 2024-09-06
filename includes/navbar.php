@@ -58,51 +58,11 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
 
-<!-- Custom CSS for hover dropdown and color palette -->
+<!-- Custom CSS for hover dropdown -->
 <style>
-  /* Navbar background */
-  .navbar {
-    background-color: #b3e5e1; /* Mint blue background */
-  }
-
-  /* Navbar text */
-  .navbar-text, .nav-link {
-    color: #006d77; /* Darker mint blue text */
-  }
-
-  /* Navbar brand */
-  .navbar-brand img {
-    filter: brightness(0.8); /* Slightly dimmed logo */
-  }
-
-  /* Dropdown */
-  .dropdown-menu {
-    background-color: #e0f7f3; /* Lighter mint background */
-  }
-
-  .dropdown-item:hover {
-    background-color: #80cbc4; /* Darker mint on hover */
-  }
-
-  /* Hover effect for nav items */
-  .nav-link:hover {
-    color: #004d4d; /* Darker blue on hover */
-  }
-
-  /* Toggle button color */
-  .navbar-toggler {
-    border-color: #006d77;
-  }
-
-  .navbar-toggler-icon {
-    background-color: #006d77;
-  }
-
-  /* Dropdown hover */
   .navbar-nav .dropdown:hover .dropdown-menu {
     display: block;
   }
-  
   .navbar-nav .dropdown-menu {
     margin-top: 0;
   }
