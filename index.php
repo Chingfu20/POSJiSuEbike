@@ -1,20 +1,20 @@
 <?php include('includes/header.php'); ?>
 
 <!-- Carousel Section -->
-<div class="py-5" style="background-color: #b3e5e1; background-size: cover; background-position: center; background-repeat: no-repeat; height: 100;">
+<div class="py-5" style="background-size: cover; background-position: center; background-repeat: no-repeat; height: 100%;">
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             <!-- Carousel indicators go here -->
         </ol>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="assets/images/jisu-ebike.jpg" class="d-block w-100" alt="Slide 1" style="height: 100; object-fit: cover;">
+                <img src="assets/images/jisu-ebike.jpg" class="d-block w-100" alt="Slide 1" style="height: 100%; object-fit: cover;">
             </div>
             <div class="carousel-item">
-                <img src="assets/images/jisu-ebike.jpg" class="d-block w-100" alt="Slide 2" style="height: 100; object-fit: cover;">
+                <img src="assets/images/jisu-ebike.jpg" class="d-block w-100" alt="Slide 2" style="height: 100%; object-fit: cover;">
             </div>
             <div class="carousel-item">
-                <img src="assets/images/jisu-ebike.jpg" class="d-block w-100" alt="Slide 3" style="height: 100; object-fit: cover;">
+                <img src="assets/images/jisu-ebike.jpg" class="d-block w-100" alt="Slide 3" style="height: 100%; object-fit: cover;">
             </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -80,3 +80,38 @@
 </div>
 
 <?php include('includes/footer.php'); ?>
+
+<!-- CSS for whole page background -->
+<style>
+    /* Apply mint blue background to the whole page */
+    body, html {
+        background-color: #b3e5e1;
+        height: 100%;
+        margin: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    /* Ensure the container sections stand out with subtle padding */
+    .container {
+        background-color: rgba(255, 255, 255, 0.85); /* Slightly translucent white background for contrast */
+        padding: 30px;
+        border-radius: 8px;
+    }
+
+    /* Adjust carousel image sizes */
+    .carousel-inner img {
+        object-fit: cover;
+        height: 500px; /* Ensures a large, uniform image height */
+    }
+
+    /* Adjust text colors to complement the mint blue background */
+    h2 {
+        color: #004d4d; /* Darker shade of mint blue for headers */
+    }
+
+    p {
+        color: #006d77; /* Slightly darker mint for paragraphs */
+    }
+
+    /* Adjust footer and other elements if needed */
+</style>
