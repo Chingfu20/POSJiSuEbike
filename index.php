@@ -8,13 +8,13 @@
         </ol>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="assets/images/jisu-ebike.jpg" class="d-block w-100" alt="Slide 1" style="height: 100%; object-fit: cover;">
+                <img src="assets/images/jisu-ebike.jpg" class="d-block w-100" alt="Slide 1" style="object-fit: cover;">
             </div>
             <div class="carousel-item">
-                <img src="assets/images/jisu-ebike.jpg" class="d-block w-100" alt="Slide 2" style="height: 100%; object-fit: cover;">
+                <img src="assets/images/jisu-ebike.jpg" class="d-block w-100" alt="Slide 2" style="object-fit: cover;">
             </div>
             <div class="carousel-item">
-                <img src="assets/images/jisu-ebike.jpg" class="d-block w-100" alt="Slide 3" style="height: 100%; object-fit: cover;">
+                <img src="assets/images/jisu-ebike.jpg" class="d-block w-100" alt="Slide 3" style="object-fit: cover;">
             </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -27,6 +27,15 @@
         </a>
     </div>
 </div>
+
+<!-- CSS for adjusting carousel image size -->
+<style>
+    /* Adjust carousel image sizes */
+    .carousel-inner img {
+        object-fit: cover;
+        height: 350px; /* Reduce height for a smaller carousel */
+    }
+</style>
 
 <!-- Other sections -->
 <div class="container my-5" style="background-color: rgba(255, 255, 255, 0.85); padding: 20px;">
