@@ -1,7 +1,6 @@
 <?php include('includes/header.php'); ?>
 
 <!-- Carousel Section inside a container with adjusted width -->
-<div class="container py-5" style="max-width: 1200px; background-size: cover; background-position: center; background-repeat: no-repeat; height: 100%;">
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             <!-- Carousel indicators go here -->
