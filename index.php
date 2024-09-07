@@ -1,19 +1,20 @@
 <?php include('includes/header.php'); ?>
 
-<!-- Carousel Section inside a container with adjusted width -->
+<!-- Carousel Section -->
+<div class="py-5" style="background-size: cover; background-position: center; background-repeat: no-repeat; height: 100%;">
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             <!-- Carousel indicators go here -->
         </ol>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="assets/images/jisu-ebike.jpg" class="d-block w-90" alt="Slide 1">
+                <img src="assets/images/jisu-ebike.jpg" class="d-block w-100" alt="Slide 1" style="height: 100%; object-fit: cover;">
             </div>
             <div class="carousel-item">
-                <img src="assets/images/jisu-ebike.jpg" class="d-block w-90" alt="Slide 2">
+                <img src="assets/images/jisu-ebike.jpg" class="d-block w-100" alt="Slide 2" style="height: 100%; object-fit: cover;">
             </div>
             <div class="carousel-item">
-                <img src="assets/images/jisu-ebike.jpg" class="d-block w-90" alt="Slide 3">
+                <img src="assets/images/jisu-ebike.jpg" class="d-block w-100" alt="Slide 3" style="height: 100%; object-fit: cover;">
             </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -27,23 +28,8 @@
     </div>
 </div>
 
-<!-- CSS for adjusting carousel size inside container -->
-<style>
-    /* Container adjustments */
-    .container {
-        max-width: 1200px; /* Limits the container width */
-        margin: 0 auto; /* Centers the container on the page */
-    }
-
-    /* Adjust carousel image sizes to show full details */
-    .carousel-inner img {
-        object-fit: contain; /* Ensures the entire image is visible */
-        height: 450px; /* Moderate height for the carousel */
-        width: 100%; /* Ensures the image takes full width of the container */
-    }
-</style>
-
 <!-- Other sections -->
+<div class="container my-5" style="background-color: rgba(255, 255, 255, 0.85); padding: 20px;">
     <div class="row justify-content-center">
         <div class="col-md-12 py-5 text-center">
             <?php alertMessage(); ?>
@@ -52,6 +38,7 @@
 </div>
 
 <!-- Product Section -->
+<div class="container py-5" style="background-color: rgba(255, 255, 255, 0.85);">
     <h2 class="text-center" style="color: #004d4d;">Unit</h2>
     <div class="row">
         <div class="col-md-3">
@@ -74,6 +61,7 @@
 </div>
 
 <!-- Contact Us Section -->
+<div class="container py-5" style="background-color: rgba(255, 255, 255, 0.85);">
     <h2 class="text-center" style="color: #004d4d;">Contact Us</h2>
     <div class="row text-center">
         <div class="col-md-4">
