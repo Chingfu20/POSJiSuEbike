@@ -7,13 +7,13 @@
         </ol>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="assets/images/jisu-ebike.jpg" class="d-block w-100" alt="Slide 1">
+                <img src="assets/images/jisu-ebike.jpg" class="d-block w-90" alt="Slide 1">
             </div>
             <div class="carousel-item">
-                <img src="assets/images/jisu-ebike.jpg" class="d-block w-100" alt="Slide 2">
+                <img src="assets/images/jisu-ebike.jpg" class="d-block w-90" alt="Slide 2">
             </div>
             <div class="carousel-item">
-                <img src="assets/images/jisu-ebike.jpg" class="d-block w-100" alt="Slide 3">
+                <img src="assets/images/jisu-ebike.jpg" class="d-block w-90" alt="Slide 3">
             </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
