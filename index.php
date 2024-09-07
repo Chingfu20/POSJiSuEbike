@@ -8,13 +8,13 @@
         </ol>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="assets/images/jisu-ebike.jpg" class="d-block w-100" alt="Slide 1" style="object-fit: cover;">
+                <img src="assets/images/" class="d-block w-100" alt="Slide 1" style="object-fit: cover;">
             </div>
             <div class="carousel-item">
-                <img src="assets/images/jisu-ebike.jpg" class="d-block w-100" alt="Slide 2" style="object-fit: cover;">
+                <img src="assets/images/" class="d-block w-100" alt="Slide 2" style="object-fit: cover;">
             </div>
             <div class="carousel-item">
-                <img src="assets/images/jisu-ebike.jpg" class="d-block w-100" alt="Slide 3" style="object-fit: cover;">
+                <img src="assets/images/" class="d-block w-100" alt="Slide 3" style="object-fit: cover;">
             </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
