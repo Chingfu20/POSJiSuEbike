@@ -33,7 +33,9 @@
     /* Adjust carousel image sizes */
     .carousel-inner img {
         object-fit: cover;
-        height: 350px; /* Reduce height for a smaller carousel */
+        height: 350px; /* Height for a smaller carousel */
+        width: 80%; /* Adjust the width to 80% of the container */
+        margin: 0 auto; /* Center the image horizontally */
     }
 </style>
 
