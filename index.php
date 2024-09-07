@@ -45,7 +45,6 @@
 </style>
 
 <!-- Other sections -->
-<div class="container my-5" style="background-color: rgba(255, 255, 255, 0.85); padding: 20px;">
     <div class="row justify-content-center">
         <div class="col-md-12 py-5 text-center">
             <?php alertMessage(); ?>
