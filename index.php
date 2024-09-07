@@ -1,20 +1,20 @@
 <?php include('includes/header.php'); ?>
 
-<!-- Carousel Section -->
-<div class="py-5" style="background-size: cover; background-position: center; background-repeat: no-repeat; height: 100%;">
+<!-- Carousel Section inside a container -->
+<div class="container py-5" style="background-size: cover; background-position: center; background-repeat: no-repeat; height: 100%;">
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             <!-- Carousel indicators go here -->
         </ol>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="assets/images/" class="d-block w-100" alt="Slide 1" style="object-fit: cover;">
+                <img src="assets/images/jisu-ebike.jpg" class="d-block w-100" alt="Slide 1" style="object-fit: cover;">
             </div>
             <div class="carousel-item">
-                <img src="assets/images/" class="d-block w-100" alt="Slide 2" style="object-fit: cover;">
+                <img src="assets/images/jisu-ebike.jpg" class="d-block w-100" alt="Slide 2" style="object-fit: cover;">
             </div>
             <div class="carousel-item">
-                <img src="assets/images/" class="d-block w-100" alt="Slide 3" style="object-fit: cover;">
+                <img src="assets/images/jisu-ebike.jpg" class="d-block w-100" alt="Slide 3" style="object-fit: cover;">
             </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -28,14 +28,13 @@
     </div>
 </div>
 
-<!-- CSS for adjusting carousel image size -->
+<!-- CSS for adjusting carousel size inside container -->
 <style>
     /* Adjust carousel image sizes */
     .carousel-inner img {
         object-fit: cover;
-        height: 350px; /* Height for a smaller carousel */
-        width: 80%; /* Adjust the width to 80% of the container */
-        margin: 0 auto; /* Center the image horizontally */
+        height: 350px; /* Adjust height for a smaller carousel */
+        width: 100%; /* Carousel images will now fit within the container's width */
     }
 </style>
 
