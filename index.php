@@ -76,7 +76,6 @@
 </div>
 
 <!-- Contact Us Section -->
-<div class="container py-5" style="background-color: rgba(255, 255, 255, 0.85);">
     <h2 class="text-center" style="color: #004d4d;">Contact Us</h2>
     <div class="row text-center">
         <div class="col-md-4">
