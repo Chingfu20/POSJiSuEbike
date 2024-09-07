@@ -146,62 +146,85 @@
 
     <?php alertMessage(); ?>
 
-    <div class="row">
-        <div class="col-md-4 mb-3">
-            <div class="card">
-                <div class="card-header">Total Categories</div>
-                <div class="card-body chart-container">
-                    <canvas id="categoryChart"></canvas>
-                </div>
+    <div class="container-fluid">
+    <h1 class="mt-4"></h1>
+
+    <!-- Row for Total Categories, Total Products, Total Customers, and Today's Orders -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<div class="row">
+    <div class="col-md-3 mb-3">
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-list-alt"></i> Total Categories
+            </div>
+            <div class="card-body">
+                <h3 id="categoryText"><i class="fas fa-list-alt"></i></h3> <!-- Category count will be shown here -->
             </div>
         </div>
+    </div>
 
-        <div class="col-md-4 mb-3">
-            <div class="card">
-                <div class="card-header">Total Products</div>
-                <div class="card-body chart-container">
-                    <canvas id="productChart"></canvas>
-                </div>
+    <div class="col-md-3 mb-3">
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-boxes"></i> Total Products
+            </div>
+            <div class="card-body">
+                <h3 id="productText"></h3> <!-- Product count will be shown here -->
             </div>
         </div>
+    </div>
 
-        <div class="col-md-4 mb-3">
-            <div class="card">
-                <div class="card-header">Total Customers</div>
-                <div class="card-body chart-container">
-                    <canvas id="customerChart"></canvas>
-                </div>
+    <div class="col-md-3 mb-3">
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-users"></i> Total Customers
+            </div>
+            <div class="card-body">
+                <h3 id="customerText"></h3> <!-- Customer count will be shown here -->
             </div>
         </div>
+    </div>
 
-        <div class="col-md-4 mb-3">
-            <div class="card">
-                <div class="card-header">Monthly Sales Report</div>
-                <div class="card-body chart-container">
-                    <canvas id="salesChart"></canvas>
-                </div>
+    <div class="col-md-3 mb-3">
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-shopping-cart"></i> Today's Orders
             </div>
-        </div>
-
-        <div class="col-md-4 mb-3">
-            <div class="card">
-                <div class="card-header">Today's Orders</div>
-                <div class="card-body chart-container">
-                    <canvas id="todayOrdersChart"></canvas>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4 mb-3">
-            <div class="card">
-                <div class="card-header">Total Orders</div>
-                <div class="card-body chart-container">
-                    <canvas id="totalOrdersChart"></canvas>
-                </div>
+            <div class="card-body">
+                <h3 id="todayOrdersText"></h3> <!-- Today's orders count will be shown here -->
             </div>
         </div>
     </div>
 </div>
+
+
+    <!-- Row for Monthly Sales Report and Total Orders -->
+    <div class="row">
+    <!-- Left Column: Monthly Sales Report -->
+    <div class="col-md-6 mb-3">
+        <div class="card">
+            <div class="card-header">Monthly Sales Report</div>
+            <div class="card-body">
+                <!-- Chart for sales -->
+                <canvas id="salesChart" width="400" height="200"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Column: Total Orders -->
+    <div class="col-md-6 mb-3">
+        <div class="card">
+            <div class="card-header">Total Orders</div>
+            <div class="card-body chart-container">
+                <canvas id="totalOrdersChart" width="400" height="200"></canvas> <!-- Pie chart for Total Orders -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 
 <input type="hidden" id="categoryCount" value="<?= getCount('categories'); ?>">
 <input type="hidden" id="productCount" value="<?= getCount('products'); ?>">
@@ -221,6 +244,7 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
+        // Get the values from hidden inputs
         const categoryCount = document.getElementById("categoryCount").value;
         const productCount = document.getElementById("productCount").value;
         const customerCount = document.getElementById("customerCount").value;
@@ -228,39 +252,146 @@
         const todayOrders = document.getElementById("todayOrders").value;
         const totalOrders = document.getElementById("totalOrders").value;
 
-        const commonOptions = {
-            type: 'bar',
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: { display: false }
-                }
-            }
-        };
+        // Display the numbers for Total Categories, Total Products, Total Customers, and Today's Orders
+        document.getElementById('categoryText').innerHTML = categoryCount;
+        document.getElementById('productText').innerHTML = productCount;
+        document.getElementById('customerText').innerHTML = customerCount;
+        document.getElementById('todayOrdersText').innerHTML = todayOrders;
 
-        const createChart = (context, label, data, bgColor, brColor) => {
+        // Create a bar chart for Monthly Sales Report
+        const createBarChart = (context, label, data, bgColor, brColor) => {
             new Chart(context, {
-                ...commonOptions,
+                type: 'bar',
                 data: {
-                    labels: [label],
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
                     datasets: [{
-                        data: [data],
+                        label: label,
+                        data: data, // Array of data for each month
                         backgroundColor: bgColor,
                         borderColor: brColor,
-                        borderWidth: 1
+                        borderWidth: 2
                     }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: '#f8f9fa',
+                            titleColor: '#343a40',
+                            bodyColor: '#343a40',
+                        }
+                    },
+                    scales: {
+                        x: {
+                            ticks: {
+                                font: {
+                                    size: 16,
+                                    family: "'Comic Sans MS', 'Cursive'"
+                                },
+                                color: '#495057'
+                            }
+                        },
+                        y: {
+                            ticks: {
+                                font: {
+                                    size: 16,
+                                    family: "'Comic Sans MS', 'Cursive'"
+                                },
+                                color: '#495057'
+                            },
+                            beginAtZero: true // Ensure the y-axis starts at 0
+                        }
+                    }
                 }
             });
         };
 
-        createChart(document.getElementById("categoryChart"), "Categories", categoryCount, 'rgba(153, 102, 255, 0.2)', 'rgba(153, 102, 255, 1)');
-        createChart(document.getElementById("productChart"), "Products", productCount, 'rgba(54, 162, 235, 0.2)', 'rgba(54, 162, 235, 1)');
-        createChart(document.getElementById("customerChart"), "Customers", customerCount, 'rgba(255, 206, 86, 0.2)', 'rgba(255, 206, 86, 1)');
-        createChart(document.getElementById("salesChart"), "Sales (Total)", salesAmount, 'rgba(75, 192, 192, 0.2)', 'rgba(75, 192, 192, 1)');
-        createChart(document.getElementById("todayOrdersChart"), "Today's Orders", todayOrders, 'rgba(255, 99, 132, 0.2)', 'rgba(255, 99, 132, 1)');
-        createChart(document.getElementById("totalOrdersChart"), "Total Orders", totalOrders, 'rgba(255, 0, 0, 0.2)', 'rgba(255, 0, 0, 1)');
+        // Sample sales data for each month (you can replace this with dynamic data)
+        createBarChart(
+            document.getElementById("salesChart"),
+            "Sales (Total)",
+            [12000, 15000, 13000, 17000, 14000, 16000, 18000, 19000, 17000, 21000, 22000, 24000], // Sample data
+            'rgba(54, 162, 235, 0.7)',  // Bar fill color
+            'rgba(54, 162, 235, 1)'     // Bar border color
+        );
 
+        // Create a pie chart for Total Orders
+        const createPieChart = (context, label, data) => {
+            new Chart(context, {
+                type: 'pie',
+                data: {
+                    labels: ['Orders'],
+                    datasets: [{
+                        label: label,
+                        data: [data],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.6)',  // Red
+                            'rgba(54, 162, 235, 0.6)',  // Blue
+                            'rgba(255, 206, 86, 0.6)',  // Yellow
+                            'rgba(75, 192, 192, 0.6)'   // Green
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: true },
+                        tooltip: {
+                            backgroundColor: '#f8f9fa',
+                            titleColor: '#343a40',
+                            bodyColor: '#343a40',
+                        }
+                    }
+                }
+            });
+        };
+
+        // Create Pie Chart for Total Orders
+        createPieChart(document.getElementById("totalOrdersChart"), "Total Orders", totalOrders);
+
+        // Sample data: number of orders per month
+        const monthlyOrders = {
+            January: 300,
+            February: 250,
+            March: 200,
+            April: 180,
+            May: 220,
+            June: 210,
+            July: 190,
+            August: 240,
+            September: 290,  // Calculating for September
+            October: 320,
+            November: 350,
+            December: 370
+        };
+
+        // Function to calculate total orders for a specific month
+        const calculateMonthlyOrders = (month) => {
+            return monthlyOrders[month] || 0; // Return 0 if no orders in that month
+        };
+
+        // Calculate total orders for September
+        const totalSeptemberOrders = calculateMonthlyOrders("September");
+        console.log("Total orders for September:", totalSeptemberOrders); // Should output 290
+
+        // Display September's total orders on the page (optional)
+        document.getElementById('septemberOrdersText').innerHTML = `Total September Orders: ${totalSeptemberOrders}`;
+
+        // Display chart for monthly orders using actual data
+        createBarChart(
+            document.getElementById("salesChart"),
+            "Total Orders",
+            Object.values(monthlyOrders), // Orders data for each month
+            'rgba(54, 162, 235, 0.7)',  // Bar fill color
+            'rgba(54, 162, 235, 1)'     // Bar border color
+        );
     });
 </script>
-</body>
-</html>
