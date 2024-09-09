@@ -101,37 +101,37 @@
         </div>
         <div class="col-md-4 mb-4">
             <div class="gallery-item">
-                <img src="assets/images/c.jpg" alt="Food Truck" class="img-fluid w-100">
+                <img src="assets/images/c.jpg" alt="" class="img-fluid w-100">
             </div>
         </div>
         <div class="col-md-4 mb-4">
             <div class="gallery-item">
-                <img src="assets/images/d.jpg" alt="Grilling burgers" class="img-fluid w-100">
+                <img src="assets/images/d.jpg" alt="" class="img-fluid w-100">
             </div>
         </div>
         <div class="col-md-4 mb-4">
             <div class="gallery-item">
-                <img src="assets/images/e.jpg" alt="Burger and soda" class="img-fluid w-100">
+                <img src="assets/images/e.jpg" alt="" class="img-fluid w-100">
             </div>
         </div>
         <div class="col-md-4 mb-4">
             <div class="gallery-item">
-                <img src="assets/images/f.jpg" alt="Enjoying burger" class="img-fluid w-100">
+                <img src="assets/images/f.jpg" alt="" class="img-fluid w-100">
             </div>
         </div>
         <div class="col-md-4 mb-4">
             <div class="gallery-item">
-                <img src="assets/images/g.jpg" alt="Burger on plate" class="img-fluid w-100">
+                <img src="assets/images/g.jpg" alt="" class="img-fluid w-100">
             </div>
         </div>
         <div class="col-md-4 mb-4">
             <div class="gallery-item">
-                <img src="assets/images/h.jpg" alt="Friends eating burgers" class="img-fluid w-100">
+                <img src="assets/images/h.jpg" alt="" class="img-fluid w-100">
             </div>
         </div>
         <div class="col-md-4 mb-4">
             <div class="gallery-item">
-                <img src="assets/images/i.jpg" alt="Closeup of burger" class="img-fluid w-100">
+                <img src="assets/images/i.jpg" alt="" class="img-fluid w-100">
             </div>
         </div>
     </div>
