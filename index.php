@@ -96,7 +96,7 @@
         </div>
         <div class="col-md-4 mb-4">
             <div class="gallery-item">
-                <img src="assets/images/b.jpg" alt="" class="img-fluid w-100">
+                <img src="customer/assets/images/b.jpg" alt="" class="img-fluid w-100">
             </div>
         </div>
         <div class="col-md-4 mb-4">
