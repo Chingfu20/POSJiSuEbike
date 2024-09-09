@@ -91,47 +91,47 @@
     <div class="row">
         <div class="col-md-4 mb-4">
             <div class="gallery-item">
-                <img src="assets/images/10.jpg" alt="Burger and Fries" class="img-fluid w-100">
+                <img src="assets/images/a.jpg" alt="Burger and Fries" class="img-fluid w-100">
             </div>
         </div>
         <div class="col-md-4 mb-4">
             <div class="gallery-item">
-                <img src="assets/images/11.jpg" alt="Couple enjoying burgers" class="img-fluid w-100">
+                <img src="assets/images/b.jpg" alt="Couple enjoying burgers" class="img-fluid w-100">
             </div>
         </div>
         <div class="col-md-4 mb-4">
             <div class="gallery-item">
-                <img src="assets/images/12.jpg" alt="Food Truck" class="img-fluid w-100">
+                <img src="assets/images/c.jpg" alt="Food Truck" class="img-fluid w-100">
             </div>
         </div>
         <div class="col-md-4 mb-4">
             <div class="gallery-item">
-                <img src="assets/images/13.jpg" alt="Grilling burgers" class="img-fluid w-100">
+                <img src="assets/images/d.jpg" alt="Grilling burgers" class="img-fluid w-100">
             </div>
         </div>
         <div class="col-md-4 mb-4">
             <div class="gallery-item">
-                <img src="assets/images/5.jpg" alt="Burger and soda" class="img-fluid w-100">
+                <img src="assets/images/e.jpg" alt="Burger and soda" class="img-fluid w-100">
             </div>
         </div>
         <div class="col-md-4 mb-4">
             <div class="gallery-item">
-                <img src="assets/images/6.jpg" alt="Enjoying burger" class="img-fluid w-100">
+                <img src="assets/images/f.jpg" alt="Enjoying burger" class="img-fluid w-100">
             </div>
         </div>
         <div class="col-md-4 mb-4">
             <div class="gallery-item">
-                <img src="assets/images/7.jpg" alt="Burger on plate" class="img-fluid w-100">
+                <img src="assets/images/g.jpg" alt="Burger on plate" class="img-fluid w-100">
             </div>
         </div>
         <div class="col-md-4 mb-4">
             <div class="gallery-item">
-                <img src="assets/images/8.jpg" alt="Friends eating burgers" class="img-fluid w-100">
+                <img src="assets/images/h.jpg" alt="Friends eating burgers" class="img-fluid w-100">
             </div>
         </div>
         <div class="col-md-4 mb-4">
             <div class="gallery-item">
-                <img src="assets/images/9.jpg" alt="Closeup of burger" class="img-fluid w-100">
+                <img src="assets/images/i.jpg" alt="Closeup of burger" class="img-fluid w-100">
             </div>
         </div>
     </div>
