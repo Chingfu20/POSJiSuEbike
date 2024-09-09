@@ -22,3 +22,43 @@
 </div>
 
 <?php include('includes/footer.php'); ?>
+
+<!-- Footer Section -->
+<footer class="footer bg-primary text-white py-4">
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-md-6">
+        <span class="footer-link">Link: <a href="https://www.facebook.com/profile.php?id=100082397474734" class="text-white">FACEBOOK SER GLO</a></span>
+      </div>
+      <div class="col-md-6">
+        <span>JI SU EBIKE</span>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-12">
+        <p>Add: Campo, Bantigue, Bantayan Island, Cebu. Tel: 0947-209-8888 Complaint:
+
+0947-209-8888</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Include Bootstrap CSS -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Custom CSS for Footer -->
+<style>
+  .footer {
+    background-color: #497ecf; /* Gloss Glacier Blue */
+    font-size: 14px;
+  }
+  .footer a {
+    text-decoration: none;
+    font-weight: bold;
+  }
+  .footer-link a:hover {
+    text-decoration: underline;
+  }
+</style>
+
