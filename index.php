@@ -91,12 +91,12 @@
     <div class="row">
         <div class="col-md-4 mb-4">
             <div class="gallery-item">
-                <img src="assets/images/a.jpg" alt="Burger and Fries" class="img-fluid w-100">
+                <img src="assets/images/a.jpg" alt="" class="img-fluid w-100">
             </div>
         </div>
         <div class="col-md-4 mb-4">
             <div class="gallery-item">
-                <img src="assets/images/b.jpg" alt="Couple enjoying burgers" class="img-fluid w-100">
+                <img src="assets/images/b.jpg" alt="" class="img-fluid w-100">
             </div>
         </div>
         <div class="col-md-4 mb-4">
