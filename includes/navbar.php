@@ -3,7 +3,7 @@
     <div class="d-flex flex-column align-items-center">
       <span class="navbar-text mb-2 text-white">Welcome to Ji Su E-Bike</span>
       <a class="navbar-brand d-flex align-items-center" href="#">
-        <img src="assets/images/WS.png" alt="JiSu E-bike Logo" style="height: 40px; width: 90px; margin-right: 5px;">
+        <img src="assets/images/WS.jpg" alt="JiSu E-bike Logo" style="height: 40px; width: 90px; margin-right: 5px;">
       </a>
     </div>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
