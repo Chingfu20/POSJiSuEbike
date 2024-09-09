@@ -52,8 +52,8 @@ if(!isset($_SESSION['productItems'])){
                                         <tr>
                                             <td style="text-align: center;" colspan="2">
                                                 <h4 style="font-size: 23px; line-height: 30px; margin: 2px; padding: 0;">Ji Su E-Bike POS</h4>
-                                                <p style="font-size: 16px; line-height: 24px; margin: 2px; padding: 0;">Sitio Chinese, Mangubat street, Poblacion, Madridejos, Cebu</p>
-                                                <p style="font-size: 16px; line-height: 24px; margin: 2px; padding: 0;">Developer, Mr. Ching</p>
+                                                <p style="font-size: 16px; line-height: 24px; margin: 2px; padding: 0;">Located at Campo, Bantigue, Bantayan Island, Cebu</p>
+                                                <p style="font-size: 16px; line-height: 24px; margin: 2px; padding: 0;">Customer Service: 0923-377-4667</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -62,12 +62,13 @@ if(!isset($_SESSION['productItems'])){
                                                 <p style="font-size: 14px; line-height: 20px; margin: 0px; padding: 0;">Customer Name: <?= $cRowData['name'] ?> </p>
                                                 <p style="font-size: 14px; line-height: 20px; margin: 0px; padding: 0;">Customer Phone No.: <?= $cRowData['phone'] ?> </p>
                                                 <p style="font-size: 14px; line-height: 20px; margin: 0px; padding: 0;">Customer Email Id: <?= $cRowData['email'] ?> </p>
+                                                <p style="font-size: 14px; line-height: 20px; margin: 0px; padding: 0;">Customer Address: <?= $cRowData['address'] ?> </p>
                                             </td>
                                             <td align="end">
                                                 <h5 style="font-size: 20px; line-height: 30px; margin: 0px; padding: 0;">Invoice Details</h5>
                                                 <p style="font-size: 14px; line-height: 20px; margin: 0px; padding: 0;">Invoice No.: <?= $invoiceNo; ?></p>
                                                 <p style="font-size: 14px; line-height: 20px; margin: 0px; padding: 0;">Invoice Date: <?= date('d M Y'); ?></p>
-                                                <p style="font-size: 14px; line-height: 20px; margin: 0px; padding: 0;">Address: 1st main road, Bangalore, India</p>
+                                                <p style="font-size: 14px; line-height: 20px; margin: 0px; padding: 0;">Address: Campo, Bantigue, Bantayan Island, Cebu</p>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -120,6 +121,14 @@ if(!isset($_SESSION['productItems'])){
                                     <tr>
                                         <td colspan="4" align="end" style="font-weight: bold;">Grand Total:</td>
                                         <td colspan="1" style="font-weight: bold;"><?= number_format($totalAmount, 0); ?></td>
+                                    </tr>
+                                    <tr>
+                                    <td colspan="4" align="end" style="font-weight: bold;">Amount:</td>
+                                    <td colspan="1" style="font-weight: bold;"><?= number_format($amountPaid, 0); ?></td>
+                                    </tr>
+                                    <tr>
+                                    <td colspan="4" align="end" style="font-weight: bold;">Change:</td>
+                                    <td colspan="1" style="font-weight: bold;"><?= number_format($changeAmount, 0); ?></td>
                                     </tr>
                                     <tr>
                                         <td colspan="5">Payment Mode: <?= isset($_SESSION['payment_mode']) ? $_SESSION['payment_mode'] : ''; ?></td>
@@ -180,7 +189,59 @@ document.getElementById('saveOrder').addEventListener('click', function() {
             });
         }
     });
-   
+
+    document.addEventListener('DOMContentLoaded', function () {
+        function updateTotalAmount() {
+            let totalAmount = 0;
+            document.querySelectorAll('.totalPrice').forEach(cell => {
+                totalAmount += parseFloat(cell.textContent.replace(/,/g, ''));
+            });
+            document.getElementById('totalAmount').value = totalAmount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+            updateChange();
+        }
+
+        function updateChange() {
+            const totalAmount = parseFloat(document.getElementById('totalAmount').value.replace(/,/g, ''));
+            const amountPaid = parseFloat(document.getElementById('amountPaid').value) || 0;
+            const change = amountPaid - totalAmount;
+            document.getElementById('changeAmount').value = change > 0 ? change.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') : '0.00';
+        }
+
+        document.querySelectorAll('.increment').forEach(button => {
+            button.addEventListener('click', function () {
+                const qtyInput = this.parentElement.querySelector('.quantityInput');
+                let quantity = parseInt(qtyInput.value);
+                if (quantity < 999) {
+                    qtyInput.value = ++quantity;
+                    updateTotalPrice(this);
+                }
+            });
+        });
+
+        document.querySelectorAll('.decrement').forEach(button => {
+            button.addEventListener('click', function () {
+                const qtyInput = this.parentElement.querySelector('.quantityInput');
+                let quantity = parseInt(qtyInput.value);
+                if (quantity > 1) {
+                    qtyInput.value = --quantity;
+                    updateTotalPrice(this);
+                }
+            });
+        });
+
+        document.getElementById('amountPaid').addEventListener('input', updateChange);
+
+        function updateTotalPrice(element) {
+            const row = element.closest('tr');
+            const price = parseFloat(row.querySelector('td:nth-child(3)').textContent.replace(/,/g, ''));
+            const quantity = parseInt(row.querySelector('.quantityInput').value);
+            const totalPriceCell = row.querySelector('.totalPrice');
+            totalPriceCell.textContent = (price * quantity).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+            updateTotalAmount();
+        }
+
+        updateTotalAmount();
+    });
 });
 </script>
 

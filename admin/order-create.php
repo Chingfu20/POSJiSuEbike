@@ -14,7 +14,7 @@
         </div>
         <div class="mb-3">
             <label>Enter Customer Phone No.</label>
-            <input type="text" class="form-control" id="c_phone" />
+            <input type="text" class="form-control" id="c_phone" value="0" class="form-control" min="0" />
         </div>
         <div class="mb-3">
             <label>Enter Customer Email (optional)</label>
@@ -139,7 +139,7 @@ foreach ($sessionProducts as $key => $item) :
                         </div>
                         <div class="col-md-4">
                         <label>Enter Customer Phone Number</label>
-                        <input type="number" id="cphone" class="form-control" value="" />
+                        <input type="number" id="cphone" class="form-control" value="0" class="form-control" min="0" />
                         </div>
                         <div class="col-md-4">
                         <label>Total Amount</label>
@@ -147,7 +147,7 @@ foreach ($sessionProducts as $key => $item) :
                     </div>
                     <div class="col-md-4">
                         <label>Enter Amount</label>
-                        <input type="number" id="amountPaid" class="form-control" value="" />
+                        <input type="number" id="amountPaid" class="form-control" value="0" class="form-control" min="0" />
                     </div>
                     <div class="col-md-4">
                         <label>Change</label>
