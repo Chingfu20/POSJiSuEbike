@@ -85,57 +85,6 @@
         </div>
     </div>
 
-   <!-- Gallery Section -->
-<div class="container py-5 section-background"> <!-- Added blue background -->
-    <h2 class="text-center">Gallery</h2>
-    <div class="row">
-        <div class="col-md-4 mb-4">
-            <div class="gallery-item">
-                <img src="assets/images/a.jpg" alt="Burger and Fries" class="img-fluid w-100">
-            </div>
-        </div>
-        <div class="col-md-4 mb-4">
-            <div class="gallery-item">
-                <img src="assets/images/b.jpg" alt="Couple enjoying burgers" class="img-fluid w-100">
-            </div>
-        </div>
-        <div class="col-md-4 mb-4">
-            <div class="gallery-item">
-                <img src="assets/images/c.jpg" alt="Food Truck" class="img-fluid w-100">
-            </div>
-        </div>
-        <div class="col-md-4 mb-4">
-            <div class="gallery-item">
-                <img src="assets/images/d.jpg" alt="Grilling burgers" class="img-fluid w-100">
-            </div>
-        </div>
-        <div class="col-md-4 mb-4">
-            <div class="gallery-item">
-                <img src="assets/images/e.jpg" alt="Burger and soda" class="img-fluid w-100">
-            </div>
-        </div>
-        <div class="col-md-4 mb-4">
-            <div class="gallery-item">
-                <img src="assets/images/f.jpg" alt="Enjoying burger" class="img-fluid w-100">
-            </div>
-        </div>
-        <div class="col-md-4 mb-4">
-            <div class="gallery-item">
-                <img src="assets/images/g.jpg" alt="Burger on plate" class="img-fluid w-100">
-            </div>
-        </div>
-        <div class="col-md-4 mb-4">
-            <div class="gallery-item">
-                <img src="assets/images/h.jpg" alt="Friends eating burgers" class="img-fluid w-100">
-            </div>
-        </div>
-        <div class="col-md-4 mb-4">
-            <div class="gallery-item">
-                <img src="assets/images/i.jpg" alt="Closeup of burger" class="img-fluid w-100">
-            </div>
-        </div>
-    </div>
-</div>
     <!-- Contact Us Section -->
     <div class="container py-5 section-background">
         <h2 class="text-center text-white">Contact Us</h2>
