@@ -139,10 +139,11 @@
             <p>0947-209-8888</p>
         </div>
     </div>
-   <!-- Motorcycle animation with adjusted size -->
-<div class="text-center mt-4" data-aos="zoom-in">
-    <img src="assets/images/ride_01.gif" alt="Person driving a motorcycle" class="img-fluid" style="max-width: 300px; height: auto;">
+  <!-- Motorcycle animation across the screen -->
+<div class="motorcycle-animation" data-aos="zoom-in">
+    <img src="assets/images/ride_01.gif" alt="Person driving a motorcycle" class="motorcycle-gif">
 </div>
+
 
 
 <?php include('includes/footer.php'); ?>
