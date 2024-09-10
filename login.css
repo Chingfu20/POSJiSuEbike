@@ -66,3 +66,26 @@
 .my-3 {
     margin-top: 1rem;
 }
+.motorcycle-animation {
+    position: relative;
+    overflow: hidden; /* Prevents any overflow of the GIF outside the container */
+    height: 300px; /* Adjust the height as needed */
+}
+
+.motorcycle-animation img {
+    position: absolute;
+    left: -300px; /* Starts off-screen on the left */
+    top: 50%; /* Vertically centers the GIF */
+    transform: translateY(-50%); /* Keeps it centered */
+    width: 200px; /* Adjust the size of the GIF */
+    animation: moveAcrossScreen 5s linear infinite; /* Controls the speed and animation */
+}
+
+@keyframes moveAcrossScreen {
+    0% {
+        left: -300px; /* Starts off the screen to the left */
+    }
+    100% {
+        left: 100%; /* Moves off the screen to the right */
+    }
+}
