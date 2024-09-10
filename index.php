@@ -67,19 +67,19 @@
     <h2 class="text-center text-white" data-aos="fade-up">Units</h2>
     <div class="row">
         <div class="col-md-3" data-aos="fade-up" data-aos-delay="100">
-            <img src="assets/images/1.jpg" alt="Product 1" class="img-fluid w-100" style="object-fit: cover; height: 300px;">
+            <img src="assets/images/1.jpg" alt="Product 1" class="img-fluid w-100 image-border" style="object-fit: cover; height: 300px;">
             <p class="text-center text-white">SG 5</p>
         </div>
         <div class="col-md-3" data-aos="fade-up" data-aos-delay="200">
-            <img src="assets/images/2.jpg" alt="Product 2" class="img-fluid w-100" style="object-fit: cover; height: 300px;">
+            <img src="assets/images/2.jpg" alt="Product 2" class="img-fluid w-100 image-border" style="object-fit: cover; height: 300px;">
             <p class="text-center text-white">DRAGON</p>
         </div>
         <div class="col-md-3" data-aos="fade-up" data-aos-delay="300">
-            <img src="assets/images/bike3.jpg" alt="Product 3" class="img-fluid w-100" style="object-fit: cover; height: 300px;">
+            <img src="assets/images/bike3.jpg" alt="Product 3" class="img-fluid w-100 image-border" style="object-fit: cover; height: 300px;">
             <p class="text-center text-white">CLASSY PRO 5 SEATERS</p>
         </div>
         <div class="col-md-3" data-aos="fade-up" data-aos-delay="400">
-            <img src="assets/images/3.jpg" alt="Product 4" class="img-fluid w-100" style="object-fit: cover; height: 300px;">
+            <img src="assets/images/3.jpg" alt="Product 4" class="img-fluid w-100 image-border" style="object-fit: cover; height: 300px;">
             <p class="text-center text-white">EAGLE SCOOTER</p>
         </div>
     </div>
@@ -91,36 +91,37 @@
     <div class="row">
         <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="100">
             <div class="gallery-item">
-                <img src="assets/images/a.jpg" alt="" class="img-fluid w-100">
+                <img src="assets/images/a.jpg" alt="" class="img-fluid w-100 image-border">
             </div>
         </div>
         <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="200">
             <div class="gallery-item">
-                <img src="assets/images/b.jpg" alt="" class="img-fluid w-100">
+                <img src="assets/images/b.jpg" alt="" class="img-fluid w-100 image-border">
             </div>
         </div>
         <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="300">
             <div class="gallery-item">
-                <img src="assets/images/c.jpg" alt="" class="img-fluid w-100">
+                <img src="assets/images/c.jpg" alt="" class="img-fluid w-100 image-border">
             </div>
         </div>
         <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="400">
             <div class="gallery-item">
-                <img src="assets/images/d.jpg" alt="" class="img-fluid w-100">
+                <img src="assets/images/d.jpg" alt="" class="img-fluid w-100 image-border">
             </div>
         </div>
         <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="500">
             <div class="gallery-item">
-                <img src="assets/images/e.jpg" alt="" class="img-fluid w-100">
+                <img src="assets/images/e.jpg" alt="" class="img-fluid w-100 image-border">
             </div>
         </div>
         <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="600">
             <div class="gallery-item">
-                <img src="assets/images/f.jpg" alt="" class="img-fluid w-100">
+                <img src="assets/images/f.jpg" alt="" class="img-fluid w-100 image-border">
             </div>
         </div>
     </div>
 </div>
+
 
 <!-- Contact Us Section -->
 <div class="container py-5 section-background">
