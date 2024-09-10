@@ -7,6 +7,7 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"> <!-- AOS CSS -->
     <link rel="stylesheet" href="style.css">
     <style>
         /* Navbar custom color */
@@ -61,144 +62,101 @@
     </div>
 </div>
 
-
-    <!-- Product Section -->
-    <div class="container py-5 section-background">
-        <h2 class="text-center text-white">Units</h2>
-        <div class="row">
-            <div class="col-md-3">
-                <img src="assets/images/1.jpg" alt="Product 1" class="img-fluid w-100" style="object-fit: cover; height: 300px;">
-                <p class="text-center text-white">SG 5</p>
-            </div>
-            <div class="col-md-3">
-                <img src="assets/images/2.jpg" alt="Product 2" class="img-fluid w-100" style="object-fit: cover; height: 300px;">
-                <p class="text-center text-white">DRAGON</p>
-            </div>
-            <div class="col-md-3">
-                <img src="assets/images/bike3.jpg" alt="Product 3" class="img-fluid w-100" style="object-fit: cover; height: 300px;">
-                <p class="text-center text-white">CLASSY PRO 5 SEATERS</p>
-            </div>
-            <div class="col-md-3">
-                <img src="assets/images/3.jpg" alt="Product 4" class="img-fluid w-100" style="object-fit: cover; height: 300px;">
-                <p class="text-center text-white">EAGLE SCOOTER</p>
-            </div>
+<!-- Product Section -->
+<div class="container py-5 section-background">
+    <h2 class="text-center text-white" data-aos="fade-up">Units</h2>
+    <div class="row">
+        <div class="col-md-3" data-aos="fade-up" data-aos-delay="100">
+            <img src="assets/images/1.jpg" alt="Product 1" class="img-fluid w-100" style="object-fit: cover; height: 300px;">
+            <p class="text-center text-white">SG 5</p>
+        </div>
+        <div class="col-md-3" data-aos="fade-up" data-aos-delay="200">
+            <img src="assets/images/2.jpg" alt="Product 2" class="img-fluid w-100" style="object-fit: cover; height: 300px;">
+            <p class="text-center text-white">DRAGON</p>
+        </div>
+        <div class="col-md-3" data-aos="fade-up" data-aos-delay="300">
+            <img src="assets/images/bike3.jpg" alt="Product 3" class="img-fluid w-100" style="object-fit: cover; height: 300px;">
+            <p class="text-center text-white">CLASSY PRO 5 SEATERS</p>
+        </div>
+        <div class="col-md-3" data-aos="fade-up" data-aos-delay="400">
+            <img src="assets/images/3.jpg" alt="Product 4" class="img-fluid w-100" style="object-fit: cover; height: 300px;">
+            <p class="text-center text-white">EAGLE SCOOTER</p>
         </div>
     </div>
+</div>
 
-   <!-- Gallery Section -->
-<div class="container py-5 section-background"> <!-- Added blue background -->
-    <h2 class="text-center">Gallery</h2>
+<!-- Gallery Section -->
+<div class="container py-5 section-background">
+    <h2 class="text-center" data-aos="fade-up">Gallery</h2>
     <div class="row">
-        <div class="col-md-4 mb-4">
+        <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="100">
             <div class="gallery-item">
                 <img src="assets/images/a.jpg" alt="" class="img-fluid w-100">
             </div>
         </div>
-        <div class="col-md-4 mb-4">
+        <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="200">
             <div class="gallery-item">
                 <img src="assets/images/b.jpg" alt="" class="img-fluid w-100">
             </div>
         </div>
-        <div class="col-md-4 mb-4">
+        <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="300">
             <div class="gallery-item">
                 <img src="assets/images/c.jpg" alt="" class="img-fluid w-100">
             </div>
         </div>
-        <div class="col-md-4 mb-4">
+        <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="400">
             <div class="gallery-item">
                 <img src="assets/images/d.jpg" alt="" class="img-fluid w-100">
             </div>
         </div>
-        <div class="col-md-4 mb-4">
+        <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="500">
             <div class="gallery-item">
                 <img src="assets/images/e.jpg" alt="" class="img-fluid w-100">
             </div>
         </div>
-        <div class="col-md-4 mb-4">
+        <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="600">
             <div class="gallery-item">
                 <img src="assets/images/f.jpg" alt="" class="img-fluid w-100">
             </div>
         </div>
-        <div class="col-md-4 mb-4">
-            <div class="gallery-item">
-                <img src="assets/images/g.jpg" alt="" class="img-fluid w-100">
-            </div>
+    </div>
+</div>
+
+<!-- Contact Us Section -->
+<div class="container py-5 section-background">
+    <h2 class="text-center text-white" data-aos="fade-up">Contact Us</h2>
+    <div class="row text-center text-white">
+        <div class="col-md-4" data-aos="fade-left">
+            <p><i class="fas fa-map-marker-alt"></i> Address</p>
+            <p>Located at Campo, Bantigue, Bantayan Island, Cebu</p>
         </div>
-        <div class="col-md-4 mb-4">
-            <div class="gallery-item">
-                <img src="assets/images/h.jpg" alt="" class="img-fluid w-100">
-            </div>
+        <div class="col-md-4" data-aos="fade-up">
+            <p><i class="fas fa-phone"></i> Customer Service:</p>
+            <p>0923-377-4667</p>
         </div>
-        <div class="col-md-4 mb-4">
-            <div class="gallery-item">
-                <img src="assets/images/i.jpg" alt="" class="img-fluid w-100">
-            </div>
+        <div class="col-md-4" data-aos="fade-right">
+            <p><i class="fas fa-envelope"></i> Complaint:</p>
+            <p>0947-209-8888</p>
         </div>
     </div>
 </div>
-    <!-- Contact Us Section -->
-    <div class="container py-5 section-background">
-        <h2 class="text-center text-white">Contact Us</h2>
-        <div class="row text-center text-white">
-            <div class="col-md-4">
-                <p><i class="fas fa-map-marker-alt"></i> Address</p>
-                <p>Located at Campo, Bantigue, Bantayan Island, Cebu</p>
-            </div>
-            <div class="col-md-4">
-                <p><i class="fas fa-phone"></i> Customer Service:</p>
-                <p>0923-377-4667</p>
-            </div>
-            <div class="col-md-4">
-                <p><i class="fas fa-envelope"></i> Complaint:</p>
-                <p>0947-209-8888</p>
-            </div>
-        </div>
-    </div>
 
-    <?php include('includes/footer.php'); ?>
+<?php include('includes/footer.php'); ?>
 
-    <!-- Include Bootstrap JS and dependencies -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- Include Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script> <!-- AOS JS -->
+
+<script>
+    // Initialize AOS (Animate on Scroll)
+    AOS.init({
+        duration: 1000, // Animation duration
+        once: true // Animation occurs only once when scrolling down
+    });
+</script>
+
 </body>
 </html>
-<!-- Footer Section -->
-<footer class="footer bg-primary text-white py-4">
-  <div class="container text-center">
-    <div class="row">
-      <div class="col-md-6">
-        <span class="footer-link">Link: <a href="https://www.facebook.com/profile.php?id=100082397474734" class="text-white">FACEBOOK SER GLO</a></span>
-      </div>
-      <div class="col-md-6">
-        <span>JI SU EBIKE</span>
-      </div>
-    </div>
-    <div class="row mt-3">
-      <div class="col-12">
-        <p>Add: Campo, Bantigue, Bantayan Island, Cebu. Tel: 0947-209-8888 Complaint:
-
-0947-209-8888</p>
-      </div>
-    </div>
-  </div>
-</footer>
-
-<!-- Include Bootstrap CSS -->
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
-
-<!-- Custom CSS for Footer -->
-<style>
-  .footer {
-    background-color: #497ecf; /* Gloss Glacier Blue */
-    font-size: 14px;
-  }
-  .footer a {
-    text-decoration: none;
-    font-weight: bold;
-  }
-  .footer-link a:hover {
-    text-decoration: underline;
-  }
-</style>
