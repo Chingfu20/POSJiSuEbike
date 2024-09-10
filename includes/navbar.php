@@ -4,12 +4,11 @@
       <span class="navbar-text mb-2 text-white">Welcome to Ji Su E-Bike</span>
       <a class="navbar-brand d-flex align-items-center" href="#">
         <img src="assets/images/WS.png" alt="JiSu E-bike Logo" style="height: 40px; width: 90px; margin-right: 5px;">
-      </a>
-      <!-- Motorcycle animation with adjusted size -->
+        <!-- Motorcycle animation with adjusted size -->
 <div class="text-center mt-4" data-aos="zoom-in">
     <img src="assets/images/ride_01.gif" alt="Person driving a motorcycle" class="img-fluid" style="height: 40px; width: 90px; margin-right: 5px;">
 </div>
-
+      </a>
     </div>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
