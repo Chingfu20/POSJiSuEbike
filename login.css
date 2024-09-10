@@ -68,24 +68,25 @@
 }
 .motorcycle-animation {
     position: relative;
-    overflow: hidden; /* Prevents any overflow of the GIF outside the container */
-    height: 300px; /* Adjust the height as needed */
+    width: 100%;  /* Full width of the screen */
+    height: 300px;  /* Adjust the height as needed */
+    overflow: hidden;  /* Ensures the GIF stays within the container */
 }
 
-.motorcycle-animation img {
+.motorcycle-gif {
     position: absolute;
-    left: -300px; /* Starts off-screen on the left */
-    top: 50%; /* Vertically centers the GIF */
-    transform: translateY(-50%); /* Keeps it centered */
-    width: 200px; /* Adjust the size of the GIF */
-    animation: moveAcrossScreen 5s linear infinite; /* Controls the speed and animation */
+    left: -200px;  /* Starts off-screen to the left */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 200px;  /* Adjust this to control the size of the GIF */
+    animation: moveAcross 5s linear forwards;  /* Controls the speed of the GIF across the screen */
 }
 
-@keyframes moveAcrossScreen {
+@keyframes moveAcross {
     0% {
-        left: -300px; /* Starts off the screen to the left */
+        left: -200px;  /* Start off-screen to the left */
     }
     100% {
-        left: 100%; /* Moves off the screen to the right */
+        left: 100%;  /* End off-screen to the right */
     }
 }
