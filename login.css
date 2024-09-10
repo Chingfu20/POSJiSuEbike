@@ -66,3 +66,9 @@
 .my-3 {
     margin-top: 1rem;
 }
+/* Image Border Styling */
+.image-border {
+    border: 5px solid #fff; /* White border color */
+    border-radius: 10px;    /* Rounded corners for the border */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  /* Adds a subtle shadow for depth */
+}
