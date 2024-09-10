@@ -141,7 +141,7 @@
     </div>
     <!-- Motorcycle animation -->
     <div class="text-center mt-4" data-aos="zoom-in">
-        <img src="assets/images/motorcycle-animation.gif" alt="Person driving a motorcycle" class="img-fluid">
+        <img src="assets/images/ride_01.gif" alt="Person driving a motorcycle" class="img-fluid">
     </div>
 </div>
 
