@@ -139,7 +139,12 @@
             <p>0947-209-8888</p>
         </div>
     </div>
+    <!-- Motorcycle animation -->
+    <div class="text-center mt-4" data-aos="zoom-in">
+        <img src="assets/images/motorcycle-animation.gif" alt="Person driving a motorcycle" class="img-fluid">
+    </div>
 </div>
+
 
 <?php include('includes/footer.php'); ?>
 
