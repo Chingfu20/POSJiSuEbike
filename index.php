@@ -122,12 +122,13 @@
     </div>
 </div>
 
-<!-- Motorcycle animation with adjusted size -->
+
+<!-- Contact Us Section -->
+ <!-- Motorcycle animation with adjusted size -->
 <div class="text-center mt-4" data-aos="zoom-in">
     <img src="assets/images/ride_01.gif" alt="Person driving a motorcycle" class="img-fluid" style="max-width: 300px; height: auto;">
 </div>
 
-<!-- Contact Us Section -->
 <div class="container py-5 section-background">
     <h2 class="text-center text-white" data-aos="fade-up">Contact Us</h2>
     <div class="row text-center text-white">
