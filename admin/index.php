@@ -13,10 +13,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <style>
-            .right-aligned-card {
-        display: flex;
-        justify-content: flex-end;
-         }
         :root {
             --background-light: #f8f9fa;
             --color-light: #343a40;
@@ -179,7 +175,6 @@
         </div>
     </div>
 
-    <div class="row right-aligned-card">
     <div class="col-md-3 mb-3">
         <div class="card" style="background-color: #96E7DC;">
             <div class="card-header">
@@ -190,7 +185,6 @@
             </div>
         </div>
     </div>
-</div>
 
     <div class="col-md-3 mb-3">
         <div class="card" style="background-color: #4FCFC0;">
@@ -251,7 +245,7 @@
         // Get the values from hidden inputs
         const categoryCount = document.getElementById("categoryCount").value;
         const productCount = document.getElementById("productCount").value;
-        const customerCount = parseInt(document.getElementById("customerCount").value, 10); // Convert to number
+        const customerCount = document.getElementById("customerCount").value;
         const salesAmount = document.getElementById("salesAmount").value;
         const todayOrders = document.getElementById("todayOrders").value;
         const totalOrders = document.getElementById("totalOrders").value;
@@ -259,7 +253,7 @@
         // Display the numbers for Total Categories, Total Products, Total Customers, Today's Orders, and Total Orders
         document.getElementById('categoryText').innerHTML = categoryCount;
         document.getElementById('productText').innerHTML = productCount;
-        document.getElementById('customerText').innerHTML = customerCount.toLocaleString(); // Format number with commas
+        document.getElementById('customerText').innerHTML = customerCount;
         document.getElementById('todayOrdersText').innerHTML = todayOrders;
         document.getElementById('totalOrdersText').innerHTML = totalOrders;
 
@@ -322,4 +316,3 @@
         );
     });
 </script>
-
