@@ -36,12 +36,7 @@
                          <label for="">Description</label>
                          <textarea name="description" class="form-control" rows="3"><?= $catergory['data']['description']; ?></textarea>
                     </div>
-                    <div class="col-md-6">
-                         <label>Status (UnChecked=Visible, Checked=Hidden)</label>
-                         <br/>
-                         <input type="checkbox" name="status" <?= $catergory['data']['status'] == true ? 'checked':''; ?> style="width:30px;height:30px;";>
-                    </div>
-                    <div class="col-md-6 mb-3 text-end">
+                    <div class="d-flex justify-content-end mt-3">
                         <br/>
                          <button type="submit" name="updateCategory" class="btn btn-primary">Update</button>
                     </div>
