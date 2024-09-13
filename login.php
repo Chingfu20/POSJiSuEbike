@@ -17,26 +17,30 @@
     }
     ?>
 
-    <div class="neon-bg">
+    <div class="py-5 bg-light">
         <div class="container mt-5">
             <div class="row justify-content-center">
                 <div class="col-md-6">
-                    <div class="neon-card">
+                    <div class="card shadow rounded-4 custom-card">
 
                         <?php alertMessage(); ?>
 
                         <div class="p-5">
-                            <center><h4 class="neon-title">Login Admin</h4></center>
+                            <center><h4 class="text-dark mb-3">Login Admin</h4></center>
                             <form action="login-code.php" method="POST" class="login-form">
                                 
-                                <div class="mb-3 neon-input-wrapper">
-                                    <input type="email" name="email" class="neon-input" placeholder="Username" required />
+                                <div class="mb-3">
+                                    <label class="form-label">Enter Email</label>
+                                    <input type="email" name="email" class="form-control" required />
                                 </div>
-                                <div class="mb-3 neon-input-wrapper">
-                                    <input type="password" name="password" class="neon-input" placeholder="Password" required />
+                                <div class="mb-3">
+                                    <label class="form-label">Enter Password</label>
+                                    <input type="password" name="password" class="form-control" required />
                                 </div>
                                 <div class="my-3">
-                                    <button type="submit" name="loginBtn" class="neon-button w-100 mt-2">Login</button>
+                                    <button type="submit" name="loginBtn" class="btn btn-primary w-100 mt-2">
+                                        Sign In
+                                    </button>
                                 </div>
                             </form>
                         </div>
