@@ -139,7 +139,7 @@ foreach ($sessionProducts as $key => $item) :
                     </div>
                         <div class="col-md-4">
                         <label for="cphone">Enter Customer Phone Number</label>
-                        <input type="text" id="cphone" class="form-control" maxlength="13" pattern="\d{11}" title="Enter exactly 13 digits" />
+                        <input type="text" id="cphone" class="form-control" maxlength="13" pattern="\d{13}" title="Enter exactly 13 digits" />
                     </div>
                         <div class="col-md-4">
                         <label>Total Amount</label>
