@@ -154,7 +154,7 @@
 
     <div class="row">
     <div class="col-md-3 mb-3">
-        <div class="card" style="background-color: #A52A2A;"> <!-- Light Red -->
+        <div class="card" style="background-color: #DDFFF7;">
             <div class="card-header">
                 <i class="fas fa-list-alt"></i> Total Categories
             </div>
@@ -165,7 +165,7 @@
     </div>
 
     <div class="col-md-3 mb-3">
-        <div class="card" style="background-color: #DAA520;"> <!-- Light Yellow -->
+        <div class="card" style="background-color: #F7DDCA;">
             <div class="card-header">
                 <i class="fas fa-boxes"></i> Total Products
             </div>
@@ -176,7 +176,7 @@
     </div>
 
     <div class="col-md-3 mb-3">
-        <div class="card" style="background-color: #DAA520;"> <!-- Light Yellow -->
+        <div class="card" style="background-color: #96E7DC;">
             <div class="card-header">
                 <i class="fas fa-users"></i> Total Customers
             </div>
@@ -187,7 +187,7 @@
     </div>
 
     <div class="col-md-3 mb-3">
-        <div class="card" style="background-color: #A52A2A;"> <!-- Light Red -->
+        <div class="card" style="background-color: #4FCFC0;">
             <div class="card-header">
                 <i class="fas fa-shopping-cart"></i> Today's Orders
             </div>
