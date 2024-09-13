@@ -234,7 +234,7 @@ foreach ($sessionProducts as $key => $item) :
             value = value.slice(0, 13);
         }
     } else {
-        value = '+63' + value.replace(/[^0-9]/g, '').slice(0, 12);
+        value = '+63' + value.replace(/[^0-9]/g, '').slice(0, 13);
     }
 
     this.value = value;
