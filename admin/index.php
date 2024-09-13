@@ -154,7 +154,7 @@
 
     <div class="row">
     <div class="col-md-3 mb-3">
-        <div class="card" style="background-color: #f8d7da;"> <!-- Light Red -->
+        <div class="card" style="background-color: #8B0000;"> <!-- Light Red -->
             <div class="card-header">
                 <i class="fas fa-list-alt"></i> Total Categories
             </div>
@@ -165,7 +165,7 @@
     </div>
 
     <div class="col-md-3 mb-3">
-        <div class="card" style="background-color: #fff3cd;"> <!-- Light Yellow -->
+        <div class="card" style="background-color: #B8860B;"> <!-- Light Yellow -->
             <div class="card-header">
                 <i class="fas fa-boxes"></i> Total Products
             </div>
@@ -176,7 +176,7 @@
     </div>
 
     <div class="col-md-3 mb-3">
-        <div class="card" style="background-color: #fff3cd;"> <!-- Light Yellow -->
+        <div class="card" style="background-color: #B8860B;"> <!-- Light Yellow -->
             <div class="card-header">
                 <i class="fas fa-users"></i> Total Customers
             </div>
@@ -187,7 +187,7 @@
     </div>
 
     <div class="col-md-3 mb-3">
-        <div class="card" style="background-color: #f8d7da;"> <!-- Light Red -->
+        <div class="card" style="background-color: #8B0000;"> <!-- Light Red -->
             <div class="card-header">
                 <i class="fas fa-shopping-cart"></i> Today's Orders
             </div>
@@ -213,7 +213,7 @@
 
     <!-- Right Column: Total Orders as Text -->
     <div class="col-md-6 mb-3">
-        <div class="card" style="background-color: #d4edda;"> <!-- Light Green -->
+        <div class="card" style="background-color: #006400;"> <!-- Light Green -->
             <div class="card-header">
                 <i class="fas fa-receipt"></i> Total Orders
             </div>
