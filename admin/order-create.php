@@ -13,11 +13,9 @@
             <input type="text" class="form-control" id="c_name" />
         </div>
         <div class="mb-3">
-    <label for="c_phone">Enter Customer Phone No.</label>
-    <input type="text" class="form-control" id="c_phone" maxlength="13" title="Enter an 11-digit phone number starting with 09 or +63" required />
-</div>
-<button type="submit" id="submitBtn">Submit</button>
-
+            <label for="c_phone">Enter Customer Phone No.</label>
+            <input type="text" class="form-control" id="c_phone" pattern="\d{11}" maxlength="11" title="Enter an 11-digit phone number" />
+      </div>
         <div class="mb-3">
             <label>Enter Customer Email (optional)</label>
             <input type="text" class="form-control" id="c_email" />
