@@ -237,14 +237,14 @@ function downloadPDF(invoiceNo){
     
         // Ensure the phone number starts with +63 or 09
         if (value.startsWith('+63')) {
-            // Maximum length is 13 characters (+63 followed by 10 digits)
-            if (value.length > 13) {
-                value = value.slice(0, 13);
+            // Maximum length is 14 characters (+63 followed by 10 digits)
+            if (value.length > 14) {
+                value = value.slice(0, 14);
             }
         } else if (value.startsWith('09')) {
             // Maximum length is 11 characters for 09xxxxxxxxx
-            if (value.length > 13) {
-                value = value.slice(0, 13);
+            if (value.length > 14) {
+                value = value.slice(0, 14);
             }
         } else {
             // If not starting with +63 or 09, reset the input
@@ -258,9 +258,9 @@ function downloadPDF(invoiceNo){
         var phone = document.getElementById('c_phone').value;
     
         // Check if the number starts with +63 or 09 and is of correct length
-        if (!(phone.startsWith('+63') && phone.length === 13) && !(phone.startsWith('09') && phone.length === 13)) {
+        if (!(phone.startsWith('+63') && phone.length === 14) && !(phone.startsWith('09') && phone.length === 14)) {
             e.preventDefault(); // Prevent form submission
-            alert("Please enter a valid phone number starting with +63 or 09 and containing exactly 13 digits.");
+            alert("Please enter a valid phone number starting with +63 or 09 and containing exactly 14 digits.");
         }
     });
     
