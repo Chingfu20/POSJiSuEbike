@@ -229,5 +229,27 @@ function downloadPDF(invoiceNo){
         width: 170,
         windowWidth: 650
     });
-
+    document.getElementById('c_phone').addEventListener('input', function () {
+        var value = this.value;
+    
+        value = value.replace(/[^0-9+]/g, '');
+    
+        if (value.startsWith('+63')) {
+            if (value.length > 13) {
+                value = value.slice(0, 13);
+            }
+        } else {
+            if (value.length <= 11) {
+                value = '+63' + value.replace(/[^0-9]/g, '').slice(0, 11);
+            } else {
+                value = '+63' + value.slice(0, 11);
+            }
+        }
+    
+        if (!value.match(/^\+63\d{11}$/)) {
+            value = value.slice(0, 13);
+        }
+    
+        this.value = value;
+    });
 }
