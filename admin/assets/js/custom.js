@@ -229,27 +229,38 @@ function downloadPDF(invoiceNo){
         width: 170,
         windowWidth: 650
     });
-    document.getElementById('c_phone').addEventListener('input', function () {
+    document.getElementById('cphone').addEventListener('input', function () {
         var value = this.value;
     
+        // Remove any character that isn't a number or "+"
         value = value.replace(/[^0-9+]/g, '');
     
+        // Ensure the number either starts with +63 or 09
         if (value.startsWith('+63')) {
-            if (value.length > 13) {
-                value = value.slice(0, 13);
+            // Max length is 12 including +63 (so only 9 digits after +63)
+            if (value.length > 12) {
+                value = value.slice(0, 12);
+            }
+        } else if (value.startsWith('09')) {
+            // Max length is 11 for numbers starting with 09
+            if (value.length > 11) {
+                value = value.slice(0, 11);
             }
         } else {
-            if (value.length <= 11) {
-                value = '+63' + value.replace(/[^0-9]/g, '').slice(0, 11);
-            } else {
-                value = '+63' + value.slice(0, 11);
-            }
-        }
-    
-        if (!value.match(/^\+63\d{11}$/)) {
-            value = value.slice(0, 13);
+            // Default to +63 if not starting with +63 or 09
+            value = '+63' + value.replace(/[^0-9]/g, '').slice(0, 9); // Ensures max 9 digits after +63
         }
     
         this.value = value;
     });
-}
+    
+    document.getElementById('submitBtn').addEventListener('click', function (e) {
+        var phone = document.getElementById('cphone').value;
+    
+        // Validation to ensure it starts with +63 or 09 and has correct length
+        if (!(phone.startsWith('+63') && phone.length === 12) && !(phone.startsWith('09') && phone.length === 11)) {
+            e.preventDefault(); // Prevent form submission
+            alert("Please enter a valid phone number starting with +63 or 09 and ensure it has the correct number of digits.");
+        }
+    });
+    
