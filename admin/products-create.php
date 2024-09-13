@@ -52,7 +52,7 @@
                         <label for="">Image *</label>
                         <input type="file" name="image" class="form-control" />
                     </div>
-                    <div class="col-md-6 mb-3 text-end">
+                    <div class="d-flex justify-content-end mt-3">
                         <br/>
                         <button type="submit" name="saveProduct" class="btn btn-primary">Save</button>
                     </div>
