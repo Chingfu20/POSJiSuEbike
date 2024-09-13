@@ -14,7 +14,7 @@
         </div>
         <div class="mb-3">
             <label for="c_phone">Enter Customer Phone No.</label>
-            <input type="text" class="form-control" id="c_phone" pattern="\d{11}" maxlength="11" title="Enter an 11-digit phone number" />
+            <input type="text" class="form-control" id="c_phone" pattern="\d{12}" maxlength="12" title="Enter an 12-digit phone number" />
       </div>
         <div class="mb-3">
             <label>Enter Customer Email (optional)</label>
