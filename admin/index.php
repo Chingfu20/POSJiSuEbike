@@ -152,9 +152,9 @@
     <!-- Row for Total Categories, Total Products, Total Customers, and Today's Orders -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-<div class="row">
+    <div class="row">
     <div class="col-md-3 mb-3">
-        <div class="card">
+        <div class="card" style="background-color: #A52A2A;"> <!-- Light Red -->
             <div class="card-header">
                 <i class="fas fa-list-alt"></i> Total Categories
             </div>
@@ -165,7 +165,7 @@
     </div>
 
     <div class="col-md-3 mb-3">
-        <div class="card">
+        <div class="card" style="background-color: #DAA520;"> <!-- Light Yellow -->
             <div class="card-header">
                 <i class="fas fa-boxes"></i> Total Products
             </div>
@@ -176,7 +176,7 @@
     </div>
 
     <div class="col-md-3 mb-3">
-        <div class="card">
+        <div class="card" style="background-color: #DAA520;"> <!-- Light Yellow -->
             <div class="card-header">
                 <i class="fas fa-users"></i> Total Customers
             </div>
@@ -187,7 +187,7 @@
     </div>
 
     <div class="col-md-3 mb-3">
-        <div class="card">
+        <div class="card" style="background-color: #A52A2A;"> <!-- Light Red -->
             <div class="card-header">
                 <i class="fas fa-shopping-cart"></i> Today's Orders
             </div>
@@ -198,12 +198,11 @@
     </div>
 </div>
 
-
-    <!-- Row for Monthly Sales Report and Total Orders -->
-    <div class="row">
+<!-- Row for Monthly Sales Report and Total Orders -->
+<div class="row">
     <!-- Left Column: Monthly Sales Report -->
     <div class="col-md-6 mb-3">
-        <div class="card">
+        <div class="card" style="background-color: #e2e3e5;"> <!-- Light Grey -->
             <div class="card-header">Monthly Sales Report</div>
             <div class="card-body">
                 <!-- Chart for sales -->
@@ -212,19 +211,18 @@
         </div>
     </div>
 
-    <!-- Right Column: Total Orders -->
+    <!-- Right Column: Total Orders as Text -->
     <div class="col-md-6 mb-3">
-        <div class="card">
-            <div class="card-header">Total Orders</div>
-            <div class="card-body chart-container">
-                <canvas id="totalOrdersChart" width="400" height="200"></canvas> <!-- Pie chart for Total Orders -->
+        <div class="card" style="background-color: #228B22;"> <!-- Light Green -->
+            <div class="card-header">
+                <i class="fas fa-receipt"></i> Total Orders
+            </div>
+            <div class="card-body">
+                <h3 id="totalOrdersText"></h3> <!-- Total Orders will be shown here -->
             </div>
         </div>
     </div>
 </div>
-
-
-
 
 <input type="hidden" id="categoryCount" value="<?= getCount('categories'); ?>">
 <input type="hidden" id="productCount" value="<?= getCount('products'); ?>">
@@ -252,11 +250,12 @@
         const todayOrders = document.getElementById("todayOrders").value;
         const totalOrders = document.getElementById("totalOrders").value;
 
-        // Display the numbers for Total Categories, Total Products, Total Customers, and Today's Orders
+        // Display the numbers for Total Categories, Total Products, Total Customers, Today's Orders, and Total Orders
         document.getElementById('categoryText').innerHTML = categoryCount;
         document.getElementById('productText').innerHTML = productCount;
         document.getElementById('customerText').innerHTML = customerCount;
         document.getElementById('todayOrdersText').innerHTML = todayOrders;
+        document.getElementById('totalOrdersText').innerHTML = totalOrders;
 
         // Create a bar chart for Monthly Sales Report
         const createBarChart = (context, label, data, bgColor, brColor) => {
@@ -312,84 +311,6 @@
             document.getElementById("salesChart"),
             "Sales (Total)",
             [12000, 15000, 13000, 17000, 14000, 16000, 18000, 19000, 17000, 21000, 22000, 24000], // Sample data
-            'rgba(54, 162, 235, 0.7)',  // Bar fill color
-            'rgba(54, 162, 235, 1)'     // Bar border color
-        );
-
-        // Create a pie chart for Total Orders
-        const createPieChart = (context, label, data) => {
-            new Chart(context, {
-                type: 'pie',
-                data: {
-                    labels: ['Orders'],
-                    datasets: [{
-                        label: label,
-                        data: [data],
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.6)',  // Red
-                            'rgba(54, 162, 235, 0.6)',  // Blue
-                            'rgba(255, 206, 86, 0.6)',  // Yellow
-                            'rgba(75, 192, 192, 0.6)'   // Green
-                        ],
-                        borderColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: { display: true },
-                        tooltip: {
-                            backgroundColor: '#f8f9fa',
-                            titleColor: '#343a40',
-                            bodyColor: '#343a40',
-                        }
-                    }
-                }
-            });
-        };
-
-        // Create Pie Chart for Total Orders
-        createPieChart(document.getElementById("totalOrdersChart"), "Total Orders", totalOrders);
-
-        // Sample data: number of orders per month
-        const monthlyOrders = {
-            January: 300,
-            February: 250,
-            March: 200,
-            April: 180,
-            May: 220,
-            June: 210,
-            July: 190,
-            August: 240,
-            September: 290,  // Calculating for September
-            October: 320,
-            November: 350,
-            December: 370
-        };
-
-        // Function to calculate total orders for a specific month
-        const calculateMonthlyOrders = (month) => {
-            return monthlyOrders[month] || 0; // Return 0 if no orders in that month
-        };
-
-        // Calculate total orders for September
-        const totalSeptemberOrders = calculateMonthlyOrders("September");
-        console.log("Total orders for September:", totalSeptemberOrders); // Should output 290
-
-        // Display September's total orders on the page (optional)
-        document.getElementById('septemberOrdersText').innerHTML = `Total September Orders: ${totalSeptemberOrders}`;
-
-        // Display chart for monthly orders using actual data
-        createBarChart(
-            document.getElementById("salesChart"),
-            "Total Orders",
-            Object.values(monthlyOrders), // Orders data for each month
             'rgba(54, 162, 235, 0.7)',  // Bar fill color
             'rgba(54, 162, 235, 1)'     // Bar border color
         );

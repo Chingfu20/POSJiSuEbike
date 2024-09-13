@@ -1,9 +1,9 @@
-<nav class="navbar navbar-expand-lg bg-white shadow">
+<nav class="navbar navbar-expand-lg shadow" style="background-color: #497ecf !important;">
   <div class="container">
     <div class="d-flex flex-column align-items-center">
-      <span class="navbar-text mb-2">Welcome to Ji Su E-Bike</span>
+      <span class="navbar-text mb-2 text-white">Welcome to Ji Su E-Bike</span>
       <a class="navbar-brand d-flex align-items-center" href="#">
-        <img src="assets/images/logo.fb51b8e1.png" alt="JiSu E-bike Logo" style="height: 40px; width: 90px; margin-right: 5px;">
+        <img src="assets/images/WS.png" alt="JiSu E-bike Logo" style="height: 40px; width: 90px; margin-right: 5px;">
       </a>
     </div>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,38 +12,38 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" href="index.php">Home</a>
+          <a class="nav-link active text-white" href="index.php">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="about_us.php">About us</a>
+          <a class="nav-link active text-white" href="about_us.php">About us</a>
         </li>
         <li class="nav-item dropdown active">
-            <a class="nav-link dropdown-toggle active" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Products
+            <a class="nav-link dropdown-toggle active text-white" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Units
             </a>
-            <ul class="dropdown-menu" aria-labelledby="adminDropdown">
+            <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="dragon.php">2 Wheel</a></li>
               <li><a class="dropdown-item" href="scooter.php">3 Wheel</a></li>
               <li><a class="dropdown-item" href="classy.php">4 Wheel</a></li>
             </ul>
-          </li>
+        </li>
         <li class="nav-item">
-          <a class="nav-link active" href="contact.php">Contact us</a>
+          <a class="nav-link active text-white" href="contact.php">Contact us</a>
         </li>
         <?php if(isset($_SESSION['loggedIn'])) : ?>
           <li class="nav-item">
-            <a class="nav-link" href="#"><?= $_SESSION['loggedInUser']['name']; ?></a>
+            <a class="nav-link text-white" href="#"><?= $_SESSION['loggedInUser']['name']; ?></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="logout.php">Logout</a>
+            <a class="nav-link active text-white" href="logout.php">Logout</a>
           </li>
-          <?php else: ?>
+        <?php else: ?>
           <li class="nav-item dropdown active">
-            <a class="nav-link dropdown-toggle active" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle active text-white" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Login
             </a>
-            <ul class="dropdown-menu" aria-labelledby="adminDropdown">
-              <li><a class="dropdown-item" href="login.php">ADMIN</a></li>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="login.php">Admin</a></li>
             </ul>
           </li>
         <?php endif; ?>
@@ -61,9 +61,22 @@
 <!-- Custom CSS for hover dropdown -->
 <style>
   .navbar-nav .dropdown:hover .dropdown-menu {
-    display: block;
+    display: block !important;
   }
   .navbar-nav .dropdown-menu {
-    margin-top: 0;
+    margin-top: 0 !important;
+  }
+  .navbar-toggler {
+    background-color: #ffffff !important; /* White toggler icon for better contrast */
+  }
+  .dropdown-menu {
+    background-color: #497ecf !important; /* Matching background for dropdown */
+  }
+  .dropdown-menu .dropdown-item {
+    color: white !important;
+  }
+  .dropdown-menu .dropdown-item:hover {
+    background-color: #ffffff !important; /* Change background color on hover */
+    color: #497ecf !important; /* Blue text color on hover */
   }
 </style>
