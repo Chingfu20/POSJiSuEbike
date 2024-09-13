@@ -229,38 +229,37 @@ function downloadPDF(invoiceNo){
         width: 170,
         windowWidth: 650
     });
-    document.getElementById('c_phone').addEventListener('input', function () {
-        var value = this.value;
-    
-        // Remove all characters except numbers and "+"
-        value = value.replace(/[^0-9+]/g, '');
-    
-        // Ensure the phone number starts with +63 or 09
-        if (value.startsWith('+63')) {
-            // Maximum length is 14 characters (+63 followed by 10 digits)
-            if (value.length > 14) {
-                value = value.slice(0, 14);
-            }
-        } else if (value.startsWith('09')) {
-            // Maximum length is 11 characters for 09xxxxxxxxx
-            if (value.length > 14) {
-                value = value.slice(0, 14);
-            }
-        } else {
-            // If not starting with +63 or 09, reset the input
-            value = '';
+   document.getElementById('c_phone').addEventListener('input', function () {
+    var value = this.value;
+
+    // Remove all characters except numbers and "+"
+    value = value.replace(/[^0-9+]/g, '');
+
+    // Ensure the phone number starts with +63 or 09
+    if (value.startsWith('+63')) {
+        // Maximum length is 13 characters (+63 followed by 10 digits)
+        if (value.length > 13) {
+            value = value.slice(0, 13);
         }
-    
-        this.value = value;
-    });
-    
-    document.getElementById('submitBtn').addEventListener('click', function (e) {
-        var phone = document.getElementById('c_phone').value;
-    
-        // Check if the number starts with +63 or 09 and is of correct length
-        if (!(phone.startsWith('+63') && phone.length === 14) && !(phone.startsWith('09') && phone.length === 14)) {
-            e.preventDefault(); // Prevent form submission
-            alert("Please enter a valid phone number starting with +63 or 09 and containing exactly 14 digits.");
+    } else if (value.startsWith('09')) {
+        // Maximum length is 11 characters for 09xxxxxxxxx
+        if (value.length > 11) {
+            value = value.slice(0, 11);
         }
-    });
-    
+    } else {
+        // If not starting with +63 or 09, reset the input
+        value = '';
+    }
+
+    this.value = value;
+});
+
+document.getElementById('submitBtn').addEventListener('click', function (e) {
+    var phone = document.getElementById('c_phone').value;
+
+    // Check if the number starts with +63 or 09 and is of correct length
+    if (!(phone.startsWith('+63') && phone.length === 13) && !(phone.startsWith('09') && phone.length === 11)) {
+        e.preventDefault(); // Prevent form submission
+        alert("Please enter a valid phone number starting with +63 or 09 and containing exactly 11 digits.");
+    }
+});
