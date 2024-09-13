@@ -245,7 +245,7 @@
         // Get the values from hidden inputs
         const categoryCount = document.getElementById("categoryCount").value;
         const productCount = document.getElementById("productCount").value;
-        const customerCount = parseInt(document.getElementById("customerCount").value, 10); // Convert to number
+        const customerCount = document.getElementById("customerCount").value;
         const salesAmount = document.getElementById("salesAmount").value;
         const todayOrders = document.getElementById("todayOrders").value;
         const totalOrders = document.getElementById("totalOrders").value;
@@ -253,7 +253,7 @@
         // Display the numbers for Total Categories, Total Products, Total Customers, Today's Orders, and Total Orders
         document.getElementById('categoryText').innerHTML = categoryCount;
         document.getElementById('productText').innerHTML = productCount;
-        document.getElementById('customerText').innerHTML = customerCount.toLocaleString(); // Format number with commas
+        document.getElementById('customerText').innerHTML = customerCount;
         document.getElementById('todayOrdersText').innerHTML = todayOrders;
         document.getElementById('totalOrdersText').innerHTML = totalOrders;
 
@@ -316,4 +316,3 @@
         );
     });
 </script>
-
