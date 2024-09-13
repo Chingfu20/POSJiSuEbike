@@ -136,35 +136,11 @@ foreach ($sessionProducts as $key => $item) :
                                 <option value="">-- Select Payment --</option>
                                 <option value="Cash Payment">Cash Payment</option>
                             </select>
-                            <div class="mb-3">
-    <label for="c_phone">Enter Customer Phone No.</label>
-    <input type="text" class="form-control" id="c_phone" maxlength="14" pattern="\+63\d{10}" title="Phone number must be in the format +631234567890" value="+63" />
-</div>
-
-<script>
-    const phoneInput = document.getElementById('c_phone');
-    
-    // Prevent the user from deleting the +63
-    phoneInput.addEventListener('input', function (e) {
-        if (!phoneInput.value.startsWith('+63')) {
-            phoneInput.value = '+63';
-        }
-        
-        // Limit the input to only 10 digits after +63
-        if (phoneInput.value.length > 13) {
-            phoneInput.value = phoneInput.value.slice(0, 13);
-        }
-    });
-
-    // Ensure that the user cannot move the cursor before the +63
-    phoneInput.addEventListener('keydown', function (e) {
-        const cursorPosition = phoneInput.selectionStart;
-        if (cursorPosition < 3 && e.key !== 'ArrowRight' && e.key !== 'ArrowLeft' && e.key !== 'Tab') {
-            e.preventDefault();
-        }
-    });
-</script>
-
+                    </div>
+                        <div class="col-md-4">
+                        <label for="cphone">Enter Customer Phone Number</label>
+                        <input type="text" id="cphone" class="form-control" maxlength="11" pattern="\d{11}" title="Enter exactly 11 digits" />
+                    </div>
                         <div class="col-md-4">
                         <label>Total Amount</label>
                         <input type="text" id="totalAmount" class="form-control" value="" readonly />
