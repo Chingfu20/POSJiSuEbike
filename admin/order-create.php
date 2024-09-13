@@ -137,11 +137,12 @@ foreach ($sessionProducts as $key => $item) :
                                 <option value="">-- Select Payment --</option>
                                 <option value="Cash Payment">Cash Payment</option>
                             </select>
-                        </div>
+                    </div>
                         <div class="col-md-4">
-                        <label>Enter Customer Phone Number</label>
-                        <input type="number" id="cphone" class="form-control" value="0" class="form-control" min="0" />
-                        </div>
+                        <label for="cphone">Enter Customer Phone Number</label>
+                        <input type="text" id="cphone" class="form-control" maxlength="11" pattern="\d{11}" title="Enter exactly 11 digits" />
+                        <small class="form-text text-muted">Please enter exactly 11 digits.</small>
+                    </div>
                         <div class="col-md-4">
                         <label>Total Amount</label>
                         <input type="text" id="totalAmount" class="form-control" value="" readonly />
@@ -226,11 +227,11 @@ foreach ($sessionProducts as $key => $item) :
         updateTotalAmount();
     });
         document.getElementById('c_phone').addEventListener('input', function () {
-        var value = this.value;
-        if (value.length > 11) {
-            this.value = value.slice(0, 11);
-        }
-    });
+             var value = this.value;
+             if (value.length > 11) {
+                 this.value = value.slice(0, 11);
+           }
+      });
 </script>
 
 <?php include('includes/footer.php'); ?>
