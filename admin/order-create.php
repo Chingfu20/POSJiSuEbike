@@ -224,12 +224,21 @@ foreach ($sessionProducts as $key => $item) :
 
         updateTotalAmount();
     });
-        document.getElementById('c_phone').addEventListener('input', function () {
-             var value = this.value;
-             if (value.length > 11) {
-                 this.value = value.slice(0, 11);
-           }
-      });
+    document.getElementById('c_phone').addEventListener('input', function () {
+    var value = this.value;
+
+    value = value.replace(/[^0-9+]/g, '');
+
+    if (value.startsWith('+63')) {
+        if (value.length > 13) {
+            value = value.slice(0, 13);
+        }
+    } else {
+        value = '+63' + value.replace(/[^0-9]/g, '').slice(0, 11);
+    }
+
+    this.value = value;
+});
 </script>
 
 <?php include('includes/footer.php'); ?>
