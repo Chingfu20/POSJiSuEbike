@@ -13,9 +13,10 @@
             <input type="text" class="form-control" id="c_name" />
         </div>
         <div class="mb-3">
-            <label>Enter Customer Phone No.</label>
-            <input type="text" class="form-control" id="c_phone" value="0" class="form-control" min="0" />
-        </div>
+            <label for="c_phone">Enter Customer Phone No.</label>
+            <input type="text" class="form-control" id="c_phone" pattern="\d{11}" maxlength="11" title="Enter an 11-digit phone number" />
+            <small class="form-text text-muted">Please enter exactly 11 digits.</small>
+      </div>
         <div class="mb-3">
             <label>Enter Customer Email (optional)</label>
             <input type="text" class="form-control" id="c_email" />
@@ -223,6 +224,12 @@ foreach ($sessionProducts as $key => $item) :
         }
 
         updateTotalAmount();
+    });
+        document.getElementById('c_phone').addEventListener('input', function () {
+        var value = this.value;
+        if (value.length > 11) {
+            this.value = value.slice(0, 11);
+        }
     });
 </script>
 
