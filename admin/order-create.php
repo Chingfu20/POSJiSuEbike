@@ -14,7 +14,7 @@
         </div>
         <div class="mb-3">
             <label for="c_phone">Enter Customer Phone No.</label>
-            <input type="text" class="form-control" id="c_phone" pattern="\d{12}" maxlength="12" title="Enter an 12-digit phone number" />
+            <input type="text" class="form-control" id="c_phone" pattern="\d{11}" maxlength="11" title="Enter an 11-digit phone number" />
       </div>
         <div class="mb-3">
             <label>Enter Customer Email (optional)</label>
@@ -139,7 +139,7 @@ foreach ($sessionProducts as $key => $item) :
                     </div>
                         <div class="col-md-4">
                         <label for="cphone">Enter Customer Phone Number</label>
-                        <input type="text" id="cphone" class="form-control" maxlength="12" pattern="\d{12}" title="Enter exactly 12 digits" />
+                        <input type="text" id="cphone" class="form-control" maxlength="13" pattern="\d{13}" title="Enter exactly 13 digits" />
                     </div>
                         <div class="col-md-4">
                         <label>Total Amount</label>
@@ -234,7 +234,7 @@ foreach ($sessionProducts as $key => $item) :
             value = value.slice(0, 13);
         }
     } else {
-        value = '+63' + value.replace(/[^0-9]/g, '').slice(0, 12);
+        value = '+63' + value.replace(/[^0-9]/g, '').slice(0, 13);
     }
 
     this.value = value;
