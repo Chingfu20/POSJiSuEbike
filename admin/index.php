@@ -202,7 +202,7 @@
 <div class="row">
     <!-- Left Column: Monthly Sales Report -->
     <div class="col-md-6 mb-3">
-        <div class="card" style="background-color: #e2e3e5;"> <!-- Light Grey -->
+        <div class="card" style="background-color: #F1B994;">
             <div class="card-header">Monthly Sales Report</div>
             <div class="card-body">
                 <!-- Chart for sales -->
