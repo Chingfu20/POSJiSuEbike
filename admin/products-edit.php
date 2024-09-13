@@ -80,8 +80,9 @@
                          <img src="../<?= $product['data']['image']; ?>" style="width:40px;height:40px;" alt="Img" />
                     </div>
                     <div class="col-md-6 mb-3 d-flex justify-content-end">
+                        <br/>
                          <button type="submit" name="updateProduct" class="btn btn-primary">Update</button>
-                     </div>
+                      </div>
                    </div>
                    <?php                        
                    }
