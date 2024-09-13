@@ -45,7 +45,7 @@
                         <input type="text" name="price" required id="price" class="form-control" />
                     </div>
                     <div class="col-md-4 mb-3">
-                        <label for="">Quantity *</label>
+                        <label for="">Unit *</label>
                         <input type="text" name="quantity" required class="form-control" />
                     </div>
                     <div class="col-md-4 mb-3">

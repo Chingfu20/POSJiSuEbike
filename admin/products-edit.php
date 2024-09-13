@@ -71,7 +71,7 @@
                          <input type="text" name="price" required value="<?= $product['data']['price']; ?>" class="form-control" />
                     </div>
                     <div class="col-md-4 mb-3">
-                         <label for="">Quantity *</label>
+                         <label for="">Unit *</label>
                          <input type="text" name="quantity" required value="<?= $product['data']['quantity']; ?>" class="form-control" />
                     </div>
                     <div class="col-md-4 mb-3">
