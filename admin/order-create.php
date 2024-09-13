@@ -140,7 +140,6 @@ foreach ($sessionProducts as $key => $item) :
     <label for="cphone">Enter Customer Phone Number</label>
     <input type="text" id="cphone" class="form-control" maxlength="12" pattern="\d{12}" title="Enter exactly 12 digits" required />
 </div>
-
                         <div class="col-md-4">
                         <label>Total Amount</label>
                         <input type="text" id="totalAmount" class="form-control" value="" readonly />
