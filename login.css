@@ -7,34 +7,31 @@
     overflow: hidden;
     padding: 20px;
     z-index: 1;
+    border: 4px solid transparent; /* Placeholder for animated border */
 }
 
-/* Color-changing border effect */
+/* Rotating color border effect */
 .custom-card::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 8px;
-    padding: 4px; /* Padding for the animated border */
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    border-radius: 12px;
     background: linear-gradient(270deg, rgba(255, 0, 150, 0.7), rgba(0, 204, 255, 0.7), rgba(0, 255, 150, 0.7), rgba(255, 255, 0, 0.7));
-    background-size: 600% 600%;
-    z-index: -1; /* Ensure the border is behind the content */
-    animation: borderAnimation 5s ease infinite;
+    background-size: 400% 400%;
+    z-index: -1;
+    animation: rotateColors 5s linear infinite;
 }
 
-/* Keyframes for color-changing border animation */
-@keyframes borderAnimation {
+/* Keyframes for rotating gradient border */
+@keyframes rotateColors {
     0% {
         background-position: 0% 50%;
     }
-    50% {
-        background-position: 100% 50%;
-    }
     100% {
-        background-position: 0% 50%;
+        background-position: 400% 50%;
     }
 }
 
@@ -56,10 +53,4 @@
 
 .my-3 {
     margin-top: 1rem;
-}
-/* Image Border Styling */
-.image-border {
-    border: 5px solid #fff; /* White border color */
-    border-radius: 10px;    /* Rounded corners for the border */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  /* Adds a subtle shadow for depth */
 }
