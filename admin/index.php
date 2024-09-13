@@ -213,7 +213,7 @@
 
     <!-- Right Column: Total Orders as Text -->
     <div class="col-md-6 mb-3">
-        <div class="card" style="background-color: #006400;"> <!-- Light Green -->
+        <div class="card" style="background-color: #228B22;"> <!-- Light Green -->
             <div class="card-header">
                 <i class="fas fa-receipt"></i> Total Orders
             </div>
