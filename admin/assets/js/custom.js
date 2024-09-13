@@ -232,24 +232,36 @@ function downloadPDF(invoiceNo){
     document.getElementById('c_phone').addEventListener('input', function () {
         var value = this.value;
     
+        // Only allow numbers and "+"
         value = value.replace(/[^0-9+]/g, '');
     
+        // Check if the phone number starts with +63 or 09
         if (value.startsWith('+63')) {
+            // Ensure max length of 13 including +63 (11 digits after +63)
             if (value.length > 13) {
                 value = value.slice(0, 13);
             }
-        } else {
-            if (value.length <= 11) {
-                value = '+63' + value.replace(/[^0-9]/g, '').slice(0, 11);
-            } else {
-                value = '+63' + value.slice(0, 11);
+        } else if (value.startsWith('09')) {
+            // Ensure max length of 11 if starting with 09
+            if (value.length > 11) {
+                value = value.slice(0, 11);
             }
-        }
-    
-        if (!value.match(/^\+63\d{11}$/)) {
-            value = value.slice(0, 13);
+        } else {
+            // If it doesn't start with +63 or 09, force +63 as default
+            value = '+63' + value.replace(/[^0-9]/g, '').slice(0, 10); // Only take 10 digits after +63
         }
     
         this.value = value;
     });
-}
+    
+    // Add event listener to form submission or a submit button
+    document.getElementById('yourForm').addEventListener('submit', function (e) {
+        var phone = document.getElementById('c_phone').value;
+    
+        // Check if the number starts with either +63 or 09 and if it has the correct length
+        if (!(phone.startsWith('+63') && phone.length === 13) && !(phone.startsWith('09') && phone.length === 11)) {
+            e.preventDefault(); // Prevent form submission
+            alert("Please enter a valid phone number that starts with +63 or 09 and contains 11 digits.");
+        }
+    });
+    
