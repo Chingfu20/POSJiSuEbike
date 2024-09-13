@@ -136,11 +136,11 @@ foreach ($sessionProducts as $key => $item) :
                                 <option value="">-- Select Payment --</option>
                                 <option value="Cash Payment">Cash Payment</option>
                             </select>
-                    </div>
-                        <div class="col-md-4">
-                        <label for="cphone">Enter Customer Phone Number</label>
-                        <input type="text" id="cphone" class="form-control" maxlength="11" pattern="\d{11}" title="Enter exactly 11 digits" />
-                    </div>
+                            <div class="col-md-4">
+    <label for="cphone">Enter Customer Phone Number</label>
+    <input type="text" id="cphone" class="form-control" maxlength="12" pattern="\d{12}" title="Enter exactly 12 digits" required />
+</div>
+
                         <div class="col-md-4">
                         <label>Total Amount</label>
                         <input type="text" id="totalAmount" class="form-control" value="" readonly />
