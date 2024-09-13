@@ -243,8 +243,8 @@ function downloadPDF(invoiceNo){
         }
     } else if (value.startsWith('09')) {
         // Maximum length is 11 characters for 09xxxxxxxxx
-        if (value.length > 11) {
-            value = value.slice(0, 11);
+        if (value.length > 12) {
+            value = value.slice(0, 12);
         }
     } else {
         // If not starting with +63 or 09, reset the input
