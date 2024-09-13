@@ -139,7 +139,7 @@ foreach ($sessionProducts as $key => $item) :
                     </div>
                         <div class="col-md-4">
                         <label for="cphone">Enter Customer Phone Number</label>
-                        <input type="text" id="cphone" class="form-control" maxlength="14" pattern="\d{14}" title="Enter exactly 14 digits" />
+                        <input type="text" id="cphone" class="form-control" maxlength="11" pattern="\d{11}" title="Enter exactly 11 digits" />
                     </div>
                         <div class="col-md-4">
                         <label>Total Amount</label>
@@ -230,11 +230,11 @@ foreach ($sessionProducts as $key => $item) :
     value = value.replace(/[^0-9+]/g, '');
 
     if (value.startsWith('+63')) {
-        if (value.length > 14) {
-            value = value.slice(0, 14);
+        if (value.length > 13) {
+            value = value.slice(0, 13);
         }
     } else {
-        value = '+63' + value.replace(/[^0-9]/g, '').slice(0, 14);
+        value = '+63' + value.replace(/[^0-9]/g, '').slice(0, 11);
     }
 
     this.value = value;
