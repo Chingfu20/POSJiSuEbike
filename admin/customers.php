@@ -28,7 +28,7 @@
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Phone</th>
-                                <th>Status</th>
+                                <th>Address</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -41,15 +41,7 @@
                                 <td><?= htmlspecialchars($item['name']) ?></td>
                                 <td><?= htmlspecialchars($item['email']) ?></td>
                                 <td><?= htmlspecialchars($item['phone']) ?></td>
-                                <td>
-                                    <?php
-                                    if($item['status'] == 1){
-                                        echo '<span class="badge bg-danger">Hidden</span>';
-                                    }else{
-                                        echo '<span class="badge bg-primary">Visible</span>';
-                                    }
-                                    ?>
-                                </td>
+                                <td><?= htmlspecialchars($item['address']) ?></td>
                                 <td>
                                     <a href="customers-edit.php?id=<?= urlencode($item['id']); ?>" class="btn btn-success btn-sm">Edit</a>
                                     <a href="customers-delete.php?id=<?= urlencode($item['id']); ?>" class="btn btn-danger btn-sm">Delete</a>
