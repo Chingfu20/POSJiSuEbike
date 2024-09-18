@@ -16,6 +16,10 @@
             <label for="c_phone">Enter Customer Phone No.</label>
             <input type="text" class="form-control" id="c_phone" pattern="\d{11}" maxlength="11" title="Enter an 11-digit phone number" />
       </div>
+      <div class="mb-3">
+        <label>Enter Customer Address</label>
+        <textarea class="form-control" id="c_address" rows="3" placeholder="Enter full address" required></textarea>
+    </div>
         <div class="mb-3">
             <label>Enter Customer Email (optional)</label>
             <input type="text" class="form-control" id="c_email" />
