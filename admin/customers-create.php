@@ -26,11 +26,6 @@
                          <label for="">Phone </label>
                          <input type="number" name="phone" class="form-control" />
                     </div>
-                    <div class="col-md-6">
-                         <label>Status (UnChecked=Visible, Checked=Hidden)</label>
-                         <br/>
-                         <input type="checkbox" name="status" style="width:30px;height:30px;";>
-                    </div>
                     <div class="col-md-6 mb-3 text-end">
                         <br/>
                          <button type="submit" name="saveCustomer" class="btn btn-primary">Save</button>
