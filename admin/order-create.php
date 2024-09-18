@@ -227,17 +227,24 @@ foreach ($sessionProducts as $key => $item) :
     document.getElementById('c_phone').addEventListener('input', function () {
     var value = this.value;
 
-    value = value.replace(/[^0-9+]/g, '');
+    // Remove any non-numeric characters
+    value = value.replace(/[^0-9]/g, '');
 
-    if (value.startsWith('+63')) {
-        if (value.length > 13) {
-            value = value.slice(0, 13);
-        }
-    } else {
-        value = '+63' + value.replace(/[^0-9]/g, '').slice(0, 13);
+    // Ensure the value is no longer than 11 digits
+    if (value.length > 11) {
+        value = value.slice(0, 11);
     }
 
     this.value = value;
+
+    // Disable further actions if the number is not exactly 11 digits
+    if (value.length !== 11) {
+        // Show an error message or disable form submission
+        console.log("Invalid number: The phone number must be exactly 11 digits.");
+    } else {
+        // Valid number
+        console.log("Valid number entered.");
+    }
 });
 </script>
 
