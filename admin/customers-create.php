@@ -26,7 +26,7 @@
                          <label for="">Phone </label>
                          <input type="number" name="phone" class="form-control" />
                     </div>
-                    <div class="col-md-6 mb-3 text-end">
+                    <div class="d-flex justify-content-end mt-3">
                         <br/>
                          <button type="submit" name="saveCustomer" class="btn btn-primary">Save</button>
                     </div>
