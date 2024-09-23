@@ -11019,8 +11019,17 @@ body {
 }
 
 .sb-sidenav-dark {
-  background-color: #212529;
-  color: rgba(255, 255, 255, 0.5);
+  background-color: #4a90e2 !important; /* Replace with the extracted blue color code */
+}
+
+.sb-sidenav .nav-link {
+  color: #ffffff !important; /* White text to contrast with the blue */
+}
+
+.sb-sidenav .sb-sidenav-collapse-arrow i {
+  color: #ffffff !important; /* White dropdown arrow for consistency */
+}
+
 }
 .sb-sidenav-dark .sb-sidenav-menu .sb-sidenav-menu-heading {
   color: rgba(255, 255, 255, 0.25);
@@ -11074,17 +11083,6 @@ body {
 }
 .sb-sidenav-light .sb-sidenav-footer {
   background-color: #e9ecef;
-}
-.sb-sidenav-dark {
-  background-color: #4a90e2 !important; /* Replace with the extracted blue color code */
-}
-
-.sb-sidenav .nav-link {
-  color: #ffffff !important; /* White text to contrast with the blue */
-}
-
-.sb-sidenav .sb-sidenav-collapse-arrow i {
-  color: #ffffff !important; /* White dropdown arrow for consistency */
 }
 
 .datatable-wrapper .datatable-container {
