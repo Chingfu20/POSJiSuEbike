@@ -127,7 +127,7 @@ foreach ($sessionProducts as $key => $item) :
     </tr>
 <?php endforeach; ?>
 
-<!-- Include SweetAlert2 -->
+                        <!-- Include SweetAlert2 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -188,14 +188,14 @@ document.querySelector('.proceedToPlace').addEventListener('click', function() {
     const paymentMode = document.getElementById('payment_mode').value.trim();
 
     // Check if all required fields are filled
-    if (!phone || !totalAmount || isNaN(amountPaid) || amountPaid < 0 || !changeAmount || !paymentMode) {
+    if (!phone || !totalAmount || isNaN(amountPaid) || amountPaid <= 0 || !changeAmount || !paymentMode) {
         Swal.fire({
             title: 'Incomplete Details',
             text: 'Please complete all required fields before proceeding.',
             icon: 'warning',
             confirmButtonText: 'OK'
         });
-        return; // Stop further execution if details are incomplete
+        return; // Stay on the current page (order-create.php) if details are incomplete
     }
 
     // Check if the total amount is a valid number
@@ -207,7 +207,7 @@ document.querySelector('.proceedToPlace').addEventListener('click', function() {
             icon: 'warning',
             confirmButtonText: 'OK'
         });
-        return; // Stop further execution if total amount is invalid
+        return; // Stay on the current page if total amount is invalid
     }
 
     // Check if the amount paid is less than the total amount
@@ -218,7 +218,7 @@ document.querySelector('.proceedToPlace').addEventListener('click', function() {
             icon: 'warning',
             confirmButtonText: 'OK'
         });
-        return; // Stop further execution if amount is insufficient
+        return; // Stay on the current page if amount is insufficient
     }
 
     // Check if the change amount is correct
@@ -232,7 +232,7 @@ document.querySelector('.proceedToPlace').addEventListener('click', function() {
             icon: 'warning',
             confirmButtonText: 'OK'
         });
-        return; // Stop further execution if change amount is incorrect
+        return; // Stay on the current page if change amount is incorrect
     }
 
     // Proceed with placing the order if all details are valid
@@ -245,12 +245,16 @@ document.querySelector('.proceedToPlace').addEventListener('click', function() {
         cancelButtonText: 'Cancel'
     }).then((result) => {
         if (result.isConfirmed) {
-            // Redirect to order-summary.php if the user confirms
+            // Redirect to order-summary.php only if the user confirms
             window.location.href = 'order-summary.php';
+        } else {
+            // Stay on the current page if the user cancels
+            window.location.href = 'order-create.php';
         }
     });
 });
 </script>
+
 
 
                 <?php
