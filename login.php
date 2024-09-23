@@ -127,18 +127,6 @@
 </head>
 
 <body>
-    <?php
-    include('includes/header.php');
-
-    // If the user is already logged in, redirect to index.php
-    if (isset($_SESSION['loggedIn'])) {
-        ?>
-        <script>window.location.href = 'index.php';</script>
-        <?php
-        exit();
-    }
-    ?>
-
     <section>
         <div class="form-box">
             <div class="form-value">
