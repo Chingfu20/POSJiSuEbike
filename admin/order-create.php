@@ -207,7 +207,7 @@ document.querySelector('.proceedToPlace').addEventListener('click', function() {
         cancelButtonText: 'Cancel'
     }).then((result) => {
         if (result.isConfirmed) {
-            // Use the form element or another method to handle order submission
+            // Proceed with form submission or other actions
             document.querySelector('form').submit(); // Adjust according to your form handling method
         }
     });
