@@ -179,6 +179,10 @@ foreach ($sessionProducts as $key => $item) :
     </div>
 </div>
 
+<!-- Include SweetAlert2 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script>
 document.querySelector('.proceedToPlace').addEventListener('click', function() {
     const phone = document.getElementById('cphone').value.trim();
@@ -221,7 +225,18 @@ document.querySelector('.proceedToPlace').addEventListener('click', function() {
     }).then((result) => {
         if (result.isConfirmed) {
             // User confirmed, submit the form or take necessary action
-            document.querySelector('form').submit(); // Adjust according to your form handling method
+            // Ensure the form is selected properly, you may need to adjust this selector
+            const form = document.querySelector('form');
+            if (form) {
+                form.submit(); // Submit the form if it exists
+            } else {
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Form not found. Please try again.',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            }
         }
     });
 });
