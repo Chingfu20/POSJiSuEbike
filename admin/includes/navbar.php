@@ -6,69 +6,23 @@
     <title>JiSu E-Bike POS</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-    <style>
-        /* Apply background color to the body and navbar */
-        body, .sb-topnav.navbar {
-            background-color: #03045e; /* Dark blue background */
-            color: #90e0ef; /* Text color for readability */
-        }
-
-        /* Style for the sidebar */
-        .sb-sidenav {
-            background-color: #023e8a; /* Sidebar background color */
-        }
-
-        /* Style for the footer */
-        .sb-sidenav-footer {
-            background-color: #0077b6; /* Footer background color */
-            color: #caf0f8; /* Light text color */
-        }
-
-        /* Active links in the sidebar */
-        .sb-sidenav .nav-link.active {
-            background-color: #00b4d8; /* Active link background color */
-            color: #ffffff; /* Active link text color */
-        }
-
-        /* Collapsed icon color */
-        .sb-sidenav .sb-sidenav-collapse-arrow {
-            color: #48cae4; /* Color for the arrow icons */
-        }
-
-        /* Adjust text color in the nav */
-        .navbar .navbar-brand, .navbar .nav-link, .dropdown-item {
-            color: #ade8f4; /* Navbar brand and item color */
-        }
-
-        /* Dropdown hover */
-        .dropdown-item:hover {
-            background-color: #00b4d8;
-            color: #ffffff;
-        }
-
-        /* SweetAlert button color customization */
-        .swal2-confirm {
-            background-color: #48cae4 !important;
-            border: none;
-            color: #ffffff !important;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
         <a class="navbar-brand ps-3">JiSu Ebike
-            <img src="assets/img/logo.fb51b8e1.png" alt="Brand Icon" style="height: 30px;">
-        </a>
+    <img src="assets/img/logo.fb51b8e1.png" alt="Brand Icon" style="height: 30px;">
+</a>
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
-        
-        <!-- Navbar Search (hidden for now) -->
+        <!-- Navbar Search-->
         <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-            <!-- Search form can be re-enabled here if needed -->
+            <!--<div class="input-group">
+                <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+                <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+            </div>-->
         </form>
-        
         <!--Navbar-->
         <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
             <li class="nav-item dropdown">
@@ -80,7 +34,6 @@
         </ul>
     </nav>
 
-    <!-- SweetAlert Logout Script -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         document.getElementById('logoutButton').addEventListener('click', function(event) {
