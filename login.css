@@ -57,8 +57,3 @@
 .my-3 {
     margin-top: 1rem;
 }
-/* Add background image to the entire body */
-body {
-    background: url('assets/images/ebike.jpg') no-repeat center center fixed;
-    background-size: cover;
-}
