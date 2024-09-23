@@ -36,7 +36,7 @@
 
                         <div class="p-5 text-center">
                             <!-- Admin picture -->
-                            <img src="path/to/WS.png" alt="Admin Picture" class="admin-img">
+                            <img src="path/to/admin-WS.png" alt="Admin Picture" class="admin-img">
                             <h4 class="text-dark mb-3">Login Admin</h4>
                             <form action="login-code.php" method="POST" class="login-form">
                                 
