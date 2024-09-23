@@ -150,38 +150,17 @@ foreach ($sessionProducts as $key => $item) :
                         <input type="text" id="totalAmount" class="form-control" value="" readonly />
                     </div>
                     <div class="col-md-4">
-    <label>Enter Amount</label>
-    <input type="number" id="amountPaid" class="form-control" value="0" class="form-control" min="0" />
-</div>
-<div class="col-md-4">
-    <label>Change</label>
-    <input type="text" id="changeAmount" class="form-control" value="" readonly />
-</div>
-<div class="col-md-4">
-    <br/>
-    <button type="button" class="btn btn-warning w-100 proceedToPlace">Proceed to place order</button>
-</div>
-
-<script>
-document.querySelector('.proceedToPlace').addEventListener('click', function() {
-    const amountPaid = parseFloat(document.getElementById('amountPaid').value.trim());
-
-    // Check if the amount is valid (not empty and greater than 0)
-    if (isNaN(amountPaid) || amountPaid <= 0) {
-        Swal.fire({
-            title: 'Amount Required',
-            text: 'Please enter a valid amount before proceeding.',
-            icon: 'warning',
-            confirmButtonText: 'OK'
-        });
-        return; // Stop further execution if the amount is invalid
-    }
-
-    // Proceed with further actions or place order logic here
-    // For example, calculating change and showing confirmation if needed
-});
-</script>
-
+                        <label>Enter Amount</label>
+                        <input type="number" id="amountPaid" class="form-control" value="0" class="form-control" min="0" />
+                    </div>
+                    <div class="col-md-4">
+                        <label>Change</label>
+                        <input type="text" id="changeAmount" class="form-control" value="" readonly />
+                    </div>
+                    <div class="col-md-4">
+                        <br/>
+                        <button type="button" class="btn btn-warning w-100 proceedToPlace">Proceed to place order</button>
+                    </div>
                 </div>
             </div>
         </div>
