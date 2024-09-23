@@ -127,43 +127,31 @@ foreach ($sessionProducts as $key => $item) :
     </tr>
 <?php endforeach; ?>
 
-                        <!-- Include SweetAlert2 -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-<!-- Form and Table Structure -->
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <!-- Assuming this is your table -->
-            <div class="table-responsive mb-3">
-                <table class="table table-striped">
-                    <!-- Table contents go here -->
-                </table>
-            </div>
-
-            <!-- Form for Order Details -->
-            <div class="mg-2">
-                <hr>
-                <div class="row">
-                    <div class="col-md-4">
-                        <label>Select Payment Mode</label>
-                        <select id="payment_mode" class="form-select">
-                            <option value="">-- Select Payment --</option>
-                            <option value="Cash Payment">Cash Payment</option>
-                        </select>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="mg-2">
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>Select Payment Mode</label>
+                            <select id="payment_mode" class="form-select">
+                                <option value="">-- Select Payment --</option>
+                                <option value="Cash Payment">Cash Payment</option>
+                            </select>
                     </div>
-                    <div class="col-md-4">
+                        <div class="col-md-4">
                         <label for="cphone">Enter Customer Phone Number</label>
                         <input type="text" id="cphone" class="form-control" maxlength="11" pattern="\d{11}" title="Enter exactly 11 digits" />
                     </div>
-                    <div class="col-md-4">
+                        <div class="col-md-4">
                         <label>Total Amount</label>
                         <input type="text" id="totalAmount" class="form-control" value="" readonly />
                     </div>
                     <div class="col-md-4">
                         <label>Enter Amount</label>
-                        <input type="number" id="amountPaid" class="form-control" value="0" min="0" />
+                        <input type="number" id="amountPaid" class="form-control" value="0" class="form-control" min="0" />
                     </div>
                     <div class="col-md-4">
                         <label>Change</label>
@@ -178,85 +166,6 @@ foreach ($sessionProducts as $key => $item) :
         </div>
     </div>
 </div>
-
-<script>
-document.querySelector('.proceedToPlace').addEventListener('click', function() {
-    const phone = document.getElementById('cphone').value.trim();
-    const totalAmount = document.getElementById('totalAmount').value.trim();
-    const amountPaid = parseFloat(document.getElementById('amountPaid').value.trim());
-    const changeAmount = document.getElementById('changeAmount').value.trim();
-    const paymentMode = document.getElementById('payment_mode').value.trim();
-
-    // Check if all required fields are filled
-    if (!phone || !totalAmount || isNaN(amountPaid) || amountPaid <= 0 || !changeAmount || !paymentMode) {
-        Swal.fire({
-            title: 'Incomplete Details',
-            text: 'Please complete all required fields before proceeding.',
-            icon: 'warning',
-            confirmButtonText: 'OK'
-        });
-        return; // Stay on the current page (order-create.php) if details are incomplete
-    }
-
-    // Check if the total amount is a valid number
-    const totalAmountValue = parseFloat(totalAmount.replace(/,/g, ''));
-    if (isNaN(totalAmountValue) || totalAmountValue <= 0) {
-        Swal.fire({
-            title: 'Invalid Total Amount',
-            text: 'Please enter a valid total amount.',
-            icon: 'warning',
-            confirmButtonText: 'OK'
-        });
-        return; // Stay on the current page if total amount is invalid
-    }
-
-    // Check if the amount paid is less than the total amount
-    if (amountPaid < totalAmountValue) {
-        Swal.fire({
-            title: 'Insufficient Amount',
-            text: 'The amount paid cannot be less than the total amount.',
-            icon: 'warning',
-            confirmButtonText: 'OK'
-        });
-        return; // Stay on the current page if amount is insufficient
-    }
-
-    // Check if the change amount is correct
-    const changeAmountValue = parseFloat(changeAmount.replace(/,/g, ''));
-    const expectedChange = amountPaid - totalAmountValue;
-
-    if (isNaN(changeAmountValue) || changeAmountValue !== expectedChange) {
-        Swal.fire({
-            title: 'Incorrect Change Amount',
-            text: `The expected change amount should be ${expectedChange.toFixed(2)}.`,
-            icon: 'warning',
-            confirmButtonText: 'OK'
-        });
-        return; // Stay on the current page if change amount is incorrect
-    }
-
-    // Proceed with placing the order if all details are valid
-    Swal.fire({
-        title: 'Proceed to Place Order',
-        text: 'Are you sure you want to proceed?',
-        icon: 'question',
-        showCancelButton: true,
-        confirmButtonText: 'Yes, proceed',
-        cancelButtonText: 'Cancel'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            // Redirect to order-summary.php only if the user confirms
-            window.location.href = 'order-summary.php';
-        } else {
-            // Stay on the current page if the user cancels
-            window.location.href = 'order-create.php';
-        }
-    });
-});
-</script>
-
-
-
                 <?php
             } else {
                 echo '<h5>No Items added</h5>';
