@@ -198,8 +198,19 @@ document.querySelector('.proceedToPlace').addEventListener('click', function() {
         return; // Stop further execution if details are incomplete
     }
 
-    // Check if amount paid is less than the total amount
+    // Check if the total amount is a valid number
     const totalAmountValue = parseFloat(totalAmount.replace(/,/g, ''));
+    if (isNaN(totalAmountValue) || totalAmountValue <= 0) {
+        Swal.fire({
+            title: 'Invalid Total Amount',
+            text: 'Please enter a valid total amount.',
+            icon: 'warning',
+            confirmButtonText: 'OK'
+        });
+        return; // Stop further execution if total amount is invalid
+    }
+
+    // Check if the amount paid is less than the total amount
     if (amountPaid < totalAmountValue) {
         Swal.fire({
             title: 'Insufficient Amount',
@@ -210,7 +221,21 @@ document.querySelector('.proceedToPlace').addEventListener('click', function() {
         return; // Stop further execution if amount is insufficient
     }
 
-    // Proceed with placing the order
+    // Check if the change amount is correct
+    const changeAmountValue = parseFloat(changeAmount.replace(/,/g, ''));
+    const expectedChange = amountPaid - totalAmountValue;
+
+    if (isNaN(changeAmountValue) || changeAmountValue !== expectedChange) {
+        Swal.fire({
+            title: 'Incorrect Change Amount',
+            text: `The expected change amount should be ${expectedChange.toFixed(2)}.`,
+            icon: 'warning',
+            confirmButtonText: 'OK'
+        });
+        return; // Stop further execution if change amount is incorrect
+    }
+
+    // Proceed with placing the order if all details are valid
     Swal.fire({
         title: 'Proceed to Place Order',
         text: 'Are you sure you want to proceed?',

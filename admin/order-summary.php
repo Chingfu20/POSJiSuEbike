@@ -1,41 +1,9 @@
 <?php 
 include('includes/header.php'); 
-
-// Check if required session variables are set
-$requiredSessionVars = ['productItems', 'cphone', 'invoice_no', 'payment_mode', 'amountPaid', 'changeAmount'];
-$allDetailsComplete = true;
-
-foreach ($requiredSessionVars as $var) {
-    if (!isset($_SESSION[$var]) || empty($_SESSION[$var])) {
-        $allDetailsComplete = false;
-        break;
-    }
+if(!isset($_SESSION['productItems'])){
+    echo '<script> window.location.href = "order-create.php"; </script>';
 }
-
-if (!$allDetailsComplete) {
-    // Redirect to a page with a warning message if details are incomplete
-    echo '<script>
-            Swal.fire({
-                title: "Incomplete Order Details",
-                text: "Please complete all required fields before proceeding.",
-                icon: "warning",
-                confirmButtonText: "OK"
-            }).then(() => {
-                window.location.href = "order-create.php";
-            });
-          </script>';
-    exit;
-}
-
-// Redirect to order-summary.php if all details are complete
-echo '<script>
-        window.location.href = "order-summary.php";
-      </script>';
 ?>
-
-
-<?php include('includes/footer.php'); ?>
-
 
 <div class="modal fade" id="orderSuccessModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
