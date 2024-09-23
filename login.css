@@ -1,8 +1,8 @@
 /* Style for the custom card */
 .custom-card {
-    border-radius: 8px;
-    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    background: linear-gradient(135deg, #ffffff, #f0f4f8); /* Light gradient background */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
     position: relative;
     overflow: hidden;
     padding: 20px;
@@ -10,40 +10,61 @@
     border: 4px solid transparent; /* Placeholder for animated border */
 }
 
-/* Rotating color border effect */
+/* Simple color border effect */
 .custom-card::before {
     content: '';
     position: absolute;
-    top: -4px;
-    left: -4px;
-    right: -4px;
-    bottom: -4px;
+    top: -6px;
+    left: -6px;
+    right: -6px;
+    bottom: -6px;
     border-radius: 12px;
-    background: linear-gradient(270deg, rgba(255, 0, 150, 0.7), rgba(0, 204, 255, 0.7), rgba(0, 255, 150, 0.7), rgba(255, 255, 0, 0.7));
-    background-size: 400% 400%;
+    background: linear-gradient(270deg, rgba(56, 123, 255, 0.7), rgba(0, 204, 204, 0.7)); /* Blue to teal gradient */
+    background-size: 200% 200%;
     z-index: -1;
-    animation: rotateColors 5s linear infinite;
+    animation: simpleColorShift 4s ease-in-out infinite;
 }
 
-/* Keyframes for rotating gradient border */
-@keyframes rotateColors {
+/* Keyframes for simplified gradient border */
+@keyframes simpleColorShift {
     0% {
         background-position: 0% 50%;
     }
-    100% {
-        background-position: 400% 50%;
+    50% {
+        background-position: 100% 50%;
     }
-}
-
-/* Ensure form fields are above the animated border */
-.login-form {
-    position: relative;
-    z-index: 2;
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 /* Style adjustments for form labels */
 .form-label {
-    font-weight: bold;
+    font-weight: 500;
+    color: #333;
+}
+
+/* Style for form controls */
+.form-control {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+/* Style for the submit button */
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
 }
 
 /* Add some padding and margins */
