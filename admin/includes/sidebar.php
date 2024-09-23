@@ -2,61 +2,6 @@
     $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], "/") + 1);
 ?>
 
-<style>
-/* Updated Sidenav Colors */
-.sb-sidenav-dark {
-  background-color: #0367b8; /* Approximate blue color */
-  color: rgba(255, 255, 255, 0.7);
-}
-.sb-sidenav-dark .sb-sidenav-menu .sb-sidenav-menu-heading {
-  color: rgba(255, 255, 255, 0.5);
-}
-.sb-sidenav-dark .sb-sidenav-menu .nav-link {
-  color: rgba(255, 255, 255, 0.7);
-}
-.sb-sidenav-dark .sb-sidenav-menu .nav-link:hover {
-  color: #ffffff;
-}
-.sb-sidenav-dark .sb-sidenav-menu .nav-link.active {
-  color: #ffffff;
-}
-.sb-sidenav-dark .sb-sidenav-footer {
-  background-color: #024a86; /* Darker blue for the footer */
-}
-
-/* Updated Sidenav Light Theme */
-.sb-sidenav-light {
-  background-color: #cfe7ff; /* Light sky blue tone */
-  color: #212529;
-}
-.sb-sidenav-light .sb-sidenav-menu .sb-sidenav-menu-heading {
-  color: #8caad1; /* Muted blue for headings */
-}
-.sb-sidenav-light .sb-sidenav-menu .nav-link {
-  color: #212529;
-}
-.sb-sidenav-light .sb-sidenav-menu .nav-link:hover {
-  color: #0367b8; /* Primary blue on hover */
-}
-.sb-sidenav-light .sb-sidenav-menu .nav-link.active {
-  color: #0367b8;
-}
-.sb-sidenav-light .sb-sidenav-footer {
-  background-color: #90c7ff; /* Soft blue for footer */
-}
-
-/* Other Element Colors */
-.sb-topnav {
-  background-color: #0367b8; /* Navbar background color */
-}
-.sb-topnav .navbar-brand {
-  background-color: #024a86; /* Navbar brand background */
-}
-.sb-topnav.navbar-dark #sidebarToggle {
-  color: rgba(255, 255, 255, 0.7);
-}
-</style>
-
 <div id="layoutSidenav_nav"> 
     <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
         <div class="sb-sidenav-menu">
@@ -150,4 +95,4 @@
             <div class="small"></div>
         </div>
     </nav>
-</div> 
+</div>
