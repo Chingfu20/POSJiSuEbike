@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="login.css">
     <style>
         body {
-            background: url('assets/images/ebike.jpg') no-repeat center center fixed;
+            background: url('assets/images/ebike.jpg')no-repeat center center fixed;
             background-size: cover;
         }
     </style>
