@@ -5,17 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JiSu Ebike POS System</title>
     <link rel="stylesheet" href="login.css">
-    <style>
-        .admin-img {
-            display: block;
-            margin: 0 auto;
-            width: 100px; /* Adjust width as needed */
-            height: auto;
-        }
-        .text-center {
-            text-align: center;
-        }
-    </style>
 </head>
 <body>
     <?php 
@@ -34,10 +23,8 @@
                 <div class="col-md-6">
                     <div class="card shadow rounded-4 custom-card">
 
-                        <div class="p-5 text-center">
-                            <!-- Admin picture -->
-                            <img src="path/to/admin-WS.png" alt="Admin Picture" class="admin-img">
-                            <h4 class="text-dark mb-3">Login Admin</h4>
+                        <div class="p-5">
+                            <center><h4 class="text-dark mb-3">Login Admin</h4></center>
                             <form action="login-code.php" method="POST" class="login-form">
                                 
                                 <div class="mb-3">
