@@ -3,7 +3,7 @@
 <footer class="py-4 bg-light mt-auto">
     <div class="container-fluid px-4">
         <div class="d-flex align-items-center justify-content-between small">
-            <div class="text-muted">Developer: Hershey Sedurifa, Johnril Rosello, Mitch Pedroza, Jessa Mae Bayawa
+            <div class="text-muted">Developer: Hershey Sedurifa,  Mitche Pedroza, Johnril Rosello, Jessa Mae Bayawa
                 &copy; JiSu E-Bike POS System 2024</div>
             
         </div>
