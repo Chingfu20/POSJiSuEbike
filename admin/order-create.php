@@ -245,7 +245,6 @@ foreach ($sessionProducts as $key => $item) :
     }
 });
 </script>
-
 <script>
 document.querySelector('.proceedToPlace').addEventListener('click', function() {
     // Retrieve values from the form
