@@ -140,77 +140,32 @@ foreach ($sessionProducts as $key => $item) :
                                 <option value="">-- Select Payment --</option>
                                 <option value="Cash Payment">Cash Payment</option>
                             </select>
-                            <div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
+                    </div>
                         <div class="col-md-4">
-                            <label for="cphone">Enter Customer Phone Number</label>
-                            <input type="text" id="cphone" class="form-control" maxlength="11" pattern="\d{11}" title="Enter exactly 11 digits" />
-                        </div>
+                        <label for="cphone">Enter Customer Phone Number</label>
+                        <input type="text" id="cphone" class="form-control" maxlength="11" pattern="\d{11}" title="Enter exactly 11 digits" />
+                    </div>
                         <div class="col-md-4">
-                            <label>Total Amount</label>
-                            <input type="text" id="totalAmount" class="form-control" value="" readonly />
-                        </div>
-                        <div class="col-md-4">
-                            <label>Enter Amount</label>
-                            <input type="number" id="amountPaid" class="form-control" value="0" min="0" />
-                        </div>
-                        <div class="col-md-4">
-                            <label>Change</label>
-                            <input type="text" id="changeAmount" class="form-control" value="" readonly />
-                        </div>
-                        <div class="col-md-4">
-                            <br/>
-                            <button type="button" class="btn btn-warning w-100 proceedToPlace">Proceed to place order</button>
-                        </div>
+                        <label>Total Amount</label>
+                        <input type="text" id="totalAmount" class="form-control" value="" readonly />
+                    </div>
+                    <div class="col-md-4">
+                        <label>Enter Amount</label>
+                        <input type="number" id="amountPaid" class="form-control" value="0" class="form-control" min="0" />
+                    </div>
+                    <div class="col-md-4">
+                        <label>Change</label>
+                        <input type="text" id="changeAmount" class="form-control" value="" readonly />
+                    </div>
+                    <div class="col-md-4">
+                        <br/>
+                        <button type="button" class="btn btn-warning w-100 proceedToPlace">Proceed to place order</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-<script>
-document.querySelector('.proceedToPlace').addEventListener('click', function() {
-    // Get form field values
-    const cphone = document.getElementById('cphone').value.trim();
-    const totalAmount = document.getElementById('totalAmount').value.trim();
-    const amountPaid = parseFloat(document.getElementById('amountPaid').value.trim());
-    const changeAmount = document.getElementById('changeAmount').value.trim();
-
-    // Validate form fields
-    if (!cphone || !totalAmount || isNaN(amountPaid) || !changeAmount) {
-        Swal.fire({
-            title: 'Incomplete Form',
-            text: 'Please provide all required information before proceeding.',
-            icon: 'warning',
-            confirmButtonText: 'OK'
-        });
-        return; // Stop further execution if validation fails
-    }
-
-    // Check for phone number validity
-    if (!/^\d{11}$/.test(cphone)) {
-        Swal.fire({
-            title: 'Invalid Phone Number',
-            text: 'Please enter a valid 11-digit phone number.',
-            icon: 'warning',
-            confirmButtonText: 'OK'
-        });
-        return; // Stop further execution if phone number is invalid
-    }
-
-    // Optionally check for additional validations if needed
-
-    // Proceed with form submission
-    // Assuming you have a form with id="orderForm"
-    document.getElementById('orderForm').submit();
-});
-</script>
-
                 <?php
             } else {
                 echo '<h5>No Items added</h5>';
