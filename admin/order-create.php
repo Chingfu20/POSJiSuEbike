@@ -175,7 +175,8 @@ document.querySelector('.proceedToPlace').addEventListener('click', function() {
     const totalAmount = document.getElementById('totalAmount').value.trim();
     const amountPaid = parseFloat(document.getElementById('amountPaid').value.trim());
     const changeAmount = document.getElementById('changeAmount').value.trim();
-    
+
+    // Check if all required fields are filled
     if (!phone || !totalAmount || isNaN(amountPaid) || amountPaid < 0 || !changeAmount) {
         Swal.fire({
             title: 'Incomplete Details',
@@ -183,9 +184,10 @@ document.querySelector('.proceedToPlace').addEventListener('click', function() {
             icon: 'warning',
             confirmButtonText: 'OK'
         });
-        return;
+        return; // Stop further execution if details are incomplete
     }
 
+    // Check if amount paid is less than the total amount
     const totalAmountValue = parseFloat(totalAmount.replace(/,/g, ''));
     if (amountPaid < totalAmountValue) {
         Swal.fire({
@@ -194,10 +196,10 @@ document.querySelector('.proceedToPlace').addEventListener('click', function() {
             icon: 'warning',
             confirmButtonText: 'OK'
         });
-        return;
+        return; // Stop further execution if amount is insufficient
     }
 
-    // All validations passed, proceed to place the order
+    // Proceed with placing the order
     Swal.fire({
         title: 'Proceed to Place Order',
         text: 'Are you sure you want to proceed?',
@@ -207,7 +209,7 @@ document.querySelector('.proceedToPlace').addEventListener('click', function() {
         cancelButtonText: 'Cancel'
     }).then((result) => {
         if (result.isConfirmed) {
-            // Proceed with form submission or other actions
+            // User confirmed, submit the form or take necessary action
             document.querySelector('form').submit(); // Adjust according to your form handling method
         }
     });
