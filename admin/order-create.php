@@ -140,7 +140,7 @@ foreach ($sessionProducts as $key => $item) :
                                 <option value="">-- Select Payment --</option>
                                 <option value="Cash Payment">Cash Payment</option>
                             </select>
-                            <div class="container">
+                  <div class="container">
     <div class="row">
         <div class="col-md-4">
             <label for="cphone">Enter Customer Phone Number</label>
@@ -200,13 +200,14 @@ document.querySelector('.proceedToPlace').addEventListener('click', function() {
     // All validations passed, proceed to place the order
     Swal.fire({
         title: 'Proceed to Place Order',
+        text: 'Are you sure you want to proceed?',
         icon: 'question',
         showCancelButton: true,
         confirmButtonText: 'Yes, proceed',
         cancelButtonText: 'Cancel'
     }).then((result) => {
         if (result.isConfirmed) {
-            // Proceed with form submission or other actions
+            // Use the form element or another method to handle order submission
             document.querySelector('form').submit(); // Adjust according to your form handling method
         }
     });
