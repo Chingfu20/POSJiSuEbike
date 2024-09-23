@@ -11,10 +11,19 @@ if (!isset($_SESSION['productItems'])) {
 $requiredSessionVars = ['cphone', 'invoice_no', 'payment_mode', 'amountPaid', 'changeAmount'];
 foreach ($requiredSessionVars as $var) {
     if (!isset($_SESSION[$var]) || empty($_SESSION[$var])) {
-        // Redirect to a page with a warning message
+        // Output SweetAlert2 script
         echo '<script>
-                alert("Incomplete order details. Please complete the form and try again.");
-                window.location.href = "order-create.php";
+                Swal.fire({
+                    title: "Incomplete Order Details",
+                    text: "Please complete the form and try again.",
+                    icon: "warning",
+                    confirmButtonText: "OK",
+                    allowOutsideClick: false
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "order-create.php";
+                    }
+                });
               </script>';
         exit;
     }
