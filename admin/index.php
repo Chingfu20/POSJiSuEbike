@@ -250,7 +250,7 @@ document.addEventListener("DOMContentLoaded", function () {
         data: {
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
             datasets: [{
-                label: 'Sales (in PHP)',
+                label: 'Sales (in a month)',
                 data: monthlySales,  // Use dynamic sales data
                 backgroundColor: 'rgba(54, 162, 235, 0.2)',
                 borderColor: 'rgba(54, 162, 235, 1)',
