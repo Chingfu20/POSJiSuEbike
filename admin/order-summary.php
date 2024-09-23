@@ -1,52 +1,9 @@
 <?php 
-include('includes/header.php');
-
-// Check if the productItems session variable is set
-if (!isset($_SESSION['productItems'])) {
-    echo '<script>
-            Swal.fire({
-                title: "No Items Found",
-                text: "You have no items in your cart. Please add items to proceed.",
-                icon: "warning",
-                confirmButtonText: "OK"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = "order-create.php";
-                }
-            });
-          </script>';
-    exit;
+include('includes/header.php'); 
+if(!isset($_SESSION['productItems'])){
+    echo '<script> window.location.href = "order-create.php"; </script>';
 }
-
-// Check if other required session variables are set
-$requiredSessionVars = ['cphone', 'invoice_no', 'payment_mode', 'amountPaid', 'changeAmount'];
-$missingVars = [];
-
-foreach ($requiredSessionVars as $var) {
-    if (!isset($_SESSION[$var]) || empty($_SESSION[$var])) {
-        $missingVars[] = $var;
-    }
-}
-
-if (!empty($missingVars)) {
-    echo '<script>
-            Swal.fire({
-                title: "Incomplete Order Details",
-                text: "Please complete the following details: ' . implode(', ', $missingVars) . '.",
-                icon: "warning",
-                confirmButtonText: "OK"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = "order-create.php";
-                }
-            });
-          </script>';
-    exit;
-}
-
-// If all checks pass, display the order summary or proceed with order processing
 ?>
-
 
 <div class="modal fade" id="orderSuccessModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
