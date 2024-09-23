@@ -4,6 +4,44 @@ if(!isset($_SESSION['productItems'])){
     echo '<script> window.location.href = "order-create.php"; </script>';
 }
 ?>
+<script>
+window.addEventListener('load', function() {
+    const phone = document.getElementById('cphone').value.trim();
+    const totalAmount = document.getElementById('totalAmount').value.trim();
+    const amountPaid = parseFloat(document.getElementById('amountPaid').value.trim());
+    const changeAmount = document.getElementById('changeAmount').value.trim();
+    const paymentMode = document.getElementById('payment_mode').value.trim();
+
+    // Check if all required fields are filled
+    if (!phone || !totalAmount || isNaN(amountPaid) || amountPaid <= 0 || !changeAmount || !paymentMode) {
+        // Do nothing if the details are incomplete; user stays on the page
+        return;
+    }
+
+    // Check if the total amount is a valid number
+    const totalAmountValue = parseFloat(totalAmount.replace(/,/g, ''));
+    if (isNaN(totalAmountValue) || totalAmountValue <= 0) {
+        return; // Do nothing if total amount is invalid
+    }
+
+    // Check if the amount paid is less than the total amount
+    if (amountPaid < totalAmountValue) {
+        return; // Do nothing if the amount paid is insufficient
+    }
+
+    // Check if the change amount is correct
+    const changeAmountValue = parseFloat(changeAmount.replace(/,/g, ''));
+    const expectedChange = amountPaid - totalAmountValue;
+
+    if (isNaN(changeAmountValue) || changeAmountValue !== expectedChange) {
+        return; // Do nothing if the change amount is incorrect
+    }
+
+    // If all details are valid, automatically redirect to order-summary.php
+    window.location.href = 'order-summary.php';
+});
+</script>
+
 
 <div class="modal fade" id="orderSuccessModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
