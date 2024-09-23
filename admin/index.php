@@ -220,7 +220,9 @@ for ($i = 1; $i <= 12; $i++) {
     $endDate = date("Y-$i-t");
     $result = mysqli_query($conn, "SELECT SUM(total_amount) AS monthly_sales FROM orders WHERE order_date BETWEEN '$startDate' AND '$endDate'");
     $row = mysqli_fetch_assoc($result);
-    $salesData[] = $row['monthly_sales'] ?? 0;
+    
+    // Format sales amount in PHP currency format
+    $salesData[] = $row['monthly_sales'] ? number_format($row['monthly_sales'], 2, '.', '') : 0.00;
 }
 ?>
 
@@ -236,7 +238,7 @@ document.addEventListener("DOMContentLoaded", function () {
         data: {
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
             datasets: [{
-                label: 'Sales (in USD)',
+                label: 'Sales (in PHP)',
                 data: monthlySales,  // Use dynamic sales data
                 backgroundColor: 'rgba(54, 162, 235, 0.2)',
                 borderColor: 'rgba(54, 162, 235, 1)',
@@ -246,7 +248,12 @@ document.addEventListener("DOMContentLoaded", function () {
         options: {
             scales: {
                 y: {
-                    beginAtZero: true
+                    beginAtZero: true,
+                    ticks: {
+                        callback: function(value) {
+                            return '₱' + value; // Add PHP symbol to y-axis labels
+                        }
+                    }
                 }
             },
             plugins: {
@@ -254,6 +261,20 @@ document.addEventListener("DOMContentLoaded", function () {
                     display: true,
                     labels: {
                         color: 'rgba(54, 162, 235, 1)',
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            let label = context.dataset.label || '';
+                            if (label) {
+                                label += ': ';
+                            }
+                            if (context.raw !== null) {
+                                label += '₱' + context.raw; // Add PHP symbol to tooltips
+                            }
+                            return label;
+                        }
                     }
                 }
             }
