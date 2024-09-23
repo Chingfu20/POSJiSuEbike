@@ -221,18 +221,7 @@ document.querySelector('.proceedToPlace').addEventListener('click', function() {
     }).then((result) => {
         if (result.isConfirmed) {
             // User confirmed, submit the form or take necessary action
-            // Ensure the form is selected properly, you may need to adjust this selector
-            const form = document.querySelector('form');
-            if (form) {
-                form.submit(); // Submit the form if it exists
-            } else {
-                Swal.fire({
-                    title: 'Error',
-                    text: 'Form not found. Please try again.',
-                    icon: 'error',
-                    confirmButtonText: 'OK'
-                });
-            }
+            document.querySelector('form').submit(); // Adjust according to your form handling method
         }
     });
 });
