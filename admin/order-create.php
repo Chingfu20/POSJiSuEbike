@@ -127,31 +127,43 @@ foreach ($sessionProducts as $key => $item) :
     </tr>
 <?php endforeach; ?>
 
-                        </tbody>
-                    </table>
-                </div>
-                
-                <div class="mg-2">
-                    <hr>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label>Select Payment Mode</label>
-                            <select id="payment_mode" class="form-select">
-                                <option value="">-- Select Payment --</option>
-                                <option value="Cash Payment">Cash Payment</option>
-                            </select>
+   <!-- Include SweetAlert2 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!-- Form and Table Structure -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- Assuming this is your table -->
+            <div class="table-responsive mb-3">
+                <table class="table table-striped">
+                    <!-- Table contents go here -->
+                </table>
+            </div>
+
+            <!-- Form for Order Details -->
+            <div class="mg-2">
+                <hr>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>Select Payment Mode</label>
+                        <select id="payment_mode" class="form-select">
+                            <option value="">-- Select Payment --</option>
+                            <option value="Cash Payment">Cash Payment</option>
+                        </select>
                     </div>
-                        <div class="col-md-4">
+                    <div class="col-md-4">
                         <label for="cphone">Enter Customer Phone Number</label>
                         <input type="text" id="cphone" class="form-control" maxlength="11" pattern="\d{11}" title="Enter exactly 11 digits" />
                     </div>
-                        <div class="col-md-4">
+                    <div class="col-md-4">
                         <label>Total Amount</label>
                         <input type="text" id="totalAmount" class="form-control" value="" readonly />
                     </div>
                     <div class="col-md-4">
                         <label>Enter Amount</label>
-                        <input type="number" id="amountPaid" class="form-control" value="0" class="form-control" min="0" />
+                        <input type="number" id="amountPaid" class="form-control" value="0" min="0" />
                     </div>
                     <div class="col-md-4">
                         <label>Change</label>
@@ -166,9 +178,6 @@ foreach ($sessionProducts as $key => $item) :
         </div>
     </div>
 </div>
-<!-- Include SweetAlert2 -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
 document.querySelector('.proceedToPlace').addEventListener('click', function() {
@@ -176,9 +185,10 @@ document.querySelector('.proceedToPlace').addEventListener('click', function() {
     const totalAmount = document.getElementById('totalAmount').value.trim();
     const amountPaid = parseFloat(document.getElementById('amountPaid').value.trim());
     const changeAmount = document.getElementById('changeAmount').value.trim();
+    const paymentMode = document.getElementById('payment_mode').value.trim();
 
     // Check if all required fields are filled
-    if (!phone || !totalAmount || isNaN(amountPaid) || amountPaid < 0 || !changeAmount) {
+    if (!phone || !totalAmount || isNaN(amountPaid) || amountPaid < 0 || !changeAmount || !paymentMode) {
         Swal.fire({
             title: 'Incomplete Details',
             text: 'Please complete all required fields before proceeding.',
@@ -216,6 +226,7 @@ document.querySelector('.proceedToPlace').addEventListener('click', function() {
     });
 });
 </script>
+
 
                 <?php
             } else {
