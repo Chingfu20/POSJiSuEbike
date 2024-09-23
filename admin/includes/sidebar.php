@@ -25,18 +25,22 @@
 
                 <div class="sb-sidenav-menu-heading">Interface</div>
 
+                <!-- Categories Section with Dropdown Icon -->
                 <a class="nav-link <?= $page == 'categories-create.php' || $page == 'categories.php' ? 'active' : ''; ?>" href="#">
                     <div class="sb-nav-link-icon"><i class="fas fa-th-list"></i></div>
                     Categories
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                 </a>
                 <nav class="sb-sidenav-menu-nested nav">
                     <a class="nav-link <?= $page == 'categories-create.php' ? 'active' : ''; ?>" href="categories-create.php">Create Category</a>
                     <a class="nav-link <?= $page == 'categories.php' ? 'active' : ''; ?>" href="categories.php">View Categories</a>
                 </nav>
 
+                <!-- Products Section with Dropdown Icon -->
                 <a class="nav-link <?= $page == 'products-create.php' || $page == 'products.php' ? 'active' : ''; ?>" href="#">
                     <div class="sb-nav-link-icon"><i class="fas fa-box"></i></div>
                     Products
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                 </a>
                 <nav class="sb-sidenav-menu-nested nav">
                     <a class="nav-link <?= $page == 'products-create.php' ? 'active' : ''; ?>" href="products-create.php">Create Product</a>
@@ -45,23 +49,28 @@
 
                 <div class="sb-sidenav-menu-heading">Manage Users</div>
 
+                <!-- Customer Section with Dropdown Icon -->
                 <a class="nav-link <?= $page == 'customers-create.php' || $page == 'customers.php' ? 'active' : ''; ?>" href="#">
                     <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
                     Customer
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                 </a>
                 <nav class="sb-sidenav-menu-nested nav">
                     <a class="nav-link <?= $page == 'customers-create.php' ? 'active' : ''; ?>" href="customers-create.php">Add Customer</a>
                     <a class="nav-link <?= $page == 'customers.php' ? 'active' : ''; ?>" href="customers.php">View Customers</a>
                 </nav>
 
+                <!-- Admin Section with Dropdown Icon -->
                 <a class="nav-link <?= $page == 'admins-create.php' || $page == 'admins.php' ? 'active' : ''; ?>" href="#">
                     <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
                     Admin
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                 </a>
                 <nav class="sb-sidenav-menu-nested nav">
                     <a class="nav-link <?= $page == 'admins-create.php' ? 'active' : ''; ?>" href="admins-create.php">Add Admin</a>
                     <a class="nav-link <?= $page == 'admins.php' ? 'active' : ''; ?>" href="admins.php">View Admins</a>
                 </nav>
+
             </div>
         </div>
         <div class="sb-sidenav-footer">
