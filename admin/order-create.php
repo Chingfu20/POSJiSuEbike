@@ -199,21 +199,6 @@ document.querySelector('.proceedToPlace').addEventListener('click', function() {
         return; // Stop further execution if amount is insufficient
     }
 
-    // Proceed with placing the order
-    Swal.fire({
-        title: 'Proceed to Place Order',
-        text: 'Are you sure you want to proceed?',
-        icon: 'question',
-        showCancelButton: true,
-        confirmButtonText: 'Yes, proceed',
-        cancelButtonText: 'Cancel'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            // User confirmed, submit the form or take necessary action
-            document.querySelector('form').submit(); // Adjust according to your form handling method
-        }
-    });
-});
 </script>
 
                 <?php
