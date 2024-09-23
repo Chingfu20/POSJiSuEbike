@@ -7,7 +7,7 @@
     <title>JiSu Ebike POS System - Login</title>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="login.css"> <!-- Updated to link to login.css -->
 </head>
 
 <body>
