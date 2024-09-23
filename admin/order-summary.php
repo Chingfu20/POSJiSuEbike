@@ -9,25 +9,32 @@ if (!isset($_SESSION['productItems'])) {
 
 // Check if other required session variables are set
 $requiredSessionVars = ['cphone', 'invoice_no', 'payment_mode', 'amountPaid', 'changeAmount'];
+$missingVars = [];
+
 foreach ($requiredSessionVars as $var) {
     if (!isset($_SESSION[$var]) || empty($_SESSION[$var])) {
-        // Output SweetAlert2 script
-        echo '<script>
-                Swal.fire({
-                    title: "Incomplete Order Details",
-                    text: "Please complete the form and try again.",
-                    icon: "warning",
-                    confirmButtonText: "OK",
-                    allowOutsideClick: false
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = "order-create.php";
-                    }
-                });
-              </script>';
-        exit;
+        $missingVars[] = $var;
     }
 }
+
+if (!empty($missingVars)) {
+    echo '<script>
+            Swal.fire({
+                title: "Incomplete Order Details",
+                text: "Please complete the form and try again. Missing details: ' . implode(', ', $missingVars) . '",
+                icon: "warning",
+                confirmButtonText: "OK"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "order-create.php";
+                }
+            });
+          </script>';
+    exit;
+}
+
+// Proceed to orders if details are complete
+// Your code for displaying order summary or processing the order
 ?>
 
 
