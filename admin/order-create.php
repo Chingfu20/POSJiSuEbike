@@ -140,32 +140,80 @@ foreach ($sessionProducts as $key => $item) :
                                 <option value="">-- Select Payment --</option>
                                 <option value="Cash Payment">Cash Payment</option>
                             </select>
-                    </div>
-                        <div class="col-md-4">
-                        <label for="cphone">Enter Customer Phone Number</label>
-                        <input type="text" id="cphone" class="form-control" maxlength="11" pattern="\d{11}" title="Enter exactly 11 digits" />
-                    </div>
-                        <div class="col-md-4">
-                        <label>Total Amount</label>
-                        <input type="text" id="totalAmount" class="form-control" value="" readonly />
-                    </div>
-                    <div class="col-md-4">
-                        <label>Enter Amount</label>
-                        <input type="number" id="amountPaid" class="form-control" value="0" class="form-control" min="0" />
-                    </div>
-                    <div class="col-md-4">
-                        <label>Change</label>
-                        <input type="text" id="changeAmount" class="form-control" value="" readonly />
-                    </div>
-                    <div class="col-md-4">
-                        <br/>
-                        <button type="button" class="btn btn-warning w-100 proceedToPlace">Proceed to place order</button>
-                    </div>
-                </div>
-            </div>
+                            <div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <label for="cphone">Enter Customer Phone Number</label>
+            <input type="text" id="cphone" class="form-control" maxlength="11" pattern="\d{11}" title="Enter exactly 11 digits" />
+        </div>
+        <div class="col-md-4">
+            <label>Total Amount</label>
+            <input type="text" id="totalAmount" class="form-control" value="" readonly />
+        </div>
+        <div class="col-md-4">
+            <label>Enter Amount</label>
+            <input type="number" id="amountPaid" class="form-control" value="0" min="0" />
+        </div>
+        <div class="col-md-4">
+            <label>Change</label>
+            <input type="text" id="changeAmount" class="form-control" value="" readonly />
+        </div>
+        <div class="col-md-4">
+            <br/>
+            <button type="button" class="btn btn-warning w-100 proceedToPlace">Proceed to place order</button>
         </div>
     </div>
 </div>
+
+<!-- Include SweetAlert2 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+document.querySelector('.proceedToPlace').addEventListener('click', function() {
+    const phone = document.getElementById('cphone').value.trim();
+    const totalAmount = document.getElementById('totalAmount').value.trim();
+    const amountPaid = parseFloat(document.getElementById('amountPaid').value.trim());
+    const changeAmount = document.getElementById('changeAmount').value.trim();
+    
+    if (!phone || !totalAmount || isNaN(amountPaid) || amountPaid < 0 || !changeAmount) {
+        Swal.fire({
+            title: 'Incomplete Details',
+            text: 'Please complete all required fields before proceeding.',
+            icon: 'warning',
+            confirmButtonText: 'OK'
+        });
+        return;
+    }
+
+    const totalAmountValue = parseFloat(totalAmount.replace(/,/g, ''));
+    if (amountPaid < totalAmountValue) {
+        Swal.fire({
+            title: 'Insufficient Amount',
+            text: 'The amount paid cannot be less than the total amount.',
+            icon: 'warning',
+            confirmButtonText: 'OK'
+        });
+        return;
+    }
+
+    // All validations passed, proceed to place the order
+    Swal.fire({
+        title: 'Proceed to Place Order',
+        text: 'Are you sure you want to proceed?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, proceed',
+        cancelButtonText: 'Cancel'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Proceed with form submission or other actions
+            document.querySelector('form').submit(); // Adjust according to your form handling method
+        }
+    });
+});
+</script>
+
                 <?php
             } else {
                 echo '<h5>No Items added</h5>';
