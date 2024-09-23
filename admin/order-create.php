@@ -200,7 +200,6 @@ document.querySelector('.proceedToPlace').addEventListener('click', function() {
     // All validations passed, proceed to place the order
     Swal.fire({
         title: 'Proceed to Place Order',
-        text: 'Are you sure you want to proceed?',
         icon: 'question',
         showCancelButton: true,
         confirmButtonText: 'Yes, proceed',
