@@ -10,7 +10,7 @@
     border: 4px solid transparent; /* Placeholder for animated border */
 }
 
-/* Subtle color border effect */
+/* Simple color border effect */
 .custom-card::before {
     content: '';
     position: absolute;
@@ -19,14 +19,14 @@
     right: -4px;
     bottom: -4px;
     border-radius: 12px;
-    background: linear-gradient(270deg, rgba(255, 182, 193, 0.5), rgba(173, 216, 230, 0.5));
+    background: linear-gradient(270deg, rgba(255, 0, 150, 0.7), rgba(0, 204, 255, 0.7));
     background-size: 200% 200%;
     z-index: -1;
-    animation: subtleColorShift 5s ease-in-out infinite;
+    animation: simpleColorShift 3s ease-in-out infinite;
 }
 
-/* Keyframes for subtle gradient border */
-@keyframes subtleColorShift {
+/* Keyframes for simplified gradient border */
+@keyframes simpleColorShift {
     0% {
         background-position: 0% 50%;
     }
