@@ -210,6 +210,58 @@
             </div>
         </div>
     </div>
+</div>
+
+<?php
+// Fetch sales data for each month from the database
+$salesData = [];
+for ($i = 1; $i <= 12; $i++) {
+    $startDate = date("Y-$i-01");
+    $endDate = date("Y-$i-t");
+    $result = mysqli_query($conn, "SELECT SUM(total_amount) AS monthly_sales FROM orders WHERE order_date BETWEEN '$startDate' AND '$endDate'");
+    $row = mysqli_fetch_assoc($result);
+    $salesData[] = $row['monthly_sales'] ?? 0;
+}
+?>
+
+<script>
+// Pass PHP sales data to JavaScript
+document.addEventListener("DOMContentLoaded", function () {
+    const monthlySales = <?php echo json_encode($salesData); ?>;
+
+    // Monthly Sales Report Chart
+    const ctx = document.getElementById('salesChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+            datasets: [{
+                label: 'Sales (in USD)',
+                data: monthlySales,  // Use dynamic sales data
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+            plugins: {
+                legend: {
+                    display: true,
+                    labels: {
+                        color: 'rgba(54, 162, 235, 1)',
+                    }
+                }
+            }
+        }
+    });
+});
+</script>
+
 
     <!-- Right Column: Total Orders as Text -->
     <div class="col-md-6 mb-3">
