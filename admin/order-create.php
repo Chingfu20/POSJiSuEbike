@@ -140,25 +140,31 @@ foreach ($sessionProducts as $key => $item) :
                                 <option value="">-- Select Payment --</option>
                                 <option value="Cash Payment">Cash Payment</option>
                             </select>
-                            <div class="col-md-4">
-    <label for="cphone">Enter Customer Phone Number</label>
-    <input type="text" id="cphone" class="form-control" maxlength="11" pattern="\d{11}" title="Enter exactly 11 digits" />
-</div>
-<div class="col-md-4">
-    <label>Total Amount</label>
-    <input type="text" id="totalAmount" class="form-control" value="" readonly />
-</div>
-<div class="col-md-4">
-    <label>Enter Amount</label>
-    <input type="number" id="amountPaid" class="form-control" value="0" min="0" />
-</div>
-<div class="col-md-4">
-    <label>Change</label>
-    <input type="text" id="changeAmount" class="form-control" value="" readonly />
-</div>
-<div class="col-md-4">
-    <br/>
-    <button type="button" class="btn btn-warning w-100 proceedToPlace">Proceed to place order</button>
+                    </div>
+                        <div class="col-md-4">
+                        <label for="cphone">Enter Customer Phone Number</label>
+                        <input type="text" id="cphone" class="form-control" maxlength="11" pattern="\d{11}" title="Enter exactly 11 digits" />
+                    </div>
+                        <div class="col-md-4">
+                        <label>Total Amount</label>
+                        <input type="text" id="totalAmount" class="form-control" value="" readonly />
+                    </div>
+                    <div class="col-md-4">
+                        <label>Enter Amount</label>
+                        <input type="number" id="amountPaid" class="form-control" value="0" class="form-control" min="0" />
+                    </div>
+                    <div class="col-md-4">
+                        <label>Change</label>
+                        <input type="text" id="changeAmount" class="form-control" value="" readonly />
+                    </div>
+                    <div class="col-md-4">
+                        <br/>
+                        <button type="button" class="btn btn-warning w-100 proceedToPlace">Proceed to place order</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
                 <?php
             } else {
