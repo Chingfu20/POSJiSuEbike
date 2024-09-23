@@ -140,32 +140,106 @@ foreach ($sessionProducts as $key => $item) :
                                 <option value="">-- Select Payment --</option>
                                 <option value="Cash Payment">Cash Payment</option>
                             </select>
-                    </div>
-                        <div class="col-md-4">
-                        <label for="cphone">Enter Customer Phone Number</label>
-                        <input type="text" id="cphone" class="form-control" maxlength="11" pattern="\d{11}" title="Enter exactly 11 digits" />
-                    </div>
-                        <div class="col-md-4">
-                        <label>Total Amount</label>
-                        <input type="text" id="totalAmount" class="form-control" value="" readonly />
-                    </div>
-                    <div class="col-md-4">
-                        <label>Enter Amount</label>
-                        <input type="number" id="amountPaid" class="form-control" value="0" class="form-control" min="0" />
-                    </div>
-                    <div class="col-md-4">
-                        <label>Change</label>
-                        <input type="text" id="changeAmount" class="form-control" value="" readonly />
-                    </div>
-                    <div class="col-md-4">
-                        <br/>
-                        <button type="button" class="btn btn-warning w-100 proceedToPlace">Proceed to place order</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                            <div class="col-md-4">
+    <label for="cphone">Enter Customer Phone Number</label>
+    <input type="text" id="cphone" class="form-control" maxlength="11" pattern="\d{11}" title="Enter exactly 11 digits" />
 </div>
+<div class="col-md-4">
+    <label>Total Amount</label>
+    <input type="text" id="totalAmount" class="form-control" value="" readonly />
+</div>
+<div class="col-md-4">
+    <label>Enter Amount</label>
+    <input type="number" id="amountPaid" class="form-control" value="0" min="0" />
+</div>
+<div class="col-md-4">
+    <label>Change</label>
+    <input type="text" id="changeAmount" class="form-control" value="" readonly />
+</div>
+<div class="col-md-4">
+    <br/>
+    <button type="button" class="btn btn-warning w-100 proceedToPlace">Proceed to place order</button>
+</div>
+
+
+<script>
+document.querySelector('.proceedToPlace').addEventListener('click', function() {
+    // Retrieve values from the form
+    const phone = document.getElementById('cphone').value.trim();
+    const totalAmount = document.getElementById('totalAmount').value.trim();
+    const amountPaid = parseFloat(document.getElementById('amountPaid').value.trim());
+    const changeAmount = document.getElementById('changeAmount').value.trim();
+    
+    // Basic validation
+    if (!phone || !totalAmount || isNaN(amountPaid) || amountPaid < 0 || !changeAmount) {
+        Swal.fire({
+            title: 'Warning!',
+            text: 'Please complete all the required fields before proceeding.',
+            icon: 'warning',
+            confirmButtonText: 'OK'
+        });
+        return; // Stop further execution if validation fails
+    }
+
+    // Further validation if necessary (e.g., checking amounts)
+    const totalAmountValue = parseFloat(totalAmount.replace(/,/g, '')); // Remove commas if any
+    if (amountPaid < totalAmountValue) {
+        Swal.fire({
+            title: 'Warning!',
+            text: 'The amount paid cannot be less than the total amount.',
+            icon: 'warning',
+            confirmButtonText: 'OK'
+        });
+        return;
+    }
+    
+    // All validations passed, proceed with form submission
+    // Replace the URL with your form submission endpoint
+    fetch('your_order_endpoint.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            cphone: phone,
+            totalAmount: totalAmountValue,
+            amountPaid: amountPaid,
+            changeAmount: changeAmount
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            Swal.fire({
+                title: 'Success!',
+                text: 'Order has been placed successfully.',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = 'orders.php'; // Redirect to orders page or any other page
+                }
+            });
+        } else {
+            Swal.fire({
+                title: 'Error!',
+                text: 'There was a problem placing the order. Please try again.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        }
+    })
+    .catch(error => {
+        Swal.fire({
+            title: 'Error!',
+            text: 'An unexpected error occurred. Please try again later.',
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
+    });
+});
+</script>
+
                 <?php
             } else {
                 echo '<h5>No Items added</h5>';
