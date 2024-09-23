@@ -1,11 +1,8 @@
-<?php
-include('includes/header.php');
-if (!isset($_SESSION['productItems'])) {
+<?php 
+include('includes/header.php'); 
+if(!isset($_SESSION['productItems'])){
     echo '<script> window.location.href = "order-create.php"; </script>';
 }
-
-$amountPaid = isset($_SESSION['amountPaid']) ? $_SESSION['amountPaid'] : 0;
-$changeAmount = isset($_SESSION['changeAmount']) ? $_SESSION['changeAmount'] : 0;
 ?>
 
 <div class="modal fade" id="orderSuccessModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -39,13 +36,15 @@ $changeAmount = isset($_SESSION['changeAmount']) ? $_SESSION['changeAmount'] : 0
                     <div id="myBillingArea">
 
                     <?php
-                    if (isset($_SESSION['cphone'])) {
+                    if(isset($_SESSION['cphone']))
+                    {
                         $phone = validate($_SESSION['cphone']);
                         $invoiceNo = validate($_SESSION['invoice_no']);
 
                         $customerQuery = mysqli_query($conn, "SELECT * FROM customers WHERE phone='$phone' LIMIT 1");
-                        if ($customerQuery) {
-                            if (mysqli_num_rows($customerQuery) > 0) {
+                        if($customerQuery){
+                            if(mysqli_num_rows($customerQuery) > 0){
+
                                 $cRowData = mysqli_fetch_assoc($customerQuery);
                                 ?>
                                 <table style="width: 100%; margin-bottom: 20px;">
@@ -75,7 +74,7 @@ $changeAmount = isset($_SESSION['changeAmount']) ? $_SESSION['changeAmount'] : 0
                                     </tbody>
                                 </table>
                                 <?php
-                            } else {
+                            }else{
                                 echo "<h5>No Customer Found</h5>";
                                 return;
                             }
@@ -84,7 +83,8 @@ $changeAmount = isset($_SESSION['changeAmount']) ? $_SESSION['changeAmount'] : 0
                     ?>
 
                     <?php
-                    if (isset($_SESSION['productItems'])) {
+                    if(isset($_SESSION['productItems']))
+                    {
                         $sessionProducts = $_SESSION['productItems'];
                     ?>
                         <div class="table-responsive mb-3">
@@ -103,8 +103,9 @@ $changeAmount = isset($_SESSION['changeAmount']) ? $_SESSION['changeAmount'] : 0
                                     $i = 1;
                                     $totalAmount = 0;
 
-                                    foreach ($sessionProducts as $key => $row) :
-                                    $totalAmount += $row['price'] * $row['quantity'];
+                                    foreach($sessionProducts as $key => $row) :
+
+                                    $totalAmount += $row['price'] * $row['quantity']
                                     ?>
                                     <tr>
                                         <td style="border-bottom: 1px solid #ccc;"><?= $i++; ?></td>
@@ -122,12 +123,12 @@ $changeAmount = isset($_SESSION['changeAmount']) ? $_SESSION['changeAmount'] : 0
                                         <td colspan="1" style="font-weight: bold;"><?= number_format($totalAmount, 0); ?></td>
                                     </tr>
                                     <tr>
-                                        <td colspan="4" align="end" style="font-weight: bold;">Amount Paid:</td>
-                                        <td colspan="1" style="font-weight: bold;"><?= number_format($amountPaid, 0); ?></td>
+                                    <td colspan="4" align="end" style="font-weight: bold;">Amount:</td>
+                                    <td colspan="1" style="font-weight: bold;"><?= number_format($amountPaid, 0); ?></td>
                                     </tr>
                                     <tr>
-                                        <td colspan="4" align="end" style="font-weight: bold;">Change:</td>
-                                        <td colspan="1" style="font-weight: bold;"><?= number_format($changeAmount, 0); ?></td>
+                                    <td colspan="4" align="end" style="font-weight: bold;">Change:</td>
+                                    <td colspan="1" style="font-weight: bold;"><?= number_format($changeAmount, 0); ?></td>
                                     </tr>
                                     <tr>
                                         <td colspan="5">Payment Mode: <?= isset($_SESSION['payment_mode']) ? $_SESSION['payment_mode'] : ''; ?></td>
@@ -136,14 +137,16 @@ $changeAmount = isset($_SESSION['changeAmount']) ? $_SESSION['changeAmount'] : 0
                             </table>
                         </div>
                     <?php
-                    } else {
+                    }
+                    else
+                    {
                         echo '<h5 class="text-center">No Items added</h5>';
                     }
                     ?>
 
                     </div>                     
 
-                    <?php if (isset($_SESSION['productItems'])) : ?>
+                    <?php if(isset($_SESSION['productItems'])) : ?>
                     <div class="mt-4 text-end">
                         <button type="button" class="btn btn-primary px-4 mx-1" id="saveOrder">Save</button>
                         <button class="btn btn-info px-4 mx-1" onclick="printMyBillingArea()">Print</button>
@@ -159,11 +162,10 @@ $changeAmount = isset($_SESSION['changeAmount']) ? $_SESSION['changeAmount'] : 0
 
 <script>
 document.getElementById('saveOrder').addEventListener('click', function() {
-    const form = new FormData(document.querySelector('form')); // Adjust this if needed
 
     fetch('save_order.php', {
         method: 'POST',
-        body: form
+        body: new FormData(document.querySelector('form')), 
     })
     .then(response => response.json())
     .then(data => {
@@ -186,6 +188,59 @@ document.getElementById('saveOrder').addEventListener('click', function() {
                 confirmButtonText: 'OK'
             });
         }
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        function updateTotalAmount() {
+            let totalAmount = 0;
+            document.querySelectorAll('.totalPrice').forEach(cell => {
+                totalAmount += parseFloat(cell.textContent.replace(/,/g, ''));
+            });
+            document.getElementById('totalAmount').value = totalAmount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+            updateChange();
+        }
+
+        function updateChange() {
+            const totalAmount = parseFloat(document.getElementById('totalAmount').value.replace(/,/g, ''));
+            const amountPaid = parseFloat(document.getElementById('amountPaid').value) || 0;
+            const change = amountPaid - totalAmount;
+            document.getElementById('changeAmount').value = change > 0 ? change.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') : '0.00';
+        }
+
+        document.querySelectorAll('.increment').forEach(button => {
+            button.addEventListener('click', function () {
+                const qtyInput = this.parentElement.querySelector('.quantityInput');
+                let quantity = parseInt(qtyInput.value);
+                if (quantity < 999) {
+                    qtyInput.value = ++quantity;
+                    updateTotalPrice(this);
+                }
+            });
+        });
+
+        document.querySelectorAll('.decrement').forEach(button => {
+            button.addEventListener('click', function () {
+                const qtyInput = this.parentElement.querySelector('.quantityInput');
+                let quantity = parseInt(qtyInput.value);
+                if (quantity > 1) {
+                    qtyInput.value = --quantity;
+                    updateTotalPrice(this);
+                }
+            });
+        });
+
+        document.getElementById('amountPaid').addEventListener('input', updateChange);
+
+        function updateTotalPrice(element) {
+            const row = element.closest('tr');
+            const price = parseFloat(row.querySelector('td:nth-child(3)').textContent.replace(/,/g, ''));
+            const quantity = parseInt(row.querySelector('.quantityInput').value);
+            const totalPriceCell = row.querySelector('.totalPrice');
+            totalPriceCell.textContent = (price * quantity).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+            updateTotalAmount();
+        }
+
+        updateTotalAmount();
     });
 });
 </script>
