@@ -19,7 +19,7 @@
     right: -4px;
     bottom: -4px;
     border-radius: 12px;
-    background: linear-gradient(270deg, rgba(0, 68, 255, 0.7), rgba(0, 255, 242, 0.699), rgba(4, 0, 255, 0.904), rgba(255, 255, 0, 0.7));
+    background: linear-gradient(270deg, rgba(0, 68, 255, 0.7), rgba(0, 255, 242, 0.699), rgba(4, 0, 255, 0.904), rgba(0, 255, 149, 0.7));
     background-size: 400% 400%;
     z-index: -1;
     animation: rotateColors 5s linear infinite;
