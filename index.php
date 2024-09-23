@@ -141,6 +141,35 @@
     </div>
 </div>
 
+<!-- homepage.php -->
+<form id="messageForm">
+    <input type="text" id="customerName" placeholder="Your Name" required>
+    <textarea id="messageText" placeholder="Your Message" required></textarea>
+    <button type="submit">Send Message</button>
+</form>
+
+<!-- AJAX to submit the form -->
+<script>
+    document.getElementById('messageForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        var customerName = document.getElementById('customerName').value;
+        var messageText = document.getElementById('messageText').value;
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "submit_message.php", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                alert("Message sent successfully");
+                document.getElementById('messageForm').reset();
+            }
+        };
+        xhr.send("name=" + customerName + "&message=" + messageText);
+    });
+</script>
+
+
     <?php include('includes/footer.php'); ?>
 
     <!-- Include Bootstrap JS and dependencies -->
