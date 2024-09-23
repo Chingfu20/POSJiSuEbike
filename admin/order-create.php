@@ -127,7 +127,7 @@ foreach ($sessionProducts as $key => $item) :
     </tr>
 <?php endforeach; ?>
 
-                        <!-- Include SweetAlert2 -->
+<!-- Include SweetAlert2 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -220,8 +220,8 @@ document.querySelector('.proceedToPlace').addEventListener('click', function() {
         cancelButtonText: 'Cancel'
     }).then((result) => {
         if (result.isConfirmed) {
-            // User confirmed, submit the form or take necessary action
-            document.querySelector('form').submit(); // Adjust according to your form handling method
+            // Redirect to order-summary.php if the user confirms
+            window.location.href = 'order-summary.php';
         }
     });
 });
