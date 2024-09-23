@@ -1,7 +1,7 @@
 /* Style for the custom card */
 .custom-card {
     border-radius: 8px;
-    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    background: linear-gradient(135deg, #f0f4f8, #dce0e6); /* Light blue gradient background */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     position: relative;
     overflow: hidden;
@@ -19,7 +19,7 @@
     right: -4px;
     bottom: -4px;
     border-radius: 12px;
-    background: linear-gradient(270deg, rgba(255, 0, 150, 0.7), rgba(0, 204, 255, 0.7));
+    background: linear-gradient(270deg, rgba(34, 193, 195, 0.7), rgba(253, 187, 45, 0.7)); /* Teal to orange gradient */
     background-size: 200% 200%;
     z-index: -1;
     animation: simpleColorShift 3s ease-in-out infinite;
