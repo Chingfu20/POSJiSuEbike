@@ -73,25 +73,37 @@ if (isset($_POST['productIncDec'])) {
 }
 
 if (isset($_POST['proceedToPlaceBtn'])) {
+    // Validate and sanitize input
     $phone = validate($_POST['cphone']);
     $payment_mode = validate($_POST['payment_mode']);
+    
+    // Check if all required details are provided
+    if (empty($phone) || empty($payment_mode)) {
+        jsonResponse(400, 'warning', 'Incomplete form details. Please provide all required information.');
+        exit; // Stop further execution
+    }
 
+    // Check if the customer exists
     $checkCustomer = mysqli_query($conn, "SELECT * FROM customers WHERE phone='$phone' LIMIT 1");
     if ($checkCustomer) {
         if (mysqli_num_rows($checkCustomer) > 0) {
+            // Generate and store invoice number and other session variables
             $_SESSION['invoice_no'] = "INV-" . rand(111111, 999999);
             $_SESSION['cphone'] = $phone;
             $_SESSION['payment_mode'] = $payment_mode;
 
-            jsonResponse(200, 'success', 'Customer Found');
+            jsonResponse(200, 'success', 'Customer Found. Proceeding to place order.');
         } else {
+            // If customer is not found
             $_SESSION['cphone'] = $phone;
-            jsonResponse(404, 'warning', 'Customer Not Found');
+            jsonResponse(404, 'warning', 'Customer Not Found. Cannot proceed to place order.');
         }
     } else {
-        jsonResponse(500, 'error', 'Something Went Wrong');
+        // Handle SQL error
+        jsonResponse(500, 'error', 'Something Went Wrong. Please try again later.');
     }
 }
+
 
 if (isset($_POST['saveCustomerBtn'])) {
     $name = validate($_POST['name']);
