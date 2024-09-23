@@ -7,11 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JiSu Ebike</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/alertifyjs/build/alertify.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --background-light: #f8f9fa;
@@ -25,7 +27,7 @@
         body {
             background-color: var(--background-light);
             color: var(--color-light);
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', sans-serif;
             transition: background-color 0.3s, color 0.3s;
         }
 
@@ -35,47 +37,44 @@
         }
 
         .card {
-            border: 1px solid #ddd;
-            border-radius: 8px;
+            background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
+            border: none;
+            border-radius: 12px;
             margin-bottom: 20px;
             overflow: hidden;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            background-color: #fff;
-            transition: background-color 0.3s, border-color 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, transform 0.3s ease;
         }
 
         .dark-mode .card {
-            background-color: #495057;
-            border-color: #6c757d;
+            background: linear-gradient(135deg, #232526 0%, #414345 100%);
+            color: #fff;
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
         }
 
         .card-header {
-            background-color: var(--primary-color-light);
+            background-color: transparent;
             color: white;
             padding: 12px;
             font-size: 1.25rem;
+            font-weight: bold;
+            text-align: center;
         }
 
-        .dark-mode .card-header {
-            background-color: var(--primary-color-dark);
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
         }
 
-        .card-body {
-            padding: 15px;
+        .card-body h3 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #fff;
         }
 
         .chart-container {
             height: 200px;
             width: 100%;
-        }
-
-        .chart-container canvas {
-            max-width: 100%;
-            height: auto !important;
-        }
-
-        .toggle-container {
-            margin: 10px 0;
         }
 
         .toggle-switch {
@@ -85,12 +84,6 @@
             position: relative;
         }
 
-        .toggle-switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
         .slider {
             position: absolute;
             cursor: pointer;
@@ -98,7 +91,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: #ccc;
+            background-color: #adb5bd;
             transition: .4s;
             border-radius: 15px;
         }
@@ -113,10 +106,11 @@
             bottom: 4px;
             background-color: white;
             transition: .4s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
         input:checked + .slider {
-            background-color: var(--primary-color-dark);
+            background-color: #17a2b8;
         }
 
         input:checked + .slider:before {
@@ -124,16 +118,16 @@
         }
 
         footer {
-            margin-top: 20px;
-            background-color: var(--background-light);
-            color: var(--color-light);
+            background: linear-gradient(135deg, #007bff 0%, #17a2b8 100%);
+            color: #fff;
             padding: 10px;
             text-align: center;
+            border-top: 2px solid #17a2b8;
         }
 
         body.dark-mode footer {
-            background-color: #1f1f1f;
-            color: var(--color-dark);
+            background: linear-gradient(135deg, #1f1f1f 0%, #343a40 100%);
+            color: #ccc;
         }
     </style>
 </head>
@@ -146,103 +140,94 @@
 
     <?php alertMessage(); ?>
 
-    <div class="container-fluid">
-    <h1 class="mt-4"></h1>
-
     <!-- Row for Total Categories, Total Products, Total Customers, and Today's Orders -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
     <div class="row">
-    <div class="col-md-3 mb-3">
-        <div class="card" style="background-color: #DDFFF7;">
-            <div class="card-header">
-                <i class="fas fa-list-alt"></i> Total Categories
+        <div class="col-md-3 mb-3">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-list-alt"></i> Total Categories
+                </div>
+                <div class="card-body">
+                    <h3 id="categoryText">1</h3>
+                </div>
             </div>
-            <div class="card-body">
-                <h3 id="categoryText"><i class="fas fa-list-alt"></i></h3> <!-- Category count will be shown here -->
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-boxes"></i> Total Products
+                </div>
+                <div class="card-body">
+                    <h3 id="productText"></h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-users"></i> Total Customers
+                </div>
+                <div class="card-body">
+                    <h3 id="customerText"></h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-shopping-cart"></i> Today's Orders
+                </div>
+                <div class="card-body">
+                    <h3 id="todayOrdersText"></h3>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="col-md-3 mb-3">
-        <div class="card" style="background-color: #F7DDCA;">
-            <div class="card-header">
-                <i class="fas fa-boxes"></i> Total Products
+    <!-- Row for Monthly Sales Report and Total Orders -->
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <div class="card">
+                <div class="card-header">Monthly Sales Report</div>
+                <div class="card-body">
+                    <canvas id="salesChart" width="400" height="200"></canvas>
+                </div>
             </div>
-            <div class="card-body">
-                <h3 id="productText"></h3> <!-- Product count will be shown here -->
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-receipt"></i> Total Orders
+                </div>
+                <div class="card-body">
+                    <h3 id="totalOrdersText"></h3>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="col-md-3 mb-3">
-        <div class="card" style="background-color: #96E7DC;">
-            <div class="card-header">
-                <i class="fas fa-users"></i> Total Customers
-            </div>
-            <div class="card-body">
-                <h3 id="customerText"></h3> <!-- Customer count will be shown here -->
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-3 mb-3">
-        <div class="card" style="background-color: #4FCFC0;">
-            <div class="card-header">
-                <i class="fas fa-shopping-cart"></i> Today's Orders
-            </div>
-            <div class="card-body">
-                <h3 id="todayOrdersText"></h3> <!-- Today's orders count will be shown here -->
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Row for Monthly Sales Report and Total Orders -->
-<div class="row">
-    <!-- Left Column: Monthly Sales Report -->
-    <div class="col-md-6 mb-3">
-        <div class="card" style="background-color: #e2e3e5;">
-            <div class="card-header">Monthly Sales Report</div>
-            <div class="card-body">
-                <!-- Chart for sales -->
-                <canvas id="salesChart" width="400" height="200"></canvas>
-            </div>
-        </div>
-    </div>
-
-    <!-- Right Column: Total Orders as Text -->
-    <div class="col-md-6 mb-3">
-        <div class="card" style="background-color: #F1B994;">
-            <div class="card-header">
-                <i class="fas fa-receipt"></i> Total Orders
-            </div>
-            <div class="card-body">
-                <h3 id="totalOrdersText"></h3> <!-- Total Orders will be shown here -->
-            </div>
-        </div>
-    </div>
-</div>
-
-<input type="hidden" id="categoryCount" value="<?= getCount('categories'); ?>">
-<input type="hidden" id="productCount" value="<?= getCount('products'); ?>">
-<input type="hidden" id="customerCount" value="<?= getCount('customers'); ?>">
-<input type="hidden" id="salesAmount" value="<?php
-    $totalSales = mysqli_query($conn, "SELECT SUM(total_amount) AS total_sales FROM orders");
-    echo $totalSales ? mysqli_fetch_assoc($totalSales)['total_sales'] : 0.00;
-?>">
-<input type="hidden" id="todayOrders" value="<?php
-    $todayDate = date('Y-m-d');
-    $todayOrders = mysqli_query($conn, "SELECT * FROM orders WHERE order_date='$todayDate'");
-    echo $todayOrders ? mysqli_num_rows($todayOrders) : 0;
-?>">
-<input type="hidden" id="totalOrders" value="<?= getCount('orders'); ?>">
+    <input type="hidden" id="categoryCount" value="<?= getCount('categories'); ?>">
+    <input type="hidden" id="productCount" value="<?= getCount('products'); ?>">
+    <input type="hidden" id="customerCount" value="<?= getCount('customers'); ?>">
+    <input type="hidden" id="salesAmount" value="<?php
+        $totalSales = mysqli_query($conn, "SELECT SUM(total_amount) AS total_sales FROM orders");
+        echo $totalSales ? mysqli_fetch_assoc($totalSales)['total_sales'] : 0.00;
+    ?>">
+    <input type="hidden" id="todayOrders" value="<?php
+        $todayDate = date('Y-m-d');
+        $todayOrders = mysqli_query($conn, "SELECT * FROM orders WHERE order_date='$todayDate'");
+        echo $todayOrders ? mysqli_num_rows($todayOrders) : 0;
+    ?>">
+    <input type="hidden" id="totalOrders" value="<?= getCount('orders'); ?>">
 
 <?php include('includes/footer.php'); ?>
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        // Get the values from hidden inputs
         const categoryCount = document.getElementById("categoryCount").value;
         const productCount = document.getElementById("productCount").value;
         const customerCount = document.getElementById("customerCount").value;
@@ -250,69 +235,49 @@
         const todayOrders = document.getElementById("todayOrders").value;
         const totalOrders = document.getElementById("totalOrders").value;
 
-        // Display the numbers for Total Categories, Total Products, Total Customers, Today's Orders, and Total Orders
         document.getElementById('categoryText').innerHTML = categoryCount;
         document.getElementById('productText').innerHTML = productCount;
         document.getElementById('customerText').innerHTML = customerCount;
-        document.getElementById('todayOrdersText').innerHTML = todayOrders;
         document.getElementById('totalOrdersText').innerHTML = totalOrders;
+        document.getElementById('todayOrdersText').innerHTML = todayOrders;
 
-        // Create a bar chart for Monthly Sales Report
-        const createBarChart = (context, label, data, bgColor, brColor) => {
-            new Chart(context, {
-                type: 'bar',
-                data: {
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                    datasets: [{
-                        label: label,
-                        data: data, // Array of data for each month
-                        backgroundColor: bgColor,
-                        borderColor: brColor,
-                        borderWidth: 2
-                    }]
+        // Monthly Sales Report Chart
+        const ctx = document.getElementById('salesChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+                datasets: [{
+                    label: 'Sales',
+                    data: [12, 19, 3, 5, 2, 3], // Replace with actual sales data
+                    backgroundColor: ['rgba(54, 162, 235, 0.2)'],
+                    borderColor: ['rgba(54, 162, 235, 1)'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
                 },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: { display: false },
-                        tooltip: {
-                            backgroundColor: '#f8f9fa',
-                            titleColor: '#343a40',
-                            bodyColor: '#343a40',
-                        }
-                    },
-                    scales: {
-                        x: {
-                            ticks: {
-                                font: {
-                                    size: 16,
-                                    family: "'Comic Sans MS', 'Cursive'"
-                                },
-                                color: '#495057'
-                            }
-                        },
-                        y: {
-                            ticks: {
-                                font: {
-                                    size: 16,
-                                    family: "'Comic Sans MS', 'Cursive'"
-                                },
-                                color: '#495057'
-                            },
-                            beginAtZero: true // Ensure the y-axis starts at 0
+                plugins: {
+                    legend: {
+                        display: true,
+                        labels: {
+                            color: 'rgba(54, 162, 235, 1)',
                         }
                     }
                 }
-            });
-        };
+            }
+        });
 
-        // Sample sales data for each month (you can replace this with dynamic data)
-        createBarChart(
-            document.getElementById("salesChart"),
-            "Sales (Total)",
-            [12000, 15000, 13000, 17000, 14000, 16000, 18000, 19000, 17000, 21000, 22000, 24000], // Sample data
-            'rgba(54, 162, 235, 0.7)',  // Bar fill color
-            'rgba(54, 162, 235, 1)'     // Bar border color
-        );
+        // Dark Mode Toggle
+        const toggleSwitch = document.getElementById('theme-toggle');
+        toggleSwitch.addEventListener('change', function () {
+            document.body.classList.toggle('dark-mode');
+        });
     });
 </script>
+</body>
+</html>
