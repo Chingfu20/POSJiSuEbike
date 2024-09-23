@@ -1,89 +1,49 @@
-/* Background image for the body */
-.bg-image {
-    background: url('path/to/your/background-image.jpg') no-repeat center center fixed;
-    background-size: cover;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-}
-
-/* Overlay to ensure text is readable */
-.overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
-}
-
 /* Style for the custom card */
 .custom-card {
-    border-radius: 10px;
-    background: rgba(255, 255, 255, 0.9); /* Transparent background */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
     padding: 20px;
     z-index: 1;
     border: 4px solid transparent; /* Placeholder for animated border */
 }
 
-/* Simple color border effect */
+/* Rotating color border effect */
 .custom-card::before {
     content: '';
     position: absolute;
-    top: -6px;
-    left: -6px;
-    right: -6px;
-    bottom: -6px;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
     border-radius: 12px;
-    background: linear-gradient(270deg, rgba(56, 123, 255, 0.7), rgba(0, 204, 204, 0.7)); /* Blue to teal gradient */
-    background-size: 200% 200%;
+    background: linear-gradient(270deg, rgba(255, 0, 150, 0.7), rgba(0, 204, 255, 0.7), rgba(0, 255, 150, 0.7), rgba(255, 255, 0, 0.7));
+    background-size: 400% 400%;
     z-index: -1;
-    animation: simpleColorShift 4s ease-in-out infinite;
+    animation: rotateColors 5s linear infinite;
 }
 
-/* Keyframes for simplified gradient border */
-@keyframes simpleColorShift {
+/* Keyframes for rotating gradient border */
+@keyframes rotateColors {
     0% {
         background-position: 0% 50%;
     }
-    50% {
-        background-position: 100% 50%;
-    }
     100% {
-        background-position: 0% 50%;
+        background-position: 400% 50%;
     }
+}
+
+/* Ensure form fields are above the animated border */
+.login-form {
+    position: relative;
+    z-index: 2;
 }
 
 /* Style adjustments for form labels */
 .form-label {
-    font-weight: 500;
-    color: #333;
-}
-
-/* Style for form controls */
-.form-control {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 10px;
-    font-size: 16px;
-}
-
-/* Style for the submit button */
-.btn-primary {
-    background-color: #007bff;
-    border: none;
-    border-radius: 8px;
-    padding: 12px;
-    font-size: 16px;
-    transition: background-color 0.3s, transform 0.2s;
-}
-
-.btn-primary:hover {
-    background-color: #0056b3;
-    transform: scale(1.05);
+    font-weight: bold;
 }
 
 /* Add some padding and margins */
