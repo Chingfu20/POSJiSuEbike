@@ -23,8 +23,6 @@
                 <div class="col-md-6">
                     <div class="card shadow rounded-4 custom-card">
 
-                        <?php alertMessage(); ?>
-
                         <div class="p-5">
                             <center><h4 class="text-dark mb-3">Login Admin</h4></center>
                             <form action="login-code.php" method="POST" class="login-form">
