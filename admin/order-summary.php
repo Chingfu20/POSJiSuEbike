@@ -1,42 +1,9 @@
 <?php 
 include('includes/header.php'); 
-
-// Check if the productItems session variable is set
-if (!isset($_SESSION['productItems'])) {
+if(!isset($_SESSION['productItems'])){
     echo '<script> window.location.href = "order-create.php"; </script>';
-    exit;
 }
-
-// Check if other required session variables are set
-$requiredSessionVars = ['cphone', 'invoice_no', 'payment_mode', 'amountPaid', 'changeAmount'];
-$missingVars = [];
-
-foreach ($requiredSessionVars as $var) {
-    if (!isset($_SESSION[$var]) || empty($_SESSION[$var])) {
-        $missingVars[] = $var;
-    }
-}
-
-if (!empty($missingVars)) {
-    echo '<script>
-            Swal.fire({
-                title: "Incomplete Order Details",
-                text: "Please complete the form and try again. Missing details: ' . implode(', ', $missingVars) . '",
-                icon: "warning",
-                confirmButtonText: "OK"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = "order-create.php";
-                }
-            });
-          </script>';
-    exit;
-}
-
-// Proceed to orders if details are complete
-// Your code for displaying order summary or processing the order
 ?>
-
 
 <div class="modal fade" id="orderSuccessModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
