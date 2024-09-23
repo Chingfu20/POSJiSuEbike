@@ -140,7 +140,7 @@ foreach ($sessionProducts as $key => $item) :
                                 <option value="">-- Select Payment --</option>
                                 <option value="Cash Payment">Cash Payment</option>
                             </select>
-                    <div class="col-md-4">
+                            <div class="col-md-4">
     <label for="cphone">Enter Customer Phone Number</label>
     <input type="text" id="cphone" class="form-control" maxlength="11" pattern="\d{11}" title="Enter exactly 11 digits" />
 </div>
@@ -160,7 +160,6 @@ foreach ($sessionProducts as $key => $item) :
     <br/>
     <button type="button" class="btn btn-warning w-100 proceedToPlace">Proceed to place order</button>
 </div>
-
                 <?php
             } else {
                 echo '<h5>No Items added</h5>';
@@ -244,6 +243,84 @@ foreach ($sessionProducts as $key => $item) :
         // Valid number
         console.log("Valid number entered.");
     }
+});
+</script>
+
+<script>
+document.querySelector('.proceedToPlace').addEventListener('click', function() {
+    // Retrieve values from the form
+    const phone = document.getElementById('cphone').value.trim();
+    const totalAmount = document.getElementById('totalAmount').value.trim();
+    const amountPaid = parseFloat(document.getElementById('amountPaid').value.trim());
+    const changeAmount = document.getElementById('changeAmount').value.trim();
+    
+    // Basic validation
+    if (!phone || !totalAmount || isNaN(amountPaid) || amountPaid < 0 || !changeAmount) {
+        Swal.fire({
+            title: 'Warning!',
+            text: 'Please complete all the required fields before proceeding.',
+            icon: 'warning',
+            confirmButtonText: 'OK'
+        });
+        return; // Stop further execution if validation fails
+    }
+
+    // Further validation if necessary (e.g., checking amounts)
+    const totalAmountValue = parseFloat(totalAmount.replace(/,/g, '')); // Remove commas if any
+    if (amountPaid < totalAmountValue) {
+        Swal.fire({
+            title: 'Warning!',
+            text: 'The amount paid cannot be less than the total amount.',
+            icon: 'warning',
+            confirmButtonText: 'OK'
+        });
+        return;
+    }
+    
+    // All validations passed, proceed with form submission
+    // Replace the URL with your form submission endpoint
+    fetch('your_order_endpoint.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            cphone: phone,
+            totalAmount: totalAmountValue,
+            amountPaid: amountPaid,
+            changeAmount: changeAmount
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            Swal.fire({
+                title: 'Success!',
+                text: 'Order has been placed successfully.',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = 'orders.php'; // Redirect to orders page or any other page
+                }
+            });
+        } else {
+            Swal.fire({
+                title: 'Error!',
+                text: 'There was a problem placing the order. Please try again.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        }
+    })
+    .catch(error => {
+        Swal.fire({
+            title: 'Error!',
+            text: 'An unexpected error occurred. Please try again later.',
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
+    });
 });
 </script>
 
