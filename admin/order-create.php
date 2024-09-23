@@ -127,7 +127,7 @@ foreach ($sessionProducts as $key => $item) :
     </tr>
 <?php endforeach; ?>
 
-   <!-- Include SweetAlert2 -->
+                        <!-- Include SweetAlert2 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -178,69 +178,6 @@ foreach ($sessionProducts as $key => $item) :
         </div>
     </div>
 </div>
-
-<!-- Include SweetAlert2 -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-<script>
-document.querySelector('.proceedToPlace').addEventListener('click', function() {
-    const phone = document.getElementById('cphone').value.trim();
-    const totalAmount = document.getElementById('totalAmount').value.trim();
-    const amountPaid = parseFloat(document.getElementById('amountPaid').value.trim());
-    const changeAmount = document.getElementById('changeAmount').value.trim();
-    const paymentMode = document.getElementById('payment_mode').value.trim();
-
-    // Check if all required fields are filled
-    if (!phone || !totalAmount || isNaN(amountPaid) || amountPaid < 0 || !changeAmount || !paymentMode) {
-        Swal.fire({
-            title: 'Incomplete Details',
-            text: 'Please complete all required fields before proceeding.',
-            icon: 'warning',
-            confirmButtonText: 'OK'
-        });
-        return; // Stop further execution if details are incomplete
-    }
-
-    // Check if amount paid is less than the total amount
-    const totalAmountValue = parseFloat(totalAmount.replace(/,/g, ''));
-    if (amountPaid < totalAmountValue) {
-        Swal.fire({
-            title: 'Insufficient Amount',
-            text: 'The amount paid cannot be less than the total amount.',
-            icon: 'warning',
-            confirmButtonText: 'OK'
-        });
-        return; // Stop further execution if amount is insufficient
-    }
-
-    // Proceed with placing the order
-    Swal.fire({
-        title: 'Proceed to Place Order',
-        text: 'Are you sure you want to proceed?',
-        icon: 'question',
-        showCancelButton: true,
-        confirmButtonText: 'Yes, proceed',
-        cancelButtonText: 'Cancel'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            // User confirmed, submit the form or take necessary action
-            // Ensure the form is selected properly, you may need to adjust this selector
-            const form = document.querySelector('form');
-            if (form) {
-                form.submit(); // Submit the form if it exists
-            } else {
-                Swal.fire({
-                    title: 'Error',
-                    text: 'Form not found. Please try again.',
-                    icon: 'error',
-                    confirmButtonText: 'OK'
-                });
-            }
-        }
-    });
-});
-</script>
 
 
                 <?php
