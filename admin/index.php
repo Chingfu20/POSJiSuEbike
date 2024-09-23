@@ -234,7 +234,7 @@ for ($i = 1; $i <= 12; $i++) {
     $row = mysqli_fetch_assoc($result);
     
     // Format sales amount in PHP currency format
-    $salesData[] = $row['monthly_sales'] ? number_format($row['monthly_sales'], 2, '.', '') : 0.00;
+    $salesData[] = $row['monthly_sales'] ? number_format($row['monthly_sales'], 2, '.', '') : 0.;
 }
 ?>
 
