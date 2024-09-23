@@ -210,6 +210,18 @@
             </div>
         </div>
     </div>
+
+    <!-- Right Column: Total Orders as Text -->
+    <div class="col-md-6 mb-3">
+        <div class="card" style="background-color: #F1B994;">
+            <div class="card-header">
+                <i class="fas fa-receipt"></i> Total Orders
+            </div>
+            <div class="card-body">
+                <h3 id="totalOrdersText"></h3> <!-- Total Orders will be shown here -->
+            </div>
+        </div>
+    </div>
 </div>
 
 <?php
@@ -282,20 +294,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 </script>
-
-
-    <!-- Right Column: Total Orders as Text -->
-    <div class="col-md-6 mb-3">
-        <div class="card" style="background-color: #F1B994;">
-            <div class="card-header">
-                <i class="fas fa-receipt"></i> Total Orders
-            </div>
-            <div class="card-body">
-                <h3 id="totalOrdersText"></h3> <!-- Total Orders will be shown here -->
-            </div>
-        </div>
-    </div>
-</div>
 
 <input type="hidden" id="categoryCount" value="<?= getCount('categories'); ?>">
 <input type="hidden" id="productCount" value="<?= getCount('products'); ?>">
