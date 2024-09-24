@@ -35,6 +35,7 @@ if (isset($_POST['loginBtn']))
                     'phone' => $row['phone'],
 
                 ];
+                redirect('login.php','Logged In Successfully');
                     
                 redirect('admin/index.php','Logged In Successfully');
                     
