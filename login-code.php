@@ -36,40 +36,7 @@ if (isset($_POST['loginBtn']))
 
                 ];
                     
-                if ($login_success) {
-                    echo "
-                    <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
-                    <script>
-                        Swal.fire({
-                            title: 'Success!',
-                            text: 'Logged In Successfully',
-                            icon: 'success',
-                            confirmButtonText: 'OK'
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                window.location.href = 'admin/index.php';
-                            }
-                        });
-                    </script>
-                    ";
-                } else {
-                    // If login failed, you can show a different SweetAlert
-                    echo "
-                    <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
-                    <script>
-                        Swal.fire({
-                            title: 'Error!',
-                            text: 'Login Failed. Please try again.',
-                            icon: 'error',
-                            confirmButtonText: 'Retry'
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                window.location.href = 'login.php';
-                            }
-                        });
-                    </script>
-                    ";
-                }
+                redirect('admin/index.php','Logged In Successfully');
                     
             }else{
                     redirect('login.php', 'Invalid Email Address');
