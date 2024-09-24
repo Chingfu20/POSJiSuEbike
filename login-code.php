@@ -36,7 +36,38 @@ if (isset($_POST['loginBtn']))
 
                 ];
                     
-                redirect('admin/index.php','Logged In Successfully');
+                <?php
+                session_start(); // Ensure session is started
+                require 'config/function.php';
+                
+                // Check if the user is logged in
+                if (!isset($_SESSION['loggedIn'])) {
+                    header('Location: login.php');
+                    exit();
+                }
+                
+                // Check for success message
+                if (isset($_SESSION['successMessage'])) {
+                    echo "
+                    <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+                    <script>
+                        Swal.fire({
+                            title: 'Success!',
+                            text: '" . $_SESSION['successMessage'] . "',
+                            icon: 'success',
+                            confirmButtonText: 'OK'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                // Optional: Redirect or do something after acknowledgment
+                            }
+                        });
+                    </script>";
+                    
+                    // Clear the session variable after displaying
+                    unset($_SESSION['successMessage']);
+                }
+                ?>
+                
                     
             }else{
                     redirect('login.php', 'Invalid Email Address');
