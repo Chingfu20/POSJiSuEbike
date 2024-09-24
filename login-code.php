@@ -1,8 +1,11 @@
 <?php
+// Start the session and output buffering
+session_start();
+ob_start();
 require 'config/function.php';
 
-if (isset($_POST['loginBtn']))
-{
+if (isset($_POST['loginBtn'])) {
+
     $email = validate($_POST['email']);
     $password = validate($_POST['password']);
 
@@ -15,14 +18,42 @@ if (isset($_POST['loginBtn']))
                 $row = mysqli_fetch_assoc($result);
                 $hashedPassword = $row['password'];
 
-                // Password check
+                // Check if the password is correct
                 if (!password_verify($password, $hashedPassword)) {
-                    redirect('login.php', 'Invalid Password', 'error');
+                    echo "
+                    <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+                    <script>
+                        Swal.fire({
+                            title: 'Error!',
+                            text: 'Invalid Password',
+                            icon: 'error',
+                            confirmButtonText: 'OK'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = 'login.php';
+                            }
+                        });
+                    </script>";
+                    exit();
                 }
 
-                // Account ban check
+                // Check if the user is banned
                 if ($row['is_ban'] == 1) {
-                    redirect('login.php', 'Your account has been banned. Contact your Admin.', 'error');
+                    echo "
+                    <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+                    <script>
+                        Swal.fire({
+                            title: 'Error!',
+                            text: 'Your account has been banned. Contact your Admin.',
+                            icon: 'error',
+                            confirmButtonText: 'OK'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = 'login.php';
+                            }
+                        });
+                    </script>";
+                    exit();
                 }
 
                 // Successful login
@@ -34,16 +65,76 @@ if (isset($_POST['loginBtn']))
                     'phone' => $row['phone'],
                 ];
 
-                redirect('admin/index.php', 'Logged In Successfully', 'success');
+                echo "
+                <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+                <script>
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Logged In Successfully',
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = 'admin/index.php';
+                        }
+                    });
+                </script>";
+                exit();
 
             } else {
-                redirect('login.php', 'Invalid Email Address', 'error');
+                // Invalid email
+                echo "
+                <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+                <script>
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'Invalid Email Address',
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = 'login.php';
+                        }
+                    });
+                </script>";
+                exit();
             }
         } else {
-            redirect('login.php', 'Something Went Wrong!', 'error');
+            // Database query failure
+            echo "
+            <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+            <script>
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Something went wrong!',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = 'login.php';
+                    }
+                });
+            </script>";
+            exit();
         }
     } else {
-        redirect('login.php', 'All fields are mandatory!', 'error');
+        // Missing fields
+        echo "
+        <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+        <script>
+            Swal.fire({
+                title: 'Error!',
+                text: 'All fields are mandatory!',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = 'login.php';
+                }
+            });
+        </script>";
+        exit();
     }
 }
+ob_end_flush();
 ?>
