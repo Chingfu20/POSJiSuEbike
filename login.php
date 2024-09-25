@@ -11,26 +11,8 @@
 <body>
     <?php 
     include('includes/header.php'); 
-    
-    // Check if the user has already been banned or reached 10 failed attempts
-    if (isset($_SESSION['failed_attempts']) && $_SESSION['failed_attempts'] >= 10) {
-        ?>
-        <script>
-            Swal.fire({
-                icon: 'error',
-                title: 'Account Locked',
-                text: 'Too many failed login attempts. Your account has been locked.'
-            }).then((result) => {
-                // Hide the login form after alert is closed
-                document.querySelector('.login-form').style.display = 'none';
-            });
-        </script>
-        <?php
-        exit(); // Prevent further access to the form
-    }
 
-    // If logged in, redirect to index page
-    if (isset($_SESSION['loggedIn'])) {
+    if(isset($_SESSION['loggedIn'])){
         ?>
         <script>window.location.href = 'index.php';</script>
         <?php
@@ -102,18 +84,6 @@
             }
 
             return true; // If all validations pass, submit the form
-        }
-
-        // Check if the user has been banned on the client side too (this value would be set from the server)
-        let failedAttempts = <?php echo isset($_SESSION['failed_attempts']) ? $_SESSION['failed_attempts'] : 0; ?>;
-        if (failedAttempts >= 10) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Account Locked',
-                text: 'Too many failed login attempts. Your account has been locked.'
-            }).then((result) => {
-                document.querySelector('.login-form').style.display = 'none'; // Hide the form
-            });
         }
     </script>
 </body>
