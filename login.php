@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JiSu Ebike POS System</title>
     <link rel="stylesheet" href="login.css">
-    <!-- SweetAlert Library -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <?php 
@@ -24,16 +22,18 @@
             <div class="row justify-content-center">
                 <div class="col-md-6">
                     <div class="card shadow rounded-4 custom-card">
+
                         <div class="p-5">
                             <center><h4 class="text-dark mb-3">Login Admin</h4></center>
-                            <form action="login-code.php" method="POST" class="login-form" onsubmit="return validateForm()">
+                            <form action="login-code.php" method="POST" class="login-form">
+                                
                                 <div class="mb-3">
                                     <label class="form-label">Enter Email</label>
-                                    <input type="text" name="email" id="email" class="form-control" />
+                                    <input type="email" name="email" class="form-control" required />
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Enter Password</label>
-                                    <input type="password" name="password" id="password" class="form-control" />
+                                    <input type="password" name="password" class="form-control" required />
                                 </div>
                                 <div class="my-3">
                                     <button type="submit" name="loginBtn" class="btn btn-primary w-100 mt-2">
@@ -47,44 +47,5 @@
             </div>
         </div>
     </div>
-
-    <script>
-        function validateForm() {
-            var email = document.getElementById('email').value;
-            var password = document.getElementById('password').value;
-
-            // Simple email validation pattern
-            var emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
-
-            if (email == '') {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Email is required!'
-                });
-                return false; // Prevent form submission
-            }
-
-            if (!email.match(emailPattern)) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Please enter a valid email address!'
-                });
-                return false; // Prevent form submission
-            }
-
-            if (password == '') {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Password is required!'
-                });
-                return false; // Prevent form submission
-            }
-
-            return true; // If all validations pass, submit the form
-        }
-    </script>
 </body>
 </html>
