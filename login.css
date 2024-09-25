@@ -1,15 +1,26 @@
-/* Style for the custom card */
-.custom-card {
-    border-radius: 8px;
-    background-color: #2a2a2a; /* Dark background to match your image */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    position: relative;
-    overflow: hidden;
-    padding: 20px;
-    z-index: 1;
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #1e1e2f; /* Dark background to match the design */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
 }
 
-/* Running border effect similar to the image */
+/* Style for the login card */
+.custom-card {
+    position: relative;
+    width: 350px;
+    padding: 30px;
+    background-color: #1a1a2e; /* Dark card background */
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+}
+
+/* Animated neon border */
 .custom-card::before {
     content: '';
     position: absolute;
@@ -17,16 +28,14 @@
     left: -2px;
     right: -2px;
     bottom: -2px;
-    border-radius: 8px;
-    background: linear-gradient(90deg, #ff004f, #00ccff, #00ff96, #ffcc00);
-    background-size: 300% 300%;
+    background: linear-gradient(90deg, #ff005e, #006eff, #00ffae, #ffcc00);
+    background-size: 400% 400%;
+    animation: neonBorder 6s ease infinite;
     z-index: -1;
-    animation: runBorder 5s linear infinite;
-    border: 2px solid transparent;
+    border-radius: 10px;
 }
 
-/* Keyframes for smooth color running along the border */
-@keyframes runBorder {
+@keyframes neonBorder {
     0% {
         background-position: 0% 50%;
     }
@@ -35,34 +44,67 @@
     }
 }
 
-/* Ensure form fields are above the animated border */
-.login-form {
-    position: relative;
-    z-index: 2;
-    color: #fff;
+/* Form header */
+.login-header {
+    text-align: center;
+    font-size: 2rem;
+    color: #00ccff;
+    margin-bottom: 20px;
 }
 
-/* Form input styles */
-.form-label {
-    font-weight: bold;
-    color: #fff;
-}
-
+/* Style for form fields */
 .input-field {
     background: transparent;
     border: none;
-    border-bottom: 1px solid #fff;
+    border-bottom: 2px solid #00ccff; /* Neon border for input */
     width: 100%;
     color: #fff;
-    margin-bottom: 1rem;
+    padding: 10px 5px;
+    margin-bottom: 20px;
+    font-size: 1rem;
+    outline: none;
+}
+
+.input-field:focus {
+    border-bottom: 2px solid #00ff96;
+}
+
+/* Button styles */
+.btn-submit {
+    width: 100%;
     padding: 10px;
+    border: none;
+    background: #00ccff;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 30px;
+    transition: background-color 0.3s ease;
 }
 
-/* Add some padding and margins */
-.mb-3 {
-    margin-bottom: 1rem;
+.btn-submit:hover {
+    background: #00ff96;
 }
 
-.my-3 {
-    margin-top: 1rem;
+/* Links */
+.form-links {
+    display: flex;
+    justify-content: space-between;
+    color: #00ccff;
+    font-size: 0.9rem;
+}
+
+.form-links a {
+    text-decoration: none;
+    color: #00ccff;
+}
+
+.form-links a:hover {
+    color: #ffcc00;
+}
+
+/* Adding neon glow effect on hover */
+.btn-submit:hover,
+.form-links a:hover {
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
 }
