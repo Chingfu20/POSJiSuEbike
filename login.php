@@ -39,10 +39,6 @@
                                         Sign In
                                     </button>
                                 </div>
-                                <div class="form-links">
-                                    <a href="#">Forgot Password?</a>
-                                    <a href="signup.php">SignUp</a>
-                                </div>
                             </form>
                         </div>
                     </div>
