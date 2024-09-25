@@ -1,118 +1,56 @@
-/* General Styles */
-body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #1e1e2f; /* Dark background to match the design */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-}
-
-/* Style for the login card */
+/* Style for the custom card */
 .custom-card {
+    border-radius: 8px;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     position: relative;
-    width: 350px;
-    padding: 30px;
-    background-color: #1a1a2e; /* Dark card background */
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
     overflow: hidden;
-    z-index: 1; /* Ensure the card is above the ::before */
+    padding: 20px;
+    z-index: 1;
+    border: 4px solid transparent; /* Placeholder for animated border */
 }
 
-/* Animated neon border */
+/* Rotating color border effect */
 .custom-card::before {
     content: '';
     position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    background: linear-gradient(90deg, #ff005e, #006eff, #00ffae, #ffcc00);
-    background-size: 400% 400%;
-    animation: neonBorder 6s ease infinite;
-    z-index: -1; /* Behind the card content */
-    border-radius: 10px;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    border-radius: 8px;
+    background: linear-gradient(270deg, rgba(255, 0, 150, 0.7), rgba(0, 204, 255, 0.7), rgba(0, 255, 150, 0.7), rgba(255, 255, 0, 0.7));
+    z-index: -1;
+    border: 4px solid transparent;
+    animation: rotateColors 5s linear infinite;
 }
 
-@keyframes neonBorder {
+/* Keyframes for simple rotating gradient */
+@keyframes rotateColors {
     0% {
-        background-position: 0% 50%;
+        transform: rotate(0deg);
     }
     100% {
-        background-position: 100% 50%;
+        transform: rotate(360deg);
     }
 }
 
-/* Form header */
-.login-header {
-    text-align: center;
-    font-size: 2rem;
-    color: #00ccff;
-    margin-bottom: 20px;
-    z-index: 2; /* Ensures it is above the card */
-}
-
-/* Style for form fields */
-.input-field {
-    background: transparent;
-    border: none;
-    border-bottom: 2px solid #00ccff; /* Neon border for input */
-    width: 100%;
-    color: #fff;
-    padding: 10px 5px;
-    margin-bottom: 20px;
-    font-size: 1rem;
-    outline: none;
-    position: relative;
-    z-index: 2; /* Keeps input above the ::before border */
-}
-
-.input-field:focus {
-    border-bottom: 2px solid #00ff96;
-}
-
-/* Button styles */
-.btn-submit {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    background: #00ccff;
-    color: #fff;
-    font-size: 1rem;
-    cursor: pointer;
-    border-radius: 30px;
-    transition: background-color 0.3s ease;
+/* Ensure form fields are above the animated border */
+.login-form {
     position: relative;
     z-index: 2;
 }
 
-.btn-submit:hover {
-    background: #00ff96;
+/* Style adjustments for form labels */
+.form-label {
+    font-weight: bold;
 }
 
-/* Links */
-.form-links {
-    display: flex;
-    justify-content: space-between;
-    color: #00ccff;
-    font-size: 0.9rem;
-    position: relative;
-    z-index: 2; /* Above the card */
+/* Add some padding and margins */
+.mb-3 {
+    margin-bottom: 1rem;
 }
 
-.form-links a {
-    text-decoration: none;
-    color: #00ccff;
-}
-
-.form-links a:hover {
-    color: #ffcc00;
-}
-
-/* Adding neon glow effect on hover */
-.btn-submit:hover,
-.form-links a:hover {
-    text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+.my-3 {
+    margin-top: 1rem;
 }
