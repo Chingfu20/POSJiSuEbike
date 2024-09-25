@@ -10,6 +10,7 @@
 </head>
 <body>
     <?php 
+    include('includes/header.php'); 
 
     if (isset($_SESSION['loggedIn'])) {
         ?>
@@ -22,20 +23,20 @@
         <div class="container mt-5">
             <div class="row justify-content-center">
                 <div class="col-md-6">
-                    <div class="custom-card">
+                    <div class="card shadow rounded-4 custom-card">
                         <div class="p-5">
-                            <center><h4 class="login-header">Login Admin</h4></center>
+                            <center><h4 class="text-dark mb-3">Login Admin</h4></center>
                             <form action="login-code.php" method="POST" class="login-form" onsubmit="return validateForm()">
                                 <div class="mb-3">
-                                    <label class="form-label">Email</label>
-                                    <input type="text" name="email" id="email" class="input-field" />
+                                    <label class="form-label">Enter Email</label>
+                                    <input type="text" name="email" id="email" class="form-control" />
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label">Password</label>
-                                    <input type="password" name="password" id="password" class="input-field" />
+                                    <label class="form-label">Enter Password</label>
+                                    <input type="password" name="password" id="password" class="form-control" />
                                 </div>
                                 <div class="my-3">
-                                    <button type="submit" name="loginBtn" class="btn-submit">
+                                    <button type="submit" name="loginBtn" class="btn btn-primary w-100 mt-2">
                                         Sign In
                                     </button>
                                 </div>
