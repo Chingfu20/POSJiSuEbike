@@ -26,7 +26,7 @@
                     <div class="card shadow rounded-4 custom-card">
                         <div class="p-5">
                             <center><h4 class="text-dark mb-3">Login Admin</h4></center>
-                            <form action="login-code.php" method="POST" class="login-form">
+                            <form action="login-code.php" method="POST" class="login-form" onsubmit="return validateForm()">
                                 <div class="mb-3">
                                     <label class="form-label">Enter Email</label>
                                     <input type="text" name="email" id="email" class="form-control" />
@@ -49,11 +49,49 @@
     </div>
 
     <script>
+        // Function to validate form inputs
+        function validateForm() {
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+
+            // Simple email validation pattern
+            var emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+
+            if (email == '') {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Email is required!'
+                });
+                return false; // Prevent form submission
+            }
+
+            if (!email.match(emailPattern)) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Please enter a valid email address!'
+                });
+                return false; // Prevent form submission
+            }
+
+            if (password == '') {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Password is required!'
+                });
+                return false; // Prevent form submission
+            }
+
+            return true; // If all validations pass, allow form submission
+        }
+
         // Check for the message in the URL
         const urlParams = new URLSearchParams(window.location.search);
         const message = urlParams.get('message');
 
-        // If a message exists, display SweetAlert
+        // If a message exists (e.g., invalid login), display SweetAlert
         if (message) {
             Swal.fire({
                 icon: 'error',
