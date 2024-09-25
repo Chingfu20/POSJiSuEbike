@@ -1,37 +1,37 @@
 /* Style for the custom card */
 .custom-card {
     border-radius: 8px;
-    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    background-color: #2a2a2a; /* Dark background to match your image */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     position: relative;
     overflow: hidden;
     padding: 20px;
     z-index: 1;
-    border: 4px solid transparent; /* Placeholder for animated border */
 }
 
-/* Simple running border effect */
+/* Running border effect similar to the image */
 .custom-card::before {
     content: '';
     position: absolute;
-    top: -4px;
-    left: -4px;
-    right: -4px;
-    bottom: -4px;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
     border-radius: 8px;
-    background: linear-gradient(90deg, rgba(0, 204, 255, 0.7), rgba(0, 204, 255, 0.7)) 0 0 no-repeat;
-    background-size: 200% 200%;
+    background: linear-gradient(90deg, #ff004f, #00ccff, #00ff96, #ffcc00);
+    background-size: 300% 300%;
     z-index: -1;
     animation: runBorder 5s linear infinite;
+    border: 2px solid transparent;
 }
 
-/* Keyframes for running color animation along the border */
+/* Keyframes for smooth color running along the border */
 @keyframes runBorder {
     0% {
         background-position: 0% 50%;
     }
     100% {
-        background-position: 200% 50%;
+        background-position: 100% 50%;
     }
 }
 
@@ -39,11 +39,23 @@
 .login-form {
     position: relative;
     z-index: 2;
+    color: #fff;
 }
 
-/* Style adjustments for form labels */
+/* Form input styles */
 .form-label {
     font-weight: bold;
+    color: #fff;
+}
+
+.input-field {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #fff;
+    width: 100%;
+    color: #fff;
+    margin-bottom: 1rem;
+    padding: 10px;
 }
 
 /* Add some padding and margins */
