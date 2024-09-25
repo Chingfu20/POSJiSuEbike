@@ -1,52 +1,33 @@
 <?php
 require 'config/function.php';
 
-if (isset($_POST['loginBtn']))
-{
+if (isset($_POST['loginBtn'])) {
+
     $email = validate($_POST['email']);
     $password = validate($_POST['password']);
 
-    if($email != '' && $password != '')
-    {
+    if ($email != '' && $password != '') {
         $query = "SELECT * FROM admins WHERE email='$email' LIMIT 1";
         $result = mysqli_query($conn, $query);
-        if ($result){
 
-            if (mysqli_num_rows($result) == 1){
-
+        if ($result) {
+            if (mysqli_num_rows($result) == 1) {
                 $row = mysqli_fetch_assoc($result);
-                $hasedPassword = $row['password'];
+                $hashedPassword = $row['password'];
 
-                if(!password_verify($password,$hasedPassword)){
-                    echo "
-                    <script>
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: 'Invalid Password!',
-                            allowOutsideClick: false
-                        }).then(function() {
-                            window.location.href = 'login.php';
-                        });
-                    </script>";
-                    exit;
+                // Check if password is correct
+                if (!password_verify($password, $hashedPassword)) {
+                    header('Location: login.php?message=Invalid+email+or+password');
+                    exit();
                 }
 
-                if($row['is_ban'] == 1){
-                    echo "
-                    <script>
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Account Banned',
-                            text: 'Your account has been banned. Contact your Admin.',
-                            allowOutsideClick: false
-                        }).then(function() {
-                            window.location.href = 'login.php';
-                        });
-                    </script>";
-                    exit;
+                // Check if the user is banned
+                if ($row['is_ban'] == 1) {
+                    header('Location: login.php?message=Your+account+has+been+banned.+Contact+your+Admin.');
+                    exit();
                 }
 
+                // Successful login, set session variables
                 $_SESSION['loggedIn'] = true;
                 $_SESSION['loggedInUser'] = [
                     'user_id' => $row['id'],
@@ -55,63 +36,21 @@ if (isset($_POST['loginBtn']))
                     'phone' => $row['phone'],
                 ];
 
-                echo "
-                <script>
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Success!',
-                        text: 'Logged In Successfully!',
-                        allowOutsideClick: false
-                    }).then(function() {
-                        window.location.href = 'admin/index.php';
-                    });
-                </script>";
-                exit;
-
+                exit();
             } else {
-                echo "
-                <script>
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Invalid Email Address!',
-                        allowOutsideClick: false
-                    }).then(function() {
-                        window.location.href = 'login.php';
-                    });
-                </script>";
-                exit;
-            }
+                // Invalid email address
+                header('Location: admin/index.php?message=Logged+In+Successfully');
 
+            }
         } else {
-            echo "
-            <script>
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Something Went Wrong!',
-                    allowOutsideClick: false
-                }).then(function() {
-                    window.location.href = 'login.php';
-                });
-            </script>";
-            exit;
+            // Database error
+            header('Location: login.php?message=Something+went+wrong');
+            exit();
         }
-    }
-    else 
-    {
-        echo "
-        <script>
-            Swal.fire({
-                icon: 'warning',
-                title: 'Warning',
-                text: 'All fields are mandatory!',
-                allowOutsideClick: false
-            }).then(function() {
-                window.location.href = 'login.php';
-            });
-        </script>";
-        exit;
+    } else {
+        // Missing email or password
+        header('Location: login.php?message=All+fields+are+mandatory');
+        exit();
     }
 }
 ?>
