@@ -37,20 +37,21 @@
           <li class="nav-item">
             <a class="nav-link active text-white" href="logout.php">Logout</a>
           </li>
-        <?php else: ?>
-          <li class="nav-item dropdown active">
-            <a class="nav-link dropdown-toggle active text-white" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Login
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="login.php">Admin</a></li>
-            </ul>
-          </li>
-        <?php endif; ?>
-      </ul>
-    </div>
-  </div>
-</nav>
+          <?php else: ?>
+    <li class="nav-item dropdown active">
+        <a class="nav-link dropdown-toggle active text-white" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Login
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+                <a class="dropdown-item" href="login.php">
+                    <i class="fas fa-user-shield"></i> Admin <!-- Using a shield icon for Admin -->
+                </a>
+            </li>
+        </ul>
+    </li>
+<?php endif; ?>
+
 
 <!-- Include Bootstrap CSS and JS -->
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
