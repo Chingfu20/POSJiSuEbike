@@ -1,12 +1,11 @@
 </main>
 
-<footer class="py-4" style="background-color: #497ecf; color: white; mt-auto;">
+<footer class="py-4 bg-light mt-auto">
     <div class="container-fluid px-4">
         <div class="d-flex align-items-center justify-content-between small">
-            <div class="text-muted">
-                Developer: Hershey Sedurifa, Mitche Pedroza, Johnril Rosello, Jessa Mae Bayawa
-                &copy; JiSu E-Bike POS System 2024
-            </div>
+            <div class="text-muted">Developer: Hershey Sedurifa,  Mitche Pedroza, Johnril Rosello, Jessa Mae Bayawa
+                &copy; JiSu E-Bike POS System 2024</div>
+            
         </div>
     </div>
 </footer>
@@ -25,11 +24,12 @@
 <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
 <script src="assets/js/datatables-simple-demo.js"></script>
 
+
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
     $(document).ready(function() {
         $('.mySelect2').select2();
-    });
+});
 </script>
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -42,5 +42,5 @@
 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/alertify.min.js"></script>
 <script src="assets/js/custom.js"></script>
 
-</body>
+  </body>
 </html>
