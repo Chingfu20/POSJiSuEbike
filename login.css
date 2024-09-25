@@ -1,7 +1,7 @@
 /* Style for the custom card */
 .custom-card {
     border-radius: 8px;
-    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    background: #1a1a2e; /* Dark background to match the theme */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     position: relative;
     overflow: hidden;
@@ -10,7 +10,7 @@
     border: 4px solid transparent; /* Placeholder for animated border */
 }
 
-/* Rotating color border effect */
+/* Slow rotating gradient border effect */
 .custom-card::before {
     content: '';
     position: absolute;
@@ -19,19 +19,20 @@
     right: -4px;
     bottom: -4px;
     border-radius: 8px;
-    background: linear-gradient(270deg, rgba(255, 0, 150, 0.7), rgba(0, 204, 255, 0.7), rgba(0, 255, 150, 0.7), rgba(255, 255, 0, 0.7));
+    background: linear-gradient(90deg, rgba(255, 0, 150, 1), rgba(0, 204, 255, 1), rgba(0, 255, 150, 1), rgba(255, 255, 0, 1));
+    background-size: 400% 400%;
     z-index: -1;
+    animation: rotateEdgeColors 10s linear infinite; /* Slow animation for smooth effect */
     border: 4px solid transparent;
-    animation: rotateColors 5s linear infinite;
 }
 
-/* Keyframes for simple rotating gradient */
-@keyframes rotateColors {
+/* Keyframes for slow rotating gradient */
+@keyframes rotateEdgeColors {
     0% {
-        transform: rotate(0deg);
+        background-position: 0% 50%;
     }
     100% {
-        transform: rotate(360deg);
+        background-position: 100% 50%;
     }
 }
 
@@ -44,6 +45,43 @@
 /* Style adjustments for form labels */
 .form-label {
     font-weight: bold;
+    color: #ffffff;
+}
+
+/* Form input styles */
+.input-field {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #00ccff;
+    width: 100%;
+    color: #fff;
+    padding: 10px 5px;
+    margin-bottom: 20px;
+    font-size: 1rem;
+    outline: none;
+}
+
+.input-field:focus {
+    border-bottom: 2px solid #00ff96;
+}
+
+/* Button styles */
+.btn-submit {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background: #00ccff;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 30px;
+    transition: background-color 0.3s ease;
+    position: relative;
+    z-index: 2;
+}
+
+.btn-submit:hover {
+    background: #00ff96;
 }
 
 /* Add some padding and margins */
@@ -53,4 +91,23 @@
 
 .my-3 {
     margin-top: 1rem;
+}
+
+/* Links */
+.form-links {
+    display: flex;
+    justify-content: space-between;
+    color: #00ccff;
+    font-size: 0.9rem;
+    position: relative;
+    z-index: 2;
+}
+
+.form-links a {
+    text-decoration: none;
+    color: #00ccff;
+}
+
+.form-links a:hover {
+    color: #ffcc00;
 }
