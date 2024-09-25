@@ -18,6 +18,7 @@ body {
     border-radius: 10px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
     overflow: hidden;
+    z-index: 1; /* Ensure the card is above the ::before */
 }
 
 /* Animated neon border */
@@ -31,7 +32,7 @@ body {
     background: linear-gradient(90deg, #ff005e, #006eff, #00ffae, #ffcc00);
     background-size: 400% 400%;
     animation: neonBorder 6s ease infinite;
-    z-index: -1;
+    z-index: -1; /* Behind the card content */
     border-radius: 10px;
 }
 
@@ -50,6 +51,7 @@ body {
     font-size: 2rem;
     color: #00ccff;
     margin-bottom: 20px;
+    z-index: 2; /* Ensures it is above the card */
 }
 
 /* Style for form fields */
@@ -63,6 +65,8 @@ body {
     margin-bottom: 20px;
     font-size: 1rem;
     outline: none;
+    position: relative;
+    z-index: 2; /* Keeps input above the ::before border */
 }
 
 .input-field:focus {
@@ -80,6 +84,8 @@ body {
     cursor: pointer;
     border-radius: 30px;
     transition: background-color 0.3s ease;
+    position: relative;
+    z-index: 2;
 }
 
 .btn-submit:hover {
@@ -92,6 +98,8 @@ body {
     justify-content: space-between;
     color: #00ccff;
     font-size: 0.9rem;
+    position: relative;
+    z-index: 2; /* Above the card */
 }
 
 .form-links a {
