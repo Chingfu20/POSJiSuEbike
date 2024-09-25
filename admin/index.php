@@ -158,8 +158,10 @@
             <div class="card-header" style="background-color: #28a745; color: white;">
                 <i class="fas fa-list-alt"></i> Total Categories
             </div>
-            <div class="card-body">
-                <h3 id="categoryText"><i class="fas fa-list-alt"></i></h3> <!-- Category count will be shown here -->
+            <div class="card-body text-center">
+                <h3 id="categoryText">
+                    <i class="fas fa-list-alt"></i> 10 <!-- Example count with icon -->
+                </h3> <!-- Category count will be shown here -->
             </div>
         </div>
     </div>
@@ -169,8 +171,10 @@
             <div class="card-header" style="background-color: #ffc107; color: white;">
                 <i class="fas fa-boxes"></i> Total Products
             </div>
-            <div class="card-body">
-                <h3 id="productText"></h3> <!-- Product count will be shown here -->
+            <div class="card-body text-center">
+                <h3 id="productText">
+                    <i class="fas fa-boxes"></i> 25 <!-- Example count with icon -->
+                </h3> <!-- Product count will be shown here -->
             </div>
         </div>
     </div>
@@ -180,8 +184,10 @@
             <div class="card-header" style="background-color: #17a2b8; color: white;">
                 <i class="fas fa-users"></i> Total Customers
             </div>
-            <div class="card-body">
-                <h3 id="customerText"></h3> <!-- Customer count will be shown here -->
+            <div class="card-body text-center">
+                <h3 id="customerText">
+                    <i class="fas fa-users"></i> 50 <!-- Example count with icon -->
+                </h3> <!-- Customer count will be shown here -->
             </div>
         </div>
     </div>
@@ -191,8 +197,10 @@
             <div class="card-header" style="background-color: #007bff; color: white;">
                 <i class="fas fa-shopping-cart"></i> Today's Orders
             </div>
-            <div class="card-body">
-                <h3 id="todayOrdersText"></h3> <!-- Today's orders count will be shown here -->
+            <div class="card-body text-center">
+                <h3 id="todayOrdersText">
+                    <i class="fas fa-shopping-cart"></i> 15 <!-- Example count with icon -->
+                </h3> <!-- Today's orders count will be shown here -->
             </div>
         </div>
     </div>
@@ -219,8 +227,10 @@
             <div class="card-header" style="background-color: #fd7e14; color: white;">
                 <i class="fas fa-receipt"></i> Total Orders
             </div>
-            <div class="card-body">
-                <h3 id="totalOrdersText"></h3> <!-- Total Orders will be shown here -->
+            <div class="card-body text-center">
+                <h3 id="totalOrdersText">
+                    <i class="fas fa-receipt"></i> 30 <!-- Example count with icon -->
+                </h3> <!-- Total Orders will be shown here -->
             </div>
         </div>
     </div>
