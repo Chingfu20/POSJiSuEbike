@@ -7,15 +7,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <style>
-        /* Add styles for the admin picture */
-        .admin-picture {
-            height: 30px; /* Adjust height as needed */
-            width: 30px; /* Adjust width as needed */
-            border-radius: 50%; /* Make it circular */
-            margin-right: 8px; /* Space between the image and the text */
-        }
-    </style>
 </head>
 <body>
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -35,16 +26,8 @@
         <!--Navbar-->
         <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fas fa-user fa-fw"></i>
-                </a>
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li>
-                        <a class="dropdown-item" href="#">
-                            <img src="path/to/admin-picture.jpg" alt="Admin" class="admin-picture"> <!-- Replace with actual path to the image -->
-                            Admin Name <!-- You can also add the admin name here if desired -->
-                        </a>
-                    </li>
                     <li><a class="dropdown-item" id="logoutButton" href="#"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
                 </ul>
             </li>
