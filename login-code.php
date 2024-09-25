@@ -36,12 +36,11 @@ if (isset($_POST['loginBtn'])) {
                     'phone' => $row['phone'],
                 ];
 
-                header('Location: admin/index.php?message=Logged+In+Successfully');
                 exit();
             } else {
                 // Invalid email address
-                header('Location: login.php?message=Invalid+email+or+password');
-                exit();
+                header('Location: admin/index.php?message=Logged+In+Successfully');
+
             }
         } else {
             // Database error
