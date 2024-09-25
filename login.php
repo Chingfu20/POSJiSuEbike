@@ -7,6 +7,108 @@
     <link rel="stylesheet" href="login.css">
     <!-- SweetAlert Library -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        /* Basic page styles */
+        body {
+            background-color: #1b1b1b;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Custom card with animated border */
+        .custom-card {
+            border-radius: 8px;
+            background-color: #2a2a2a;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            padding: 20px;
+            z-index: 1;
+        }
+
+        /* Running border effect */
+        .custom-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: 8px;
+            background: linear-gradient(90deg, #ff004f, #00ccff, #00ff96, #ffcc00);
+            background-size: 300% 300%;
+            z-index: -1;
+            animation: runBorder 5s linear infinite;
+            border: 2px solid transparent;
+        }
+
+        /* Keyframes for the smooth running color */
+        @keyframes runBorder {
+            0% {
+                background-position: 0% 50%;
+            }
+            100% {
+                background-position: 100% 50%;
+            }
+        }
+
+        /* Login form styles */
+        .login-form {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Form label styles */
+        .form-label {
+            color: #fff;
+            font-weight: bold;
+        }
+
+        /* Input fields */
+        .form-control {
+            background-color: transparent;
+            border: none;
+            border-bottom: 1px solid #fff;
+            color: #fff;
+            padding: 10px;
+            width: 100%;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-bottom: 1px solid #00ccff;
+        }
+
+        /* Submit button */
+        .btn {
+            background-color: #00ccff;
+            border: none;
+            padding: 10px;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #ff004f;
+        }
+
+        /* Container for the login card */
+        .bg-light {
+            background-color: #1b1b1b;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h4 {
+            color: #fff;
+        }
+    </style>
 </head>
 <body>
     <?php 
@@ -19,13 +121,13 @@
     }
     ?>
 
-    <div class="py-5 bg-light">
-        <div class="container mt-5">
+    <div class="bg-light">
+        <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-6">
                     <div class="card shadow rounded-4 custom-card">
                         <div class="p-5">
-                            <center><h4 class="text-dark mb-3">Login Admin</h4></center>
+                            <center><h4 class="mb-3">Login Admin</h4></center>
                             <form action="login-code.php" method="POST" class="login-form" onsubmit="return validateForm()">
                                 <div class="mb-3">
                                     <label class="form-label">Enter Email</label>
