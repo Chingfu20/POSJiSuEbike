@@ -154,8 +154,8 @@
 
     <div class="row">
     <div class="col-md-3 mb-3">
-        <div class="card" style="background-color: #DDFFF7;">
-            <div class="card-header">
+        <div class="card" style="background-color: #D3E5E2;"> <!-- Softer green -->
+            <div class="card-header" style="background-color: #28a745; color: white;">
                 <i class="fas fa-list-alt"></i> Total Categories
             </div>
             <div class="card-body">
@@ -165,8 +165,8 @@
     </div>
 
     <div class="col-md-3 mb-3">
-        <div class="card" style="background-color: #F7DDCA;">
-            <div class="card-header">
+        <div class="card" style="background-color: #FCE6B2;"> <!-- Soft beige -->
+            <div class="card-header" style="background-color: #ffc107; color: white;">
                 <i class="fas fa-boxes"></i> Total Products
             </div>
             <div class="card-body">
@@ -176,8 +176,8 @@
     </div>
 
     <div class="col-md-3 mb-3">
-        <div class="card" style="background-color: #96E7DC;">
-            <div class="card-header">
+        <div class="card" style="background-color: #B3E5D6;"> <!-- Light teal -->
+            <div class="card-header" style="background-color: #17a2b8; color: white;">
                 <i class="fas fa-users"></i> Total Customers
             </div>
             <div class="card-body">
@@ -187,8 +187,8 @@
     </div>
 
     <div class="col-md-3 mb-3">
-        <div class="card" style="background-color: #4FCFC0;">
-            <div class="card-header">
+        <div class="card" style="background-color: #C8E6F5;"> <!-- Light blue -->
+            <div class="card-header" style="background-color: #007bff; color: white;">
                 <i class="fas fa-shopping-cart"></i> Today's Orders
             </div>
             <div class="card-body">
@@ -203,7 +203,9 @@
     <!-- Left Column: Monthly Sales Report -->
     <div class="col-md-6 mb-3">
         <div class="card" style="background-color: #e2e3e5;">
-            <div class="card-header">Monthly Sales Report</div>
+            <div class="card-header" style="background-color: #6c757d; color: white;">
+                Monthly Sales Report
+            </div>
             <div class="card-body">
                 <!-- Chart for sales -->
                 <canvas id="salesChart" width="400" height="200"></canvas>
@@ -213,8 +215,8 @@
 
     <!-- Right Column: Total Orders as Text -->
     <div class="col-md-6 mb-3">
-        <div class="card" style="background-color: #F1B994;">
-            <div class="card-header">
+        <div class="card" style="background-color: #FAD0C4;"> <!-- Light peach -->
+            <div class="card-header" style="background-color: #fd7e14; color: white;">
                 <i class="fas fa-receipt"></i> Total Orders
             </div>
             <div class="card-body">
@@ -223,6 +225,7 @@
         </div>
     </div>
 </div>
+
 
 <?php
 // Fetch sales data for each month from the database
