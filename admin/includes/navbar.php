@@ -12,8 +12,8 @@
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
         <a class="navbar-brand ps-3">JiSu Ebike
-    <img src="assets/img/logo.fb51b8e1.png" alt="Brand Icon" style="height: 30px;">
-</a>
+            <img src="assets/img/logo.fb51b8e1.png" alt="Brand Icon" style="height: 30px;">
+        </a>
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
         <!-- Navbar Search-->
@@ -28,7 +28,7 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" id="logoutButton" href="#">Logout</a></li>
+                    <li><a class="dropdown-item" id="logoutButton" href="#"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
                 </ul>
             </li>
         </ul>
