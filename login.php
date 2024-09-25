@@ -10,9 +10,7 @@
 </head>
 <body>
     <?php 
-    include('includes/header.php'); 
 
-    // Redirect to index.php if user is already logged in
     if (isset($_SESSION['loggedIn'])) {
         ?>
         <script>window.location.href = 'index.php';</script>
