@@ -219,15 +219,41 @@ if (isset($_POST['updateProduct'])) {
         'status' => $status
     ];
 
+    <?php
+    // Assuming you already have the database connection and functions included
+    
     $result = update('products', $product_id, $data);
-
+    
     if ($result) {
-        redirect('products-edit.php?id=' . $product_id, 'Product Updated Successfully!');
+        // Successful update
+        echo '<script>
+                echo "<script>
+                Swal.fire({
+                    icon: \'success\',
+                    title: \'Product Updated Successfully!\',
+                    showConfirmButton: true,
+                    confirmButtonText: \'OK\'
+                }).then(() => {
+                    window.location.href = \'products-edit.php?id=' . $product_id . '\';
+                });
+              </script>";
+              </script>';
     } else {
+        // Update failed
         error_log("Update query failed: " . mysqli_error($conn));
-        redirect('products-edit.php?id=' . $product_id, 'Something Went Wrong!');
+        echo '<script>
+                Swal.fire({
+                    icon: \'error\',
+                    title: \'Something Went Wrong!\',
+                    text: \'Please try again later.\',
+                    showConfirmButton: true,
+                    confirmButtonText: \'OK\'
+                }).then(() => {
+                    window.location.href = \'products-edit.php?id=' . $product_id . '\';
+                });
+              </script>';
     }
-}
+    
 
 if (isset($_POST['saveCustomer'])) {
     $name = validate($_POST['name']);
