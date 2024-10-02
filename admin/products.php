@@ -56,35 +56,34 @@
                             </tr>
                         </thead>
                         <tbody>
-    <?php
-    $displayId = 1; // Initialize display ID
-    foreach($products as $item) : ?>
-    <tr>
-        <td><?= $displayId++ ?></td> <!-- Display ID -->
-        <td>
-            <img src="../<?= htmlspecialchars($item['image']); ?>" style="width:50px;height:50px;" alt="Img" />
-        </td>
-        <td><?= htmlspecialchars($item['name']) ?></td>
-        <td>
-            <?php
-            if($item['status'] == 1){
-                echo '<span class="badge bg-danger">Hidden</span>';
-            }else{
-                echo '<span class="badge bg-primary">Visible</span>';
-            }
-            ?>
-        </td>
-        <td class="text-center"><?= htmlspecialchars($item['quantity']) ?></td> <!-- Changed field name -->
-        <td>
-            <a href="products-edit.php?id=<?= urlencode($item['id']); ?>" class="btn btn-success btn-sm">Edit</a>
-            <a href="products-delete.php?id=<?= urlencode($item['id']); ?>" class="btn btn-danger btn-sm">Delete</a>
-            <a href="products-view.php?id=<?= urlencode($item['id']); ?>" class="btn btn-info btn-sm">View</a>
-            <a href="products-add.php?id=<?= urlencode($item['id']); ?>&quantity=<?= urlencode($item['quantity']); ?>" class="btn btn-warning btn-sm">Add</a>
-        </td>
-    </tr>
-    <?php endforeach; ?>
-</tbody>
-
+                            <?php
+                            $displayId = 1; // Initialize display ID
+                            foreach($products as $item) : ?>
+                            <tr>
+                                <td><?= $displayId++ ?></td> <!-- Display ID -->
+                                <td>
+                                    <img src="../<?= htmlspecialchars($item['image']); ?>" style="width:50px;height:50px;" alt="Img" />
+                                </td>
+                                <td><?= htmlspecialchars($item['name']) ?></td>
+                                <td>
+                                    <?php
+                                    if($item['status'] == 1){
+                                        echo '<span class="badge bg-danger">Hidden</span>';
+                                    }else{
+                                        echo '<span class="badge bg-primary">Visible</span>';
+                                    }
+                                    ?>
+                                </td>
+                                <td class="text-center"><?= htmlspecialchars($item['quantity']) ?></td> <!-- Changed field name -->
+                                <td>
+                                    <a href="products-edit.php?id=<?= urlencode($item['id']); ?>" class="btn btn-success btn-sm">Edit</a>
+                                    <a href="products-delete.php?id=<?= urlencode($item['id']); ?>" class="btn btn-danger btn-sm">Delete</a>
+                                    <a href="products-view.php?id=<?= urlencode($item['id']); ?>" class="btn btn-info btn-sm">View</a>
+                                    <a href="products-add.php?id=<?= urlencode($item['id']); ?>" class="btn btn-warning btn-sm">Add</a>
+                                </td>
+                            </tr>
+                            <?php endforeach; ?>
+                        </tbody>
                     </table>
                 </div>
             <?php
