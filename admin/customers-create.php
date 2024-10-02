@@ -20,7 +20,7 @@
                     </div>
                     <div class="col-md-12 mb-3">
                         <label for="">Address</label>
-                        <input type="email" name="email" class="form-control" />
+                        <input type="Address" name="Address" class="form-control" />
                     </div>
                     <div class="col-md-12 mb-3">
                         <label for="">Phone</label>
