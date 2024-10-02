@@ -10,17 +10,6 @@
         <div class="card-body">
             <?php alertMessage(); ?>
 
-            <?php
-            // Check if the quantity is set in the URL
-            if (isset($_GET['quantity'])) {
-                $quantity = intval($_GET['quantity']); // Convert to integer
-                echo "<script>console.log('Quantity from URL: " . $quantity . "');</script>"; // Debugging output
-                $defaultQuantity = $quantity; // Use this variable in the input field
-            } else {
-                $defaultQuantity = ''; // Default to empty if not set
-            }
-            ?>
-
             <form action="code.php" method="POST" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-md-12 mb-3">
@@ -57,7 +46,7 @@
                     </div>
                     <div class="col-md-4 mb-3">
                         <label for="">Unit *</label>
-                        <input type="text" name="quantity" required class="form-control" value="<?= htmlspecialchars($defaultQuantity); ?>" />
+                        <input type="text" name="quantity" required class="form-control" />
                     </div>
                     <div class="col-md-4 mb-3">
                         <label for="">Image *</label>
@@ -75,6 +64,7 @@
 
 <script>
     function fetchProductPrice(productName) {
+     
         $.ajax({
             url: 'fetch_price.php',
             type: 'POST',
