@@ -79,20 +79,7 @@
                                     <a href="products-edit.php?id=<?= urlencode($item['id']); ?>" class="btn btn-success btn-sm">Edit</a>
                                     <a href="products-delete.php?id=<?= urlencode($item['id']); ?>" class="btn btn-danger btn-sm">Delete</a>
                                     <a href="products-view.php?id=<?= urlencode($item['id']); ?>" class="btn btn-info btn-sm">View</a>
-                                    <div class="col-md-4 mb-3">
-    <label for="">Unit *</label>
-    <div class="input-group">
-        <input type="text" name="quantity" required value="<?= $product['data']['quantity']; ?>" class="form-control" />
-        <div class="input-group-append">
-            <a href="products-add.php?id=<?= urlencode($item['id']); ?>" class="btn btn-warning btn-sm">Add</a>
-        </div>
-    </div>
-</div>
-
-<div class="col-md-4 mb-3">
-    <button type="submit" name="updateProduct" class="btn btn-primary">Update</button>
-</div>
-
+                                    <a href="products-add.php?id=<?= urlencode($item['id']); ?>" class="btn btn-warning btn-sm">Add</a>
                                 </td>
                             </tr>
                             <?php endforeach; ?>
