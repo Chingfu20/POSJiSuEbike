@@ -18,31 +18,44 @@
             <?php alertMessage(); ?>
 
             <?php
-            // Initialize search term if provided
-            $searchTerm = isset($_GET['search']) ? mysqli_real_escape_string($conn, $_GET['search']) : '';
+// Include your database connection
+include 'db_connection.php'; // adjust the filename as necessary
 
-            // Fetch products with search functionality
-            $query = "
-                SELECT p.id, p.image, p.name, p.status, p.quantity
-                FROM products p
-            ";
+// Initialize search term if provided
+$searchTerm = isset($_GET['search']) ? mysqli_real_escape_string($conn, $_GET['search']) : '';
 
-            // Add search condition if search term is provided
-            if ($searchTerm != '') {
-                $query .= " WHERE p.name LIKE '%$searchTerm%' ";
-            }
+// Fetch products with search functionality
+$query = "
+    SELECT p.id, p.image, p.name, p.status, p.quantity
+    FROM products p
+";
 
-            // Order by product ID
-            $query .= " ORDER BY p.id";
+if ($searchTerm != '') {
+    $query .= " WHERE p.name LIKE '%$searchTerm%' ";
+}
 
-            $products = mysqli_query($conn, $query);
+$query .= " ORDER BY p.id";
+$products = mysqli_query($conn, $query);
 
-            if (!$products) {
-                echo '<h4>Something Went Wrong!</h4>';
-                return false;
-            }
-            if (mysqli_num_rows($products) > 0) {
-            ?>  
+if (!$products) {
+    echo '<h4>Something Went Wrong!</h4>';
+    return;
+}
+
+if (mysqli_num_rows($products) > 0) {
+    while ($row = mysqli_fetch_assoc($products)) {
+        echo '<div class="product">';
+        echo '<img src="' . $row['image'] . '" alt="' . htmlspecialchars($row['name']) . '">';
+        echo '<h5>' . htmlspecialchars($row['name']) . '</h5>';
+        echo '<p>Status: ' . htmlspecialchars($row['status']) . '</p>';
+        echo '<p>Quantity: ' . htmlspecialchars($row['quantity']) . '</p>';
+        echo '</div>';
+    }
+} else {
+    echo '<h4>No products found</h4>';
+}
+?>
+
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered">
                         <thead>
