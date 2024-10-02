@@ -222,7 +222,21 @@ if (isset($_POST['updateProduct'])) {
     $result = update('products', $product_id, $data);
 
     if ($result) {
-        redirect('products-edit.php?id=' . $product_id, 'Product Updated Successfully!');
+        echo "
+        <script>
+            swal({
+                title: 'Success!',
+                text: 'Product Updated Successfully!',
+                type: 'success',
+                confirmButtonText: 'OK'
+            }).then(function() {
+                window.location = 'products-edit.php?id=" . $product_id . "';
+            });
+        </script>
+        ";
+        exit; // Make sure to exit after echoing the script
+    }
+    
     } else {
         error_log("Update query failed: " . mysqli_error($conn));
         redirect('products-edit.php?id=' . $product_id, 'Something Went Wrong!');
