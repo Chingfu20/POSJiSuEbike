@@ -78,11 +78,28 @@
                          <label for="">Image *</label>
                          <input type="file" name="image" class="form-control" />
                          <img src="../<?= $product['data']['image']; ?>" style="width:40px;height:40px;" alt="Img" />
-                    </div>
-                    <div class="d-flex justify-content-end mt-3">
-                         <button type="submit" name="updateProduct" class="btn btn-primary">Update</button>
-                    </div>
-                   </div>
+                         <div class="d-flex justify-content-end mt-3">
+    <button type="button" id="updateProduct" class="btn btn-primary">Update</button>
+</div>
+
+<script>
+document.getElementById('updateProduct').addEventListener('click', function() {
+    swal({
+        title: "Are you sure?",
+        text: "Once updated, you will not be able to recover this!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+    .then((willUpdate) => {
+        if (willUpdate) {
+            // If confirmed, submit the form
+            document.querySelector('form').submit(); // Make sure your button is inside a form
+        }
+    });
+});
+</script>
+
                    <?php                        
                    }
                    else
