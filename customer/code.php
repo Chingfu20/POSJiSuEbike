@@ -219,15 +219,23 @@ if (isset($_POST['updateProduct'])) {
         'status' => $status
     ];
 
-    $result = update('products', $product_id, $data);
+    session_start();
 
-    if ($result) {
-        redirect('products-edit.php?id=' . $product_id, 'Product Updated Successfully!');
-    } else {
-        error_log("Update query failed: " . mysqli_error($conn));
-        redirect('products-edit.php?id=' . $product_id, 'Something Went Wrong!');
-    }
+$result = update('products', $product_id, $data);
+
+if ($result) {
+    $_SESSION['message'] = 'Product Updated Successfully!';
+    $_SESSION['message_type'] = 'success';
+} else {
+    error_log("Update query failed: " . mysqli_error($conn));
+    $_SESSION['message'] = 'Something Went Wrong!';
+    $_SESSION['message_type'] = 'error';
 }
+
+// Redirect to the edit page
+header('Location: products-edit.php?id=' . $product_id);
+exit();
+
 
 if (isset($_POST['saveCustomer'])) {
     $name = validate($_POST['name']);
