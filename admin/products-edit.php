@@ -80,25 +80,8 @@
                          <img src="../<?= $product['data']['image']; ?>" style="width:40px;height:40px;" alt="Img" />
                     </div>
                     <div class="d-flex justify-content-end mt-3">
-                   <button type="button" id="updateProductBtn" class="btn btn-primary">Update</button>
-                   </div>
-
-                   if ($result) {
-    echo "
-    <script>
-        swal({
-            title: 'Success!',
-            text: 'Product Updated Successfully!',
-            icon: 'success',
-            button: 'OK',
-        }).then(function() {
-            window.location = 'products-edit.php?id=" . $product_id . "';
-        });
-    </script>
-    ";
-    exit; // Ensure to exit after echoing the script
-}
-
+                         <button type="submit" name="updateProduct" class="btn btn-primary">Update</button>
+                    </div>
                    </div>
                    <?php                        
                    }
