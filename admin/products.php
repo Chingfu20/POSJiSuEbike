@@ -64,8 +64,8 @@
                                     <a href="products-edit.php?id=<?= urlencode($item['id']); ?>" class="btn btn-success btn-sm">Edit</a>
                                     <a href="products-delete.php?id=<?= urlencode($item['id']); ?>" class="btn btn-danger btn-sm">Delete</a>
                                     <a href="products-view.php?id=<?= urlencode($item['id']); ?>" class="btn btn-info btn-sm">View</a>
-                                    <a href="javascript:void(0)" onclick="incrementQuantity(<?= $item['id']; ?>)" class="btn btn-secondary btn-sm">+</a>
-                                    </td>
+                                    <a href="products-add.php?id=<?= urlencode($item['id']); ?>" class="btn btn-secondary btn-sm">+</a>
+                                </td>
                             </tr>
                             <?php endforeach; ?>
                         </tbody>
@@ -83,27 +83,5 @@
         </div>
     </div>
 </div>
-<script>
-    function incrementQuantity(productId) {
-        $.ajax({
-            url: 'increment_quantity.php', // The PHP file that will handle the update
-            type: 'POST',
-            data: { product_id: productId }, // Pass the product ID
-            success: function(response) {
-                // Optionally, parse the response and reload the page or update the UI
-                if(response.success) {
-                    alert('Quantity updated successfully!');
-                    location.reload(); // Refresh the page to show updated quantity
-                } else {
-                    alert('Failed to update quantity. ' + response.message);
-                }
-            },
-            error: function(xhr, status, error) {
-                console.error(xhr.responseText);
-                alert('An error occurred.');
-            }
-        });
-    }
-</script>
 
 <?php include('includes/footer.php'); ?>
