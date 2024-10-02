@@ -79,26 +79,7 @@
                                     <a href="products-edit.php?id=<?= urlencode($item['id']); ?>" class="btn btn-success btn-sm">Edit</a>
                                     <a href="products-delete.php?id=<?= urlencode($item['id']); ?>" class="btn btn-danger btn-sm">Delete</a>
                                     <a href="products-view.php?id=<?= urlencode($item['id']); ?>" class="btn btn-info btn-sm">View</a>
-                                    <td>
-    <a href="products-edit.php?id=<?= urlencode($item['id']); ?>" class="btn btn-success btn-sm">Edit</a>
-    <a href="products-delete.php?id=<?= urlencode($item['id']); ?>" class="btn btn-danger btn-sm">Delete</a>
-    <a href="products-view.php?id=<?= urlencode($item['id']); ?>" class="btn btn-info btn-sm">View</a>
-    <button onclick="addProduct(<?= $item['id']; ?>, 1)" class="btn btn-warning btn-sm">Add</button>
-</td>
-<script>
-function addProduct(productId, quantity) {
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "add_product.php", true);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            alert(xhr.responseText); // Display the server response
-        }
-    };
-    xhr.send("id=" + encodeURIComponent(productId) + "&quantity=" + encodeURIComponent(quantity));
-}
-</script>
-
+                                    <a href="products-add.php?id=<?= urlencode($item['id']); ?>" class="btn btn-warning btn-sm">+</a>
                                 </td>
                             </tr>
                             <?php endforeach; ?>
