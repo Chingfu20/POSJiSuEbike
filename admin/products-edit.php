@@ -80,34 +80,9 @@
                          <img src="../<?= $product['data']['image']; ?>" style="width:40px;height:40px;" alt="Img" />
                     </div>
                     <div class="d-flex justify-content-end mt-3">
-    <button type="button" id="updateProductBtn" class="btn btn-primary">Update</button>
-</div>
-
-<script>
-document.getElementById('updateProductBtn').addEventListener('click', function() {
-    swal({
-        title: 'Are you sure?',
-        text: 'You are about to update the product!',
-        icon: 'warning',
-        buttons: {
-            cancel: true,
-            confirm: {
-                text: 'Update',
-                value: true,
-                visible: true,
-                className: "btn-primary",
-                closeModal: true
-            }
-        }
-    }).then((willUpdate) => {
-        if (willUpdate) {
-            // If confirmed, submit the form
-            document.querySelector('form').submit();
-        }
-    });
-});
-</script>
-
+                         <button type="submit" name="updateProduct" class="btn btn-primary">Update</button>
+                    </div>
+                   </div>
                    <?php                        
                    }
                    else

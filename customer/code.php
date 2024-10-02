@@ -222,36 +222,12 @@ if (isset($_POST['updateProduct'])) {
     $result = update('products', $product_id, $data);
 
     if ($result) {
-        echo "
-        <script>
-            swal({
-                title: 'Success!',
-                text: 'Product Updated Successfully!',
-                icon: 'success',
-                button: 'OK',
-            }).then(function() {
-                window.location = 'products-edit.php?id=" . $product_id . "';
-            });
-        </script>
-        ";
+        redirect('products-edit.php?id=' . $product_id, 'Product Updated Successfully!');
     } else {
         error_log("Update query failed: " . mysqli_error($conn));
-        echo "
-        <script>
-            swal({
-                title: 'Error!',
-                text: 'Something Went Wrong!',
-                icon: 'error',
-                button: 'OK',
-            }).then(function() {
-                window.location = 'products-edit.php?id=" . $product_id . "';
-            });
-        </script>
-        ";
+        redirect('products-edit.php?id=' . $product_id, 'Something Went Wrong!');
     }
-    
-    exit; // Ensure to exit after echoing the script
-    
+}
 
 if (isset($_POST['saveCustomer'])) {
     $name = validate($_POST['name']);
