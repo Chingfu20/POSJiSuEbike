@@ -26,6 +26,10 @@ require 'authentication.php';
         <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/themes/default.min.css"/>
 
         <link href="assets/css/custom.css" rel="stylesheet" />
+        
+        <!-- Include SweetAlert CSS and JS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
         
     </head>
