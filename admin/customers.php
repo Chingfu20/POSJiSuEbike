@@ -26,9 +26,8 @@
                             <tr>
                                 <th>ID</th> <!-- Display ID column -->
                                 <th>Name</th>
-                                <th>Email</th>
-                                <th>Phone</th>
                                 <th>Address</th>
+                                <th>Phone</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
