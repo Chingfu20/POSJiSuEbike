@@ -165,16 +165,20 @@ if (isset($_POST['saveProduct'])) {
         'image' => $finalImage,
         'status' => $status
     ];
-
-    $result = insert('products', $data);
+    $result = update('products', $product_id, $data);
 
     if ($result) {
-        redirect('products.php', 'Product Created Successfully!');
+        $_SESSION['message'] = 'Product Updated Successfully!';
+        $_SESSION['message_type'] = 'success';
     } else {
-        error_log("Insert query failed: " . mysqli_error($conn));
-        redirect('products-create.php', 'Something Went Wrong!');
+        error_log("Update query failed: " . mysqli_error($conn));
+        $_SESSION['message'] = 'Something Went Wrong!';
+        $_SESSION['message_type'] = 'error';
     }
-}
+    
+    header('Location: products-edit.php?id=' . $product_id);
+    exit();
+    
 
 if (isset($_POST['updateProduct'])) {
     $product_id = validate($_POST['product_id']);
