@@ -221,13 +221,32 @@ if (isset($_POST['updateProduct'])) {
 
     $result = update('products', $product_id, $data);
 
-    if ($result) {
-        redirect('products-edit.php?id=' . $product_id, 'Product Updated Successfully!');
-    } else {
-        error_log("Update query failed: " . mysqli_error($conn));
-        redirect('products-edit.php?id=' . $product_id, 'Something Went Wrong!');
-    }
+if ($result) {
+    echo '<script>
+            Swal.fire({
+                icon: "success",
+                title: "Product Updated Successfully!",
+                showConfirmButton: true,
+                confirmButtonText: "OK"
+            }).then(() => {
+                window.location.href = "products-edit.php?id=' . $product_id . '";
+            });
+          </script>';
+} else {
+    error_log("Update query failed: " . mysqli_error($conn));
+    echo '<script>
+            Swal.fire({
+                icon: "error",
+                title: "Something Went Wrong!",
+                text: "Please try again later.",
+                showConfirmButton: true,
+                confirmButtonText: "OK"
+            }).then(() => {
+                window.location.href = "products-edit.php?id=' . $product_id . '";
+            });
+          </script>';
 }
+
 
 if (isset($_POST['saveCustomer'])) {
     $name = validate($_POST['name']);
