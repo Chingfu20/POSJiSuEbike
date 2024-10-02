@@ -83,30 +83,21 @@
                    <button type="button" id="updateProductBtn" class="btn btn-primary">Update</button>
                    </div>
 
-                   <script>
-document.getElementById('updateProductBtn').addEventListener('click', function() {
-    swal({
-        title: 'Are you sure?',
-        text: 'You are about to update the product!',
-        icon: 'warning',
-        buttons: {
-            cancel: true,
-            confirm: {
-                text: 'Update',
-                value: true,
-                visible: true,
-                className: "btn-primary",
-                closeModal: true
-            }
-        }
-    }).then((willUpdate) => {
-        if (willUpdate) {
-            // If confirmed, submit the form
-            document.querySelector('form').submit();
-        }
-    });
-});
-</script>
+                   if ($result) {
+    echo "
+    <script>
+        swal({
+            title: 'Success!',
+            text: 'Product Updated Successfully!',
+            icon: 'success',
+            button: 'OK',
+        }).then(function() {
+            window.location = 'products-edit.php?id=" . $product_id . "';
+        });
+    </script>
+    ";
+    exit; // Ensure to exit after echoing the script
+}
 
                    </div>
                    <?php                        
