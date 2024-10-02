@@ -165,23 +165,16 @@ if (isset($_POST['saveProduct'])) {
         'image' => $finalImage,
         'status' => $status
     ];
-    session_start();
 
-    $result = update('products', $product_id, $data);
-    
+    $result = insert('products', $data);
+
     if ($result) {
-        $_SESSION['message'] = 'Product Updated Successfully!';
-        $_SESSION['message_type'] = 'success';
+        redirect('products.php', 'Product Created Successfully!');
     } else {
-        error_log("Update query failed: " . mysqli_error($conn));
-        $_SESSION['message'] = 'Something Went Wrong!';
-        $_SESSION['message_type'] = 'error';
+        error_log("Insert query failed: " . mysqli_error($conn));
+        redirect('products-create.php', 'Something Went Wrong!');
     }
-    
-    // Redirect to the edit page (or wherever you need to show the message)
-    header('Location: products-edit.php?id=' . $product_id);
-    exit();
-    
+}
 
 if (isset($_POST['updateProduct'])) {
     $product_id = validate($_POST['product_id']);
