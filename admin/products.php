@@ -80,18 +80,6 @@
                                     <a href="products-delete.php?id=<?= urlencode($item['id']); ?>" class="btn btn-danger btn-sm">Delete</a>
                                     <a href="products-view.php?id=<?= urlencode($item['id']); ?>" class="btn btn-info btn-sm">View</a>
                                     <a href="products-add.php?id=<?= urlencode($item['id']); ?>" class="btn btn-warning btn-sm">Add</a>
-
-                                    <script>
-    function incrementQuantity(event, itemId) {
-        event.preventDefault(); // Prevent the default link behavior
-        const quantityCell = document.getElementById(itemId);
-        const currentQuantity = parseInt(quantityCell.innerText);
-        quantityCell.innerText = currentQuantity + 1;
-
-        // Redirect to the specified URL after updating the quantity
-        window.location.href = event.currentTarget.href;
-    }
-</script>
                                 </td>
                             </tr>
                             <?php endforeach; ?>
