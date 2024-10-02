@@ -14,7 +14,7 @@
             // Check if the quantity is set in the URL
             if (isset($_GET['quantity'])) {
                 $quantity = intval($_GET['quantity']); // Convert to integer
-                // Optionally set the quantity to be displayed in the input field
+                echo "<script>console.log('Quantity from URL: " . $quantity . "');</script>"; // Debugging output
                 $defaultQuantity = $quantity; // Use this variable in the input field
             } else {
                 $defaultQuantity = ''; // Default to empty if not set
