@@ -165,8 +165,10 @@ if (isset($_POST['saveProduct'])) {
         'image' => $finalImage,
         'status' => $status
     ];
-    $result = update('products', $product_id, $data);
+    session_start();
 
+    $result = update('products', $product_id, $data);
+    
     if ($result) {
         $_SESSION['message'] = 'Product Updated Successfully!';
         $_SESSION['message_type'] = 'success';
@@ -176,6 +178,7 @@ if (isset($_POST['saveProduct'])) {
         $_SESSION['message_type'] = 'error';
     }
     
+    // Redirect to the edit page (or wherever you need to show the message)
     header('Location: products-edit.php?id=' . $product_id);
     exit();
     

@@ -5,6 +5,8 @@
           <div class="card-hear">
                <h4 class="mb-0">Edit Product
                     <a href="products.php" class="btn btn-danger float-end">Back</a>
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
                </h4>
           </div>
           <div class="card-body">
@@ -78,27 +80,12 @@
                          <label for="">Image *</label>
                          <input type="file" name="image" class="form-control" />
                          <img src="../<?= $product['data']['image']; ?>" style="width:40px;height:40px;" alt="Img" />
-                         <div class="d-flex justify-content-end mt-3">
-    <button type="button" id="updateProduct" class="btn btn-primary">Update</button>
-</div>
-
-<script>
-document.getElementById('updateProduct').addEventListener('click', function() {
-    swal({
-        title: "Are you sure?",
-        text: "Once updated, you will not be able to recover this!",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true,
-    })
-    .then((willUpdate) => {
-        if (willUpdate) {
-            // If confirmed, submit the form
-            document.querySelector('form').submit(); // Make sure your button is inside a form
-        }
-    });
-});
-</script>
+                         <form method="POST" action="your_update_action.php">
+    <!-- Your input fields for product details -->
+    <div class="d-flex justify-content-end mt-3">
+        <button type="submit" name="updateProduct" class="btn btn-primary">Update</button>
+    </div>
+</form>
 
                    <?php                        
                    }
