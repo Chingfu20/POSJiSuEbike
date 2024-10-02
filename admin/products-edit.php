@@ -78,6 +78,11 @@
                          <label for="">Image *</label>
                          <input type="file" name="image" class="form-control" />
                          <img src="../<?= $product['data']['image']; ?>" style="width:40px;height:40px;" alt="Img" />
+
+                         <!-- Include SweetAlert CSS and JS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
                     </div>
                     <div class="d-flex justify-content-end mt-3">
                          <button type="submit" name="updateProduct" class="btn btn-primary">Update</button>
