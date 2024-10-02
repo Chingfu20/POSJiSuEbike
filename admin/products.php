@@ -79,7 +79,7 @@
                                     <a href="products-edit.php?id=<?= urlencode($item['id']); ?>" class="btn btn-success btn-sm">Edit</a>
                                     <a href="products-delete.php?id=<?= urlencode($item['id']); ?>" class="btn btn-danger btn-sm">Delete</a>
                                     <a href="products-view.php?id=<?= urlencode($item['id']); ?>" class="btn btn-secondary btn-sm">View</a>
-                                    <a href="products-add.php?id=<?= urlencode($item['id']); ?>" class="btn btn-primary btn-sm">+</a>
+                                    <a href="products-add.php?id=<?= urlencode($item['id']); ?>" class="btn btn-warning btn-sm">+</a>
                                 </td>
                             </tr>
                             <?php endforeach; ?>
