@@ -18,44 +18,31 @@
             <?php alertMessage(); ?>
 
             <?php
-// Include your database connection
-include 'db_connection.php'; // adjust the filename as necessary
+            // Initialize search term if provided
+            $searchTerm = isset($_GET['search']) ? mysqli_real_escape_string($conn, $_GET['search']) : '';
 
-// Initialize search term if provided
-$searchTerm = isset($_GET['search']) ? mysqli_real_escape_string($conn, $_GET['search']) : '';
+            // Fetch products with search functionality
+            $query = "
+                SELECT p.id, p.image, p.name, p.status, p.quantity
+                FROM products p
+            ";
 
-// Fetch products with search functionality
-$query = "
-    SELECT p.id, p.image, p.name, p.status, p.quantity
-    FROM products p
-";
+            // Add search condition if search term is provided
+            if ($searchTerm != '') {
+                $query .= " WHERE p.name LIKE '%$searchTerm%' ";
+            }
 
-if ($searchTerm != '') {
-    $query .= " WHERE p.name LIKE '%$searchTerm%' ";
-}
+            // Order by product ID
+            $query .= " ORDER BY p.id";
 
-$query .= " ORDER BY p.id";
-$products = mysqli_query($conn, $query);
+            $products = mysqli_query($conn, $query);
 
-if (!$products) {
-    echo '<h4>Something Went Wrong!</h4>';
-    return;
-}
-
-if (mysqli_num_rows($products) > 0) {
-    while ($row = mysqli_fetch_assoc($products)) {
-        echo '<div class="product">';
-        echo '<img src="' . $row['image'] . '" alt="' . htmlspecialchars($row['name']) . '">';
-        echo '<h5>' . htmlspecialchars($row['name']) . '</h5>';
-        echo '<p>Status: ' . htmlspecialchars($row['status']) . '</p>';
-        echo '<p>Quantity: ' . htmlspecialchars($row['quantity']) . '</p>';
-        echo '</div>';
-    }
-} else {
-    echo '<h4>No products found</h4>';
-}
-?>
-
+            if (!$products) {
+                echo '<h4>Something Went Wrong!</h4>';
+                return false;
+            }
+            if (mysqli_num_rows($products) > 0) {
+            ?>  
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered">
                         <thead>
