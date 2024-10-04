@@ -91,7 +91,6 @@
             return true; // If all validations pass, allow form submission
         }
 
-        // Password toggle functionality
         const togglePassword = document.querySelector('#togglePassword');
         const password = document.querySelector('#password');
 
@@ -103,38 +102,33 @@
             this.classList.toggle('fa-eye-slash');
         });
 
-        // Handle form submission and display SweetAlert based on server response
         document.querySelector('#loginForm').addEventListener('submit', function(e) {
-            e.preventDefault(); // Prevent form from submitting right away
+            e.preventDefault(); 
 
             if (validateForm()) {
-                // AJAX request to login-code.php
                 var formData = new FormData(this);
 
                 fetch('login-code.php', {
                     method: 'POST',
                     body: formData
                 })
-                .then(response => response.json()) // Expecting JSON response
+                .then(response => response.json())
                 .then(data => {
                     if (data.status === 'success') {
-                        // If login is successful
                         Swal.fire({
                             title: 'Sign In Successful',
                             text: 'You have successfully signed in!',
                             icon: 'success',
                         }).then((result) => {
                             if (result.isConfirmed) {
-                                // Redirect to admin page after login success
                                 window.location.href = 'admin/index.php';
                             }
                         });
                     } else {
-                        // If login fails, show error
                         Swal.fire({
                             icon: 'error',
                             title: 'Login Failed',
-                            text: data.message // Display the error message from the server
+                            text: data.message 
                         });
                     }
                 })
