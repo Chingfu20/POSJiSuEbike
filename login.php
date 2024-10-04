@@ -129,7 +129,7 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 // Redirect to the desired page, for example, after successful login
-                window.location.href = 'admin/index.php';
+                window.location.href = '..admin/index.php';
             }
         });
     });
