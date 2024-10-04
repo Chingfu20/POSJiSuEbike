@@ -126,7 +126,6 @@
             title: 'Sign In Successful',
             text: 'You have successfully signed in!',
             icon: 'success',
-            confirmButtonText: 'OK'
         }).then((result) => {
             if (result.isConfirmed) {
                 // Redirect to the desired page, for example, after successful login
