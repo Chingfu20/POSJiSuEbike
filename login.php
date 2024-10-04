@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="">
     <!-- SweetAlert Library -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <?php 
