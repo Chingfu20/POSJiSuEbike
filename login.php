@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="">
     <!-- SweetAlert Library -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <?php 
@@ -26,7 +27,7 @@
                     <div class="card shadow rounded-4 custom-card">
                         <div class="p-5">
                             <center><h4 class="text-dark mb-3">Login Admin</h4></center>
-                            <form action="login-code.php" method="POST" class="login-form" id="loginForm">
+                            <form action="login-code.php" method="POST" class="login-form" onsubmit="return validateForm()">
                                 <div class="mb-3">
                                     <label class="form-label">Enter Email</label>
                                     <input type="text" name="email" id="email" class="form-control" />
@@ -41,10 +42,12 @@
                               </div>
                              </div>
                              <div class="my-3">
-                                <button type="submit" name="loginBtn" class="btn btn-primary w-100 mt-2" id="signInBtn">
-                                    Sign In
-                                </button>
-                            </div>
+    <button type="submit" name="loginBtn" class="btn btn-primary w-100 mt-2" id="signInBtn">
+        Sign In
+    </button>
+</div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -91,57 +94,30 @@
             return true; // If all validations pass, allow form submission
         }
 
+        // Check for the message in the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const message = urlParams.get('message');
+
+        // If a message exists (e.g., invalid login), display SweetAlert
+        if (message) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Login Error',
+                text: decodeURIComponent(message.replace(/\+/g, ' ')) // Replaces + with space
+            });
+        }
         const togglePassword = document.querySelector('#togglePassword');
-        const password = document.querySelector('#password');
+    const password = document.querySelector('#password');
 
-        togglePassword.addEventListener('click', function (e) {
-            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-            password.setAttribute('type', type);
-
-            this.classList.toggle('fa-eye');
-            this.classList.toggle('fa-eye-slash');
-        });
-
-        document.querySelector('#loginForm').addEventListener('submit', function(e) {
-            e.preventDefault(); 
-
-            if (validateForm()) {
-                var formData = new FormData(this);
-
-                fetch('login-code.php', {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.status === 'success') {
-                        Swal.fire({
-                            title: 'Sign In Successful',
-                            text: 'You have successfully signed in!',
-                            icon: 'success',
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                window.location.href = 'admin/index.php';
-                            }
-                        });
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Login Failed',
-                            text: data.message 
-                        });
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Something went wrong!'
-                    });
-                });
-            }
-        });
+    togglePassword.addEventListener('click', function (e) {
+        // Toggle the type attribute
+        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+        password.setAttribute('type', type);
+        
+        // Toggle between eye and eye-slash icons
+        this.classList.toggle('fa-eye');
+        this.classList.toggle('fa-eye-slash');
+    });
     </script>
 </body>
 </html>
