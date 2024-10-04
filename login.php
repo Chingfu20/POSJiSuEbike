@@ -56,68 +56,113 @@
     </div>
 
     <script>
-        // Function to validate form inputs
-        function validateForm() {
-            var email = document.getElementById('email').value;
-            var password = document.getElementById('password').value;
+    // Function to validate form inputs before making the AJAX call
+    function validateForm() {
+        var email = document.getElementById('email').value;
+        var password = document.getElementById('password').value;
 
-            // Simple email validation pattern
-            var emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+        // Simple email validation pattern
+        var emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
 
-            if (email == '') {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Email is required!'
-                });
-                return false; // Prevent form submission
-            }
-
-            if (!email.match(emailPattern)) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Please enter a valid email address!'
-                });
-                return false; // Prevent form submission
-            }
-
-            if (password == '') {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Password is required!'
-                });
-                return false; // Prevent form submission
-            }
-
-            return true; // If all validations pass, allow form submission
-        }
-
-        // Check for the message in the URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const message = urlParams.get('message');
-
-        // If a message exists (e.g., invalid login), display SweetAlert
-        if (message) {
+        if (email == '') {
             Swal.fire({
                 icon: 'error',
-                title: 'Login Error',
-                text: decodeURIComponent(message.replace(/\+/g, ' ')) // Replaces + with space
+                title: 'Oops...',
+                text: 'Email is required!'
+            });
+            return false; // Prevent form submission
+        }
+
+        if (!email.match(emailPattern)) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Please enter a valid email address!'
+            });
+            return false; // Prevent form submission
+        }
+
+        if (password == '') {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Password is required!'
+            });
+            return false; // Prevent form submission
+        }
+
+        return true; // If all validations pass, allow form submission
+    }
+
+    // Handle the form submission with AJAX
+    document.querySelector('#loginForm').addEventListener('submit', function(e) {
+        e.preventDefault(); // Prevent form from submitting the default way
+
+        if (validateForm()) {
+            // AJAX request to login-code.php
+            var formData = new FormData(this);
+
+            fetch('login-code.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json()) // Expecting a JSON response
+            .then(data => {
+                if (data.status === 'success') {
+                    // If login is successful
+                    Swal.fire({
+                        title: 'Login Successful',
+                        text: 'You have successfully signed in!',
+                        icon: 'success',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Redirect to admin page after login success
+                            window.location.href = 'admin/index.php';
+                        }
+                    });
+                } else {
+                    // If login fails, show error
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Login Failed',
+                        text: data.message // Display the error message from the server
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong!'
+                });
             });
         }
-        const togglePassword = document.querySelector('#togglePassword');
+    });
+
+    // Password toggle functionality
+    const togglePassword = document.querySelector('#togglePassword');
     const password = document.querySelector('#password');
 
-    togglePassword.addEventListener('click', function (e) {
-        // Toggle the type attribute
+    togglePassword.addEventListener('click', function () {
         const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
         password.setAttribute('type', type);
-        
-        // Toggle between eye and eye-slash icons
+
         this.classList.toggle('fa-eye');
         this.classList.toggle('fa-eye-slash');
     });
-    </script>
+
+    // Check for the message in the URL (e.g., invalid login)
+    const urlParams = new URLSearchParams(window.location.search);
+    const message = urlParams.get('message');
+
+    if (message) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Login Error',
+            text: decodeURIComponent(message.replace(/\+/g, ' ')) // Replace + with space
+        });
+    }
+</script>
 </body>
 </html>
