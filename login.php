@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="">
     <!-- SweetAlert Library -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <?php 
@@ -32,18 +33,19 @@
                                     <input type="text" name="email" id="email" class="form-control" />
                                 </div>
                                 <div class="mb-3">
-    <label class="form-label">Enter Password</label>
-    <div class="input-group">
-        <input type="password" name="password" id="password" class="form-control" />
-        <span class="input-group-text">
-            <i class="fa fa-eye" id="togglePassword" style="cursor: pointer;"></i>
-        </span>
-    </div>
+                                  <label class="form-label">Enter Password</label>
+                                <div class="input-group">
+                                  <input type="password" name="password" id="password" class="form-control" />
+                                <span class="input-group-text">
+                                  <i class="fa fa-eye" id="togglePassword" style="cursor: pointer;"></i>
+                               </span>
+                              </div>
+                             </div>
+                             <div class="my-3">
+    <button type="submit" name="loginBtn" class="btn btn-primary w-100 mt-2" id="signInBtn">
+        Sign In
+    </button>
 </div>
-                                <div class="my-3">
-                                    <button type="submit" name="loginBtn" class="btn btn-primary w-100 mt-2">
-                                        Sign In
-                                    </button>
                                 </div>
                             </form>
                         </div>
@@ -115,6 +117,22 @@
         // Toggle between eye and eye-slash icons
         this.classList.toggle('fa-eye');
         this.classList.toggle('fa-eye-slash');
+    });
+    document.querySelector('#signInBtn').addEventListener('click', function(e) {
+        e.preventDefault(); // Prevent form submission for demonstration purposes
+
+        // SweetAlert2 success message
+        Swal.fire({
+            title: 'Sign In Successful',
+            text: 'You have successfully signed in!',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Redirect to the desired page, for example, after successful login
+                window.location.href = 'admin/index.php';
+            }
+        });
     });
     </script>
 </body>
