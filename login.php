@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="">
     <!-- SweetAlert Library -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <?php 
@@ -112,7 +113,8 @@
         const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
         password.setAttribute('type', type);
         
-        // Toggle the eye icon
+        // Toggle between eye and eye-slash icons
+        this.classList.toggle('fa-eye');
         this.classList.toggle('fa-eye-slash');
     });
     </script>
