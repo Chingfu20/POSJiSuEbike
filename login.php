@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="">
     <!-- SweetAlert Library -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <?php 
@@ -27,7 +26,7 @@
                     <div class="card shadow rounded-4 custom-card">
                         <div class="p-5">
                             <center><h4 class="text-dark mb-3">Login Admin</h4></center>
-                            <form action="login-code.php" method="POST" class="login-form" onsubmit="return validateForm()">
+                            <form action="login-code.php" method="POST" class="login-form" id="loginForm">
                                 <div class="mb-3">
                                     <label class="form-label">Enter Email</label>
                                     <input type="text" name="email" id="email" class="form-control" />
@@ -42,12 +41,10 @@
                               </div>
                              </div>
                              <div class="my-3">
-    <button type="submit" name="loginBtn" class="btn btn-primary w-100 mt-2" id="signInBtn">
-        Sign In
-    </button>
-</div>
-                                </div>
-                            </form>
+                                <button type="submit" name="loginBtn" class="btn btn-primary w-100 mt-2" id="signInBtn">
+                                    Sign In
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -94,45 +91,63 @@
             return true; // If all validations pass, allow form submission
         }
 
-        // Check for the message in the URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const message = urlParams.get('message');
-
-        // If a message exists (e.g., invalid login), display SweetAlert
-        if (message) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Login Error',
-                text: decodeURIComponent(message.replace(/\+/g, ' ')) // Replaces + with space
-            });
-        }
+        // Password toggle functionality
         const togglePassword = document.querySelector('#togglePassword');
-    const password = document.querySelector('#password');
+        const password = document.querySelector('#password');
 
-    togglePassword.addEventListener('click', function (e) {
-        // Toggle the type attribute
-        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-        password.setAttribute('type', type);
-        
-        // Toggle between eye and eye-slash icons
-        this.classList.toggle('fa-eye');
-        this.classList.toggle('fa-eye-slash');
-    });
-    document.querySelector('#signInBtn').addEventListener('click', function(e) {
-        e.preventDefault(); // Prevent form submission for demonstration purposes
+        togglePassword.addEventListener('click', function (e) {
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
 
-        // SweetAlert2 success message
-        Swal.fire({
-            title: 'Sign In Successful',
-            text: 'You have successfully signed in!',
-            icon: 'success',
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // Redirect to the desired page, for example, after successful login
-                window.location.href = 'admin/index.php';
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
+        });
+
+        // Handle form submission and display SweetAlert based on server response
+        document.querySelector('#loginForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent form from submitting right away
+
+            if (validateForm()) {
+                // AJAX request to login-code.php
+                var formData = new FormData(this);
+
+                fetch('login-code.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json()) // Expecting JSON response
+                .then(data => {
+                    if (data.status === 'success') {
+                        // If login is successful
+                        Swal.fire({
+                            title: 'Sign In Successful',
+                            text: 'You have successfully signed in!',
+                            icon: 'success',
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                // Redirect to admin page after login success
+                                window.location.href = 'admin/index.php';
+                            }
+                        });
+                    } else {
+                        // If login fails, show error
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Login Failed',
+                            text: data.message // Display the error message from the server
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Something went wrong!'
+                    });
+                });
             }
         });
-    });
     </script>
 </body>
 </html>
