@@ -28,23 +28,19 @@
                         <div class="p-5">
                             <center><h4 class="text-dark mb-3">Login Admin</h4></center>
                             <form action="login-code.php" method="POST" class="login-form" onsubmit="return validateForm()">
-                                <div class="mb-3">
-                                    <label class="form-label">Enter Email</label>
-                                    <input type="text" name="email" id="email" class="form-control" />
-                                </div>
-                                <div class="mb-3">
-    <label class="form-label">Enter Password</label>
-    <div class="input-group">
-        <input type="password" name="password" id="password" class="form-control" />
-        <span class="input-group-text">
-            <i class="fa fa-eye" id="togglePassword" style="cursor: pointer;"></i>
-        </span>
-    </div>
+                            <div class="form-container">
+    <form class="login-form">
+        <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="username">
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password">
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
 </div>
-                                <div class="my-3">
-                                    <button type="submit" name="loginBtn" class="btn btn-primary w-100 mt-2">
-                                        Sign In
-                                    </button>
                                 </div>
                             </form>
                         </div>
