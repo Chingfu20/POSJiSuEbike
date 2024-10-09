@@ -175,6 +175,7 @@
         <p>Add: Campo, Bantigue, Bantayan Island, Cebu. Tel: 0947-209-8888 Complaint:
 
 0947-209-8888</p>
+<p> © Hershey Sedurifa & Johnril Rosello</p>
       </div>
     </div>
   </div>
