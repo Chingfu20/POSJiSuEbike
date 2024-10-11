@@ -42,7 +42,6 @@
             </h4>
         </div>
         <div class="card-body">
-            <?php alertMessage(); ?>
 
             <form action="orders-code.php" method="POST">
                 <div class="row">
