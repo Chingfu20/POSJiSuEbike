@@ -112,7 +112,7 @@ if (isset($_POST['saveCustomerBtn'])) {
                 jsonResponse(500, 'error', 'Something Went Wrong');
             }
         } else {
-            jsonResponse(422, 'warning', 'Phone number must be exactly 11 digits.');
+            jsonResponse(422, 'warning', 'Invalid input. Phone number must have 11 digits.');
         }
     } else {
         jsonResponse(422, 'warning', 'Please Fill required fields.');
