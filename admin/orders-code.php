@@ -97,12 +97,16 @@ if (isset($_POST['saveCustomerBtn'])) {
     $name = validate($_POST['name']);
     $phone = validate($_POST['phone']);
     $email = validate($_POST['email']);
+    $address = validate($_POST['address']);
+
 
     if ($name != '' && $phone != '') {
         $data = [
             'name' => $name,
             'phone' => $phone,
             'email' => $email,
+            'address' => $address,
+
         ];
         $result = insert('customers', $data);
         if ($result) {
