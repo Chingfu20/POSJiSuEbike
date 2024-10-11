@@ -15,11 +15,11 @@
         <div class="mb-3">
             <label for="c_phone">Enter Customer Phone No.</label>
             <input type="text" class="form-control" id="c_phone" pattern="\d{11}" maxlength="11" title="Enter an 11-digit phone number" />
-        </div>
-        <div class="mb-3">
-            <label>Enter Customer Address</label>
-            <textarea class="form-control" id="c_address" rows="3" placeholder="Enter full address" required></textarea>
-        </div>
+      </div>
+      <div class="mb-3">
+        <label>Enter Customer Address</label>
+        <textarea class="form-control" id="c_address" rows="3" placeholder="Enter full address" required></textarea>
+    </div>
         <div class="mb-3">
             <label>Enter Customer Email (optional)</label>
             <input type="text" class="form-control" id="c_email" />
@@ -175,7 +175,6 @@ foreach ($sessionProducts as $key => $item) :
     </div>
 </div>
 
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         function updateTotalAmount() {
@@ -229,14 +228,7 @@ foreach ($sessionProducts as $key => $item) :
 
         updateTotalAmount();
     });
-    document.addEventListener('DOMContentLoaded', function () {
-
-// Function to validate phone number
-function validatePhoneNumber(phone) {
-    return phone.length === 11;
-}
-
-document.getElementById('c_phone').addEventListener('input', function () {
+    document.getElementById('c_phone').addEventListener('input', function () {
     var value = this.value;
 
     // Remove any non-numeric characters
@@ -248,34 +240,15 @@ document.getElementById('c_phone').addEventListener('input', function () {
     }
 
     this.value = value;
-});
 
-document.querySelector('.saveCustomer').addEventListener('click', function () {
-    var customerName = document.getElementById('c_name').value;
-    var customerPhone = document.getElementById('c_phone').value;
-    var customerAddress = document.getElementById('c_address').value;
-
-    // Check if the phone number is exactly 11 digits
-    if (!validatePhoneNumber(customerPhone)) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Invalid Phone Number',
-            text: 'Phone number must be exactly 11 digits!',
-        });
+    // Disable further actions if the number is not exactly 11 digits
+    if (value.length !== 11) {
+        // Show an error message or disable form submission
+        console.log("Invalid number: The phone number must be exactly 11 digits.");
     } else {
-        // Proceed to add the customer if all validations pass
-        Swal.fire({
-            icon: 'success',
-            title: 'Customer Added',
-            text: 'Customer has been successfully added!',
-        });
-
-        // Here you can proceed with your form submission or AJAX call
-        // Example:
-        // addCustomer(customerName, customerPhone, customerAddress);
+        // Valid number
+        console.log("Valid number entered.");
     }
-});
-
 });
 </script>
 

@@ -98,22 +98,28 @@ if (isset($_POST['saveCustomerBtn'])) {
     $phone = validate($_POST['phone']);
     $email = validate($_POST['email']);
 
+    // Check if phone number is exactly 11 digits
     if ($name != '' && $phone != '') {
-        $data = [
-            'name' => $name,
-            'phone' => $phone,
-            'email' => $email,
-        ];
-        $result = insert('customers', $data);
-        if ($result) {
-            jsonResponse(200, 'success', 'Customer Created Successfully');
+        if (strlen($phone) == 11 && ctype_digit($phone)) {
+            $data = [
+                'name' => $name,
+                'phone' => $phone,
+                'email' => $email,
+            ];
+            $result = insert('customers', $data);
+            if ($result) {
+                jsonResponse(200, 'success', 'Customer Created Successfully');
+            } else {
+                jsonResponse(500, 'error', 'Something Went Wrong');
+            }
         } else {
-            jsonResponse(500, 'error', 'Something Went Wrong');
+            jsonResponse(422, 'warning', 'Phone number must be exactly 11 digits.');
         }
     } else {
-        jsonResponse(422, 'warning', 'Please Fill required fields');
+        jsonResponse(422, 'warning', 'Please Fill required fields.');
     }
 }
+
 
 if (isset($_POST['saveOrder'])) {
     $phone = validate($_SESSION['cphone']);
