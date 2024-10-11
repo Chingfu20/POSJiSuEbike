@@ -1,4 +1,5 @@
 <?php include('includes/header.php'); ?>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <div class="modal fade" id="addCustomerModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -141,10 +142,10 @@ foreach ($sessionProducts as $key => $item) :
                                 <option value="Cash Payment">Cash Payment</option>
                             </select>
                     </div>
-                        <div class="col-md-4">
-                        <label for="cphone">Enter Customer Phone Number</label>
-                        <input type="text" id="cphone" class="form-control" maxlength="11" pattern="\d{11}" title="Enter exactly 11 digits" />
-                    </div>
+                    <div class="col-md-4">
+    <label for="cphone">Enter Customer Phone Number</label>
+    <input type="text" id="cphone" class="form-control" maxlength="11" pattern="\d{11}" title="Enter exactly 11 digits" />
+</div>
                         <div class="col-md-4">
                         <label>Total Amount</label>
                         <input type="text" id="totalAmount" class="form-control" value="" readonly />
@@ -228,28 +229,29 @@ foreach ($sessionProducts as $key => $item) :
 
         updateTotalAmount();
     });
-    document.getElementById('c_phone').addEventListener('input', function () {
-    var value = this.value;
+    document.getElementById('addCustomerBtn').addEventListener('click', function() {
+        var phoneInput = document.getElementById('cphone').value;
 
-    // Remove any non-numeric characters
-    value = value.replace(/[^0-9]/g, '');
+        // Check if phone number is exactly 11 digits
+        if (phoneInput.length < 11) {
+            // Show alert if the phone number is less than 11 digits
+            Swal.fire({
+                icon: 'error',
+                title: 'Invalid Number',
+                text: 'Phone number must be exactly 11 digits!',
+            });
+        } else if (phoneInput.length === 11) {
+            // Proceed with adding customer if number is valid
+            Swal.fire({
+                icon: 'success',
+                title: 'Customer Added',
+                text: 'Customer has been successfully added!',
+            });
 
-    // Ensure the value is no longer than 11 digits
-    if (value.length > 11) {
-        value = value.slice(0, 11);
-    }
-
-    this.value = value;
-
-    // Disable further actions if the number is not exactly 11 digits
-    if (value.length !== 11) {
-        // Show an error message or disable form submission
-        console.log("Invalid number: The phone number must be exactly 11 digits.");
-    } else {
-        // Valid number
-        console.log("Valid number entered.");
-    }
-});
+            // You can call your function or perform an action here to add the customer
+            // Example: addCustomer(phoneInput);
+        }
+    });
 </script>
 
 <?php include('includes/footer.php'); ?>
