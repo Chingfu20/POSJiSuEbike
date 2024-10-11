@@ -33,14 +33,14 @@
                                     <input type="text" name="email" id="email" class="form-control" />
                                 </div>
                                 <div class="mb-3">
-    <label class="form-label">Enter Password</label>
-    <div class="input-group">
-        <input type="password" name="password" id="password" class="form-control" />
-        <span class="input-group-text">
-            <i class="fa fa-eye" id="togglePassword" style="cursor: pointer;"></i>
-        </span>
-    </div>
-</div>
+                                <label class="form-label">Enter Password</label>
+                                 <div class="input-group">
+                                  <input type="password" name="password" id="password" class="form-control" />
+                                  <span class="input-group-text">
+                                  <i class="fa fa-eye" id="togglePassword" style="cursor: pointer;"></i>
+                              </span>
+                             </div>
+                            </div>
                                 <div class="my-3">
                                     <button type="submit" name="loginBtn" class="btn btn-primary w-100 mt-2">
                                         Sign In
@@ -105,16 +105,17 @@
                 text: decodeURIComponent(message.replace(/\+/g, ' ')) // Replaces + with space
             });
         }
-            const togglePassword = document.querySelector('#togglePassword');
+        const togglePassword = document.querySelector('#togglePassword');
     const password = document.querySelector('#password');
 
-    togglePassword.addEventListener('click', function (e) {
-        // Toggle the type attribute
-        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-        password.setAttribute('type', type);
-        
-        // Toggle the eye icon
-        this.classList.toggle('fa-eye-slash');
+    togglePassword.addEventListener('click', function () {
+        // Toggle between password and text field types
+        const isPasswordVisible = password.getAttribute('type') === 'password';
+        password.setAttribute('type', isPasswordVisible ? 'text' : 'password');
+
+        // Update the icon based on the current state
+        this.classList.toggle('fa-eye');           // Shows the eye icon
+        this.classList.toggle('fa-eye-slash');     // Switches to the slashed eye icon
     });
     </script>
 </body>
