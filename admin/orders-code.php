@@ -98,7 +98,6 @@ if (isset($_POST['saveCustomerBtn'])) {
     $phone = validate($_POST['phone']);
     $email = validate($_POST['email']);
 
-    // Check if phone number is exactly 11 digits
     if ($name != '' && $phone != '') {
         if (strlen($phone) == 11 && ctype_digit($phone)) {
             $data = [
@@ -113,7 +112,7 @@ if (isset($_POST['saveCustomerBtn'])) {
                 jsonResponse(500, 'error', 'Something Went Wrong');
             }
         } else {
-            jsonResponse(422, 'warning', 'Phone number must be exactly 11 digits.');
+            jsonResponse(422, 'warning', 'Please Fill required fields.');
         }
     } else {
         jsonResponse(422, 'warning', 'Please Fill required fields.');
