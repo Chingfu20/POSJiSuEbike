@@ -1,5 +1,4 @@
 <?php include('includes/header.php'); ?>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <div class="modal fade" id="addCustomerModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -16,11 +15,11 @@
         <div class="mb-3">
             <label for="c_phone">Enter Customer Phone No.</label>
             <input type="text" class="form-control" id="c_phone" pattern="\d{11}" maxlength="11" title="Enter an 11-digit phone number" />
-      </div>
-      <div class="mb-3">
-        <label>Enter Customer Address</label>
-        <textarea class="form-control" id="c_address" rows="3" placeholder="Enter full address" required></textarea>
-    </div>
+        </div>
+        <div class="mb-3">
+            <label>Enter Customer Address</label>
+            <textarea class="form-control" id="c_address" rows="3" placeholder="Enter full address" required></textarea>
+        </div>
         <div class="mb-3">
             <label>Enter Customer Email (optional)</label>
             <input type="text" class="form-control" id="c_email" />
@@ -142,10 +141,10 @@ foreach ($sessionProducts as $key => $item) :
                                 <option value="Cash Payment">Cash Payment</option>
                             </select>
                     </div>
-                    <div class="col-md-4">
-    <label for="cphone">Enter Customer Phone Number</label>
-    <input type="text" id="cphone" class="form-control" maxlength="11" pattern="\d{11}" title="Enter exactly 11 digits" />
-</div>
+                        <div class="col-md-4">
+                        <label for="cphone">Enter Customer Phone Number</label>
+                        <input type="text" id="cphone" class="form-control" maxlength="11" pattern="\d{11}" title="Enter exactly 11 digits" />
+                    </div>
                         <div class="col-md-4">
                         <label>Total Amount</label>
                         <input type="text" id="totalAmount" class="form-control" value="" readonly />
@@ -176,6 +175,7 @@ foreach ($sessionProducts as $key => $item) :
     </div>
 </div>
 
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         function updateTotalAmount() {
@@ -229,29 +229,54 @@ foreach ($sessionProducts as $key => $item) :
 
         updateTotalAmount();
     });
-    document.getElementById('addCustomerBtn').addEventListener('click', function() {
-        var phoneInput = document.getElementById('cphone').value;
+    document.addEventListener('DOMContentLoaded', function () {
 
-        // Check if phone number is exactly 11 digits
-        if (phoneInput.length < 11) {
-            // Show alert if the phone number is less than 11 digits
-            Swal.fire({
-                icon: 'error',
-                title: 'Invalid Number',
-                text: 'Phone number must be exactly 11 digits!',
-            });
-        } else if (phoneInput.length === 11) {
-            // Proceed with adding customer if number is valid
-            Swal.fire({
-                icon: 'success',
-                title: 'Customer Added',
-                text: 'Customer has been successfully added!',
-            });
+// Function to validate phone number
+function validatePhoneNumber(phone) {
+    return phone.length === 11;
+}
 
-            // You can call your function or perform an action here to add the customer
-            // Example: addCustomer(phoneInput);
-        }
-    });
+document.getElementById('c_phone').addEventListener('input', function () {
+    var value = this.value;
+
+    // Remove any non-numeric characters
+    value = value.replace(/[^0-9]/g, '');
+
+    // Ensure the value is no longer than 11 digits
+    if (value.length > 11) {
+        value = value.slice(0, 11);
+    }
+
+    this.value = value;
+});
+
+document.querySelector('.saveCustomer').addEventListener('click', function () {
+    var customerName = document.getElementById('c_name').value;
+    var customerPhone = document.getElementById('c_phone').value;
+    var customerAddress = document.getElementById('c_address').value;
+
+    // Check if the phone number is exactly 11 digits
+    if (!validatePhoneNumber(customerPhone)) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Invalid Phone Number',
+            text: 'Phone number must be exactly 11 digits!',
+        });
+    } else {
+        // Proceed to add the customer if all validations pass
+        Swal.fire({
+            icon: 'success',
+            title: 'Customer Added',
+            text: 'Customer has been successfully added!',
+        });
+
+        // Here you can proceed with your form submission or AJAX call
+        // Example:
+        // addCustomer(customerName, customerPhone, customerAddress);
+    }
+});
+
+});
 </script>
 
 <?php include('includes/footer.php'); ?>
