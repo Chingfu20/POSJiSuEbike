@@ -39,8 +39,8 @@
                                   <span class="input-group-text">
                                   <i class="fa fa-eye" id="togglePassword" style="cursor: pointer;"></i>
                               </span>
-                             </div>
-                            </div>
+                         </div>
+                      </div>
                                 <div class="my-3">
                                     <button type="submit" name="loginBtn" class="btn btn-primary w-100 mt-2">
                                         Sign In
@@ -109,13 +109,12 @@
     const password = document.querySelector('#password');
 
     togglePassword.addEventListener('click', function () {
-        // Toggle between password and text field types
+
         const isPasswordVisible = password.getAttribute('type') === 'password';
         password.setAttribute('type', isPasswordVisible ? 'text' : 'password');
 
-        // Update the icon based on the current state
-        this.classList.toggle('fa-eye');           // Shows the eye icon
-        this.classList.toggle('fa-eye-slash');     // Switches to the slashed eye icon
+        this.classList.toggle('fa-eye');
+        this.classList.toggle('fa-eye-slash'); 
     });
     </script>
 </body>
