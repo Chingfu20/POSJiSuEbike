@@ -18,6 +18,7 @@
             <?php alertMessage(); ?>
 
             <?php
+            // Initialize search term if provided
             $searchTerm = isset($_GET['search']) ? mysqli_real_escape_string($conn, $_GET['search']) : '';
 
             // Fetch products with search functionality
@@ -26,10 +27,12 @@
                 FROM products p
             ";
 
+            // Add search condition if search term is provided
             if ($searchTerm != '') {
                 $query .= " WHERE p.name LIKE '%$searchTerm%' ";
             }
 
+            // Order by product ID
             $query .= " ORDER BY p.id";
 
             $products = mysqli_query($conn, $query);
@@ -44,28 +47,29 @@
                     <table class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>ID</th> <!-- Display ID column -->
                                 <th>Image</th>
                                 <th>Name</th>
-                                <th>Quantity</th>
+                                <th>Quantity</th> <!-- Changed header text -->
                                 <th>Action</th> 
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                            $displayId = 1;
+                            $displayId = 1; // Initialize display ID
                             foreach($products as $item) : ?>
                             <tr>
-                                <td><?= $displayId++ ?></td>
+                                <td><?= $displayId++ ?></td> <!-- Display ID -->
                                 <td>
                                     <img src="../<?= htmlspecialchars($item['image']); ?>" style="width:50px;height:50px;" alt="Img" />
                                 </td>
                                 <td><?= htmlspecialchars($item['name']) ?></td>
                                 <td>
-                                    <div class="input-group qtyBox">
-                                        <button class="input-group-text decrement" data-id="<?= $item['id']; ?>">-</button>
-                                        <input type="text" value="<?= $item['quantity']; ?>" class="qty quantityInput" data-id="<?= $item['id']; ?>" />
-                                        <button class="input-group-text increment" data-id="<?= $item['id']; ?>">+</button>
+                                <div class="input-group qtyBox">
+                                    
+                                        <button class="input-group-text decrement">-</button>
+                                        <input type="text" value="<?= $item['quantity']; ?>" class="qty quantityInput" />
+                                        <button class="input-group-text increment">+</button>
                                     </div>
                                 </td>
                                 <td>
@@ -88,68 +92,27 @@
         </div>
     </div>
 </div>
-
 <script>
-    function updateProductQuantity(productId, quantity) {
-        fetch('products.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: `productIncDec=1&product_id=${productId}&quantity=${quantity}`
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === 'success') {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Quantity Updated',
-                    text: data.message,
-                    timer: 1500,
-                    showConfirmButton: false
-                });
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: data.message,
-                    timer: 1500,
-                    showConfirmButton: false
-                });
-            }
-        })
-        .catch(error => {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Something went wrong. Please try again.',
-                timer: 1500,
-                showConfirmButton: false
+    document.querySelectorAll('.increment').forEach(button => {
+            button.addEventListener('click', function () {
+                const qtyInput = this.parentElement.querySelector('.quantityInput');
+                let quantity = parseInt(qtyInput.value);
+                if (quantity < 999) {
+                    qtyInput.value = +quantity;
+                    updateTotalPrice(this);
+                }
             });
         });
-    }
 
-    document.querySelectorAll('.increment').forEach(button => {
-        button.addEventListener('click', function () {
-            const qtyInput = this.parentElement.querySelector('.quantityInput');
-            let quantity = parseInt(qtyInput.value);
-            if (quantity < 999) {
-                qtyInput.value = ++quantity;
-                updateProductQuantity(this.dataset.id, quantity);
-            }
+        document.querySelectorAll('.decrement').forEach(button => {
+            button.addEventListener('click', function () {
+                const qtyInput = this.parentElement.querySelector('.quantityInput');
+                let quantity = parseInt(qtyInput.value);
+                if (quantity > 1) {
+                    qtyInput.value = -quantity;
+                    updateTotalPrice(this);
+                }
+            });
         });
-    });
-
-    document.querySelectorAll('.decrement').forEach(button => {
-        button.addEventListener('click', function () {
-            const qtyInput = this.parentElement.querySelector('.quantityInput');
-            let quantity = parseInt(qtyInput.value);
-            if (quantity > 1) {
-                qtyInput.value = --quantity;
-                updateProductQuantity(this.dataset.id, quantity);
-            }
-        });
-    });
 </script>
-
 <?php include('includes/footer.php'); ?>
