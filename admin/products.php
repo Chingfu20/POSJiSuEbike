@@ -79,8 +79,8 @@
                                     <a href="products-edit.php?id=<?= urlencode($item['id']); ?>" class="btn btn-success btn-sm">Edit</a>
                                     <a href="products-delete.php?id=<?= urlencode($item['id']); ?>" class="btn btn-danger btn-sm">Delete</a>
                                     <a href="products-view.php?id=<?= urlencode($item['id']); ?>" class="btn btn-info btn-sm">View</a>
-                                    <a href="products-add.php?id=<?= urlencode($item['id']); ?>" class="btn btn-warning btn-sm">+</a>
-                                </td>
+                                    <button class="btn btn-warning btn-sm add-quantity-btn" data-id="<?= $item['id']; ?>">+</button>
+                                    </td>
                             </tr>
                             <?php endforeach; ?>
                         </tbody>
@@ -96,5 +96,35 @@
         </div>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    // When the "+" button is clicked
+    $('.add-quantity-btn').click(function() {
+        var productId = $(this).data('id');
+        var button = $(this);
+
+        // Perform AJAX request to add quantity
+        $.ajax({
+            url: 'add-quantity.php',
+            method: 'POST',
+            data: { id: productId },
+            dataType: 'json',
+            success: function(response) {
+                if (response.status === 'success') {
+                    alert('Quantity updated successfully! New quantity: ' + response.new_quantity);
+                    // Optionally, you can refresh the page or update the quantity field in the table
+                    location.reload(); // Refresh the page
+                } else {
+                    alert('Error: ' + response.message);
+                }
+            },
+            error: function() {
+                alert('Failed to update quantity');
+            }
+        });
+    });
+});
+</script>
 
 <?php include('includes/footer.php'); ?>
