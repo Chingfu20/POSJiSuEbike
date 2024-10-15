@@ -66,9 +66,9 @@
                                 <td><?= htmlspecialchars($item['name']) ?></td>
                                 <td>
                                 <div class="input-group qtyBox">
-                                        <button class="input-group-text decrement">-</button>
-                                        <input type="text" value="<?= $item['quantity']; ?>" class="qty quantityInput" />
-                                        <button class="input-group-text increment">+</button>
+                                <button class="decrement">-</button>
+                                   <input type="text" class="quantityInput" value="1" />
+                                   <button class="increment">+</button>
                                     </div>
                                 </td>
                                 <td>
@@ -96,7 +96,8 @@
         button.addEventListener('click', function () {
             const qtyInput = this.parentElement.querySelector('.quantityInput');
             let quantity = parseInt(qtyInput.value);
-            if (quantity < 999) {
+            // Ensure quantity is a number before incrementing
+            if (!isNaN(quantity) && quantity < 999) {
                 qtyInput.value = quantity + 1; 
                 updateTotalPrice(this);
             }
@@ -107,7 +108,8 @@
         button.addEventListener('click', function () {
             const qtyInput = this.parentElement.querySelector('.quantityInput');
             let quantity = parseInt(qtyInput.value);
-            if (quantity > 1) {
+            // Ensure quantity is a number before decrementing
+            if (!isNaN(quantity) && quantity > 1) {
                 qtyInput.value = quantity - 1; 
                 updateTotalPrice(this);
             }
