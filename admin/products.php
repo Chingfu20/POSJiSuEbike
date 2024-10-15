@@ -91,7 +91,7 @@
 
 <script>
     function updateProductQuantity(productId, quantity) {
-        fetch('update_quantity.php', {
+        fetch('products.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -134,7 +134,7 @@
             const qtyInput = this.parentElement.querySelector('.quantityInput');
             let quantity = parseInt(qtyInput.value);
             if (quantity < 999) {
-                qtyInput.value = +quantity;
+                qtyInput.value = ++quantity;
                 updateProductQuantity(this.dataset.id, quantity);
             }
         });
@@ -145,7 +145,7 @@
             const qtyInput = this.parentElement.querySelector('.quantityInput');
             let quantity = parseInt(qtyInput.value);
             if (quantity > 1) {
-                qtyInput.value = -quantity;
+                qtyInput.value = --quantity;
                 updateProductQuantity(this.dataset.id, quantity);
             }
         });
