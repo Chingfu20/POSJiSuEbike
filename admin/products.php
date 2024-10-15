@@ -70,6 +70,9 @@
                                         <input type="text" name="quantity" required value="<?= $product['data']['quantity']; ?>" class="form-control" />
                                         <button class="input-group-text increment">+</button>
                                     </div>
+                                    <div class="d-flex justify-content-end mt-3">
+                         <button type="submit" name="updateProduct" class="btn btn-primary">Update</button>
+                    </div>
                                 </td>
                                 <td>
                                     <a href="products-edit.php?id=<?= urlencode($item['id']); ?>" class="btn btn-success btn-sm">Edit</a>
