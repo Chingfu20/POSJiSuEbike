@@ -19,16 +19,12 @@
                         <input type="text" name="name" required class="form-control" />
                     </div>
                     <div class="col-md-12 mb-3">
-                        <label for="">Email Id</label>
+                        <label for="">Address</label>
                         <input type="email" name="email" class="form-control" />
                     </div>
                     <div class="col-md-12 mb-3">
                         <label for="">Phone</label>
                         <input type="number" name="phone" class="form-control" />
-                    </div>
-                    <div class="col-md-12 mb-3">
-                        <label for="">Address</label>
-                        <textarea name="address" class="form-control" rows="3" required></textarea>
                     </div>
                     <div class="d-flex justify-content-end mt-3">
                         <br/>
