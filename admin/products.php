@@ -59,11 +59,6 @@
                             <?php
                             $displayId = 1; // Initialize display ID
                             foreach($products as $item) : ?>
-                            <td class="text-center">
-    <button class="btn btn-sm btn-danger btn-minus" data-id="<?= htmlspecialchars($item['id']); ?>">-</button>
-    <span class="quantity"><?= htmlspecialchars($item['quantity']); ?></span>
-    <button class="btn btn-sm btn-success btn-plus" data-id="<?= htmlspecialchars($item['id']); ?>">+</button>
-</td>
                             <tr>
                                 <td><?= $displayId++ ?></td> <!-- Display ID -->
                                 <td>
@@ -84,6 +79,7 @@
                                     <a href="products-edit.php?id=<?= urlencode($item['id']); ?>" class="btn btn-success btn-sm">Edit</a>
                                     <a href="products-delete.php?id=<?= urlencode($item['id']); ?>" class="btn btn-danger btn-sm">Delete</a>
                                     <a href="products-view.php?id=<?= urlencode($item['id']); ?>" class="btn btn-info btn-sm">View</a>
+                                    <a href="products-add.php?id=<?= urlencode($item['id']); ?>" class="btn btn-warning btn-sm">+</a>
                                 </td>
                             </tr>
                             <?php endforeach; ?>
