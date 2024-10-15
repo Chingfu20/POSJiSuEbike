@@ -23,7 +23,7 @@ if (isset($_POST['saveAdmin'])) {
 
         $data = [
             'name' => $name,
-            'address' => $address,
+            'email' => $email,
             'password' => $bcrypt_password,
             'phone' => $phone,
             'is_ban' => $is_ban
@@ -231,8 +231,9 @@ if (isset($_POST['updateProduct'])) {
 
 if (isset($_POST['saveCustomer'])) {
     $name = validate($_POST['name']);
-    $address = validate($_POST['address']);
+    $email = validate($_POST['email']);
     $phone = validate($_POST['phone']);
+    $address = validate($_POST['address']); // Added address field
     $status = isset($_POST['status']) ? 1 : 0;
 
     if ($name && $address) { // Ensure both name and address are filled
@@ -248,8 +249,9 @@ if (isset($_POST['saveCustomer'])) {
 
         $data = [
             'name' => $name,
-            'address' => $address,
+            'email' => $email,
             'phone' => $phone,
+            'address' => $address, // Add address to the data array
             'status' => $status
         ];
 
@@ -270,8 +272,9 @@ if (isset($_POST['saveCustomer'])) {
 if (isset($_POST['updateCustomer'])) {
     $customerId = validate($_POST['customerId']);
     $name = validate($_POST['name']);
-    $address = validate($_POST['address']);
+    $email = validate($_POST['email']);
     $phone = validate($_POST['phone']);
+    $address = validate($_POST['address']); // Added address field
     $status = isset($_POST['status']) ? 1 : 0;
 
     if ($name && $address) { // Ensure both name and address are filled
@@ -287,8 +290,9 @@ if (isset($_POST['updateCustomer'])) {
 
         $data = [
             'name' => $name,
-            'address' => $address,
+            'email' => $email,
             'phone' => $phone,
+            'address' => $address, // Add address to the data array
             'status' => $status
         ];
 
