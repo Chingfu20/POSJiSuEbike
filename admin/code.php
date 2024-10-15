@@ -268,7 +268,6 @@ if (isset($_POST['saveCustomer'])) {
     }
 }
 
-
 if (isset($_POST['updateCustomer'])) {
     $customerId = validate($_POST['customerId']);
     $name = validate($_POST['name']);
