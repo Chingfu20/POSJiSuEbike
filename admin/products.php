@@ -65,14 +65,11 @@
                                 </td>
                                 <td><?= htmlspecialchars($item['name']) ?></td>
                                 <td>
-                                <div class="col-md-4 mb-3">
-    <label for="">Unit *</label>
-    <div class="input-group qtyBox">
-        <button class="input-group-text decrement">-</button>
-        <input type="text" name="quantity" required value="<?= $product['data']['quantity']; ?>" class="form-control quantityInput" />
-        <button class="input-group-text increment">+</button>
-    </div>
-</div>
+                                <div class="input-group qtyBox">
+                                        <button class="input-group-text decrement">-</button>
+                                        <input type="text" value="<?= $item['quantity']; ?>" class="qty quantityInput" />
+                                        <button class="input-group-text increment">+</button>
+                                    </div>
                                 </td>
                                 <td>
                                     <a href="products-edit.php?id=<?= urlencode($item['id']); ?>" class="btn btn-success btn-sm">Edit</a>
@@ -94,36 +91,27 @@
         </div>
     </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const quantityInput = document.querySelector('.quantityInput');
-        const incrementBtn = document.querySelector('.increment');
-        const decrementBtn = document.querySelector('.decrement');
-
-        incrementBtn.addEventListener('click', function() {
-            let currentValue = parseInt(quantityInput.value);
-            quantityInput.value = currentValue + 1;
-            showAlert('Quantity updated successfully');
-        });
-
-        decrementBtn.addEventListener('click', function() {
-            let currentValue = parseInt(quantityInput.value);
-            if (currentValue > 0) { // Prevent going below zero
-                quantityInput.value = currentValue - 1;
-                showAlert('Quantity updated successfully');
+    document.querySelectorAll('.increment').forEach(button => {
+        button.addEventListener('click', function () {
+            const qtyInput = this.parentElement.querySelector('.quantityInput');
+            let quantity = parseInt(qtyInput.value);
+            if (quantity < 999) {
+                qtyInput.value = quantity + 1; 
+                updateTotalPrice(this);
             }
         });
+    });
 
-        function showAlert(message) {
-            Swal.fire({
-                icon: 'success',
-                title: message,
-                showConfirmButton: false,
-                timer: 1500
-            });
-        }
+    document.querySelectorAll('.decrement').forEach(button => {
+        button.addEventListener('click', function () {
+            const qtyInput = this.parentElement.querySelector('.quantityInput');
+            let quantity = parseInt(qtyInput.value);
+            if (quantity > 1) {
+                qtyInput.value = quantity - 1; 
+                updateTotalPrice(this);
+            }
+        });
     });
 </script>
 
