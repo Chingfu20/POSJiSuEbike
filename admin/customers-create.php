@@ -11,7 +11,7 @@
             
             <?php alertMessage(); ?>
 
-            <form action="code.php" method="POST">
+            <form action="customers.php" method="POST">
                 
                 <div class="row">
                     <div class="col-md-12 mb-3">
