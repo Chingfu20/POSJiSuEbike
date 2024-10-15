@@ -119,30 +119,4 @@
         });
     });
 
-    function updateQuantity(productId, quantity) {
-        // Send AJAX request to update the quantity
-        fetch('update_quantity.php', { // Ensure this points to the right PHP file
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                product_id: productId,
-                quantity: quantity
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === 'success') {
-                Swal.fire('Updated!', data.message, 'success'); // Success message
-            } else {
-                Swal.fire('Error!', data.message, 'error'); // Error message
-            }
-        })
-        .catch(error => {
-            Swal.fire('Error!', 'Unable to update the quantity.', 'error');
-        });
-    }
-</script>
-
 <?php include('includes/footer.php'); ?>
