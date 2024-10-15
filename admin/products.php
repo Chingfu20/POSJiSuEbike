@@ -65,11 +65,49 @@
                                 </td>
                                 <td><?= htmlspecialchars($item['name']) ?></td>
                                 <td>
-                                <div class="input-group qtyBox">
-                                        <button class="input-group-text decrement">-</button>
-                                        <input type="text" value="<?= $item['quantity']; ?>" class="qty quantityInput" />
-                                        <button class="input-group-text increment">+</button>
-                                    </div>
+                                <div class="col-md-4 mb-3">
+    <label for="">Unit *</label>
+    <div class="input-group qtyBox">
+        <button class="input-group-text decrement">-</button>
+        <input type="text" name="quantity" required value="<?= $product['data']['quantity']; ?>" class="form-control quantityInput" />
+        <button class="input-group-text increment">+</button>
+    </div>
+</div>
+
+<!-- Include SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const quantityInput = document.querySelector('.quantityInput');
+        const incrementBtn = document.querySelector('.increment');
+        const decrementBtn = document.querySelector('.decrement');
+
+        incrementBtn.addEventListener('click', function() {
+            let currentValue = parseInt(quantityInput.value);
+            quantityInput.value = currentValue + 1;
+            showAlert('Quantity updated successfully');
+        });
+
+        decrementBtn.addEventListener('click', function() {
+            let currentValue = parseInt(quantityInput.value);
+            if (currentValue > 0) { // Prevent going below zero
+                quantityInput.value = currentValue - 1;
+                showAlert('Quantity updated successfully');
+            }
+        });
+
+        function showAlert(message) {
+            Swal.fire({
+                icon: 'success',
+                title: message,
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
+    });
+</script>
+
                                 </td>
                                 <td>
                                     <a href="products-edit.php?id=<?= urlencode($item['id']); ?>" class="btn btn-success btn-sm">Edit</a>
