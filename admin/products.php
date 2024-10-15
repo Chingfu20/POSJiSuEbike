@@ -47,23 +47,19 @@
                     <table class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>ID</th> <!-- Display ID column -->
                                 <th>Image</th>
                                 <th>Name</th>
-                                <th>Quantity</th>
+                                <th>Quantity</th> <!-- Changed header text -->
                                 <th>Action</th> 
                             </tr>
                         </thead>
                         <tbody>
                             <?php
                             $displayId = 1; // Initialize display ID
-                            foreach ($products as $item) : ?>
-                            <tr data-product-id="<?= htmlspecialchars($item['id']); ?>"> <!-- Added data-product-id -->
-                                <td><?= $displayId++ ?></td>
-                                <td>
-                                    <img src="../<?= htmlspecialchars($item['image']); ?>" style="width:50px;height:50px;" alt="Img" />
-                                </td>
-                                <td><?= htmlspecialchars($item['name']) ?></td>
+                            foreach($products as $item) : ?>
+                            <tr>
+                                <td><?= $displayId++ ?></td> <!-- Display ID -->
                                 <td>
                                     <div class="input-group qtyBox">
                                         <button class="input-group-text decrement">-</button>
@@ -71,6 +67,11 @@
                                         <button class="input-group-text increment">+</button>
                                     </div>
                                 </td>
+                                <td>
+                                    <img src="../<?= htmlspecialchars($item['image']); ?>" style="width:50px;height:50px;" alt="Img" />
+                                </td>
+                                <td><?= htmlspecialchars($item['name']) ?></td>
+                                <td class="text-center"><?= htmlspecialchars($item['quantity']) ?></td> <!-- Changed field name -->
                                 <td>
                                     <a href="products-edit.php?id=<?= urlencode($item['id']); ?>" class="btn btn-success btn-sm">Edit</a>
                                     <a href="products-delete.php?id=<?= urlencode($item['id']); ?>" class="btn btn-danger btn-sm">Delete</a>
@@ -91,32 +92,5 @@
         </div>
     </div>
 </div>
-
-<script>
-    document.querySelectorAll('.increment').forEach(button => {
-        button.addEventListener('click', function () {
-            const qtyInput = this.parentElement.querySelector('.quantityInput');
-            let quantity = parseInt(qtyInput.value) + 1; // Increment quantity
-            const productId = this.closest('tr').getAttribute('data-product-id'); // Get product ID
-
-            if (quantity <= 999) {
-                qtyInput.value = quantity;
-                updateQuantity(productId, quantity); // Call AJAX function to update
-            }
-        });
-    });
-
-    document.querySelectorAll('.decrement').forEach(button => {
-        button.addEventListener('click', function () {
-            const qtyInput = this.parentElement.querySelector('.quantityInput');
-            let quantity = parseInt(qtyInput.value) - 1; // Decrement quantity
-            const productId = this.closest('tr').getAttribute('data-product-id'); // Get product ID
-
-            if (quantity >= 1) {
-                qtyInput.value = quantity;
-                updateQuantity(productId, quantity); // Call AJAX function to update
-            }
-        });
-    });
 
 <?php include('includes/footer.php'); ?>
