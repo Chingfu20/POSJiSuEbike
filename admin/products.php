@@ -75,9 +75,9 @@
                                     ?>
                                 </td>
                                 <td class="text-center">
-                                    <button class="btn btn-sm btn-danger btn-minus" data-id="<?= htmlspecialchars($item['id']); ?>">-</button>
+                                    <button data-id="<?= htmlspecialchars($item['id']); ?>">-</button>
                                     <span class="quantity"><?= htmlspecialchars($item['quantity']); ?></span>
-                                    <button class="btn btn-sm btn-success btn-plus" data-id="<?= htmlspecialchars($item['id']); ?>">+</button>
+                                    <button data-id="<?= htmlspecialchars($item['id']); ?>">+</button>
                                 </td>
                                 <td>
                                     <a href="products-edit.php?id=<?= urlencode($item['id']); ?>" class="btn btn-success btn-sm">Edit</a>
