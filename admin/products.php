@@ -66,11 +66,10 @@
                                 <td><?= htmlspecialchars($item['name']) ?></td>
                                 <td>
                                 <div class="input-group qtyBox">
-                                     <button class="input-group-text decrement">-</button>
-                                     <input type="text" value="<?= $item['quantity']; ?>" class="qty quantityInput" />
-                                     <button class="input-group-text increment">+</button>
-                               </div>
-
+                                        <button class="input-group-text decrement">-</button>
+                                        <input type="text" value="<?= $item['quantity']; ?>" class="qty quantityInput" />
+                                        <button class="input-group-text increment">+</button>
+                                    </div>
                                 </td>
                                 <td>
                                     <a href="products-edit.php?id=<?= urlencode($item['id']); ?>" class="btn btn-success btn-sm">Edit</a>
@@ -93,12 +92,6 @@
     </div>
 </div>
 <script>
-    // Function to update the total price (assuming it's defined elsewhere)
-    function updateTotalPrice(button) {
-        // Your logic to update the total price goes here
-        console.log("Total price updated");
-    }
-
     document.querySelectorAll('.increment').forEach(button => {
         button.addEventListener('click', function () {
             const qtyInput = this.parentElement.querySelector('.quantityInput');
@@ -123,6 +116,5 @@
         });
     });
 </script>
-
 
 <?php include('includes/footer.php'); ?>
