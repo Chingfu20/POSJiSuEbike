@@ -64,13 +64,6 @@
                                     <img src="../<?= htmlspecialchars($item['image']); ?>" style="width:50px;height:50px;" alt="Img" />
                                 </td>
                                 <td><?= htmlspecialchars($item['name']) ?></td>
-                                <td>
-                                    <div class="input-group qtyBox">
-                                        <button class="input-group-text decrement">-</button>
-                                        <input type="text" value="<?= $item['quantity']; ?>" class="qty quantityInput" />
-                                        <button class="input-group-text increment">+</button>
-                                    </div>
-                                </td>
                                 <td class="text-center"><?= htmlspecialchars($item['quantity']) ?></td> <!-- Changed field name -->
                                 <td>
                                     <a href="products-edit.php?id=<?= urlencode($item['id']); ?>" class="btn btn-success btn-sm">Edit</a>
