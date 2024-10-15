@@ -50,7 +50,8 @@
                                 <th>ID</th> <!-- Display ID column -->
                                 <th>Image</th>
                                 <th>Name</th>
-                                <th>Action</th>
+                                <th>Quantity</th> <!-- Changed header text -->
+                                <th>Action</th> 
                             </tr>
                         </thead>
                         <tbody>
