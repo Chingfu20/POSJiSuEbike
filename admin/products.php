@@ -50,7 +50,6 @@
                                 <th>ID</th> <!-- Display ID column -->
                                 <th>Image</th>
                                 <th>Name</th>
-                                <th>Status</th>
                                 <th>Quantity</th> <!-- Changed header text -->
                                 <th>Action</th>
                             </tr>
@@ -66,16 +65,7 @@
                                 </td>
                                 <td><?= htmlspecialchars($item['name']) ?></td>
                                 <td>
-                                    <?php
-                                    if($item['status'] == 1){
-                                        echo '<span class="badge bg-danger">Hidden</span>';
-                                    }else{
-                                        echo '<span class="badge bg-primary">Visible</span>';
-                                    }
-                                    ?>
-                                </td>
-                                <td>
-                                <div class="input-group qtyBox">
+                                    <div class="input-group qtyBox">
                                         <button class="input-group-text decrement">-</button>
                                         <input type="text" value="<?= $item['quantity']; ?>" class="qty quantityInput" />
                                         <button class="input-group-text increment">+</button>
