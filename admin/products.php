@@ -47,25 +47,25 @@
                     <table class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th>ID</th> <!-- Display ID column -->
+                                <th>ID</th>
                                 <th>Image</th>
                                 <th>Name</th>
-                                <th>Quantity</th> <!-- Changed header text -->
+                                <th>Quantity</th>
                                 <th>Action</th> 
                             </tr>
                         </thead>
                         <tbody>
                             <?php
                             $displayId = 1; // Initialize display ID
-                            foreach($products as $item) : ?>
-                            <tr>
-                                <td><?= $displayId++ ?></td> <!-- Display ID -->
+                            foreach ($products as $item) : ?>
+                            <tr data-product-id="<?= htmlspecialchars($item['id']); ?>"> <!-- Added data-product-id -->
+                                <td><?= $displayId++ ?></td>
                                 <td>
                                     <img src="../<?= htmlspecialchars($item['image']); ?>" style="width:50px;height:50px;" alt="Img" />
                                 </td>
                                 <td><?= htmlspecialchars($item['name']) ?></td>
                                 <td>
-                                <div class="input-group qtyBox">
+                                    <div class="input-group qtyBox">
                                         <button class="input-group-text decrement">-</button>
                                         <input type="text" value="<?= $item['quantity']; ?>" class="qty quantityInput" />
                                         <button class="input-group-text increment">+</button>
@@ -91,27 +91,58 @@
         </div>
     </div>
 </div>
+
 <script>
     document.querySelectorAll('.increment').forEach(button => {
-            button.addEventListener('click', function () {
-                const qtyInput = this.parentElement.querySelector('.quantityInput');
-                let quantity = parseInt(qtyInput.value);
-                if (quantity < 999) {
-                    qtyInput.value = +quantity;
-                    updateTotalPrice(this);
-                }
-            });
-        });
+        button.addEventListener('click', function () {
+            const qtyInput = this.parentElement.querySelector('.quantityInput');
+            let quantity = parseInt(qtyInput.value) + 1; // Increment quantity
+            const productId = this.closest('tr').getAttribute('data-product-id'); // Get product ID
 
-        document.querySelectorAll('.decrement').forEach(button => {
-            button.addEventListener('click', function () {
-                const qtyInput = this.parentElement.querySelector('.quantityInput');
-                let quantity = parseInt(qtyInput.value);
-                if (quantity > 1) {
-                    qtyInput.value = -quantity;
-                    updateTotalPrice(this);
-                }
-            });
+            if (quantity <= 999) {
+                qtyInput.value = quantity;
+                updateQuantity(productId, quantity); // Call AJAX function to update
+            }
         });
+    });
+
+    document.querySelectorAll('.decrement').forEach(button => {
+        button.addEventListener('click', function () {
+            const qtyInput = this.parentElement.querySelector('.quantityInput');
+            let quantity = parseInt(qtyInput.value) - 1; // Decrement quantity
+            const productId = this.closest('tr').getAttribute('data-product-id'); // Get product ID
+
+            if (quantity >= 1) {
+                qtyInput.value = quantity;
+                updateQuantity(productId, quantity); // Call AJAX function to update
+            }
+        });
+    });
+
+    function updateQuantity(productId, quantity) {
+        // Send AJAX request to update the quantity
+        fetch('update_quantity.php', { // Ensure this points to the right PHP file
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                product_id: productId,
+                quantity: quantity
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                Swal.fire('Updated!', data.message, 'success'); // Success message
+            } else {
+                Swal.fire('Error!', data.message, 'error'); // Error message
+            }
+        })
+        .catch(error => {
+            Swal.fire('Error!', 'Unable to update the quantity.', 'error');
+        });
+    }
 </script>
+
 <?php include('includes/footer.php'); ?>
