@@ -50,7 +50,6 @@
                                 <th>ID</th> <!-- Display ID column -->
                                 <th>Image</th>
                                 <th>Name</th>
-                                <th>Quantity</th> <!-- Changed header text -->
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -67,7 +66,7 @@
                                 <td>
                                     <div class="input-group qtyBox">
                                         <button class="input-group-text decrement">-</button>
-                                        <input value="<?= $item['quantity']; ?>" class="qty quantityInput" />
+                                        <input type="text" value="<?= $item['quantity']; ?>" class="qty quantityInput" />
                                         <button class="input-group-text increment">+</button>
                                     </div>
                                 </td>
