@@ -66,13 +66,11 @@
                                 </td>
                                 <td><?= htmlspecialchars($item['name']) ?></td>
                                 <td>
-                                    <?php
-                                    if($item['status'] == 1){
-                                        echo '<span class="badge bg-danger">Hidden</span>';
-                                    }else{
-                                        echo '<span class="badge bg-primary">Visible</span>';
-                                    }
-                                    ?>
+                                    <div class="input-group qtyBox">
+                                        <button class="input-group-text decrement">-</button>
+                                        <input type="text" value="<?= $item['quantity']; ?>" class="qty quantityInput" />
+                                        <button class="input-group-text increment">+</button>
+                                    </div>
                                 </td>
                                 <td class="text-center"><?= htmlspecialchars($item['quantity']) ?></td> <!-- Changed field name -->
                                 <td>
