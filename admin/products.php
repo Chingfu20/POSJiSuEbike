@@ -66,6 +66,11 @@
                                 </td>
                                 <td><?= htmlspecialchars($item['name']) ?></td>
                                 <td>
+                                <td class="text-center">
+    <button class="btn btn-sm btn-danger btn-minus" data-id="<?= htmlspecialchars($item['id']); ?>">-</button>
+    <span class="quantity"><?= htmlspecialchars($item['quantity']); ?></span>
+    <button class="btn btn-sm btn-success btn-plus" data-id="<?= htmlspecialchars($item['id']); ?>">+</button>
+</td>
                                     <?php
                                     if($item['status'] == 1){
                                         echo '<span class="badge bg-danger">Hidden</span>';
@@ -79,7 +84,6 @@
                                     <a href="products-edit.php?id=<?= urlencode($item['id']); ?>" class="btn btn-success btn-sm">Edit</a>
                                     <a href="products-delete.php?id=<?= urlencode($item['id']); ?>" class="btn btn-danger btn-sm">Delete</a>
                                     <a href="products-view.php?id=<?= urlencode($item['id']); ?>" class="btn btn-info btn-sm">View</a>
-                                    <a href="products-add.php?id=<?= urlencode($item['id']); ?>" class="btn btn-warning btn-sm">+</a>
                                 </td>
                             </tr>
                             <?php endforeach; ?>
@@ -96,5 +100,50 @@
         </div>
     </div>
 </div>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    $(document).ready(function () {
+        // Increase quantity
+        $(".btn-plus").click(function () {
+            var productId = $(this).data('id');
+            updateQuantity(productId, 'increase');
+        });
+
+        // Decrease quantity
+        $(".btn-minus").click(function () {
+            var productId = $(this).data('id');
+            updateQuantity(productId, 'decrease');
+        });
+
+        function updateQuantity(productId, action) {
+            $.ajax({
+                url: "update-quantity.php",  // This script will handle quantity update
+                type: "POST",
+                data: { id: productId, action: action },
+                success: function (response) {
+                    if (response.success) {
+                        // Update the quantity displayed
+                        $("button[data-id='" + productId + "']").siblings('.quantity').text(response.new_quantity);
+
+                        // SweetAlert for success message
+                        Swal.fire({
+                            icon: 'success',
+                            title: response.message,
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    } else {
+                        // SweetAlert for error
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error!',
+                            text: response.message,
+                        });
+                    }
+                }
+            });
+        }
+    });
+</script>
 
 <?php include('includes/footer.php'); ?>

@@ -172,4 +172,46 @@ function getCount($tableName){
         return 'Something Went Wrong!';
     }
 }
+include('config.php');
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $productId = isset($_POST['id']) ? intval($_POST['id']) : 0;
+    $action = $_POST['action'];
+
+    // Fetch the current quantity of the product
+    $query = "SELECT quantity FROM products WHERE id = $productId LIMIT 1";
+    $result = mysqli_query($conn, $query);
+    $product = mysqli_fetch_assoc($result);
+
+    if ($product) {
+        $newQuantity = $product['quantity'];
+
+        // Adjust quantity based on action
+        if ($action == 'increase') {
+            $newQuantity++;
+        } elseif ($action == 'decrease' && $newQuantity > 0) {
+            $newQuantity--;
+        }
+
+        // Update the quantity in the database
+        $updateQuery = "UPDATE products SET quantity = $newQuantity WHERE id = $productId";
+        if (mysqli_query($conn, $updateQuery)) {
+            echo json_encode([
+                'success' => true,
+                'new_quantity' => $newQuantity,
+                'message' => 'Quantity updated successfully!'
+            ]);
+        } else {
+            echo json_encode([
+                'success' => false,
+                'message' => 'Failed to update quantity.'
+            ]);
+        }
+    } else {
+        echo json_encode([
+            'success' => false,
+            'message' => 'Product not found.'
+        ]);
+    }
+}
 ?>
