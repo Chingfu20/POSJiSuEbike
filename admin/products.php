@@ -108,7 +108,7 @@
                 const qtyInput = this.parentElement.querySelector('.quantityInput');
                 let quantity = parseInt(qtyInput.value);
                 if (quantity > 1) {
-                    qtyInput.value = -quantity;
+                    qtyInput.value = --quantity;
                     updateTotalPrice(this);
                 }
             });
