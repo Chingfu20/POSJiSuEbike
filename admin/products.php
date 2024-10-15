@@ -67,7 +67,7 @@
                                 <td>
                                     <div class="input-group qtyBox">
                                         <button class="input-group-text decrement">-</button>
-                                        <input type="text" value="<?= $item['quantity']; ?>" />
+                                        <input value="<?= $item['quantity']; ?>" class="qty quantityInput" />
                                         <button class="input-group-text increment">+</button>
                                     </div>
                                 </td>
