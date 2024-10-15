@@ -57,27 +57,18 @@ if (isset($_POST['productIncDec'])) {
     $productId = validate($_POST['product_id']);
     $quantity = validate($_POST['quantity']);
 
-    if (!isset($_SESSION['productItems']) || empty($_SESSION['productItems'])) {
-        jsonResponse(500, 'error', 'No products in the session');
-        return;
-    }
-
-    error_log(print_r($_SESSION['productItems'], true));
-    error_log("Product ID: $productId, Quantity: $quantity");
-
     $flag = false;
     foreach ($_SESSION['productItems'] as $key => $item) {
         if ($item['product_id'] == $productId) {
             $flag = true;
             $_SESSION['productItems'][$key]['quantity'] = $quantity;
-            break;
         }
     }
 
     if ($flag) {
         jsonResponse(200, 'success', 'Quantity Updated');
     } else {
-        jsonResponse(500, 'error', 'Product not found in session');
+        jsonResponse(500, 'error', 'Something Went Wrong. Please refresh');
     }
 }
 
