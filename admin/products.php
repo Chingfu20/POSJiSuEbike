@@ -96,8 +96,7 @@
         button.addEventListener('click', function () {
             const qtyInput = this.parentElement.querySelector('.quantityInput');
             let quantity = parseInt(qtyInput.value);
-            // Ensure quantity is a number before incrementing
-            if (!isNaN(quantity) && quantity < 999) {
+            if (quantity < 999) {
                 qtyInput.value = quantity + 1; 
                 updateTotalPrice(this);
             }
@@ -108,8 +107,7 @@
         button.addEventListener('click', function () {
             const qtyInput = this.parentElement.querySelector('.quantityInput');
             let quantity = parseInt(qtyInput.value);
-            // Ensure quantity is a number before decrementing
-            if (!isNaN(quantity) && quantity > 1) {
+            if (quantity > 1) {
                 qtyInput.value = quantity - 1; 
                 updateTotalPrice(this);
             }
