@@ -54,22 +54,26 @@ if (isset($_POST['addItem'])) {
 }
 
 if (isset($_POST['productIncDec'])) {
-    $productId = validate($_POST['product_id']);
-    $quantity = validate($_POST['quantity']);
+    $productId = intval($_POST['product_id']);
+    $quantity = intval($_POST['quantity']);
 
-    $flag = false;
-    foreach ($_SESSION['productItems'] as $key => $item) {
-        if ($item['product_id'] == $productId) {
-            $flag = true;
-            $_SESSION['productItems'][$key]['quantity'] = $quantity;
+    if ($productId && $quantity > 0) {
+        $query = "UPDATE products SET quantity = ? WHERE id = ?";
+        $stmt = mysqli_prepare($conn, $query);
+        mysqli_stmt_bind_param($stmt, 'ii', $quantity, $productId);
+        
+        if (mysqli_stmt_execute($stmt)) {
+            jsonResponse(200, 'success', 'Quantity Updated');
+        } else {
+            jsonResponse(500, 'error', 'Failed to update quantity');
         }
-    }
-
-    if ($flag) {
-        jsonResponse(200, 'success', 'Quantity Updated');
     } else {
-        jsonResponse(500, 'error', 'Something Went Wrong. Please refresh');
+        jsonResponse(500, 'error', 'Invalid product ID or quantity');
     }
+}
+
+function jsonResponse($status, $type, $message) {
+    echo json_encode(['status' => $type, 'message' => $message]);
 }
 
 if (isset($_POST['proceedToPlaceBtn'])) {
