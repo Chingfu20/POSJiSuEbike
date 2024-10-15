@@ -91,5 +91,27 @@
         </div>
     </div>
 </div>
+<script>
+    document.querySelectorAll('.increment').forEach(button => {
+            button.addEventListener('click', function () {
+                const qtyInput = this.parentElement.querySelector('.quantityInput');
+                let quantity = parseInt(qtyInput.value);
+                if (quantity < 999) {
+                    qtyInput.value = ++quantity;
+                    updateTotalPrice(this);
+                }
+            });
+        });
 
+        document.querySelectorAll('.decrement').forEach(button => {
+            button.addEventListener('click', function () {
+                const qtyInput = this.parentElement.querySelector('.quantityInput');
+                let quantity = parseInt(qtyInput.value);
+                if (quantity > 1) {
+                    qtyInput.value = --quantity;
+                    updateTotalPrice(this);
+                }
+            });
+        });
+</script>
 <?php include('includes/footer.php'); ?>
