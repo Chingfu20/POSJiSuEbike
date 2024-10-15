@@ -43,7 +43,7 @@ $(document).ready(function () {
     function updateQuantity(prodId, qty) {
         $.ajax({
             type: "POST",
-            url: "product.php",
+            url: "orders-code.php",
             data: {
                 'productIncDec': true,
                 'product_id': prodId,
