@@ -236,21 +236,15 @@ if (isset($_POST['saveCustomer'])) {
     $address = validate($_POST['address']); // Added address field
     $status = isset($_POST['status']) ? 1 : 0;
 
-    if ($name && $address) {
-        if (strlen($phone) != 11) {
-            redirect('customers-create.php', 'Phone number must be exactly 11 digits.');
-        }
-
-        if ($email) {
-            $emailCheck = mysqli_query($conn, "SELECT * FROM customers WHERE email='$email'");
-            if ($emailCheck) {
-                if (mysqli_num_rows($emailCheck) > 0) {
-                    redirect('customers-create.php', 'Email already used by another user.');
-                }
-            } else {
-                error_log("Email check query failed: " . mysqli_error($conn));
-                redirect('customers-create.php', 'Something went wrong during email check.');
+    if ($name && $address) { // Ensure both name and address are filled
+        $emailCheck = mysqli_query($conn, "SELECT * FROM customers WHERE email='$email'");
+        if ($emailCheck) {
+            if (mysqli_num_rows($emailCheck) > 0) {
+                redirect('customers-create.php', 'Email already used by another user');
             }
+        } else {
+            error_log("Email check query failed: " . mysqli_error($conn));
+            redirect('customers-create.php', 'Something went wrong during email check.');
         }
 
         $data = [
@@ -264,15 +258,54 @@ if (isset($_POST['saveCustomer'])) {
         $result = insert('customers', $data);
 
         if ($result) {
-            redirect('customers.php', 'Customer Created Successfully.');
+            redirect('customers.php', 'Customer Created Successfully');
         } else {
             error_log("Insert query failed: " . mysqli_error($conn));
             redirect('customers-create.php', 'Something Went Wrong!');
         }
     } else {
-        redirect('customers-create.php', 'Please fill required fields.');
+        redirect('customers-create.php', 'Please fill required fields');
     }
 }
 
+if (isset($_POST['updateCustomer'])) {
+    $customerId = validate($_POST['customerId']);
+    $name = validate($_POST['name']);
+    $email = validate($_POST['email']);
+    $phone = validate($_POST['phone']);
+    $address = validate($_POST['address']); // Added address field
+    $status = isset($_POST['status']) ? 1 : 0;
+
+    if ($name && $address) { // Ensure both name and address are filled
+        $emailCheck = mysqli_query($conn, "SELECT * FROM customers WHERE email='$email' AND id != '$customerId'");
+        if ($emailCheck) {
+            if (mysqli_num_rows($emailCheck) > 0) {
+                redirect('customers-edit.php?id=' . $customerId, 'Email already used by another user');
+            }
+        } else {
+            error_log("Email check query failed: " . mysqli_error($conn));
+            redirect('customers-edit.php?id=' . $customerId, 'Something went wrong during email check.');
+        }
+
+        $data = [
+            'name' => $name,
+            'email' => $email,
+            'phone' => $phone,
+            'address' => $address, // Add address to the data array
+            'status' => $status
+        ];
+
+        $result = update('customers', $customerId, $data);
+
+        if ($result) {
+            redirect('customers-edit.php?id=' . $customerId, 'Customer updated Successfully');
+        } else {
+            error_log("Update query failed: " . mysqli_error($conn));
+            redirect('customers-edit.php?id=' . $customerId, 'Something Went Wrong!');
+        }
+    } else {
+        redirect('customers-edit.php?id=' . $customerId, 'Please fill required fields');
+    }
+}
 
 ?>
