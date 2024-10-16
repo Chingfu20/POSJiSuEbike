@@ -65,13 +65,6 @@
                                 </td>
                                 <td><?= htmlspecialchars($item['name']) ?></td>
                                 <td>
-                                <div class="input-group qtyBox">
-                                        <button class="input-group-text decrement">-</button>
-                                        <input type="text" value="<?= $item['quantity']; ?>" class="qty quantityInput" />
-                                        <button class="input-group-text increment">+</button>
-                                    </div>
-                                </td>
-                                <td>
                                     <a href="products-edit.php?id=<?= urlencode($item['id']); ?>" class="btn btn-success btn-sm">Edit</a>
                                     <a href="products-delete.php?id=<?= urlencode($item['id']); ?>" class="btn btn-danger btn-sm">Delete</a>
                                     <a href="products-view.php?id=<?= urlencode($item['id']); ?>" class="btn btn-info btn-sm">View</a>
@@ -91,28 +84,5 @@
         </div>
     </div>
 </div>
-<script>
-    document.querySelectorAll('.increment').forEach(button => {
-        button.addEventListener('click', function () {
-            const qtyInput = this.parentElement.querySelector('.quantityInput');
-            let quantity = parseInt(qtyInput.value);
-            if (quantity < 999) {
-                qtyInput.value = quantity + 1; 
-                updateTotalPrice(this);
-            }
-        });
-    });
-
-    document.querySelectorAll('.decrement').forEach(button => {
-        button.addEventListener('click', function () {
-            const qtyInput = this.parentElement.querySelector('.quantityInput');
-            let quantity = parseInt(qtyInput.value);
-            if (quantity > 1) {
-                qtyInput.value = quantity - 1; 
-                updateTotalPrice(this);
-            }
-        });
-    });
-</script>
 
 <?php include('includes/footer.php'); ?>
