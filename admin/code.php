@@ -233,10 +233,9 @@ if (isset($_POST['saveCustomer'])) {
     $name = validate($_POST['name']);
     $email = validate($_POST['email']);
     $phone = validate($_POST['phone']);
-    $address = validate($_POST['address']); // Added address field
     $status = isset($_POST['status']) ? 1 : 0;
 
-    if ($name && $address) { // Ensure both name and address are filled
+    if ($name) {
         $emailCheck = mysqli_query($conn, "SELECT * FROM customers WHERE email='$email'");
         if ($emailCheck) {
             if (mysqli_num_rows($emailCheck) > 0) {
@@ -251,7 +250,6 @@ if (isset($_POST['saveCustomer'])) {
             'name' => $name,
             'email' => $email,
             'phone' => $phone,
-            'address' => $address, // Add address to the data array
             'status' => $status
         ];
 
@@ -268,15 +266,15 @@ if (isset($_POST['saveCustomer'])) {
     }
 }
 
+
 if (isset($_POST['updateCustomer'])) {
     $customerId = validate($_POST['customerId']);
     $name = validate($_POST['name']);
     $email = validate($_POST['email']);
     $phone = validate($_POST['phone']);
-    $address = validate($_POST['address']); // Added address field
     $status = isset($_POST['status']) ? 1 : 0;
 
-    if ($name && $address) { // Ensure both name and address are filled
+    if ($name) {
         $emailCheck = mysqli_query($conn, "SELECT * FROM customers WHERE email='$email' AND id != '$customerId'");
         if ($emailCheck) {
             if (mysqli_num_rows($emailCheck) > 0) {
@@ -291,7 +289,6 @@ if (isset($_POST['updateCustomer'])) {
             'name' => $name,
             'email' => $email,
             'phone' => $phone,
-            'address' => $address, // Add address to the data array
             'status' => $status
         ];
 
@@ -307,5 +304,16 @@ if (isset($_POST['updateCustomer'])) {
         redirect('customers-edit.php?id=' . $customerId, 'Please fill required fields');
     }
 }
+
+
+
+
+
+
+
+
+
+
+
 
 ?>
