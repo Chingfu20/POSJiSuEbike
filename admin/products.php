@@ -65,10 +65,11 @@
                                 </td>
                                 <td><?= htmlspecialchars($item['name']) ?></td>
                                 <td>
-                                <div class="input-group qtyBox">
+                                    <div class="input-group qtyBox">
                                         <button class="input-group-text decrement">-</button>
                                         <input type="text" value="<?= $item['quantity']; ?>" class="qty quantityInput" />
                                         <button class="input-group-text increment">+</button>
+                                        <button class="input-group-text add">Add</button> <!-- New Add button -->
                                     </div>
                                 </td>
                                 <td>
@@ -92,6 +93,7 @@
     </div>
 </div>
 <script>
+    // Increment functionality
     document.querySelectorAll('.increment').forEach(button => {
         button.addEventListener('click', function () {
             const qtyInput = this.parentElement.querySelector('.quantityInput');
@@ -103,6 +105,7 @@
         });
     });
 
+    // Decrement functionality
     document.querySelectorAll('.decrement').forEach(button => {
         button.addEventListener('click', function () {
             const qtyInput = this.parentElement.querySelector('.quantityInput');
@@ -113,6 +116,22 @@
             }
         });
     });
+
+    // Add functionality
+    document.querySelectorAll('.add').forEach(button => {
+        button.addEventListener('click', function () {
+            const qtyInput = this.parentElement.querySelector('.quantityInput');
+            let quantity = parseInt(qtyInput.value);
+            qtyInput.value = quantity + 1; // Increment by 1
+            updateTotalPrice(this);
+        });
+    });
+
+    function updateTotalPrice(button) {
+        // Implement the logic to update total price if needed
+        // This function is a placeholder for future implementation
+        console.log("Total price updated (placeholder function)");
+    }
 </script>
 
 <?php include('includes/footer.php'); ?>
