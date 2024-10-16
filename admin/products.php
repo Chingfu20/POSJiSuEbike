@@ -64,16 +64,15 @@
                                     <img src="../<?= htmlspecialchars($item['image']); ?>" style="width:50px;height:50px;" alt="Img" />
                                 </td>
                                 <td><?= htmlspecialchars($item['name']) ?></td>
-                                <td>
-                                <div class="input-group qtyBox">
-                                        <input type="text" value="<?= $item['quantity']; ?>" class="qty quantityInput" />
-                                        <button class="input-group-text increment">+</button>
-                                    </div>
-                                </td>
+                                
                                 <td>
                                     <a href="products-edit.php?id=<?= urlencode($item['id']); ?>" class="btn btn-success btn-sm">Edit</a>
                                     <a href="products-delete.php?id=<?= urlencode($item['id']); ?>" class="btn btn-danger btn-sm">Delete</a>
                                     <a href="products-view.php?id=<?= urlencode($item['id']); ?>" class="btn btn-info btn-sm">View</a>
+                                    <div class="input-group qtyBox">
+                                        <input type="text" value="<?= $item['quantity']; ?>" class="qty quantityInput" />
+                                        <button class="input-group-text increment">+</button>
+                                    </div>
                                 </td>
                             </tr>
                             <?php endforeach; ?>
