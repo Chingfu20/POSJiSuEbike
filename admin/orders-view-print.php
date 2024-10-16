@@ -54,7 +54,7 @@
                                         <h5 style="font-size: 20px; line-height: 30px; margin:0px; padding: 0;">Customer Details</h5>
                                         <p style="font-size: 14px; line-height: 20px; margin:0px; padding: 0;">Customer Name: <?= $orderDataRow['name'] ?> </p>
                                         <p style="font-size: 14px; line-height: 20px; margin:0px; padding: 0;">Customer Phone No.: <?= $orderDataRow['phone'] ?> </p>
-                                        <p style="font-size: 14px; line-height: 20px; margin:0px; padding: 0;">Customer Email Id: <?= $orderDataRow['email'] ?> </p>
+                                        <p style="font-size: 14px; line-height: 20px; margin:0px; padding: 0;">Customer Email: <?= $orderDataRow['email'] ?> </p>
                                     </td>
                                     <td align="end">
                                         <h5 style="font-size: 20px; line-height: 30px; margin:0px; padding: 0;">Invoice Details</h5>
