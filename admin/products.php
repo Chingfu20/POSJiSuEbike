@@ -58,17 +58,18 @@
                             <?php
                             $displayId = 1; // Initialize display ID
                             foreach($products as $item) : ?>
-                            <tr>
+                            <tr data-id="<?= $item['id']; ?>"> <!-- Add data-id for reference -->
                                 <td><?= $displayId++ ?></td> <!-- Display ID -->
                                 <td>
                                     <img src="../<?= htmlspecialchars($item['image']); ?>" style="width:50px;height:50px;" alt="Img" />
                                 </td>
                                 <td><?= htmlspecialchars($item['name']) ?></td>
                                 <td>
-                                <div class="input-group qtyBox">
+                                    <div class="input-group qtyBox">
                                         <button class="input-group-text decrement">-</button>
                                         <input type="text" value="<?= $item['quantity']; ?>" class="qty quantityInput" />
                                         <button class="input-group-text increment">+</button>
+                                        <button class="input-group-text add">Add</button> <!-- New Add button -->
                                     </div>
                                 </td>
                                 <td>
@@ -92,27 +93,48 @@
     </div>
 </div>
 <script>
-    document.querySelectorAll('.increment').forEach(button => {
-        button.addEventListener('click', function () {
-            const qtyInput = this.parentElement.querySelector('.quantityInput');
+    // Load quantities from local storage
+    document.querySelectorAll('tr[data-id]').forEach(row => {
+        const productId = row.getAttribute('data-id');
+        const qtyInput = row.querySelector('.quantityInput');
+        
+        // Set initial quantity from local storage, if available
+        const storedQuantity = localStorage.getItem(`quantity-${productId}`);
+        if (storedQuantity) {
+            qtyInput.value = storedQuantity;
+        }
+        
+        // Increment functionality
+        row.querySelector('.increment').addEventListener('click', function () {
             let quantity = parseInt(qtyInput.value);
             if (quantity < 999) {
-                qtyInput.value = quantity + 1; 
-                updateTotalPrice(this);
+                qtyInput.value = quantity + 1;
+                localStorage.setItem(`quantity-${productId}`, qtyInput.value); // Update local storage
             }
+        });
+
+        // Decrement functionality
+        row.querySelector('.decrement').addEventListener('click', function () {
+            let quantity = parseInt(qtyInput.value);
+            if (quantity > 1) {
+                qtyInput.value = quantity - 1;
+                localStorage.setItem(`quantity-${productId}`, qtyInput.value); // Update local storage
+            }
+        });
+
+        // Add functionality
+        row.querySelector('.add').addEventListener('click', function () {
+            let quantity = parseInt(qtyInput.value);
+            qtyInput.value = quantity + 1; // Increment by 1
+            localStorage.setItem(`quantity-${productId}`, qtyInput.value); // Update local storage
         });
     });
 
-    document.querySelectorAll('.decrement').forEach(button => {
-        button.addEventListener('click', function () {
-            const qtyInput = this.parentElement.querySelector('.quantityInput');
-            let quantity = parseInt(qtyInput.value);
-            if (quantity > 1) {
-                qtyInput.value = quantity - 1; 
-                updateTotalPrice(this);
-            }
-        });
-    });
+    function updateTotalPrice(button) {
+        // Implement the logic to update total price if needed
+        // This function is a placeholder for future implementation
+        console.log("Total price updated (placeholder function)");
+    }
 </script>
 
 <?php include('includes/footer.php'); ?>
