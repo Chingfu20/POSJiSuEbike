@@ -64,42 +64,7 @@
                                     <img src="../<?= htmlspecialchars($item['image']); ?>" style="width:50px;height:50px;" alt="Img" />
                                 </td>
                                 <td><?= htmlspecialchars($item['name']) ?></td>
-                                <td>
-                                <div class="input-group qtyBox">
-    <button class="input-group-text decrement">-</button>
-    <input type="text" value="<?= $item['quantity']; ?>" class="qty quantityInput" />
-    <button class="input-group-text increment">+</button>
-</div>
-
-<script>
-// Select the decrement and increment buttons and the quantity input
-const decrementButton = document.querySelector('.decrement');
-const incrementButton = document.querySelector('.increment');
-const quantityInput = document.querySelector('.quantityInput');
-
-// Function to update the quantity
-function updateQuantity(delta) {
-    // Parse the current quantity value from the input
-    let currentQuantity = parseInt(quantityInput.value);
-
-    // Update the quantity based on the delta (increment/decrement)
-    currentQuantity += delta;
-
-    // Ensure the quantity doesn't go below 0
-    if (currentQuantity < 0) {
-        currentQuantity = 0;
-    }
-
-    // Update the input value
-    quantityInput.value = currentQuantity;
-}
-
-// Add event listeners to the buttons
-decrementButton.addEventListener('click', () => updateQuantity(-1));
-incrementButton.addEventListener('click', () => updateQuantity(1));
-</script>
-
-                                </td>
+                               
                                 <td>
                                     <a href="products-edit.php?id=<?= urlencode($item['id']); ?>" class="btn btn-success btn-sm">Edit</a>
                                     <a href="products-delete.php?id=<?= urlencode($item['id']); ?>" class="btn btn-danger btn-sm">Delete</a>

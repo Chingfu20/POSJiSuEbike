@@ -67,52 +67,15 @@
                             }
                             ?>
                         </select>
-                        <div class="input-group qtyBox mb-3">
-    <button class="input-group-text decrement">-</button>
-    <input type="number" value="<?= $item['quantity']; ?>" class="qty quantityInput form-control" min="0" />
-    <button class="input-group-text increment">+</button>
-</div>
-
-<div class="col-md-2 mb-3">
-    <label for="">Quantity</label>
-    <input type="number" name="quantity" value="0" class="form-control" min="0" />
-</div>
-<div class="col-md-3 mb-3 text-end">  
-    <br />
-    <button type="submit" name="addItem" class="btn btn-primary">Add Item</button>
-</div>
-
-<script>
-// Select the decrement and increment buttons and the quantity input
-const decrementButton = document.querySelector('.decrement');
-const incrementButton = document.querySelector('.increment');
-const quantityInput = document.querySelector('.quantityInput');
-
-// Function to update the quantity
-function updateQuantity(delta) {
-    // Parse the current quantity value from the input
-    let currentQuantity = parseInt(quantityInput.value);
-
-    // Update the quantity based on the delta (increment/decrement)
-    currentQuantity += delta;
-
-    // Ensure the quantity doesn't go below 0
-    if (currentQuantity < 0) {
-        currentQuantity = 0;
-    }
-
-    // Update the input value
-    quantityInput.value = currentQuantity;
-
-    // Also update the quantity in the main form input
-    document.querySelector('input[name="quantity"]').value = currentQuantity;
-}
-
-// Add event listeners to the buttons
-decrementButton.addEventListener('click', () => updateQuantity(-1));
-incrementButton.addEventListener('click', () => updateQuantity(1));
-</script>
-
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <label for="">Quantity</label>
+                        <input type="number" name="quantity" value="0" class="form-control" min="0" />
+                    </div>
+                    <div class="col-md-3 mb-3 text-end">
+                        <br />
+                        <button type="submit" name="addItem" class="btn btn-primary">Add Item</button>
+                    </div>
                 </div>
             </form>
         </div>
