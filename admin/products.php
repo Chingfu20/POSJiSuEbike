@@ -66,7 +66,6 @@
                                 <td><?= htmlspecialchars($item['name']) ?></td>
                                 <td>
                                 <div class="input-group qtyBox">
-                                        <button class="input-group-text decrement">-</button>
                                         <input type="text" value="<?= $item['quantity']; ?>" class="qty quantityInput" />
                                         <button class="input-group-text increment">+</button>
                                     </div>
@@ -98,6 +97,17 @@
             let quantity = parseInt(qtyInput.value);
             if (quantity < 999) {
                 qtyInput.value = quantity + 1; 
+                updateTotalPrice(this);
+            }
+        });
+    });
+
+    document.querySelectorAll('.decrement').forEach(button => {
+        button.addEventListener('click', function () {
+            const qtyInput = this.parentElement.querySelector('.quantityInput');
+            let quantity = parseInt(qtyInput.value);
+            if (quantity > 1) {
+                qtyInput.value = quantity - 1; 
                 updateTotalPrice(this);
             }
         });
