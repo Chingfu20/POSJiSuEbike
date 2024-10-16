@@ -66,14 +66,15 @@
                                 <td><?= htmlspecialchars($item['name']) ?></td>
                                 <td>
                                 <div class="input-group qtyBox">
+                                        <button class="input-group-text decrement">-</button>
                                         <input type="text" value="<?= $item['quantity']; ?>" class="qty quantityInput" />
                                     </div>
-                                    </td>
+                                </td>
                                 <td>
                                     <a href="products-edit.php?id=<?= urlencode($item['id']); ?>" class="btn btn-success btn-sm">Edit</a>
                                     <a href="products-delete.php?id=<?= urlencode($item['id']); ?>" class="btn btn-danger btn-sm">Delete</a>
                                     <a href="products-view.php?id=<?= urlencode($item['id']); ?>" class="btn btn-info btn-sm">View</a>
-                                    <button class="input-group-text increment">+</button>
+                                    <a href="products-edit.php?id=<?= urlencode($item['id']); ?>" class="input-group-text increment">+</a>
 
                                 </td>
                             </tr>
