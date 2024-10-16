@@ -50,7 +50,6 @@
                                 <th>ID</th> <!-- Display ID column -->
                                 <th>Image</th>
                                 <th>Name</th>
-                                <th>Status</th>
                                 <th>Quantity</th> <!-- Changed header text -->
                                 <th>Action</th>
                             </tr>
@@ -65,15 +64,6 @@
                                     <img src="../<?= htmlspecialchars($item['image']); ?>" style="width:50px;height:50px;" alt="Img" />
                                 </td>
                                 <td><?= htmlspecialchars($item['name']) ?></td>
-                                <td>
-                                    <?php
-                                    if($item['status'] == 1){
-                                        echo '<span class="badge bg-danger">Hidden</span>';
-                                    }else{
-                                        echo '<span class="badge bg-primary">Visible</span>';
-                                    }
-                                    ?>
-                                </td>
                                 <td class="text-center"><?= htmlspecialchars($item['quantity']) ?></td> <!-- Changed field name -->
                                 <td>
                                     <a href="products-edit.php?id=<?= urlencode($item['id']); ?>" class="btn btn-success btn-sm">Edit</a>
