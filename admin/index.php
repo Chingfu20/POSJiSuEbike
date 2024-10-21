@@ -242,27 +242,12 @@ for ($i = 1; $i <= 12; $i++) {
         <div class="card-header" style="background-color: #17a2b8; color: white;">
             <i class="fas fa-users"></i> Total Customers
         </div>
-        <div class="card-body d-flex justify-content-between align-items-center">
-            <!-- Months list -->
-            <ul id="monthsList" style="list-style-type: none; padding: 0; margin: 0;">
-                <li>January</li>
-                <li>February</li>
-                <li>March</li>
-                <li>April</li>
-                <li>May</li>
-                <li>June</li>
-                <li>July</li>
-                <li>August</li>
-                <li>September</li>
-                <li>October</li>
-                <li>November</li>
-                <li>December</li>
-            </ul>
-            <!-- Pie chart -->
+        <div class="card-body">
             <canvas id="customersChart" style="max-width: 200px; max-height: 300px; width: 100%; height: auto;"></canvas> 
         </div>
     </div>
 </div>
+
 
 <script>
 // JavaScript code for rendering the pie chart
@@ -272,13 +257,14 @@ document.addEventListener("DOMContentLoaded", function () {
     // Pie Chart for Monthly Total Customers
     const ctxCustomers = document.getElementById('customersChart').getContext('2d');
     new Chart(ctxCustomers, {
-        type: 'pie',
+        type: 'pie', // Pie chart type
         data: {
             labels: [
+                'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
             ],
             datasets: [{
                 label: 'Monthly Total Customers',
-                data: monthlyCustomers,  // Dynamic customer count data
+                data: monthlyCustomers,  // Use dynamic customer count data
                 backgroundColor: [
                     '#FF6384',
                     '#36A2EB',
@@ -303,7 +289,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 legend: {
                     display: true,
                     labels: {
-                        color: '#333' // Legend text color
+                        color: '#333' // Color of legend text
                     }
                 },
                 tooltip: {
