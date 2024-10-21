@@ -222,15 +222,16 @@
     </div>
 
     <!-- Right Column: Total Orders as Text -->
-<div class="col-md-6 mb-3">
-    <div class="card" style="background-color: #FAD0C4;"> <!-- Light peach -->
-        <div class="card-header" style="background-color: #fd7e14; color: white;">
-            <i class="fas fa-receipt"></i> Total Orders
-        </div>
-        <div class="card-body text-center">
-            <h3 id="totalOrdersText">
-                <i class="fas fa-receipt"></i> 30 <!-- Example count with icon -->
-            </h3> <!-- Total Orders will be shown here -->
+    <div class="col-md-6 mb-3">
+        <div class="card" style="background-color: #FAD0C4;"> <!-- Light peach -->
+            <div class="card-header" style="background-color: #fd7e14; color: white;">
+                <i class="fas fa-receipt"></i> Total Orders
+            </div>
+            <div class="card-body text-center">
+                <h3 id="totalOrdersText">
+                    <i class="fas fa-receipt"></i> 30 <!-- Example count with icon -->
+                </h3> <!-- Total Orders will be shown here -->
+            </div>
         </div>
     </div>
 </div>
