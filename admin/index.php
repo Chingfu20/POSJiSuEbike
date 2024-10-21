@@ -237,6 +237,67 @@
     </div>
 </div>
 
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const monthlyCustomers = <?php echo json_encode($monthlyCustomers); ?>;
+
+    // Pie Chart for Monthly Total Customers
+    const ctxCustomers = document.getElementById('customersChart').getContext('2d');
+    new Chart(ctxCustomers, {
+        type: 'pie', // Pie chart type
+        data: {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+            datasets: [{
+                label: 'Monthly Total Customers',
+                data: monthlyCustomers,  // Use dynamic customer count data
+                backgroundColor: [
+                    '#FF6384',
+                    '#36A2EB',
+                    '#FFCE56',
+                    '#4BC0C0',
+                    '#9966FF',
+                    '#FF9F40',
+                    '#FF6384',
+                    '#36A2EB',
+                    '#FFCE56',
+                    '#4BC0C0',
+                    '#9966FF',
+                    '#FF9F40'
+                ],
+                borderColor: 'rgba(255, 255, 255, 0.5)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: true,
+                    labels: {
+                        color: '#333' // Color of legend text
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            let label = context.label || '';
+                            if (label) {
+                                label += ': ';
+                            }
+                            if (context.raw !== null) {
+                                label += context.raw; // Show the raw value in tooltips
+                            }
+                            return label;
+                        }
+                    }
+                }
+            }
+        }
+    });
+});
+</script>
+
+
 <?php
 // Fetch sales data for each month from the database
 $salesData = [];
