@@ -241,7 +241,7 @@ for ($i = 1; $i <= 12; $i++) {
     <div class="col-md-6 mb-3">
         <div class="card" style="background-color: #B3E5D6;"> <!-- Light teal -->
             <div class="card-header" style="background-color: #17a2b8; color: white;">
-                <i class="fas fa-users"></i> Monthly Total Customers
+                <i class="fas fa-users"></i> Total Customers
             </div>
             <div class="card-body">
                 <!-- Canvas for pie chart -->
