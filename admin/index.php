@@ -235,53 +235,13 @@
             </div>
         </div>
     </div>
-
-
+    
     <?php
-// Fetch total customers for each month from the database
-$monthlyCustomers = [];
-for ($i = 1; $i <= 12; $i++) {
-    $startDate = date("Y-$i-01");
-    $endDate = date("Y-$i-t");
-    $result = mysqli_query($conn, "SELECT COUNT(*) AS monthly_customers FROM customers WHERE created_at BETWEEN '$startDate' AND '$endDate'"); // Assuming 'created_at' is the timestamp of when a customer was added
-    $row = mysqli_fetch_assoc($result);
-    
-    $monthlyCustomers[] = $row['monthly_customers'] ? $row['monthly_customers'] : 0; // Count of customers for the month
-}
+// Fetch total customers from the database
+$result = mysqli_query($conn, "SELECT COUNT(*) AS total_customers FROM customers");
+$row = mysqli_fetch_assoc($result);
+$totalCustomers = $row['total_customers'];
 ?>
-<?php
-// Database connection (assumed already established)
-// Fetch total customers for each month from the database
-$monthlyCustomers = [];
-for ($i = 1; $i <= 12; $i++) {
-    $startDate = date("Y-$i-01");
-    $endDate = date("Y-$i-t");
-    $result = mysqli_query($conn, "SELECT COUNT(*) AS monthly_customers FROM customers WHERE created_at BETWEEN '$startDate' AND '$endDate'"); // Adjust the date column name as needed
-    $row = mysqli_fetch_assoc($result);
-    
-    $monthlyCustomers[] = $row['monthly_customers'] ? $row['monthly_customers'] : 0; // Count of customers for the month
-}
-?>
-
-<div class="row">
-    <?php 
-    $months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    foreach ($monthlyCustomers as $index => $customerCount) : ?>
-        <div class="col-md-3 mb-3">
-            <div class="card" style="background-color: #B3E5D6;"> <!-- Light teal -->
-                <div class="card-header" style="background-color: #17a2b8; color: white;">
-                    <i class="fas fa-users"></i> <?php echo $months[$index]; ?>
-                </div>
-                <div class="card-body text-center">
-                    <h3 id="customerText">
-                        <i class="fas fa-users"></i> <?php echo $customerCount; ?> <!-- Display monthly customer count dynamically -->
-                    </h3>
-                </div>
-            </div>
-        </div>
-    <?php endforeach; ?>
-</div>
-
 
 
 <?php
