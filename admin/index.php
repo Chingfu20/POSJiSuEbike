@@ -223,19 +223,6 @@
         </div>
     </div>
 
-    <div class="col-md-3 mb-3">
-        <div class="card" style="background-color: #B3E5D6;"> <!-- Light teal -->
-            <div class="card-header" style="background-color: #17a2b8; color: white;">
-                <i class="fas fa-users"></i> Total Customers
-            </div>
-            <div class="card-body text-center">
-                <h3 id="customerText">
-                    <i class="fas fa-users"></i> 50 <!-- Example count with icon -->
-                </h3> <!-- Customer count will be shown here -->
-            </div>
-        </div>
-    </div>
-
     <?php
 // Fetch total customers per month from the database
 $monthlyCustomers = [];
