@@ -237,24 +237,28 @@ for ($i = 1; $i <= 12; $i++) {
 }
 ?>
 
-   <!-- Right Column: Pie Chart for Total Customers -->
-<div class="col-md-6 mb-3"> <!-- Adjusted to 6 for visual consistency -->
+<!-- Total Customers Card - Simplified Design -->
+<div class="col-md-3 mb-3"> <!-- Adjusted to 3 for visual consistency -->
     <div class="card" style="background-color: #B3E5D6;"> <!-- Light teal -->
         <div class="card-header" style="background-color: #17a2b8; color: white;">
             <i class="fas fa-users"></i> Total Customers
         </div>
-        <div class="card-body">
-            <!-- Canvas for pie chart -->
-            <canvas id="customersChart" width="300" height="300"></canvas> <!-- Adjusted size -->
+        <div class="card-body text-center">
+            <h3 id="customerText" style="font-size: 2.5rem; color: #17a2b8;">
+                <!-- Display the customer count dynamically -->
+                <i class="fas fa-users"></i> 50 <!-- Example count -->
+            </h3>
         </div>
     </div>
 </div>
 
 
+
 <script>
-// JavaScript code for rendering the pie chart
-document.addEventListener("DOMContentLoaded", function () {
-    const monthlyCustomers = <?php echo json_encode($monthlyCustomers); ?>;
+    document.addEventListener("DOMContentLoaded", function () {
+        const customerCount = document.getElementById("customerCount").value; // Assuming you fetch this value from your backend
+        document.getElementById('customerText').innerHTML = `<i class="fas fa-users"></i> ${customerCount}`;
+    });
 
     // Pie Chart for Monthly Total Customers
     const ctxCustomers = document.getElementById('customersChart').getContext('2d');
