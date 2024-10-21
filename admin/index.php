@@ -249,7 +249,6 @@ for ($i = 1; $i <= 12; $i++) {
 </div>
 
 
-
 <script>
 // JavaScript code for rendering the pie chart
 document.addEventListener("DOMContentLoaded", function () {
@@ -260,7 +259,20 @@ document.addEventListener("DOMContentLoaded", function () {
     new Chart(ctxCustomers, {
         type: 'pie', // Pie chart type
         data: {
-            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+            labels: [
+                'Jan 1 - Jan 31', 
+                'Feb 1 - Feb 28/29', 
+                'Mar 1 - Mar 31', 
+                'Apr 1 - Apr 30', 
+                'May 1 - May 31', 
+                'Jun 1 - Jun 30', 
+                'Jul 1 - Jul 31', 
+                'Aug 1 - Aug 31', 
+                'Sep 1 - Sep 30', 
+                'Oct 1 - Oct 31', 
+                'Nov 1 - Nov 30', 
+                'Dec 1 - Dec 31'
+            ],
             datasets: [{
                 label: 'Monthly Total Customers',
                 data: monthlyCustomers,  // Use dynamic customer count data
