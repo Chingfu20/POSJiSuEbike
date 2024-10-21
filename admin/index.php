@@ -245,7 +245,7 @@ for ($i = 1; $i <= 12; $i++) {
         </div>
         <div class="card-body">
             <!-- Canvas for pie chart -->
-            <canvas id="customersChart" width="100" height="100"></canvas> <!-- Adjusted size -->
+            <canvas id="customersChart" width="50" height="50"></canvas> <!-- Adjusted size -->
         </div>
     </div>
 </div>
