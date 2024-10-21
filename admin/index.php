@@ -221,35 +221,21 @@
         </div>
     </div>
 
-    <?php
-// Database connection (assumed already established)
-// Fetch total customers for each month from the database
-$monthlyCustomers = [];
-for ($i = 1; $i <= 12; $i++) {
-    $startDate = date("Y-$i-01");
-    $endDate = date("Y-$i-t");
-    $result = mysqli_query($conn, "SELECT COUNT(*) AS monthly_customers FROM customers WHERE created_at BETWEEN '$startDate' AND '$endDate'"); // Adjust the date column name as needed
-    $row = mysqli_fetch_assoc($result);
-    
-    $monthlyCustomers[] = $row['monthly_customers'] ? $row['monthly_customers'] : 0; // Count of customers for the month
-}
-?>
     <!-- Right Column: Pie Chart for Total Customers -->
     <div class="col-md-6 mb-3">
         <div class="card" style="background-color: #B3E5D6;"> <!-- Light teal -->
             <div class="card-header" style="background-color: #17a2b8; color: white;">
-                <i class="fas fa-users"></i> Monthly Total Customers
+                <i class="fas fa-users"></i>Total Customers
             </div>
             <div class="card-body">
                 <!-- Canvas for pie chart -->
-                <canvas id="customersChart" width="400" height="200"></canvas>
+                <canvas id="customersChart" width="400" height="200"></canvas> <!-- Match the size here -->
             </div>
         </div>
     </div>
 </div>
 
 <script>
-// JavaScript code for rendering the pie chart
 document.addEventListener("DOMContentLoaded", function () {
     const monthlyCustomers = <?php echo json_encode($monthlyCustomers); ?>;
 
@@ -308,8 +294,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 </script>
-
-
 
 <?php
 // Fetch sales data for each month from the database
