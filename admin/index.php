@@ -237,14 +237,13 @@ for ($i = 1; $i <= 12; $i++) {
 }
 ?>
 
-<div class="col-md-6 mb-3 d-flex justify-content-end"> 
-    <div class="card" style="background-color: #B3E5D6; width: 100%; max-width: 400px;">
+<div class="col-md-6 mb-3"> 
+    <div class="card" style="background-color: #B3E5D6;">
         <div class="card-header" style="background-color: #17a2b8; color: white;">
             <i class="fas fa-users"></i> Total Customers
         </div>
         <div class="card-body">
-            <!-- Adjust the size and move canvas to the right -->
-            <canvas id="customersChart" style="max-width: 200px; max-height: 300px; width: 100%; height: auto; float: right;"></canvas>
+            <canvas id="customersChart" style="max-width: 200px; max-height: 300px; width: 100%; height:;"></canvas> 
         </div>
     </div>
 </div>
