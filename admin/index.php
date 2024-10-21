@@ -234,36 +234,72 @@
         </div>
     </div>
 </div>
-<!-- Chart canvas -->
-<canvas id="customersChart" width="400" height="200"></canvas>
 
+<?php
+// Initialize an empty array for customers data
+$customersData = [];
+
+for ($i = 1; $i <= 12; $i++) {
+    $startDate = date("Y-$i-01");
+    $endDate = date("Y-$i-t");
+    $result = mysqli_query($conn, "SELECT COUNT(id) AS monthly_customers FROM customers WHERE created_at BETWEEN '$startDate' AND '$endDate'");
+    $row = mysqli_fetch_assoc($result);
+    
+    // Push customer count into the array
+    $customersData[] = $row['monthly_customers'] ? $row['monthly_customers'] : 0;
+}
+?>
 <script>
-// Chart.js script for Total Customers per month
-var ctxCustomers = document.getElementById('customersChart').getContext('2d');
-var customersChart = new Chart(ctxCustomers, {
-    type: 'bar', // 'line', 'doughnut', etc. depending on your preference
-    data: {
-        labels: months, // Months from PHP
-        datasets: [{
-            label: 'Total Customers',
-            data: customerCounts, // Customer counts from PHP
-            backgroundColor: '#17a2b8', // Same teal color
-            borderColor: '#6c757d', // Same as card-header background
-            borderWidth: 1
-        }]
-    },
-    options: {
-        responsive: true,
-        scales: {
-            y: {
-                beginAtZero: true // Start y-axis at 0
+// Pass PHP customers data to JavaScript
+document.addEventListener("DOMContentLoaded", function () {
+    const monthlyCustomers = <?php echo json_encode($customersData); ?>;
+
+    // Total Customers Chart
+    const ctxCustomers = document.getElementById('customersChart').getContext('2d');
+    new Chart(ctxCustomers, {
+        type: 'bar', // You can also use 'line' or other chart types
+        data: {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+            datasets: [{
+                label: 'Total Customers',
+                data: monthlyCustomers,  // Use dynamic customers data
+                backgroundColor: 'rgba(23, 162, 184, 0.2)',  // Teal color
+                borderColor: 'rgba(23, 162, 184, 1)',  // Darker teal for borders
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                }
+            },
+            plugins: {
+                legend: {
+                    display: true,
+                    labels: {
+                        color: 'rgba(23, 162, 184, 1)',
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            let label = context.dataset.label || '';
+                            if (label) {
+                                label += ': ';
+                            }
+                            if (context.raw !== null) {
+                                label += context.raw + ' customers'; // Tooltip shows customer count
+                            }
+                            return label;
+                        }
+                    }
+                }
             }
         }
-    }
+    });
 });
 </script>
-
-
 
 <?php
 // Fetch sales data for each month from the database
