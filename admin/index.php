@@ -236,6 +236,90 @@
         </div>
     </div>
 
+    <?php
+// Fetch total customers per month from the database
+$monthlyCustomers = [];
+for ($i = 1; $i <= 12; $i++) {
+    $startDate = date("Y-$i-01");
+    $endDate = date("Y-$i-t");
+    $result = mysqli_query($conn, "SELECT COUNT(*) AS total_customers FROM customers WHERE created_at BETWEEN '$startDate' AND '$endDate'");
+    $row = mysqli_fetch_assoc($result);
+    $monthlyCustomers[] = $row['total_customers'] ? $row['total_customers'] : 0; // Default to 0 if NULL
+}
+?>
+
+<div class="col-md-6 mb-3">
+    <div class="card" style="background-color: #B3E5D6;"> <!-- Light teal -->
+        <div class="card-header" style="background-color: #17a2b8; color: white;">
+            <i class="fas fa-users"></i> Monthly Total Customers
+        </div>
+        <div class="card-body">
+            <!-- Canvas for pie chart -->
+            <canvas id="customersChart" width="400" height="200"></canvas>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const monthlyCustomers = <?php echo json_encode($monthlyCustomers); ?>;
+
+    // Pie Chart for Monthly Total Customers
+    const ctxCustomers = document.getElementById('customersChart').getContext('2d');
+    new Chart(ctxCustomers, {
+        type: 'pie', // Pie chart type
+        data: {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+            datasets: [{
+                label: 'Monthly Total Customers',
+                data: monthlyCustomers,  // Use dynamic customer count data
+                backgroundColor: [
+                    '#FF6384',
+                    '#36A2EB',
+                    '#FFCE56',
+                    '#4BC0C0',
+                    '#9966FF',
+                    '#FF9F40',
+                    '#FF6384',
+                    '#36A2EB',
+                    '#FFCE56',
+                    '#4BC0C0',
+                    '#9966FF',
+                    '#FF9F40'
+                ],
+                borderColor: 'rgba(255, 255, 255, 0.5)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: true,
+                    labels: {
+                        color: '#333' // Color of legend text
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            let label = context.label || '';
+                            if (label) {
+                                label += ': ';
+                            }
+                            if (context.raw !== null) {
+                                label += context.raw; // Show the raw value in tooltips
+                            }
+                            return label;
+                        }
+                    }
+                }
+            }
+        }
+    });
+});
+</script>
+
 
 <?php
 // Fetch sales data for each month from the database
