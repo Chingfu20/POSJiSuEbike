@@ -249,57 +249,163 @@ for ($i = 1; $i <= 12; $i++) {
     $customersData[] = $row['monthly_customers'] ? $row['monthly_customers'] : 0;
 }
 ?>
-<script>
-// Pass PHP customers data to JavaScript
-document.addEventListener("DOMContentLoaded", function () {
-    const monthlyCustomers = <?php echo json_encode($customersData); ?>;
+<?php
+// Database connection
+$conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
 
-    // Total Customers Chart
-    const ctxCustomers = document.getElementById('customersChart').getContext('2d');
-    new Chart(ctxCustomers, {
-        type: 'bar', // You can also use 'line' or other chart types
-        data: {
-            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-            datasets: [{
-                label: 'Total Customers',
-                data: monthlyCustomers,  // Use dynamic customers data
-                backgroundColor: 'rgba(23, 162, 184, 0.2)',  // Teal color
-                borderColor: 'rgba(23, 162, 184, 1)',  // Darker teal for borders
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true,
-                }
+if (!$conn) {
+    die("Connection Failed: " . mysqli_connect_error());
+}
+
+// Fetch sales data for each month from the database
+$salesData = [];
+for ($i = 1; $i <= 12; $i++) {
+    $startDate = date("Y-$i-01");
+    $endDate = date("Y-$i-t");
+    $result = mysqli_query($conn, "SELECT SUM(total_amount) AS monthly_sales FROM orders WHERE order_date BETWEEN '$startDate' AND '$endDate'");
+    $row = mysqli_fetch_assoc($result);
+    
+    $salesData[] = $row['monthly_sales'] ? number_format($row['monthly_sales'], 2, '.', '') : 0.00;
+}
+
+// Fetch total customers data for each month from the database
+$customersData = [];
+for ($i = 1; $i <= 12; $i++) {
+    $startDate = date("Y-$i-01");
+    $endDate = date("Y-$i-t");
+    $result = mysqli_query($conn, "SELECT COUNT(id) AS monthly_customers FROM customers WHERE created_at BETWEEN '$startDate' AND '$endDate'");
+    $row = mysqli_fetch_assoc($result);
+    
+    $customersData[] = $row['monthly_customers'] ? $row['monthly_customers'] : 0;
+}
+
+mysqli_close($conn);
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Sales Chart -->
+    <canvas id="salesChart" width="400" height="200"></canvas>
+
+    <!-- Customers Chart -->
+    <canvas id="customersChart" width="400" height="200"></canvas>
+
+    <script>
+    // Pass PHP sales data to JavaScript
+    document.addEventListener("DOMContentLoaded", function () {
+        const monthlySales = <?php echo json_encode($salesData); ?>;
+        const monthlyCustomers = <?php echo json_encode($customersData); ?>;
+
+        // Monthly Sales Report Chart
+        const ctxSales = document.getElementById('salesChart').getContext('2d');
+        new Chart(ctxSales, {
+            type: 'bar',
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                datasets: [{
+                    label: 'Monthly Sales',
+                    data: monthlySales,
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
             },
-            plugins: {
-                legend: {
-                    display: true,
-                    labels: {
-                        color: 'rgba(23, 162, 184, 1)',
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return value; // Just return numeric value
+                            }
+                        }
                     }
                 },
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            let label = context.dataset.label || '';
-                            if (label) {
-                                label += ': ';
+                plugins: {
+                    legend: {
+                        display: true,
+                        labels: {
+                            color: 'rgba(54, 162, 235, 1)',
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.raw !== null) {
+                                    label += context.raw; // Numeric value in tooltip
+                                }
+                                return label;
                             }
-                            if (context.raw !== null) {
-                                label += context.raw + ' customers'; // Tooltip shows customer count
-                            }
-                            return label;
                         }
                     }
                 }
             }
-        }
+        });
+
+        // Total Customers Chart
+        const ctxCustomers = document.getElementById('customersChart').getContext('2d');
+        new Chart(ctxCustomers, {
+            type: 'bar',
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                datasets: [{
+                    label: 'Total Customers',
+                    data: monthlyCustomers,
+                    backgroundColor: 'rgba(23, 162, 184, 0.2)',  // Teal color
+                    borderColor: 'rgba(23, 162, 184, 1)',  // Darker teal for borders
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return value; // Just return numeric value for Y-axis
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        labels: {
+                            color: 'rgba(23, 162, 184, 1)',
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.raw !== null) {
+                                    label += context.raw; // Numeric value in tooltip
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
     });
-});
-</script>
+    </script>
+</body>
+</html>
 
 <?php
 // Fetch sales data for each month from the database
