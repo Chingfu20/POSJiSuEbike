@@ -233,7 +233,7 @@ for ($i = 1; $i <= 12; $i++) {
 }
 ?>
 
-  <!-- Right Column: Pie Chart for Total Customers -->
+    <!-- Right Column: Pie Chart for Total Customers -->
 <div class="col-md-6 mb-3"> <!-- Adjusted to 6 for visual consistency -->
     <div class="card" style="background-color: #B3E5D6;"> <!-- Light teal -->
         <div class="card-header" style="background-color: #17a2b8; color: white;">
@@ -241,7 +241,7 @@ for ($i = 1; $i <= 12; $i++) {
         </div>
         <div class="card-body">
             <!-- Canvas for pie chart -->
-            <canvas id="customersChart" width="400" height="400"></canvas> <!-- Updated height -->
+            <canvas id="customersChart" width="400" height="200"></canvas> <!-- Same size as sales chart -->
         </div>
     </div>
 </div>
