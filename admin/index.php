@@ -275,7 +275,6 @@ document.addEventListener("DOMContentLoaded", function () {
         type: 'pie',
         data: {
             labels: [
-                'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
             ],
             datasets: [{
                 label: 'Monthly Total Customers',
