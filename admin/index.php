@@ -234,22 +234,6 @@ for ($i = 1; $i <= 12; $i++) {
     $monthlyCustomers[] = $row['monthly_customers'] ? $row['monthly_customers'] : 0; // Count of customers for the month
 }
 ?>
-
-<!-- Row for Monthly Sales Report and Total Orders -->
-<div class="row">
-    <!-- Left Column: Monthly Sales Report -->
-    <div class="col-md-6 mb-3">
-        <div class="card" style="background-color: #e2e3e5;">
-            <div class="card-header" style="background-color: #6c757d; color: white;">
-                Monthly Sales Report
-            </div>
-            <div class="card-body">
-                <!-- Chart for sales -->
-                <canvas id="salesChart" width="400" height="200"></canvas>
-            </div>
-        </div>
-    </div>
-
     <!-- Right Column: Pie Chart for Total Customers -->
     <div class="col-md-6 mb-3">
         <div class="card" style="background-color: #B3E5D6;"> <!-- Light teal -->
