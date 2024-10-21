@@ -236,6 +236,61 @@
         </div>
     </div>
     
+
+    <?php
+// Fetch total customers for each month from the database
+$monthlyCustomers = [];
+for ($i = 1; $i <= 12; $i++) {
+    $startDate = date("Y-$i-01");
+    $endDate = date("Y-$i-t");
+    $result = mysqli_query($conn, "SELECT COUNT(*) AS monthly_customers FROM customers WHERE created_at BETWEEN '$startDate' AND '$endDate'"); // Adjust the date column name as needed
+    $row = mysqli_fetch_assoc($result);
+    
+    $monthlyCustomers[] = $row['monthly_customers'] ? $row['monthly_customers'] : 0; // Count of customers for the month
+}
+?>
+
+<!-- Row for Monthly Sales Report and Total Orders -->
+<div class="row">
+    <!-- Left Column: Monthly Sales Report -->
+    <div class="col-md-6 mb-3">
+        <div class="card" style="background-color: #e2e3e5;">
+            <div class="card-header" style="background-color: #6c757d; color: white;">
+                Monthly Sales Report
+            </div>
+            <div class="card-body">
+                <!-- Chart for sales -->
+                <canvas id="salesChart" width="400" height="200"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Column: Total Customers for Each Month -->
+    <div class="col-md-6 mb-3">
+        <div class="card" style="background-color: #B3E5D6;"> <!-- Light teal -->
+            <div class="card-header" style="background-color: #17a2b8; color: white;">
+                <i class="fas fa-users"></i> Monthly Total Customers
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <?php 
+                    $months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                    foreach ($monthlyCustomers as $index => $customerCount) : ?>
+                        <div class="col-4 mb-2">
+                            <div class="text-center" style="background-color: white; border-radius: 5px; padding: 10px; box-shadow: 0 1px 5px rgba(0,0,0,0.1);">
+                                <h5><?php echo $months[$index]; ?></h5>
+                                <h3>
+                                    <i class="fas fa-users"></i> <?php echo $customerCount; ?> <!-- Display monthly customer count dynamically -->
+                                </h3>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
     <?php
 // Fetch total customers from the database
 $result = mysqli_query($conn, "SELECT COUNT(*) AS total_customers FROM customers");
