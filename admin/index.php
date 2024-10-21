@@ -223,7 +223,7 @@
         </div>
     </div>
 
-   <div class="col-md-6 mb-3"> <!-- Adjusted to 6 for visual consistency -->
+    <div class="col-md-6 mb-3"> <!-- Adjusted to 6 for visual consistency -->
     <div class="card" style="background-color: #B3E5D6;"> <!-- Light teal -->
         <div class="card-header" style="background-color: #17a2b8; color: white;">
             <i class="fas fa-users"></i> Monthly Total Customers
@@ -234,6 +234,91 @@
         </div>
     </div>
 </div>
+
+<?php
+// Fetch customer count for each month from the database
+$customerData = [];
+for ($i = 1; $i <= 12; $i++) {
+    $startDate = date("Y-$i-01");
+    $endDate = date("Y-$i-t");
+    $result = mysqli_query($conn, "SELECT COUNT(*) AS total_customers FROM customers WHERE registration_date BETWEEN '$startDate' AND '$endDate'");
+    $row = mysqli_fetch_assoc($result);
+    
+    $customerData[] = $row['total_customers'] ? (int)$row['total_customers'] : 0; // Ensure it's an integer
+}
+?>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const monthlyCustomers = <?php echo json_encode($customerData); ?>;
+
+    // Customers Pie Chart
+    const ctxCustomers = document.getElementById('customersChart').getContext('2d');
+    new Chart(ctxCustomers, {
+        type: 'pie', // Change to 'pie' for the pie chart
+        data: {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+            datasets: [{
+                label: 'Monthly Customers',
+                data: monthlyCustomers,  // Use dynamic customer data
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(201, 203, 207, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(201, 203, 207, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top',
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            let label = context.label || '';
+                            if (label) {
+                                label += ': ';
+                            }
+                            if (context.raw !== null) {
+                                label += context.raw; // Show the count in the tooltip
+                            }
+                            return label;
+                        }
+                    }
+                }
+            }
+        }
+    });
+});
+</script>
+
 
     
 
