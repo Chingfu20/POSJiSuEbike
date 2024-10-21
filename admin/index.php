@@ -221,20 +221,48 @@
         </div>
     </div>
 
-    <!-- Right Column: Total Orders as Text -->
-    <div class="col-md-6 mb-3">
-        <div class="card" style="background-color: #FAD0C4;"> <!-- Light peach -->
-            <div class="card-header" style="background-color: #fd7e14; color: white;">
-                <i class="fas fa-receipt"></i> Total Orders
-            </div>
-            <div class="card-body text-center">
-                <h3 id="totalOrdersText">
-                    <i class="fas fa-receipt"></i> 30 <!-- Example count with icon -->
-                </h3> <!-- Total Orders will be shown here -->
-            </div>
+  <!-- Right Column: Total Orders as Pie Chart -->
+<div class="col-md-6 mb-3">
+    <div class="card" style="background-color: #FAD0C4;"> <!-- Light peach -->
+        <div class="card-header" style="background-color: #fd7e14; color: white;">
+            <i class="fas fa-receipt"></i> Total Orders
+        </div>
+        <div class="card-body text-center">
+            <canvas id="totalOrdersPieChart" width="200" height="200"></canvas>
         </div>
     </div>
 </div>
+
+<!-- Add Chart.js Library -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    // Data for the Pie Chart
+    const ctx = document.getElementById('totalOrdersPieChart').getContext('2d');
+    const totalOrdersPieChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['Completed Orders', 'Pending Orders'], // Example labels
+            datasets: [{
+                label: 'Total Orders',
+                data: [20, 10], // Example data for the chart
+                backgroundColor: [
+                    '#36a2eb', // Color for completed orders
+                    '#ffcd56'  // Color for pending orders
+                ],
+                hoverOffset: 4
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }
+    });
+</script>
 
 
 <?php
