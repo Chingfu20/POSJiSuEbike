@@ -392,7 +392,6 @@ for ($i = 1; $i <= 12; $i++) {
             }
         }
     });
-});
 </script>
 
 <input type="hidden" id="categoryCount" value="<?= getCount('categories'); ?>">
