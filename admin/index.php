@@ -223,19 +223,19 @@
         </div>
     </div>
 
-    <div class="col-md-3 mb-3">
+     <!-- Right Column: Pie Chart for Total Customers -->
+     <div class="col-md-6 mb-3">
         <div class="card" style="background-color: #B3E5D6;"> <!-- Light teal -->
             <div class="card-header" style="background-color: #17a2b8; color: white;">
-                <i class="fas fa-users"></i> Total Customers
+                <i class="fas fa-users"></i>Total Customers
             </div>
-            <div class="card-body text-center">
-                <h3 id="customerText">
-                    <i class="fas fa-users"></i> 50 <!-- Example count with icon -->
-                </h3> <!-- Customer count will be shown here -->
+            <div class="card-body">
+                <!-- Canvas for pie chart -->
+                <canvas id="customersChart" width="400" height="200"></canvas> <!-- Match the size here -->
             </div>
         </div>
     </div>
-
+</div>
 
 <?php
 // Fetch sales data for each month from the database
