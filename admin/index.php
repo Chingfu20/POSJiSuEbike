@@ -223,18 +223,44 @@
     </div>
 
     <!-- Right Column: Total Orders as Text -->
-    <div class="col-md-3 mb-3">
-        <div class="card" style="background-color: #B3E5D6;"> <!-- Light teal -->
-            <div class="card-header" style="background-color: #17a2b8; color: white;">
-                <i class="fas fa-users"></i> Total Customers
-            </div>
-            <div class="card-body text-center">
-                <h3 id="customerText">
-                    <i class="fas fa-users"></i> 50 <!-- Example count with icon -->
-                </h3> <!-- Customer count will be shown here -->
-            </div>
+   <!-- Right Column: Total Customers as Chart -->
+<div class="col-md-6 mb-3">
+    <div class="card" style="background-color: #e2e3e5;"> <!-- Same color as Monthly Sales Report -->
+        <div class="card-header" style="background-color: #6c757d; color: white;"> <!-- Same color as Monthly Sales Report -->
+            Total Customers
+        </div>
+        <div class="card-body">
+            <!-- Chart for customers -->
+            <canvas id="customersChart" width="400" height="200"></canvas>
         </div>
     </div>
+</div>
+<script>
+    // Example Chart.js script for Total Customers
+var ctxCustomers = document.getElementById('customersChart').getContext('2d');
+var customersChart = new Chart(ctxCustomers, {
+    type: 'bar', // or 'line', 'doughnut', etc.
+    data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'], // Example labels
+        datasets: [{
+            label: 'Total Customers',
+            data: [20, 30, 40, 35, 50, 45], // Example data
+            backgroundColor: '#17a2b8', // Same teal color
+            borderColor: '#6c757d', // Same as card-header background
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true,
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+</script>
 
 
 <?php
