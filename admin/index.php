@@ -260,18 +260,7 @@ document.addEventListener("DOMContentLoaded", function () {
         type: 'pie', // Pie chart type
         data: {
             labels: [
-                'Jan 1 - Jan 31', 
-                'Feb 1 - Feb 28/29', 
-                'Mar 1 - Mar 31', 
-                'Apr 1 - Apr 30', 
-                'May 1 - May 31', 
-                'Jun 1 - Jun 30', 
-                'Jul 1 - Jul 31', 
-                'Aug 1 - Aug 31', 
-                'Sep 1 - Sep 30', 
-                'Oct 1 - Oct 31', 
-                'Nov 1 - Nov 30', 
-                'Dec 1 - Dec 31'
+                'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
             ],
             datasets: [{
                 label: 'Monthly Total Customers',
