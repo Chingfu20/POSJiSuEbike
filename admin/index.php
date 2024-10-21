@@ -223,31 +223,18 @@
         </div>
     </div>
 
-    <div class="col-md-6 mb-3"> <!-- Adjusted to 6 for visual consistency -->
-    <div class="card" style="background-color: #B3E5D6;"> <!-- Light teal -->
-        <div class="card-header" style="background-color: #17a2b8; color: white;">
-            <i class="fas fa-users"></i> Monthly Total Customers
-        </div>
-        <div class="card-body">
-            <!-- Canvas for pie chart -->
-            <canvas id="customersChart" width="400" height="200"></canvas> <!-- Same size as sales chart -->
+    <div class="col-md-3 mb-3">
+        <div class="card" style="background-color: #B3E5D6;"> <!-- Light teal -->
+            <div class="card-header" style="background-color: #17a2b8; color: white;">
+                <i class="fas fa-users"></i> Total Customers
+            </div>
+            <div class="card-body text-center">
+                <h3 id="customerText">
+                    <i class="fas fa-users"></i> 50 <!-- Example count with icon -->
+                </h3> <!-- Customer count will be shown here -->
+            </div>
         </div>
     </div>
-</div>
-
-<?php
-// Fetch customer count for each month from the database
-$customerData = [];
-for ($i = 1; $i <= 12; $i++) {
-    $startDate = date("Y-$i-01");
-    $endDate = date("Y-$i-t");
-    $result = mysqli_query($conn, "SELECT COUNT(*) AS total_customers FROM customers WHERE registration_date BETWEEN '$startDate' AND '$endDate'");
-    $row = mysqli_fetch_assoc($result);
-    
-    $customerData[] = $row['total_customers'] ? (int)$row['total_customers'] : 0; // Ensure it's an integer
-}
-?>
-
 
     
 
