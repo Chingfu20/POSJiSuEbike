@@ -208,21 +208,17 @@
     </div>
 </div>
 
-<!-- Row for Monthly Sales Report and Total Orders -->
-<div class="row">
-    <!-- Left Column: Monthly Sales Report -->
-    <div class="col-md-6 mb-3">
-        <div class="card" style="background-color: #e2e3e5;">
-            <div class="card-header" style="background-color: #6c757d; color: white;">
-                Monthly Sales Report
-            </div>
-            <div class="card-body">
-                <!-- Chart for sales -->
-                <canvas id="salesChart" width="400" height="200"></canvas>
-            </div>
+<!-- Monthly Sales Report Chart -->
+<div class="col-md-6 mb-3">
+    <div class="card" style="background-color: #B3E5D6;">
+        <div class="card-header" style="background-color: #17a2b8; color: white;">
+            <i class="fas fa-dollar-sign"></i> Monthly Sales Report
+        </div>
+        <div class="card-body">
+            <canvas id="salesChart" width="400" height="400"></canvas> <!-- Keep dimensions consistent -->
         </div>
     </div>
-
+</div>
     <?php
 // Database connection (assumed already established)
 // Fetch total customers for each month from the database
@@ -237,7 +233,7 @@ for ($i = 1; $i <= 12; $i++) {
 }
 ?>
 
-    <!-- Right Column: Pie Chart for Total Customers -->
+   <!-- Right Column: Pie Chart for Total Customers -->
 <div class="col-md-6 mb-3"> <!-- Adjusted to 6 for visual consistency -->
     <div class="card" style="background-color: #B3E5D6;"> <!-- Light teal -->
         <div class="card-header" style="background-color: #17a2b8; color: white;">
@@ -245,7 +241,7 @@ for ($i = 1; $i <= 12; $i++) {
         </div>
         <div class="card-body">
             <!-- Canvas for pie chart -->
-            <canvas id="customersChart" width="400" height="200"></canvas> <!-- Same size as sales chart -->
+            <canvas id="customersChart" width="400" height="400"></canvas> <!-- Updated height -->
         </div>
     </div>
 </div>
