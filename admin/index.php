@@ -179,20 +179,18 @@
         </div>
     </div>
 
-    <!-- Right Column: Total Orders as Text -->
-    <div class="col-md-6 mb-3">
-        <div class="card" style="background-color: #FAD0C4;"> <!-- Light peach -->
-            <div class="card-header" style="background-color: #fd7e14; color: white;">
-                <i class="fas fa-receipt"></i> Total Orders
+    <div class="col-md-3 mb-3">
+        <div class="card" style="background-color: #B3E5D6;"> <!-- Light teal -->
+            <div class="card-header" style="background-color: #17a2b8; color: white;">
+                <i class="fas fa-users"></i> Total Customers
             </div>
             <div class="card-body text-center">
-                <h3 id="totalOrdersText">
-                    <i class="fas fa-receipt"></i> 30 <!-- Example count with icon -->
-                </h3> <!-- Total Orders will be shown here -->
+                <h3 id="customerText">
+                    <i class="fas fa-users"></i> 50 <!-- Example count with icon -->
+                </h3> <!-- Customer count will be shown here -->
             </div>
         </div>
     </div>
-</div>
 
     <div class="col-md-3 mb-3">
         <div class="card" style="background-color: #C8E6F5;"> <!-- Light blue -->
@@ -223,18 +221,20 @@
         </div>
     </div>
 
-    <div class="col-md-3 mb-3">
-        <div class="card" style="background-color: #B3E5D6;"> <!-- Light teal -->
-            <div class="card-header" style="background-color: #17a2b8; color: white;">
-                <i class="fas fa-users"></i> Total Customers
+    <!-- Right Column: Total Orders as Text -->
+    <div class="col-md-6 mb-3">
+        <div class="card" style="background-color: #FAD0C4;"> <!-- Light peach -->
+            <div class="card-header" style="background-color: #fd7e14; color: white;">
+                <i class="fas fa-receipt"></i> Total Orders
             </div>
             <div class="card-body text-center">
-                <h3 id="customerText">
-                    <i class="fas fa-users"></i> 50 <!-- Example count with icon -->
-                </h3> <!-- Customer count will be shown here -->
+                <h3 id="totalOrdersText">
+                    <i class="fas fa-receipt"></i> 30 <!-- Example count with icon -->
+                </h3> <!-- Total Orders will be shown here -->
             </div>
         </div>
     </div>
+</div>
 
 
 <?php
