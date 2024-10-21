@@ -251,6 +251,21 @@ for ($i = 1; $i <= 12; $i++) {
 </div>
 
 
+<div class="row">
+    <!-- Right Column: Pie Chart for Total Customers -->
+    <div class="col-md-6 mb-3"> <!-- Adjusted to 6 for visual consistency -->
+        <div class="card" style="background-color: #B3E5D6;"> <!-- Light teal -->
+            <div class="card-header" style="background-color: #17a2b8; color: white;">
+                <i class="fas fa-users"></i> Total Customers
+            </div>
+            <div class="card-body">
+                <!-- Canvas for pie chart -->
+                <canvas id="customersChart" width="400" height="200"></canvas> <!-- Same size as sales chart -->
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
 // JavaScript code for rendering the pie chart
 document.addEventListener("DOMContentLoaded", function () {
@@ -311,6 +326,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 </script>
+
 
 <?php
 // Fetch sales data for each month from the database
