@@ -243,7 +243,7 @@ for ($i = 1; $i <= 12; $i++) {
             <i class="fas fa-users"></i> Total Customers
         </div>
         <div class="card-body">
-            <canvas id="customersChart" style="max-width: 200px; max-height: 300px; width: 100%; height: auto;"></canvas> 
+            <canvas id="customersChart" style="max-width: 200px; max-height: 300px; width: 100%; height: float: right;"></canvas> 
         </div>
     </div>
 </div>
