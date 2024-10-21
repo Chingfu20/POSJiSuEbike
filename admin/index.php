@@ -249,68 +249,34 @@ for ($i = 1; $i <= 12; $i++) {
     </div>
 </div>
 
-<script>
-// JavaScript code for rendering the pie chart
-document.addEventListener("DOMContentLoaded", function () {
-    const monthlyCustomers = <?php echo json_encode($monthlyCustomers); ?>;
-
-    // Pie Chart for Monthly Total Customers
-    const ctxCustomers = document.getElementById('customersChart').getContext('2d');
-    new Chart(ctxCustomers, {
-        type: 'pie', // Pie chart type
-        data: {
-            labels: [
-                'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
-            ],
-            datasets: [{
-                label: 'Monthly Total Customers',
-                data: monthlyCustomers,  // Use dynamic customer count data
-                backgroundColor: [
-                    '#FF6384',
-                    '#36A2EB',
-                    '#FFCE56',
-                    '#4BC0C0',
-                    '#9966FF',
-                    '#FF9F40',
-                    '#FF6384',
-                    '#36A2EB',
-                    '#FFCE56',
-                    '#4BC0C0',
-                    '#9966FF',
-                    '#FF9F40'
-                ],
-                borderColor: 'rgba(255, 255, 255, 0.5)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    display: true,
-                    labels: {
-                        color: '#333' // Color of legend text
-                    }
-                },
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            let label = context.label || '';
-                            if (label) {
-                                label += ': ';
-                            }
-                            if (context.raw !== null) {
-                                label += context.raw; // Show the raw value in tooltips
-                            }
-                            return label;
-                        }
-                    }
-                }
-            }
-        }
-    });
-});
-</script>
+<div class="col-md-6 mb-3"> 
+    <div class="card" style="background-color: #B3E5D6;">
+        <div class="card-header" style="background-color: #17a2b8; color: white;">
+            <i class="fas fa-users"></i> Total Customers
+        </div>
+        <div class="card-body d-flex">
+            <!-- Months list -->
+            <div id="monthsList" style="flex: 1; text-align: left; margin-right: 20px;">
+                <ul style="list-style-type: none; padding: 0; font-size: 14px; line-height: 1.8;">
+                    <li>January</li>
+                    <li>February</li>
+                    <li>March</li>
+                    <li>April</li>
+                    <li>May</li>
+                    <li>June</li>
+                    <li>July</li>
+                    <li>August</li>
+                    <li>September</li>
+                    <li>October</li>
+                    <li>November</li>
+                    <li>December</li>
+                </ul>
+            </div>
+            <!-- Pie chart -->
+            <canvas id="customersChart" style="max-width: 250px; max-height: 250px; width: 100%; height: auto;"></canvas> 
+        </div>
+    </div>
+</div>
 
 <?php
 // Fetch sales data for each month from the database
