@@ -223,8 +223,7 @@
     </div>
 
     <!-- Right Column: Total Orders as Text -->
-   <!-- Right Column: Total Customers as Chart -->
-<div class="col-md-6 mb-3">
+    <div class="col-md-6 mb-3">
     <div class="card" style="background-color: #e2e3e5;"> <!-- Same color as Monthly Sales Report -->
         <div class="card-header" style="background-color: #6c757d; color: white;"> <!-- Same color as Monthly Sales Report -->
             Total Customers
@@ -235,17 +234,21 @@
         </div>
     </div>
 </div>
+
+<!-- Chart canvas -->
+<canvas id="customersChart" width="400" height="200"></canvas>
+
 <script>
-    // Example Chart.js script for Total Customers
+// Chart.js script for Total Customers per month
 var ctxCustomers = document.getElementById('customersChart').getContext('2d');
 var customersChart = new Chart(ctxCustomers, {
-    type: 'bar', // or 'line', 'doughnut', etc.
+    type: 'bar', // or 'line' chart
     data: {
-        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'], // Example labels
+        labels: months, // Months from PHP
         datasets: [{
             label: 'Total Customers',
-            data: [20, 30, 40, 35, 50, 45], // Example data
-            backgroundColor: '#17a2b8', // Same teal color
+            data: customerCounts, // Customer counts from PHP
+            backgroundColor: '#17a2b8', // Same teal color as requested
             borderColor: '#6c757d', // Same as card-header background
             borderWidth: 1
         }]
@@ -259,9 +262,7 @@ var customersChart = new Chart(ctxCustomers, {
         }
     }
 });
-
 </script>
-
 
 <?php
 // Fetch sales data for each month from the database
