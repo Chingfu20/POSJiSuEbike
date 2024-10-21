@@ -180,18 +180,17 @@
     </div>
 
     <div class="col-md-3 mb-3">
-    <div class="card" style="background-color: #FAD0C4;"> <!-- Light peach -->
-        <div class="card-header" style="background-color: #fd7e14; color: white;">
-            <i class="fas fa-receipt"></i> Total Orders
-        </div>
-        <div class="card-body text-center">
-            <h3 id="totalOrdersText">
-                <i class="fas fa-receipt"></i> 30 <!-- Example count with icon -->
-            </h3> <!-- Total Orders will be shown here -->
+        <div class="card" style="background-color: #B3E5D6;"> <!-- Light teal -->
+            <div class="card-header" style="background-color: #17a2b8; color: white;">
+                <i class="fas fa-users"></i> Total Customers
+            </div>
+            <div class="card-body text-center">
+                <h3 id="customerText">
+                    <i class="fas fa-users"></i> 50 <!-- Example count with icon -->
+                </h3> <!-- Customer count will be shown here -->
+            </div>
         </div>
     </div>
-</div>
-
 
     <div class="col-md-3 mb-3">
         <div class="card" style="background-color: #C8E6F5;"> <!-- Light blue -->
@@ -223,121 +222,19 @@
     </div>
 
     <!-- Right Column: Total Orders as Text -->
-    <div class="col-md-3 mb-3">
-        <div class="card" style="background-color: #B3E5D6;"> <!-- Light teal -->
-            <div class="card-header" style="background-color: #17a2b8; color: white;">
-                <i class="fas fa-users"></i> Total Customers
+    <div class="col-md-6 mb-3">
+        <div class="card" style="background-color: #FAD0C4;"> <!-- Light peach -->
+            <div class="card-header" style="background-color: #fd7e14; color: white;">
+                <i class="fas fa-receipt"></i> Total Orders
             </div>
             <div class="card-body text-center">
-                <h3 id="customerText">
-                    <i class="fas fa-users"></i> 50 <!-- Example count with icon -->
-                </h3> <!-- Customer count will be shown here -->
-            </div>
-        </div>
-    </div>
-    <?php
-// Database connection (assumed already established)
-// Fetch total customers for each month from the database
-$monthlyCustomers = [];
-for ($i = 1; $i <= 12; $i++) {
-    $startDate = date("Y-$i-01");
-    $endDate = date("Y-$i-t");
-    $result = mysqli_query($conn, "SELECT COUNT(*) AS monthly_customers FROM customers WHERE created_at BETWEEN '$startDate' AND '$endDate'"); // Adjust the date column name as needed
-    $row = mysqli_fetch_assoc($result);
-    
-    $monthlyCustomers[] = $row['monthly_customers'] ? $row['monthly_customers'] : 0; // Count of customers for the month
-}
-?>
-
-<!-- Row for Monthly Sales Report and Total Orders -->
-<div class="row">
-    <!-- Left Column: Monthly Sales Report -->
-    <div class="col-md-6 mb-3">
-        <div class="card" style="background-color: #e2e3e5;">
-            <div class="card-header" style="background-color: #6c757d; color: white;">
-                Monthly Sales Report
-            </div>
-            <div class="card-body">
-                <!-- Chart for sales -->
-                <canvas id="salesChart" width="400" height="200"></canvas>
-            </div>
-        </div>
-    </div>
-
-    <!-- Right Column: Pie Chart for Total Customers -->
-    <div class="col-md-6 mb-3">
-        <div class="card" style="background-color: #B3E5D6;"> <!-- Light teal -->
-            <div class="card-header" style="background-color: #17a2b8; color: white;">
-                <i class="fas fa-users"></i> Monthly Total Customers
-            </div>
-            <div class="card-body">
-                <!-- Canvas for pie chart -->
-                <canvas id="customersChart" width="400" height="200"></canvas>
+                <h3 id="totalOrdersText">
+                    <i class="fas fa-receipt"></i> 30 <!-- Example count with icon -->
+                </h3> <!-- Total Orders will be shown here -->
             </div>
         </div>
     </div>
 </div>
-
-<script>
-// JavaScript code for rendering the pie chart
-document.addEventListener("DOMContentLoaded", function () {
-    const monthlyCustomers = <?php echo json_encode($monthlyCustomers); ?>;
-
-    // Pie Chart for Monthly Total Customers
-    const ctxCustomers = document.getElementById('customersChart').getContext('2d');
-    new Chart(ctxCustomers, {
-        type: 'pie', // Pie chart type
-        data: {
-            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-            datasets: [{
-                label: 'Monthly Total Customers',
-                data: monthlyCustomers,  // Use dynamic customer count data
-                backgroundColor: [
-                    '#FF6384',
-                    '#36A2EB',
-                    '#FFCE56',
-                    '#4BC0C0',
-                    '#9966FF',
-                    '#FF9F40',
-                    '#FF6384',
-                    '#36A2EB',
-                    '#FFCE56',
-                    '#4BC0C0',
-                    '#9966FF',
-                    '#FF9F40'
-                ],
-                borderColor: 'rgba(255, 255, 255, 0.5)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    display: true,
-                    labels: {
-                        color: '#333' // Color of legend text
-                    }
-                },
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            let label = context.label || '';
-                            if (label) {
-                                label += ': ';
-                            }
-                            if (context.raw !== null) {
-                                label += context.raw; // Show the raw value in tooltips
-                            }
-                            return label;
-                        }
-                    }
-                }
-            }
-        }
-    });
-});
-</script>
 
 
 <?php
