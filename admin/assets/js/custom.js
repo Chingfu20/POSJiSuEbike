@@ -62,30 +62,29 @@ $(document).ready(function () {
 
     // proceed to place order button click
     $(document).on('click', '.proceedToPlace', function () {
-
-        // console.log('proceedToPlace');
-
         var cphone = $('#cphone').val();
         var payment_mode = $('#payment_mode').val();
-
-        if(payment_mode == ''){
-
+        var amountPaid = $('#amountPaid').val();
+        var changeAmount = $('#changeAmount').val();
+    
+        if(payment_mode == '') {
             swal("Select Payment Mode","Select your payment mode","warning");
             return false;
         }
-
-        if(cphone == '' && !$.isNumeric(cphone)){
-
+    
+        if(cphone == '' && !$.isNumeric(cphone)) {
             swal("Enter Phone Number","Enter Valid Phone Number","warning");
             return false;
         }
-
+    
         var data = {
             'proceedToPlaceBtn': true,
             'cphone': cphone,
             'payment_mode': payment_mode,
+            'amountPaid': amountPaid,
+            'changeAmount': changeAmount
         };
-
+    
         $.ajax({
             type: "POST",
             url: "orders-code.php",
@@ -135,6 +134,7 @@ $(document).ready(function () {
         var c_name = $('#c_name').val();
         var c_phone = $('#c_phone').val();
         var c_email = $('#c_email').val();
+        var c_address = $('#c_address').val();
 
 
         if(c_name != '' && c_phone != '' )
@@ -146,6 +146,7 @@ $(document).ready(function () {
                     'name': c_name,
                     'phone': c_phone,
                     'email': c_email,
+                    'address': c_address
                 };
 
                 $.ajax({
