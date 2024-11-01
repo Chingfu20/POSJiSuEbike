@@ -55,12 +55,7 @@
                                             Order Date: 
                                             <span class="fw-bold"><?= $orderData['order_date']; ?></span>
                                         </label>
-                                        <br/>
-                                        <label class="mb-1">
-                                            Order Status: 
-                                            <span class="fw-bold"><?= $orderData['order_status']; ?></span>
-                                        </label>
-                                        <br/>
+                                            <br/>
                                         <label class="mb-1">
                                             Payment Mode: 
                                             <span class="fw-bold"><?= $orderData['payment_mode']; ?></span>
@@ -104,7 +99,7 @@
                                        <table class="table table-bordered table-stiped">
                                         <thead>
                                             <tr>
-                                                <th>Product</th>
+                                                <th>Unit</th>
                                                 <th>price</th>
                                                 <th>Quantity</th>
                                                 <th>Total</th>
@@ -133,7 +128,7 @@
 
                                             <tr>
                                                 <td class="text-end fw-bold">Total Price: </td>
-                                                <td colspan="3" class="text-end fw-bold">Rs: <?= number_format($orderItemRow['total_amount'],0); ?></td>
+                                                <td colspan="3" class="text-end fw-bold">Price: <?= number_format($orderItemRow['total_amount'],0); ?></td>
                                             </tr>
                                         </tbody>
                                        </table>
