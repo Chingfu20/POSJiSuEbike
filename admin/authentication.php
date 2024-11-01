@@ -1,7 +1,4 @@
 <?php
-
-session_start(); 
-
 if (isset($_SESSION['loggedInUser'])) {
     $email = validate($_SESSION['loggedInUser']['email']); 
 
@@ -19,7 +16,7 @@ if (isset($_SESSION['loggedInUser'])) {
         }
     }
 } else {
-    redirect('../login.php', 'Login to Continue...');
+    // redirect('../login.php', 'Login to Continue...');
 }
 
 ?>
