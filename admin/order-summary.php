@@ -92,9 +92,9 @@ if(!isset($_SESSION['productItems'])){
                                 <thead>
                                     <tr>
                                         <th align="start" style="border-bottom: 1px solid #ccc;" width="5%">ID</th>
-                                        <th align="start" style="border-bottom: 1px solid #ccc;">Product Name</th>
+                                        <th align="start" style="border-bottom: 1px solid #ccc;">Unit Name</th>
                                         <th align="start" style="border-bottom: 1px solid #ccc;" width="10%">Price</th>
-                                        <th align="start" style="border-bottom: 1px solid #ccc;" width="10%">Quantity</th>
+                                        <th align="start" style="border-bottom: 1px solid #ccc;" width="10%">Unit</th>
                                         <th align="start" style="border-bottom: 1px solid #ccc;" width="15%">Total Price</th>
                                     </tr>
                                 </thead>
@@ -124,11 +124,13 @@ if(!isset($_SESSION['productItems'])){
                                     </tr>
                                     <tr>
                                     <td colspan="4" align="end" style="font-weight: bold;">Amount:</td>
-                                    <td colspan="1" style="font-weight: bold;"><?= number_format($amountPaid, 0); ?></td>
+                                    <td colspan="1" style="font-weight: bold;">   <?= isset($_SESSION['amountPaid']) ? number_format($_SESSION['amountPaid'], 0) : '0'; ?></td>
                                     </tr>
                                     <tr>
                                     <td colspan="4" align="end" style="font-weight: bold;">Change:</td>
-                                    <td colspan="1" style="font-weight: bold;"><?= number_format($changeAmount, 0); ?></td>
+                                    <td colspan="1" style="font-weight: bold;">
+                                     <?= isset($_SESSION['changeAmount']) ? number_format(floatval(str_replace(',', '', $_SESSION['changeAmount'])), 0) : '0'; ?>
+                                    </td>
                                     </tr>
                                     <tr>
                                         <td colspan="5">Payment Mode: <?= isset($_SESSION['payment_mode']) ? $_SESSION['payment_mode'] : ''; ?></td>
