@@ -75,6 +75,8 @@ if (isset($_POST['productIncDec'])) {
 if (isset($_POST['proceedToPlaceBtn'])) {
     $phone = validate($_POST['cphone']);
     $payment_mode = validate($_POST['payment_mode']);
+    $amountPaid = validate($_POST['amountPaid']);
+    $changeAmount = validate($_POST['changeAmount']);
 
     $checkCustomer = mysqli_query($conn, "SELECT * FROM customers WHERE phone='$phone' LIMIT 1");
     if ($checkCustomer) {
@@ -82,6 +84,8 @@ if (isset($_POST['proceedToPlaceBtn'])) {
             $_SESSION['invoice_no'] = "INV-" . rand(111111, 999999);
             $_SESSION['cphone'] = $phone;
             $_SESSION['payment_mode'] = $payment_mode;
+            $_SESSION['amountPaid'] = $amountPaid;
+            $_SESSION['changeAmount'] = $changeAmount;
 
             jsonResponse(200, 'success', 'Customer Found');
         } else {
@@ -97,6 +101,7 @@ if (isset($_POST['saveCustomerBtn'])) {
     $name = validate($_POST['name']);
     $phone = validate($_POST['phone']);
     $email = validate($_POST['email']);
+    $address = validate($_POST['address']);
 
     if ($name != '' && $phone != '') {
         if (strlen($phone) == 11 && ctype_digit($phone)) {
@@ -104,6 +109,7 @@ if (isset($_POST['saveCustomerBtn'])) {
                 'name' => $name,
                 'phone' => $phone,
                 'email' => $email,
+                'address' => $address
             ];
             $result = insert('customers', $data);
             if ($result) {
