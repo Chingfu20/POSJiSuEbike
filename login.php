@@ -6,18 +6,11 @@
     <title>JiSu Ebike POS System</title>
     <link rel="stylesheet" href="login.css">
     <!-- SweetAlert Library -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <?php 
     include('includes/header.php'); 
 
-    if (isset($_SESSION['loggedIn'])) {
-        ?>
-        <script>window.location.href = 'index.php';</script>
-        <?php
-    }
     ?>
 
     <div class="py-5 bg-light">
@@ -47,16 +40,28 @@
                                     </button>
                                 </div>
                             </form>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <script>
-        // Function to validate form inputs
-        function validateForm() {
+                            <script>
+<?php if(isset($_SESSION['sweet_alert'])) : ?>
+    
+    Swal.fire({
+        icon: '<?= $_SESSION['sweet_alert']['type'] ?>',
+        title: '<?= $_SESSION['sweet_alert']['message'] ?>',
+    });
+
+    <?php unset($_SESSION['sweet_alert']); ?>
+<?php endif; ?>
+
+
+function validateForm() {
             var email = document.getElementById('email').value;
             var password = document.getElementById('password').value;
 
@@ -116,6 +121,7 @@
         this.classList.toggle('fa-eye');
         this.classList.toggle('fa-eye-slash'); 
     });
-    </script>
+</script>
+
 </body>
 </html>
