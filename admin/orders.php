@@ -66,10 +66,9 @@
                         <thead>
                             <tr>
                                 <th>Tracking No.</th>
-                                <th>C Name</th>
+                                <th> Name</th>
                                 <th>C Phone</th>
                                 <th>Order Date</th>
-                                <th>Order Status</th>
                                 <th>Payment Mode</th>
                                 <th>Action</th>
                             </tr>
@@ -81,7 +80,6 @@
                                     <td><?= $orderItem['name']; ?></td>
                                     <td><?= $orderItem['phone']; ?></td>
                                     <td><?= date('d M, Y', strtotime($orderItem['order_date'])); ?></td>
-                                    <td><?= $orderItem['order_status']; ?></td>
                                     <td><?= $orderItem['payment_mode']; ?></td>
                                     <td>
                                         <a href="orders-view.php?track=<?= $orderItem['tracking_no']; ?>" class="btn btn-info mb-0 px-2 btn-sm">View</a>
