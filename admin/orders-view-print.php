@@ -40,31 +40,44 @@
                     $orderDataRow = mysqli_fetch_assoc($orderQueryRes);
                   //  print_r($orderDataRow);
                     ?>
-                   <table style="width: 100%; margin-button: 20px;">
-                            <tbody>
-                                 <tr>
-                                    <td style="text-align: center;" colspan="2">
-                                        <h4 style="font-size: 23px; line-height: 30px; margin:2px; padding: 0;">Ji Su E-Bike POS</h4>
-                                        <p style="font-size: 16px; line-height: 24px; margin:2px; padding: 0;">Located at Campo, Bantigue, Bantayan Island, Cebu</p>
-                                        <p style="font-size: 16px; line-height: 24px; margin:2px; padding: 0;">Developer, Mr. Ching</p>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <h5 style="font-size: 20px; line-height: 30px; margin:0px; padding: 0;">Customer Details</h5>
-                                        <p style="font-size: 14px; line-height: 20px; margin:0px; padding: 0;">Customer Name: <?= $orderDataRow['name'] ?> </p>
-                                        <p style="font-size: 14px; line-height: 20px; margin:0px; padding: 0;">Customer Phone No.: <?= $orderDataRow['phone'] ?> </p>
-                                        <p style="font-size: 14px; line-height: 20px; margin:0px; padding: 0;">Customer Email: <?= $orderDataRow['email'] ?> </p>
-                                    </td>
-                                    <td align="end">
-                                        <h5 style="font-size: 20px; line-height: 30px; margin:0px; padding: 0;">Invoice Details</h5>
-                                        <p style="font-size: 14px; line-height: 20px; margin:0px; padding: 0;">Invoice No.: <?= $orderDataRow['invoice_no']; ?></p>
-                                        <p style="font-size: 14px; line-height: 20px; margin:0px; padding: 0;">Invoice Date: <?= date('d M Y'); ?></p>
-                                        <p style="font-size: 14px; line-height: 20px; margin:0px; padding: 0;">Address: ""</p>
-                                    </td>
-                                </tr>
-                            </tbody>
-                     </table>
+                  <table style="width: 100%; margin-bottom: 20px;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;" colspan="2">
+                <h4 style="font-size: 23px; line-height: 30px; margin: 2px; padding: 0; display: inline;">Ji Su E-Bike POS</h4>
+                <p style="font-size: 16px; line-height: 24px; margin: 2px; padding: 0;">Located at Campo, Bantigue, Bantayan Island, Cebu</p>
+                <p style="font-size: 16px; line-height: 24px; margin: 2px; padding: 0;">Customer Service: 0923-377-4667</p>
+                <img src="assets/img/logo.fb51b8e1.png" alt="Ji Su E-Bike Logo" style="vertical-align: middle; width: 130px; height: auto; margin-top: 10px;">
+            </td>
+        </tr>
+        <tr>
+            <td>
+        <br>
+        <br>
+        <br>
+        <br>
+
+                <h5 style="font-size: 20px; line-height: 30px; margin: 0px; padding: 0;">Customer Details</h5>
+                <p style="font-size: 14px; line-height: 20px; margin: 0px; padding: 0;">Customer Name: <?= $orderDataRow['name'] ?></p>
+                <p style="font-size: 14px; line-height: 20px; margin: 0px; padding: 0;">Customer Phone No.: <?= $orderDataRow['phone'] ?></p>
+                <p style="font-size: 14px; line-height: 20px; margin: 0px; padding: 0;">Customer Email: <?= $orderDataRow['email'] ?></p>
+            </td>
+            <td align="end">
+        <br>
+        <br>
+        <br>
+        <br>
+
+                <h5 style="font-size: 20px; line-height: 30px; margin: 0px; padding: 0;">Invoice Details</h5>
+                <p style="font-size: 14px; line-height: 20px; margin: 0px; padding: 0;">Invoice No.: <?= $orderDataRow['invoice_no']; ?></p>
+                <p style="font-size: 14px; line-height: 20px; margin: 0px; padding: 0;">Invoice Date: <?= date('d M Y'); ?></p>
+                <p style="font-size: 14px; line-height: 20px; margin: 0px; padding: 0;">Address: Campo, Bantigue, Bantayan Island, Cebu</p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
                     <?php
                 }
                 else
@@ -88,7 +101,7 @@
                                    <thead>
                                       <tr>
                                           <th align="start" style="border-bottom: 1px solid #ccc;" width="5%">ID</th>
-                                          <th align="start" style="border-bottom: 1px solid #ccc;">Product Name</th>
+                                          <th align="start" style="border-bottom: 1px solid #ccc;">Unit Name</th>
                                           <th align="start" style="border-bottom: 1px solid #ccc;" width="10%">Price</th>
                                           <th align="start" style="border-bottom: 1px solid #ccc;" width="10%">Quantity</th>
                                           <th align="start" style="border-bottom: 1px solid #ccc;" width="15%">Total Price</th>
@@ -114,6 +127,17 @@
                                           <td colspan="4" align="end" style="font-weight: bold;">Grand Total:</td>
                                           <td colspan="1" style="font-weight: bold;"><?= number_format($row['total_amount'], 0); ?></td>
                                    </tr>
+                                    <tr>
+                                    <td colspan="4" align="end" style="font-weight: bold;">Amount:</td>
+                                    <td colspan="1" style="font-weight: bold;">   <?= isset($_SESSION['amountPaid']) ? number_format($_SESSION['amountPaid'], 0) : '0'; ?></td>
+                                    </tr>
+                                    <tr>
+                                    <td colspan="4" align="end" style="font-weight: bold;">Change:</td>
+                                    <td colspan="1" style="font-weight: bold;">
+                                     <?= isset($_SESSION['changeAmount']) ? number_format(floatval(str_replace(',', '', $_SESSION['changeAmount'])), 0) : '0'; ?>
+                                    </td>
+                                    </tr>
+                                    
                                    <tr>
                                    <td colspan="5">Payment Mode: <?= $row['payment_mode'];?></td>
                                     </tr>
@@ -156,4 +180,58 @@
         </div>
      </div>
 
+     <script>
+            document.addEventListener('DOMContentLoaded', function () {
+        function updateTotalAmount() {
+            let totalAmount = 0;
+            document.querySelectorAll('.totalPrice').forEach(cell => {
+                totalAmount += parseFloat(cell.textContent.replace(/,/g, ''));
+            });
+            document.getElementById('totalAmount').value = totalAmount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+            updateChange();
+        }
+
+        function updateChange() {
+            const totalAmount = parseFloat(document.getElementById('totalAmount').value.replace(/,/g, ''));
+            const amountPaid = parseFloat(document.getElementById('amountPaid').value) || 0;
+            const change = amountPaid - totalAmount;
+            document.getElementById('changeAmount').value = change > 0 ? change.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') : '0.00';
+        }
+
+        document.querySelectorAll('.increment').forEach(button => {
+            button.addEventListener('click', function () {
+                const qtyInput = this.parentElement.querySelector('.quantityInput');
+                let quantity = parseInt(qtyInput.value);
+                if (quantity < 999) {
+                    qtyInput.value = ++quantity;
+                    updateTotalPrice(this);
+                }
+            });
+        });
+
+        document.querySelectorAll('.decrement').forEach(button => {
+            button.addEventListener('click', function () {
+                const qtyInput = this.parentElement.querySelector('.quantityInput');
+                let quantity = parseInt(qtyInput.value);
+                if (quantity > 1) {
+                    qtyInput.value = --quantity;
+                    updateTotalPrice(this);
+                }
+            });
+        });
+
+        document.getElementById('amountPaid').addEventListener('input', updateChange);
+
+        function updateTotalPrice(element) {
+            const row = element.closest('tr');
+            const price = parseFloat(row.querySelector('td:nth-child(3)').textContent.replace(/,/g, ''));
+            const quantity = parseInt(row.querySelector('.quantityInput').value);
+            const totalPriceCell = row.querySelector('.totalPrice');
+            totalPriceCell.textContent = (price * quantity).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+            updateTotalAmount();
+        }
+
+        updateTotalAmount();
+    });
+     </script>
 <?php include('includes/footer.php'); ?>
