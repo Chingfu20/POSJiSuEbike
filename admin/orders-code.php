@@ -157,7 +157,6 @@ if (isset($_POST['saveOrder'])) {
             'invoice_no' => $invoice_no,
             'total_amount' => $totalAmount,
             'order_date' => date('Y-m-d'),
-            'order_status' => 'booked',
             'payment_mode' => $payment_mode,
             'order_placed_by_id' => $order_placed_by_id
         ];
