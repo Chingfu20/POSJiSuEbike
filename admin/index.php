@@ -229,10 +229,7 @@ $conn->close();
             <div class="card-body text-center">
             <i class="fas fa-boxes"></i> 
                 <h3>
-                <?php
-         
-         echo htmlspecialchars($orders);
-         ?>
+                
                 </h3> 
             </div>
     </div>
