@@ -169,21 +169,20 @@ $conn->close();
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <div class="row">
-    
-
     <div class="col-md-3 mb-3">
         <div class="card" style="background-color: #D3E5E2;">
             <div class="card-header" style="background-color: #28a745; color: white;">
-          <center> Categories </center>
+          <center> Total Categories </center>
         </div>
         <div class="card-body text-center">
-            <i class="fas fa-list-alt"></i>
-            <h3 id="category">
-                <?php
+        <i class="fas fa-list-alt"></i>
+            <h3>
+            <?php
          
-                echo htmlspecialchars($totalCount);
-                ?>
-            </h3>
+         echo htmlspecialchars($totalCount);
+         ?>
+                </h3>
+            </div>
         </div>
     </div>
 
@@ -213,7 +212,7 @@ $conn->close();
     </div>
 </div>
 
- <div class="col-md-3 mb-3">
+            <div class="col-md-3 mb-3">
     <div class="card" style="background-color: #B3E5D6;"> 
         <div class="card-header" style="background-color: #17a2b8; color: white;">
            <center> Total Orders </center>
@@ -262,8 +261,6 @@ for ($i = 1; $i <= 12; $i++) {
         </div>
     </div>
 </div>
-
-
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
