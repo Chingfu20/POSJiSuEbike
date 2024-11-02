@@ -166,7 +166,7 @@
             </div>
             <div class="card-body text-center">
                 <h3 id="categoryText">
-                    <i class="fas fa-list-alt"></i> 10 <!-- Example count with icon -->
+                    <i class="fas fa-list-alt"></i>  <!-- Example count with icon -->
                 </h3> <!-- Category count will be shown here -->
             </div>
         </div>
@@ -179,7 +179,7 @@
             </div>
             <div class="card-body text-center">
                 <h3 id="productText">
-                    <i class="fas fa-boxes"></i> 25 <!-- Example count with icon -->
+                    <i class="fas fa-boxes"></i>  <!-- Example count with icon -->
                 </h3> <!-- Product count will be shown here -->
             </div>
         </div>
