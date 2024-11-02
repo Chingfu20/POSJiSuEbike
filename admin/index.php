@@ -207,7 +207,7 @@
             </div>
             <div class="card-body text-center">
                 <h3 id="todayOrdersText">
-                    <i class="fas fa-shopping-cart"></i> 15 <!-- Example count with icon -->
+                    <i class="fas fa-shopping-cart"></i>  <!-- Example count with icon -->
                 </h3> <!-- Today's orders count will be shown here -->
             </div>
         </div>
