@@ -161,7 +161,7 @@ if(!isset($_SESSION['loggedInUser'])){
     <div class="col-md-3 mb-3">
         <div class="card" style="background-color: #D3E5E2;">
             <div class="card-header" style="background-color: #28a745; color: white;">
-          <center> Total Categories </center>
+          <center> Total Categoriessasd </center>
         </div>
         <div class="card-body text-center">
         <i class="fas fa-list-alt"></i>
