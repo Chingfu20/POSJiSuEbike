@@ -1,10 +1,10 @@
 <?php
 include ('../config/dbcon.php');
 
-session_start();
-if(!isset($_SESSION['loggedInUser'])){
-    header('location: ../login.php');
-}
+// session_start();
+// if(!isset($_SESSION['loggedInUser'])){
+//     header('location: ../login.php');
+// }
 
 $sql = "SELECT COUNT(*) AS total FROM categories WHERE status = 0"; // Count visible categories
 $result = $conn->query($sql);
