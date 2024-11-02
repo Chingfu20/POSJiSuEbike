@@ -1,12 +1,10 @@
 <?php
-include('includes/header.php');
 include ('../config/dbcon.php');
 
-
-// session_start();
-// if(!isset($_SESSION['loggedInUser'])){
-//     header('location: ../login.php');
-// }
+session_start();
+if(!isset($_SESSION['loggedInUser'])){
+    header('location: ../login.php');
+}
 
 $sql = "SELECT COUNT(*) AS total FROM categories WHERE status = 0"; // Count visible categories
 $result = $conn->query($sql);
@@ -194,7 +192,7 @@ $conn->close();
 </head>
 <body>
 
-<?php  ?>
+<?php include('includes/header.php'); ?>
 
 <div class="container-fluid">
     <h1 class="mt-4"></h1>
