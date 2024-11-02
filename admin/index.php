@@ -1,5 +1,4 @@
 <?php
- include('includes/header.php'); 
 include ('../config/dbcon.php');
 
 session_start();
@@ -193,7 +192,7 @@ $conn->close();
 </head>
 <body>
 
-
+<?php include('includes/header.php'); ?>
 
 <div class="container-fluid">
     <h1 class="mt-4"></h1>
