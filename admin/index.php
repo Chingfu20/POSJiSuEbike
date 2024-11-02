@@ -179,10 +179,20 @@ $conn->close();
           <center> Categories </center>
         </div>
         <div class="card-body text-center">
-        <i class="fas fa-list-alt"></i>
+            <i class="fas fa-list-alt"></i>
             <h3 id="category">
-                </h3>
-            </div>
+                <?php
+                
+                // Display categories
+                if (!empty($categories)) {
+                    foreach ($categories as $category) {
+                        echo "<p>" . htmlspecialchars($category['name']) . "</p>";
+                    }
+                } else {
+                    echo "<p>No categories found.</p>";
+                }
+                ?>
+            </h3>
         </div>
     </div>
 
