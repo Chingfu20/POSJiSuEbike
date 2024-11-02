@@ -36,7 +36,7 @@ if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i>  <?php echo htmlspecialchars($_SESSION['loggedInUser']['email'] ?? ''); ?></a>
               
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" id="logoutButton" href="#"> <i class="fas fa-sign-out-alt"></i>Logout</a></li>
+                    <li><a class="dropdown-item" id="logoutButton" > <i class="fas fa-sign-out-alt"></i>Logout</a></li>
                 </ul>
             </li>
         </ul>
