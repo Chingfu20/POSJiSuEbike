@@ -3,6 +3,16 @@ session_start();
 if(!isset($_SESSION['loggedInUser'])){
     header('location: ../login.php');
 }
+
+$sql = "SELECT * FROM categories WHERE status = 0"; // Only visible categories
+$result = $conn->query($sql);
+
+$categories = [];
+if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+        $categories[] = $row; // Store each category in an array
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
