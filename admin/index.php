@@ -6,14 +6,12 @@ if(!isset($_SESSION['loggedInUser'])){
     header('location: ../login.php');
 }
 
-$sql = "SELECT * FROM categories WHERE status = 0"; // Only visible categories
+$sql = "SELECT COUNT(*) AS total FROM categories WHERE status = 0"; // Count visible categories
 $result = $conn->query($sql);
 
-$categories = [];
-if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
-        $categories[] = $row; // Store each category in an array
-    }
+$totalCount = 0; // Default count
+if ($result && $row = $result->fetch_assoc()) {
+    $totalCount = $row['total'];
 }
 $conn->close();
 ?>
@@ -182,15 +180,8 @@ $conn->close();
             <i class="fas fa-list-alt"></i>
             <h3 id="category">
                 <?php
-                
-                // Display categories
-                if (!empty($categories)) {
-                    foreach ($categories as $category) {
-                        echo "<p>" . htmlspecialchars($category['name']) . "</p>";
-                    }
-                } else {
-                    echo "<p>No categories found.</p>";
-                }
+         
+                echo htmlspecialchars($totalCount);
                 ?>
             </h3>
         </div>
