@@ -54,7 +54,7 @@ if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
                 cancelButtonText: 'No, stay logged in'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = '../logout.php';
+                    window.location.href = '../../logout.php';
                 }
             });
         });
