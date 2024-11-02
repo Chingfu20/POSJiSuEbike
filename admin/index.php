@@ -1,8 +1,45 @@
 <?php
+include ('../config/dbcon.php');
 // session_start();
 // if(!isset($_SESSION['loggedInUser'])){
 //     header('location: ../login.php');
 // }
+
+$sql = "SELECT COUNT(*) AS total FROM products WHERE status = 0"; // Count visible categories
+$result = $conn->query($sql);
+
+$products = 0; // Default count
+if ($result && $row = $result->fetch_assoc()) {
+    $products = $row['total'];
+}
+
+$sql = "SELECT COUNT(*) AS total FROM orders WHERE payment_mode = 'Cash Payment'"; // Count visible categories
+$result = $conn->query($sql);
+
+$orders = 0; // Default count
+if ($result && $row = $result->fetch_assoc()) {
+    $orders = $row['total'];
+}
+
+// Get today's date
+// Get today's date
+$today = date('Y-m-d');
+
+// Fetch today's orders count
+$sqlToday = "SELECT COUNT(*) AS total FROM orders WHERE order_date = ?";
+$stmtToday = $conn->prepare($sqlToday);
+$stmtToday->bind_param("s", $today);
+$stmtToday->execute();
+$resultToday = $stmtToday->get_result();
+$totalToday = 0;
+
+if ($resultToday && $row = $resultToday->fetch_assoc()) {
+    $totalToday = $row['total'];
+}
+
+$stmtToday->close();
+
+$conn->close();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -193,7 +230,7 @@
         </div>
         <div class="card-body text-center">
             <h3 id="totalOrdersText">
-                <i class="fas fa-receipt"></i>  <!-- Example count with icon -->
+                <i class="fas fa-receipt"></i>  <?php    echo htmlspecialchars($totalToday); ?>
             </h3> <!-- Total Orders will be shown here -->
         </div>
     </div>
@@ -207,8 +244,11 @@
             </div>
             <div class="card-body text-center">
                 <h3 id="todayOrdersText">
-                    <i class="fas fa-shopping-cart"></i>  <!-- Example count with icon -->
-                </h3> <!-- Today's orders count will be shown here -->
+                <?php
+         
+         echo htmlspecialchars($orders);
+         ?>   <i class="fas fa-shopping-cart"></i>   
+                </h3>
             </div>
         </div>
     </div>
