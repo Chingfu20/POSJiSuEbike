@@ -1,4 +1,6 @@
 <?php
+include ('../config/dbcon.php');
+
 session_start();
 if(!isset($_SESSION['loggedInUser'])){
     header('location: ../login.php');
@@ -13,6 +15,7 @@ if ($result->num_rows > 0) {
         $categories[] = $row; // Store each category in an array
     }
 }
+$conn->close();
 ?>
 <!DOCTYPE html>
 <html lang="en">
