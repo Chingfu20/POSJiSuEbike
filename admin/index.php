@@ -22,6 +22,15 @@ $products = 0; // Default count
 if ($result && $row = $result->fetch_assoc()) {
     $products = $row['total'];
 }
+
+$sql = "SELECT COUNT(*) AS total FROM orders WHERE status = 0"; // Count visible categories
+$result = $conn->query($sql);
+
+$orders = 0; // Default count
+if ($result && $row = $result->fetch_assoc()) {
+    $orders = $row['total'];
+}
+
 $conn->close();
 ?>
 <!DOCTYPE html>
@@ -219,7 +228,11 @@ $conn->close();
             </div>
             <div class="card-body text-center">
             <i class="fas fa-boxes"></i> 
-                <h3 id="todayOrdersText">
+                <h3>
+                <?php
+         
+         echo htmlspecialchars($orders);
+         ?>
                 </h3> 
             </div>
     </div>
@@ -232,7 +245,11 @@ $conn->close();
         </div>
         <div class="card-body text-center">
         <i class="fas fa-list"></i>
-            <h3 id="totalOrdersText">
+            <h3>
+            <?php
+         
+         echo htmlspecialchars($orders);
+         ?>
             </h3>
         </div>
         </div>
