@@ -13,6 +13,15 @@ $totalCount = 0; // Default count
 if ($result && $row = $result->fetch_assoc()) {
     $totalCount = $row['total'];
 }
+
+
+$sql = "SELECT COUNT(*) AS total FROM products WHERE status = 0"; // Count visible categories
+$result = $conn->query($sql);
+
+$products = 0; // Default count
+if ($result && $row = $result->fetch_assoc()) {
+    $products = $row['total'];
+}
 $conn->close();
 ?>
 <!DOCTYPE html>
@@ -193,7 +202,11 @@ $conn->close();
         </div>
         <div class="card-body text-center">
         <i class="fas fa-boxes"></i>
-            <h3 id="productText">
+            <h3>
+            <?php
+         
+         echo htmlspecialchars($products);
+         ?>
                 </h3>
             </div>
         </div>
