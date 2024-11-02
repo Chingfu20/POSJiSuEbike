@@ -235,18 +235,6 @@ for ($i = 1; $i <= 12; $i++) {
 }
 ?>
 
-<!-- <div class="col-md-6 mb-3"> 
-    <div class="card" style="background-color: #B3E5D6;">
-        <div class="card-header" style="background-color: #17a2b8; color: white;">
-            <center> Total Cusasdasdtomers </center>
-        </div>
-        <div class="card-body">
-        <center><i class="fas fa-users"></i></center>
-            <canvas id="customersChart" style="max-width: 500px; max-height: 300px; width: 100%; height: auto;"></canvas> 
-        </div>
-    </div>
-</div> -->
-
 <div class="col-md-6 mb-3"> 
     <div class="card" style="background-color: #B3E5D6;">
         <div class="card-header" style="background-color: #17a2b8; color: white;">
@@ -254,10 +242,11 @@ for ($i = 1; $i <= 12; $i++) {
         </div>
         <div class="card-body">
         <center><i class="fas fa-users"></i></center>
-            <canvas id="customerrecord" style="max-width: 500px; max-height: 300px; width: 100%; height: auto;"></canvas> 
+            <canvas id="customersChart" style="max-width: 500px; max-height: 300px; width: 100%; height: auto;"></canvas> 
         </div>
     </div>
 </div>
+
 
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
