@@ -31,6 +31,24 @@ if ($result && $row = $result->fetch_assoc()) {
     $orders = $row['total'];
 }
 
+// Get today's date
+// Get today's date
+$today = date('Y-m-d');
+
+// Fetch today's orders count
+$sqlToday = "SELECT COUNT(*) AS total FROM orders WHERE order_date = ?";
+$stmtToday = $conn->prepare($sqlToday);
+$stmtToday->bind_param("s", $today);
+$stmtToday->execute();
+$resultToday = $stmtToday->get_result();
+$totalToday = 0;
+
+if ($resultToday && $row = $resultToday->fetch_assoc()) {
+    $totalToday = $row['total'];
+}
+
+$stmtToday->close();
+
 $conn->close();
 ?>
 <!DOCTYPE html>
@@ -229,7 +247,7 @@ $conn->close();
             <div class="card-body text-center">
             <i class="fas fa-boxes"></i> 
                 <h3>
-                
+              <?php    echo htmlspecialchars($totalToday); ?>
                 </h3> 
             </div>
     </div>
