@@ -19,19 +19,19 @@ if (is_numeric($paraResultId)){
                 unlink($deleteImage);
             }
             
-            redirect('delete.php', 'Delete Deleted Successfully');
+            redirect('orders.php', 'Delete Deleted Successfully');
         }
         else
         {
-            redirect('delete.php', 'Something Went Wrong.');
+            redirect('orders.php', 'Something Went Wrong.');
         }
     }
     else
     {
-        redirect('delete.php',$delete['message']);   
+        redirect('orders.php',$delete['message']);   
     }
 }else{
-    redirect('delete.php', 'Something Went Wrong.');
+    redirect('orders.php', 'Something Went Wrong.');
 }
 
 ?>
