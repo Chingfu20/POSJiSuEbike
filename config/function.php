@@ -174,4 +174,77 @@ function getCount($tableName){
         return 'Something Went Wrong!';
     }
 }
+
+function checkParamId($parameterName)
+{
+    if(!isset($_GET[$parameterName])) {
+        return false;
+    }
+    if($_GET[$parameterName] == null) {
+        return false;
+    }
+    return $_GET[$parameterName];
+}
+
+function getById($tableName, $id)
+{
+    global $conn;
+    
+    $table = validate($tableName);
+    $id = validate($id);
+    
+    $query = "SELECT * FROM $table WHERE id='$id' LIMIT 1";
+    $result = mysqli_query($conn, $query);
+    
+    if($result) {
+        if(mysqli_num_rows($result) == 1) {
+            $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+            
+            $response = [
+                'status' => 200,
+                'message' => 'Record Found',
+                'data' => $row
+            ];
+            return $response;
+        } else {
+            $response = [
+                'status' => 404,
+                'message' => 'No Record Found'
+            ];
+            return $response;
+        }
+    } else {
+        $response = [
+            'status' => 500,
+            'message' => 'Something Went Wrong'
+        ];
+        return $response;
+    }
+}
+
+function delete($tableName, $id)
+{
+    global $conn;
+    
+    $table = validate($tableName);
+    $id = validate($id);
+    
+    $query = "DELETE FROM $table WHERE id='$id' LIMIT 1";
+    $result = mysqli_query($conn, $query);
+    return $result;
+}
+
+function validate($input)
+{
+    global $conn;
+    $validatedInput = mysqli_real_escape_string($conn, $input);
+    return trim($validatedInput);
+}
+
+function redirect($url, $message)
+{
+    $_SESSION['message'] = $message;
+    header('Location: '.$url);
+    exit();
+}
 ?>
