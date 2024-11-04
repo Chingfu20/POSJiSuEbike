@@ -222,29 +222,4 @@ function getById($tableName, $id)
     }
 }
 
-function delete($tableName, $id)
-{
-    global $conn;
-    
-    $table = validate($tableName);
-    $id = validate($id);
-    
-    $query = "DELETE FROM $table WHERE id='$id' LIMIT 1";
-    $result = mysqli_query($conn, $query);
-    return $result;
-}
-
-function validate($input)
-{
-    global $conn;
-    $validatedInput = mysqli_real_escape_string($conn, $input);
-    return trim($validatedInput);
-}
-
-function redirect($url, $message)
-{
-    $_SESSION['message'] = $message;
-    header('Location: '.$url);
-    exit();
-}
 ?>
