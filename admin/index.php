@@ -244,7 +244,7 @@ $conn->close();
                 <?php
          
          echo htmlspecialchars($orders);
-         ?>   <i class="fas fa-shopping-cart"></i>   
+         ?>   
                 </h3>
             </div>
         </div>
