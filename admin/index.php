@@ -202,7 +202,6 @@ $conn->close();
             </div>
             <div class="card-body text-center">
                 <h3 id="categoryText">
-                    <i class="fas fa-list-alt"></i> 
                 </h3> 
             </div>
         </div>
