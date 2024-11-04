@@ -84,7 +84,6 @@
                                     <td>
                                         <a href="orders-view.php?track=<?= $orderItem['tracking_no']; ?>" class="btn btn-info mb-0 px-2 btn-sm">View</a>
                                         <a href="orders-view-print.php?track=<?= $orderItem['tracking_no']; ?>" class="btn btn-primary mb-0 px-2 btn-sm">Print</a>
-                                        <a href="orders-delete.php?track=<?= $orderItem['tracking_no']; ?>" class="btn btn-danger mb-0 px-2 btn-sm">Delete</a>
                                     </td>
                                 </tr>
                             <?php endforeach;?>
