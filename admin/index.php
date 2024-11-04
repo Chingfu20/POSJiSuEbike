@@ -192,46 +192,43 @@ $conn->close();
     <div class="container-fluid">
     <h1 class="mt-4"></h1>
 
-    <!-- Row for Total Categories, Total Products, Total Customers, and Today's Orders -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <div class="row">
     <div class="col-md-3 mb-3">
-        <div class="card" style="background-color: #D3E5E2;"> <!-- Softer green -->
+        <div class="card" style="background-color: #D3E5E2;">
             <div class="card-header" style="background-color: #28a745; color: white;">
                 <i class="fas fa-list-alt"></i> Total Categories
             </div>
             <div class="card-body text-center">
                 <h3 id="categoryText">
-                    <i class="fas fa-list-alt"></i>  <!-- Example count with icon -->
-                </h3> <!-- Category count will be shown here -->
+                    <i class="fas fa-list-alt"></i> 
+                </h3> 
             </div>
         </div>
     </div>
 
     <div class="col-md-3 mb-3">
-        <div class="card" style="background-color: #FCE6B2;"> <!-- Soft beige -->
+        <div class="card" style="background-color: #FCE6B2;">
             <div class="card-header" style="background-color: #ffc107; color: white;">
                 <i class="fas fa-boxes"></i> Total Products
             </div>
             <div class="card-body text-center">
                 <h3 id="productText">
-                    <i class="fas fa-boxes"></i>  <!-- Example count with icon -->
-                </h3> <!-- Product count will be shown here -->
+                </h3>
             </div>
         </div>
     </div>
 
-    <!-- Right Column: Total Orders as Text -->
 <div class="col-md-3 mb-3">
-    <div class="card" style="background-color: #B3E5D6;"> <!-- Light teal -->
+    <div class="card" style="background-color: #B3E5D6;"> 
         <div class="card-header" style="background-color: #17a2b8; color: white;">
             <i class="fas fa-receipt"></i> Total Orders
         </div>
         <div class="card-body text-center">
             <h3 id="totalOrdersText">
-                <i class="fas fa-receipt"></i>  <?php    echo htmlspecialchars($totalToday); ?>
-            </h3> <!-- Total Orders will be shown here -->
+                  <?php    echo htmlspecialchars($totalToday); ?>
+            </h3>
         </div>
     </div>
 </div>
