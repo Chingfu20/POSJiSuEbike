@@ -354,7 +354,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                 label += ': ';
                             }
                             if (context.raw !== null) {
-                                label += context.raw; // Show the raw value in tooltips
+                                label += context.raw; 
                             }
                             return label;
                         }
@@ -367,7 +367,6 @@ document.addEventListener("DOMContentLoaded", function () {
 </script>
 
 <?php
-// Fetch sales data for each month from the database
 $salesData = [];
 for ($i = 1; $i <= 12; $i++) {
     $startDate = date("Y-$i-01");
@@ -375,7 +374,6 @@ for ($i = 1; $i <= 12; $i++) {
     $result = mysqli_query($conn, "SELECT SUM(total_amount) AS monthly_sales FROM orders WHERE order_date BETWEEN '$startDate' AND '$endDate'");
     $row = mysqli_fetch_assoc($result);
     
-    // Format sales amount in PHP currency format
     $salesData[] = $row['monthly_sales'] ? number_format($row['monthly_sales'], 2, '.', '') : 0.00;
 }
 ?>
@@ -423,7 +421,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                 label += ': ';
                             }
                             if (context.raw !== null) {
-                                label += '₱' + context.raw; // Add PHP symbol to tooltips
+                                label += '₱' + context.raw;
                             }
                             return label;
                         }
@@ -453,7 +451,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        // Get the values from hidden inputs
         const categoryCount = document.getElementById("categoryCount").value;
         const productCount = document.getElementById("productCount").value;
         const customerCount = document.getElementById("customerCount").value;
@@ -461,14 +458,12 @@ document.addEventListener("DOMContentLoaded", function () {
         const todayOrders = document.getElementById("todayOrders").value;
         const totalOrders = document.getElementById("totalOrders").value;
 
-        // Display the numbers for Total Categories, Total Products, Total Customers, Today's Orders, and Total Orders
         document.getElementById('categoryText').innerHTML = categoryCount;
         document.getElementById('productText').innerHTML = productCount;
         document.getElementById('customerText').innerHTML = customerCount;
         document.getElementById('todayOrdersText').innerHTML = todayOrders;
         document.getElementById('totalOrdersText').innerHTML = totalOrders;
 
-        // Create a bar chart for Monthly Sales Report
         const createBarChart = (context, label, data, bgColor, brColor) => {
             new Chart(context, {
                 type: 'bar',
@@ -476,7 +471,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
                     datasets: [{
                         label: label,
-                        data: data, // Array of data for each month
+                        data: data, 
                         backgroundColor: bgColor,
                         borderColor: brColor,
                         borderWidth: 2
@@ -510,20 +505,19 @@ document.addEventListener("DOMContentLoaded", function () {
                                 },
                                 color: '#495057'
                             },
-                            beginAtZero: true // Ensure the y-axis starts at 0
+                            beginAtZero: true 
                         }
                     }
                 }
             });
         };
 
-        // Sample sales data for each month (you can replace this with dynamic data)
         createBarChart(
             document.getElementById("salesChart"),
             "Sales (Total)",
-            [12000, 15000, 13000, 17000, 14000, 16000, 18000, 19000, 17000, 21000, 22000, 24000], // Sample data
-            'rgba(54, 162, 235, 0.7)',  // Bar fill color
-            'rgba(54, 162, 235, 1)'     // Bar border color
+            [12000, 15000, 13000, 17000, 14000, 16000, 18000, 19000, 17000, 21000, 22000, 24000], 
+            'rgba(54, 162, 235, 0.7)',  
+            'rgba(54, 162, 235, 1)'     
         );
     });
 </script>
