@@ -234,7 +234,7 @@ $conn->close();
 
 
     <div class="col-md-3 mb-3">
-        <div class="card" style="background-color: #C8E6F5;"> <!-- Light blue -->
+        <div class="card" style="background-color: #C8E6F5;"> 
             <div class="card-header" style="background-color: #007bff; color: white;">
                 <i class="fas fa-shopping-cart"></i> Today's Orders
             </div>
@@ -249,24 +249,19 @@ $conn->close();
     </div>
 </div>
 
-<!-- Row for Monthly Sales Report and Total Orders -->
 <div class="row">
-    <!-- Left Column: Monthly Sales Report -->
     <div class="col-md-6 mb-3">
         <div class="card" style="background-color: #e2e3e5;">
             <div class="card-header" style="background-color: #6c757d; color: white;">
                 Monthly Sales Report
             </div>
             <div class="card-body">
-                <!-- Chart for sales -->
                 <canvas id="salesChart" width="400" height="200"></canvas>
             </div>
         </div>
     </div>
 
     <?php
-// Database connection (assumed already established)
-// Fetch total customers for each month from the database
 $monthlyCustomers = [];
 for ($i = 1; $i <= 12; $i++) {
     $startDate = date("Y-$i-01");
@@ -274,7 +269,7 @@ for ($i = 1; $i <= 12; $i++) {
     $result = mysqli_query($conn, "SELECT COUNT(*) AS monthly_customers FROM customers WHERE created_at BETWEEN '$startDate' AND '$endDate'"); // Adjust the date column name as needed
     $row = mysqli_fetch_assoc($result);
     
-    $monthlyCustomers[] = $row['monthly_customers'] ? $row['monthly_customers'] : 0; // Count of customers for the month
+    $monthlyCustomers[] = $row['monthly_customers'] ? $row['monthly_customers'] : 0; 
 }
 ?>
 
