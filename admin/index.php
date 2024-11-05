@@ -240,9 +240,7 @@ $conn->close();
             </div>
             <div class="card-body text-center">
                 <h3 id="todayOrdersText">
-                <?php
-         echo htmlspecialchars($todayOrders);
-         ?>   
+                <?php    echo htmlspecialchars($todayOrders);  ?>   
                 </h3>
             </div>
         </div>
