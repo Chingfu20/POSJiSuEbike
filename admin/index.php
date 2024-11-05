@@ -381,11 +381,9 @@ for ($i = 1; $i <= 12; $i++) {
 ?>
 
 <script>
-// Pass PHP sales data to JavaScript
 document.addEventListener("DOMContentLoaded", function () {
     const monthlySales = <?php echo json_encode($salesData); ?>;
 
-    // Monthly Sales Report Chart
     const ctx = document.getElementById('salesChart').getContext('2d');
     new Chart(ctx, {
         type: 'bar',
@@ -393,7 +391,7 @@ document.addEventListener("DOMContentLoaded", function () {
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
             datasets: [{
                 label: 'Monthly Sales',
-                data: monthlySales,  // Use dynamic sales data
+                data: monthlySales, 
                 backgroundColor: 'rgba(54, 162, 235, 0.2)',
                 borderColor: 'rgba(54, 162, 235, 1)',
                 borderWidth: 1
@@ -405,7 +403,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     beginAtZero: true,
                     ticks: {
                         callback: function(value) {
-                            return '₱' + value; // Add PHP symbol to y-axis labels
+                            return '₱' + value; 
                         }
                     }
                 }
