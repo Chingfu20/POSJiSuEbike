@@ -225,7 +225,7 @@ $conn->close();
             <i class="fas fa-receipt"></i> Total Orders
         </div>
         <div class="card-body text-center">
-            <h3 id="totalOrdersText"> 3
+            <h3 id="totalOrdersText">
                   <?php    echo htmlspecialchars($totalToday); ?>
             </h3>
         </div>
@@ -240,7 +240,7 @@ $conn->close();
             </div>
             <div class="card-body text-center">
                 <h3 id="todayOrdersText">
-                 <?php    echo htmlspecialchars($totalToday);  ?>   
+                <?php    echo htmlspecialchars($todayOrders);  ?>   
                 </h3>
             </div>
         </div>
