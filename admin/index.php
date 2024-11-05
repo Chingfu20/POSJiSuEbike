@@ -239,7 +239,10 @@ $conn->close();
                 <i class="fas fa-shopping-cart"></i> Today's Orders
             </div>
             <div class="card-body text-center">
-                <h3 id="todayOrdersText"> 2
+                <h3 id="todayOrdersText">
+                <?php
+         echo htmlspecialchars($todayOrders);
+         ?>   
                 </h3>
             </div>
         </div>
