@@ -87,14 +87,14 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`id`, `name`, `email`, `phone`, `status`, `address`, `created_at`) VALUES
--- (74, 'tasdasdasdasdasd', 'teaasdasdsdasdst@gmail.com', '09692870485', 0, 'asdasdasds', '2024-10-23'),
--- (75, 'john', 'j@gmail.com', '09636541784', 0, 'mancilang, madridejos, cebu', '2024-10-30'),
--- (76, 'chingfu', 'chingfu@gmail.com', '09489937567', 0, 'mancilang', '2024-10-30'),
--- (77, 'ching', 'chingfu@gmail.com', '09096391158', 0, 'Poblacion', '2024-10-30'),
--- (78, 'Hershey Sedurifa', 'chingfu@gmail.com', '09096391168', 0, 'Poblacion, Madridejos, Cebu', '2024-10-31'),
--- (79, 'Ching Fu', 'chingfujizz@gmail.com', '09489938678', 0, 'Fujisan Sitio Japan', '2024-10-31'),
--- (80, 'Micheble', 'michped@gmail.com', '09996391168', 0, 'Sillon', '2024-10-31'),
--- (81, 'Kungkuro', 'kaguran@gmail.com', '09102131231', 0, 'Ari ra dire dapit kilids dahan', '2024-10-31');
+(74, 'tasdasdasdasdasd', 'teaasdasdsdasdst@gmail.com', '09692870485', 0, 'asdasdasds', '2024-10-23'),
+(75, 'john', 'j@gmail.com', '09636541784', 0, 'mancilang, madridejos, cebu', '2024-10-30'),
+(76, 'chingfu', 'chingfu@gmail.com', '09489937567', 0, 'mancilang', '2024-10-30'),
+(77, 'ching', 'chingfu@gmail.com', '09096391158', 0, 'Poblacion', '2024-10-30'),
+(78, 'Hershey Sedurifa', 'chingfu@gmail.com', '09096391168', 0, 'Poblacion, Madridejos, Cebu', '2024-10-31'),
+(79, 'Ching Fu', 'chingfujizz@gmail.com', '09489938678', 0, 'Fujisan Sitio Japan', '2024-10-31'),
+(80, 'Micheble', 'michped@gmail.com', '09996391168', 0, 'Sillon', '2024-10-31'),
+(81, 'Kungkuro', 'kaguran@gmail.com', '09102131231', 0, 'Ari ra dire dapit kilids dahan', '2024-10-31');
 
 -- --------------------------------------------------------
 
