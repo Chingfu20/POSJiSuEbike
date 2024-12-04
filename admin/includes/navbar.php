@@ -1,7 +1,7 @@
 <?php // Check if user is logged in
-if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
-    redirect('../login.php', 'Please login first');
-}
+// if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
+//     redirect('../login.php', 'Please login first');
+// }
 ?>
 <!DOCTYPE html>
 <html lang="en">
