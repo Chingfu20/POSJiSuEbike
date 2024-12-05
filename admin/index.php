@@ -433,9 +433,10 @@ document.addEventListener("DOMContentLoaded", function () {
     echo $totalSales ? mysqli_fetch_assoc($totalSales)['total_sales'] : 0.00;
 ?>">
 <input type="hidden" id="todayOrders" value="<?php
-    $todayDate = date('Y-m-d');
-    $todayOrders = mysqli_query($conn, "SELECT * FROM orders WHERE order_date='$todayDate'");
-    echo $todayOrders ? mysqli_num_rows($todayOrders) : 0;
+    $todayDate = date('Y-m-d'); 
+    $todayOrdersResult = mysqli_query($conn, "SELECT COUNT(*) AS count FROM orders WHERE DATE(order_date) = '$todayDate'");
+    $todayOrdersCount = mysqli_fetch_assoc($todayOrdersResult)['count'];
+    echo $todayOrdersCount; 
 ?>">
 <input type="hidden" id="totalOrders" value="<?= getCount('orders'); ?>">
 
