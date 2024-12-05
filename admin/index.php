@@ -26,15 +26,23 @@ if ($result && $row = $result->fetch_assoc()) {
 $today = date('Y-m-d');
 
 // Fetch today's orders count
-$sqlToday = "SELECT COUNT(*) AS total FROM orders WHERE order_date = ?";
-$stmtToday = $conn->prepare($sqlToday);
-$stmtToday->bind_param("s", $today);
-$stmtToday->execute();
-$resultToday = $stmtToday->get_result();
-$totalToday = 0;
+$sql = "SELECT COUNT(*) AS total FROM orders";
+$result = $conn->query($sql);
 
-if ($resultToday && $row = $resultToday->fetch_assoc()) {
-    $totalToday = $row['total'];
+$orders = 0; // Default count
+if ($result) {
+    $row = $result->fetch_assoc();
+    $orders = $row['total'];
+}
+
+// Or use a prepared statement for better security
+$stmt = $conn->prepare("SELECT COUNT(*) AS total FROM orders");
+$stmt->execute();
+$result = $stmt->get_result();
+$orders = 0;
+if ($result) {
+    $row = $result->fetch_assoc();
+    $orders = $row['total'];
 }
 
 $stmtToday->close();
