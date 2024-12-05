@@ -13,6 +13,9 @@ if ($result && $row = $result->fetch_assoc()) {
     $products = $row['total'];
 }
 
+$sql = "SELECT COUNT(*) AS total FROM orders WHERE payment_mode = 'Cash Payment'"; // Count visible categories
+$result = $conn->query($sql);
+
 $orders = 0; // Default count
 if ($result && $row = $result->fetch_assoc()) {
     $orders = $row['total'];
@@ -23,23 +26,15 @@ if ($result && $row = $result->fetch_assoc()) {
 $today = date('Y-m-d');
 
 // Fetch today's orders count
-$sql = "SELECT COUNT(*) AS total FROM orders";
-$result = $conn->query($sql);
+$sqlToday = "SELECT COUNT(*) AS total FROM orders WHERE order_date = ?";
+$stmtToday = $conn->prepare($sqlToday);
+$stmtToday->bind_param("s", $today);
+$stmtToday->execute();
+$resultToday = $stmtToday->get_result();
+$totalToday = 0;
 
-$orders = 0; // Default count
-if ($result) {
-    $row = $result->fetch_assoc();
-    $orders = $row['total'];
-}
-
-// Or use a prepared statement for better security
-$stmt = $conn->prepare("SELECT COUNT(*) AS total FROM orders");
-$stmt->execute();
-$result = $stmt->get_result();
-$orders = 0;
-if ($result) {
-    $row = $result->fetch_assoc();
-    $orders = $row['total'];
+if ($resultToday && $row = $resultToday->fetch_assoc()) {
+    $totalToday = $row['total'];
 }
 
 $stmtToday->close();
@@ -438,12 +433,10 @@ document.addEventListener("DOMContentLoaded", function () {
     echo $totalSales ? mysqli_fetch_assoc($totalSales)['total_sales'] : 0.00;
 ?>">
 <input type="hidden" id="todayOrders" value="<?php
-    $todayDate = date('Y-m-d'); 
-    $todayOrdersResult = mysqli_query($conn, "SELECT COUNT(*) AS count FROM orders WHERE DATE(order_date) = '$todayDate'");
-    $todayOrdersCount = mysqli_fetch_assoc($todayOrdersResult)['count'];
-    echo $todayOrdersCount; 
+    $todayDate = date('Y-m-d');
+    $todayOrders = mysqli_query($conn, "SELECT * FROM orders WHERE order_date='$todayDate'");
+    echo $todayOrders ? mysqli_num_rows($todayOrders) : 0;
 ?>">
-
 <input type="hidden" id="totalOrders" value="<?= getCount('orders'); ?>">
 
 <?php include('includes/footer.php'); ?>
