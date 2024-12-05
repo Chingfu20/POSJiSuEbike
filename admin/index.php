@@ -13,9 +13,6 @@ if ($result && $row = $result->fetch_assoc()) {
     $products = $row['total'];
 }
 
-$sql = "SELECT COUNT(*) AS total FROM orders WHERE payment_mode = 'Cash Payment'"; // Count visible categories
-$result = $conn->query($sql);
-
 $orders = 0; // Default count
 if ($result && $row = $result->fetch_assoc()) {
     $orders = $row['total'];
