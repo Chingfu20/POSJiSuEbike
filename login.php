@@ -6,7 +6,7 @@
     <title>JiSu Ebike POS System - Login</title>
     <link rel="stylesheet" href="login.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <script src="https://www.google.com/recaptcha/api.js?render=6LcxSJIqAAAAABwEaDzDQ85Z8bClNZY7nhY2-jDD"></script>
+    <script src="https://www.google.com/recaptcha/api.js?render=6LdeBZMqAAAAAKAMeLNRPYEX1PsYJRtDRBsEAQVl"></script>
     <style>
         .lockout-container {
             background-color: #f8d7da;

@@ -98,7 +98,7 @@ class LoginAttemptTracker {
 
 if (isset($_POST['recaptcha_token'])) {
     $recaptchaToken = $_POST['recaptcha_token'];
-    $recaptchaSecret = '6LcxSJIqAAAAACEg_1wzRIw3Bvd0Ap9mskFoQBnd';
+    $recaptchaSecret = '6LdeBZMqAAAAAIQ_WS82shdqz-ZfuVHUEcg2peCH';
 
     // Validate token with Google
     $recaptchaVerifyURL = 'https://www.google.com/recaptcha/api/siteverify';
