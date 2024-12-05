@@ -220,16 +220,11 @@
     });
     </script>
   <script>
-    document.querySelector('.login-form').addEventListener('submit', function(e) {
-        e.preventDefault(); // Prevent immediate form submission
-        grecaptcha.ready(function() {
-            grecaptcha.execute('6LdeBZMqAAAAAKAMeLNRPYEX1PsYJRtDRBsEAQVl', { action: 'login' }).then(function(token) {
-                // Add the token to the form
-                document.getElementById('recaptcha_token').value = token;
-                e.target.submit(); // Submit the form
-            });
-        });
+    grecaptcha.ready(function() {
+    grecaptcha.execute('6LdeBZMqAAAAAKAMeLNRPYEX1PsYJRtDRBsEAQVl', {action: 'login'}).then(function(token) {
+        document.getElementById('recaptcha_token').value = token;
     });
-</script>
+});
+  </script>
 </body>
 </html>
