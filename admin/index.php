@@ -1,45 +1,8 @@
 <?php
-include ('../config/dbcon.php');
-// session_start();
-// if(!isset($_SESSION['loggedInUser'])){
-//     header('location: ../login.php');
-// }
-
-$sql = "SELECT COUNT(*) AS total FROM products WHERE status = 0"; // Count visible categories
-$result = $conn->query($sql);
-
-$products = 0; // Default count
-if ($result && $row = $result->fetch_assoc()) {
-    $products = $row['total'];
+session_start();
+if(!isset($_SESSION['loggedInUser'])){
+    header('location: ../login.php');
 }
-
-$sql = "SELECT COUNT(*) AS total FROM orders WHERE payment_mode = 'Cash Payment'"; // Count visible categories
-$result = $conn->query($sql);
-
-$orders = 0; // Default count
-if ($result && $row = $result->fetch_assoc()) {
-    $orders = $row['total'];
-}
-
-// Get today's date
-// Get today's date
-$today = date('Y-m-d');
-
-// Fetch today's orders count
-$sqlToday = "SELECT COUNT(*) AS total FROM orders WHERE order_date = ?";
-$stmtToday = $conn->prepare($sqlToday);
-$stmtToday->bind_param("s", $today);
-$stmtToday->execute();
-$resultToday = $stmtToday->get_result();
-$totalToday = 0;
-
-if ($resultToday && $row = $resultToday->fetch_assoc()) {
-    $totalToday = $row['total'];
-}
-
-$stmtToday->close();
-
-$conn->close();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -198,51 +161,52 @@ $conn->close();
     <div class="col-md-3 mb-3">
         <div class="card" style="background-color: #D3E5E2;">
             <div class="card-header" style="background-color: #28a745; color: white;">
-                <i class="fas fa-list-alt"></i> Total Categories
-            </div>
-            <div class="card-body text-center">
-                <h3 id="categoryText">
-                </h3> 
-            </div>
+          <center> Total Categories </center>
         </div>
-    </div>
-
-    <div class="col-md-3 mb-3">
-        <div class="card" style="background-color: #FCE6B2;">
-            <div class="card-header" style="background-color: #ffc107; color: white;">
-                <i class="fas fa-boxes"></i> Total Products
-            </div>
-            <div class="card-body text-center">
-                <h3 id="productText">
+        <div class="card-body text-center">
+        <i class="fas fa-list-alt"></i>
+            <h3 id="categoryText">
                 </h3>
             </div>
         </div>
     </div>
 
-<div class="col-md-3 mb-3">
-    <div class="card" style="background-color: #B3E5D6;"> 
-        <div class="card-header" style="background-color: #17a2b8; color: white;">
-            <i class="fas fa-receipt"></i> Total Orders
+    <div class="col-md-3 mb-3">
+        <div class="card" style="background-color: #FCE6B2;"> 
+            <div class="card-header" style="background-color: #ffc107; color: white;">
+          <center> Total Products </center>
         </div>
         <div class="card-body text-center">
-            <h3 id="totalOrdersText">
-                  <?php    echo htmlspecialchars($totalToday); ?>
-            </h3>
+        <i class="fas fa-boxes"></i>
+            <h3 id="productText">
+                </h3>
+            </div>
         </div>
     </div>
-</div>
-
 
     <div class="col-md-3 mb-3">
         <div class="card" style="background-color: #C8E6F5;"> 
             <div class="card-header" style="background-color: #007bff; color: white;">
-                <i class="fas fa-shopping-cart"></i> Today's Orders
+          <center> Today's Orders </center>
             </div>
             <div class="card-body text-center">
+            <i class="fas fa-boxes"></i> 
                 <h3 id="todayOrdersText">
-                <?php    echo htmlspecialchars($todayOrders);  ?>   
-                </h3>
+                </h3> 
             </div>
+    </div>
+</div>
+
+            <div class="col-md-3 mb-3">
+    <div class="card" style="background-color: #B3E5D6;"> 
+        <div class="card-header" style="background-color: #17a2b8; color: white;">
+           <center> Total Orders </center>
+        </div>
+        <div class="card-body text-center">
+        <i class="fas fa-list"></i>
+            <h3 id="totalOrdersText">
+            </h3>
+        </div>
         </div>
     </div>
 </div>
@@ -251,7 +215,7 @@ $conn->close();
     <div class="col-md-6 mb-3">
         <div class="card" style="background-color: #e2e3e5;">
             <div class="card-header" style="background-color: #6c757d; color: white;">
-                Monthly Sales Report
+               <center> Monthly Sales Report </center>
             </div>
             <div class="card-body">
                 <canvas id="salesChart" width="400" height="200"></canvas>
@@ -274,9 +238,10 @@ for ($i = 1; $i <= 12; $i++) {
 <div class="col-md-6 mb-3"> 
     <div class="card" style="background-color: #B3E5D6;">
         <div class="card-header" style="background-color: #17a2b8; color: white;">
-            <i class="fas fa-users"></i> Total Customers
+            <center> Total Customers </center>
         </div>
         <div class="card-body">
+        <center><i class="fas fa-users"></i></center>
             <canvas id="customersChart" style="max-width: 500px; max-height: 300px; width: 100%; height: auto;"></canvas> 
         </div>
     </div>
@@ -296,21 +261,19 @@ title: '<?= $_SESSION['sweet_alert']['message'] ?>',
 <?php unset($_SESSION['sweet_alert']); ?>
 <?php endif; ?>
 
-// JavaScript code for rendering the pie chart
 document.addEventListener("DOMContentLoaded", function () {
     const monthlyCustomers = <?php echo json_encode($monthlyCustomers); ?>;
 
-    // Pie Chart for Monthly Total Customers
     const ctxCustomers = document.getElementById('customersChart').getContext('2d');
     new Chart(ctxCustomers, {
-        type: 'pie', // Pie chart type
+        type: 'pie', 
         data: {
             labels: [
                 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
             ],
             datasets: [{
                 label: 'Monthly Total Customers',
-                data: monthlyCustomers,  // Use dynamic customer count data
+                data: monthlyCustomers,
                 backgroundColor: [
                     '#FF6384',
                     '#36A2EB',
@@ -335,7 +298,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 legend: {
                     display: true,
                     labels: {
-                        color: '#333' // Color of legend text
+                        color: '#333' 
                     }
                 },
                 tooltip: {
@@ -381,7 +344,7 @@ document.addEventListener("DOMContentLoaded", function () {
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
             datasets: [{
                 label: 'Monthly Sales',
-                data: monthlySales, 
+                data: monthlySales,  
                 backgroundColor: 'rgba(54, 162, 235, 0.2)',
                 borderColor: 'rgba(54, 162, 235, 1)',
                 borderWidth: 1
@@ -428,25 +391,31 @@ document.addEventListener("DOMContentLoaded", function () {
 <input type="hidden" id="categoryCount" value="<?= getCount('categories'); ?>">
 <input type="hidden" id="productCount" value="<?= getCount('products'); ?>">
 <input type="hidden" id="customerCount" value="<?= getCount('customers'); ?>">
+<input type="hidden" id="todayOrdersCount" value="<?= getCount('todayOrders'); ?>">
+<input type="hidden" id="totalOrdersCount" value="<?= getCount('totalOrders'); ?>">
 <input type="hidden" id="salesAmount" value="<?php
     $totalSales = mysqli_query($conn, "SELECT SUM(total_amount) AS total_sales FROM orders");
+    $totalOrdersResult = mysqli_query($conn, "SELECT COUNT(*) AS count FROM orders");
+    $totalOrdersCount = mysqli_fetch_assoc($totalOrdersResult)['count'];
     echo $totalSales ? mysqli_fetch_assoc($totalSales)['total_sales'] : 0.00;
 ?>">
 <input type="hidden" id="todayOrders" value="<?php
-    $todayDate = date('Y-m-d');
-    $todayOrders = mysqli_query($conn, "SELECT * FROM orders WHERE order_date='$todayDate'");
-    echo $todayOrders ? mysqli_num_rows($todayOrders) : 0;
+    $todayDate = date('Y-m-d'); 
+    $todayOrdersResult = mysqli_query($conn, "SELECT COUNT(*) AS count FROM orders WHERE DATE(order_date) = '$todayDate'");
+    $todayOrdersCount = mysqli_fetch_assoc($todayOrdersResult)['count'];
+    echo $todayOrdersCount; 
 ?>">
+
 <input type="hidden" id="totalOrders" value="<?= getCount('orders'); ?>">
 
 <?php include('includes/footer.php'); ?>
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
+
         const categoryCount = document.getElementById("categoryCount").value;
         const productCount = document.getElementById("productCount").value;
         const customerCount = document.getElementById("customerCount").value;
-        const salesAmount = document.getElementById("salesAmount").value;
         const todayOrders = document.getElementById("todayOrders").value;
         const totalOrders = document.getElementById("totalOrders").value;
 
@@ -454,7 +423,7 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById('productText').innerHTML = productCount;
         document.getElementById('customerText').innerHTML = customerCount;
         document.getElementById('todayOrdersText').innerHTML = todayOrders;
-        document.getElementById('totalOrdersText').innerHTML = totalOrders;
+        document.getElementById('totalOrdersText').innerHTML = totalOrders; 
 
         const createBarChart = (context, label, data, bgColor, brColor) => {
             new Chart(context, {
@@ -511,5 +480,15 @@ document.addEventListener("DOMContentLoaded", function () {
             'rgba(54, 162, 235, 0.7)',  
             'rgba(54, 162, 235, 1)'     
         );
+    });
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const todayOrders = document.getElementById("todayOrders").value;
+        const totalOrders = document.getElementById("totalOrders").value;
+
+        document.getElementById('todayOrdersText').innerHTML = todayOrders;
+        document.getElementById('totalOrdersText').innerHTML = totalOrders;
     });
 </script>
