@@ -200,52 +200,51 @@ $conn->close();
     <div class="col-md-3 mb-3">
         <div class="card" style="background-color: #D3E5E2;">
             <div class="card-header" style="background-color: #28a745; color: white;">
-          <center> Total Categories </center>
-        </div>
-        <div class="card-body text-center">
-        <i class="fas fa-list-alt"></i>
-            <h3 id="categoryText">
-                </h3>
+                <i class="fas fa-list-alt"></i> Total Categories
+            </div>
+            <div class="card-body text-center">
+                <h3 id="categoryText">
+                </h3> 
             </div>
         </div>
     </div>
 
     <div class="col-md-3 mb-3">
-        <div class="card" style="background-color: #FCE6B2;"> 
+        <div class="card" style="background-color: #FCE6B2;">
             <div class="card-header" style="background-color: #ffc107; color: white;">
-          <center> Total Products </center>
-        </div>
-        <div class="card-body text-center">
-        <i class="fas fa-boxes"></i>
-            <h3 id="productText">
+                <i class="fas fa-boxes"></i> Total Products
+            </div>
+            <div class="card-body text-center">
+                <h3 id="productText">
                 </h3>
             </div>
         </div>
     </div>
+
+<div class="col-md-3 mb-3">
+    <div class="card" style="background-color: #B3E5D6;"> 
+        <div class="card-header" style="background-color: #17a2b8; color: white;">
+            <i class="fas fa-receipt"></i> Total Orders
+        </div>
+        <div class="card-body text-center">
+            <h3 id="totalOrdersText">
+                  <?php    echo htmlspecialchars($totalToday); ?>
+            </h3>
+        </div>
+    </div>
+</div>
+
 
     <div class="col-md-3 mb-3">
         <div class="card" style="background-color: #C8E6F5;"> 
             <div class="card-header" style="background-color: #007bff; color: white;">
-          <center> Today's Orders </center>
+                <i class="fas fa-shopping-cart"></i> Today's Orders
             </div>
             <div class="card-body text-center">
-            <i class="fas fa-boxes"></i> 
                 <h3 id="todayOrdersText">
-                </h3> 
+                <?php echo isset($todayOrders) ? htmlspecialchars($todayOrders) : 0; ?>
+                </h3>
             </div>
-    </div>
-</div>
-
-            <div class="col-md-3 mb-3">
-    <div class="card" style="background-color: #B3E5D6;"> 
-        <div class="card-header" style="background-color: #17a2b8; color: white;">
-           <center> Total Orders </center>
-        </div>
-        <div class="card-body text-center">
-        <i class="fas fa-list"></i>
-            <h3 id="totalOrdersText">
-            </h3>
-        </div>
         </div>
     </div>
 </div>
@@ -254,7 +253,7 @@ $conn->close();
     <div class="col-md-6 mb-3">
         <div class="card" style="background-color: #e2e3e5;">
             <div class="card-header" style="background-color: #6c757d; color: white;">
-               <center> Monthly Sales Report </center>
+                Monthly Sales Report
             </div>
             <div class="card-body">
                 <canvas id="salesChart" width="400" height="200"></canvas>
