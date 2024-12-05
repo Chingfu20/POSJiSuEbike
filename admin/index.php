@@ -1,515 +1,228 @@
 <?php
 include ('../config/dbcon.php');
-// session_start();
-// if(!isset($_SESSION['loggedInUser'])){
-//     header('location: ../login.php');
-// }
 
-$sql = "SELECT COUNT(*) AS total FROM products WHERE status = 0"; // Count visible categories
-$result = $conn->query($sql);
-
-$products = 0; // Default count
-if ($result && $row = $result->fetch_assoc()) {
-    $products = $row['total'];
+// Function to safely get count from a table
+function getCount($table) {
+    global $conn;
+    $sql = "SELECT COUNT(*) AS total FROM $table";
+    $result = $conn->query($sql);
+    
+    if ($result) {
+        $row = $result->fetch_assoc();
+        return $row['total'];
+    }
+    return 0;
 }
 
-$sql = "SELECT COUNT(*) AS total FROM orders WHERE payment_mode = 'Cash Payment'"; // Count visible categories
-$result = $conn->query($sql);
+// Fetch total products
+$products = getCount('products');
 
-$orders = 0; // Default count
-if ($result && $row = $result->fetch_assoc()) {
-    $orders = $row['total'];
-}
+// Fetch total orders
+$totalOrders = getCount('orders');
 
-// Get today's date
-// Get today's date
+// Fetch today's orders
 $today = date('Y-m-d');
-
-// Fetch today's orders count
 $sqlToday = "SELECT COUNT(*) AS total FROM orders WHERE order_date = ?";
 $stmtToday = $conn->prepare($sqlToday);
 $stmtToday->bind_param("s", $today);
 $stmtToday->execute();
 $resultToday = $stmtToday->get_result();
-$totalToday = 0;
+$todayOrders = 0;
 
-if ($resultToday && $row = $resultToday->fetch_assoc()) {
-    $totalToday = $row['total'];
+if ($resultToday) {
+    $row = $resultToday->fetch_assoc();
+    $todayOrders = $row['total'];
 }
-
 $stmtToday->close();
 
-$conn->close();
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<link rel="icon" type="image/x-icon" href="assets/img/logo.jpg">
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JiSu Ebike</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/alertifyjs/build/alertify.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
-    <style>
-        :root {
-            --background-light: #f8f9fa;
-            --color-light: #343a40;
-            --primary-color-light: #007bff;
-            --background-dark: #343a40;
-            --color-dark: #f8f9fa;
-            --primary-color-dark: #17a2b8;
-        }
-
-        body {
-            background-color: var(--background-light);
-            color: var(--color-light);
-            font-family: Arial, sans-serif;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .dark-mode {
-            background-color: var(--background-dark);
-            color: var(--color-dark);
-        }
-
-        .card {
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            overflow: hidden;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            background-color: #fff;
-            transition: background-color 0.3s, border-color 0.3s;
-        }
-
-        .dark-mode .card {
-            background-color: #495057;
-            border-color: #6c757d;
-        }
-
-        .card-header {
-            background-color: var(--primary-color-light);
-            color: white;
-            padding: 12px;
-            font-size: 1.25rem;
-        }
-
-        .dark-mode .card-header {
-            background-color: var(--primary-color-dark);
-        }
-
-        .card-body {
-            padding: 15px;
-        }
-
-        .chart-container {
-            height: 200px;
-            width: 100%;
-        }
-
-        .chart-container canvas {
-            max-width: 100%;
-            height: auto !important;
-        }
-
-        .toggle-container {
-            margin: 10px 0;
-        }
-
-        .toggle-switch {
-            display: inline-block;
-            width: 60px;
-            height: 30px;
-            position: relative;
-        }
-
-        .toggle-switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #ccc;
-            transition: .4s;
-            border-radius: 15px;
-        }
-
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 22px;
-            width: 22px;
-            border-radius: 50%;
-            left: 4px;
-            bottom: 4px;
-            background-color: white;
-            transition: .4s;
-        }
-
-        input:checked + .slider {
-            background-color: var(--primary-color-dark);
-        }
-
-        input:checked + .slider:before {
-            transform: translateX(30px);
-        }
-
-        footer {
-            margin-top: 20px;
-            background-color: var(--background-light);
-            color: var(--color-light);
-            padding: 10px;
-            text-align: center;
-        }
-
-        body.dark-mode footer {
-            background-color: #1f1f1f;
-            color: var(--color-dark);
-        }
-    </style>
-</head>
-<body>
-
-<?php include('includes/header.php'); ?>
-
-<div class="container-fluid">
-    <h1 class="mt-4"></h1>
-
- 
-
-    <div class="container-fluid">
-    <h1 class="mt-4"></h1>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-    <div class="row">
-    <div class="col-md-3 mb-3">
-        <div class="card" style="background-color: #D3E5E2;">
-            <div class="card-header" style="background-color: #28a745; color: white;">
-                <i class="fas fa-list-alt"></i> Total Categories
-            </div>
-            <div class="card-body text-center">
-                <h3 id="categoryText">
-                </h3> 
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-3 mb-3">
-        <div class="card" style="background-color: #FCE6B2;">
-            <div class="card-header" style="background-color: #ffc107; color: white;">
-                <i class="fas fa-boxes"></i> Total Products
-            </div>
-            <div class="card-body text-center">
-                <h3 id="productText">
-                </h3>
-            </div>
-        </div>
-    </div>
-
-<div class="col-md-3 mb-3">
-    <div class="card" style="background-color: #B3E5D6;"> 
-        <div class="card-header" style="background-color: #17a2b8; color: white;">
-            <i class="fas fa-receipt"></i> Total Orders
-        </div>
-        <div class="card-body text-center">
-            <h3 id="totalOrdersText">
-                  <?php    echo htmlspecialchars($totalToday); ?>
-            </h3>
-        </div>
-    </div>
-</div>
-
-
-    <div class="col-md-3 mb-3">
-        <div class="card" style="background-color: #C8E6F5;"> 
-            <div class="card-header" style="background-color: #007bff; color: white;">
-                <i class="fas fa-shopping-cart"></i> Today's Orders
-            </div>
-            <div class="card-body text-center">
-                <h3 id="todayOrdersText">
-                <?php    echo htmlspecialchars($todayOrders);  ?>   
-                </h3>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-md-6 mb-3">
-        <div class="card" style="background-color: #e2e3e5;">
-            <div class="card-header" style="background-color: #6c757d; color: white;">
-                Monthly Sales Report
-            </div>
-            <div class="card-body">
-                <canvas id="salesChart" width="400" height="200"></canvas>
-            </div>
-        </div>
-    </div>
-
-    <?php
-$monthlyCustomers = [];
-for ($i = 1; $i <= 12; $i++) {
-    $startDate = date("Y-$i-01");
-    $endDate = date("Y-$i-t");
-    $result = mysqli_query($conn, "SELECT COUNT(*) AS monthly_customers FROM customers WHERE created_at BETWEEN '$startDate' AND '$endDate'"); // Adjust the date column name as needed
-    $row = mysqli_fetch_assoc($result);
-    
-    $monthlyCustomers[] = $row['monthly_customers'] ? $row['monthly_customers'] : 0; 
-}
-?>
-
-<div class="col-md-6 mb-3"> 
-    <div class="card" style="background-color: #B3E5D6;">
-        <div class="card-header" style="background-color: #17a2b8; color: white;">
-            <i class="fas fa-users"></i> Total Customers
-        </div>
-        <div class="card-body">
-            <canvas id="customersChart" style="max-width: 500px; max-height: 300px; width: 100%; height: auto;"></canvas> 
-        </div>
-    </div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-<script>
-<?php if(isset($_SESSION['sweet_alert'])) : ?>
-
-Swal.fire({
-icon: '<?= $_SESSION['sweet_alert']['type'] ?>',
-title: '<?= $_SESSION['sweet_alert']['message'] ?>',
-
-});
-
-<?php unset($_SESSION['sweet_alert']); ?>
-<?php endif; ?>
-
-// JavaScript code for rendering the pie chart
-document.addEventListener("DOMContentLoaded", function () {
-    const monthlyCustomers = <?php echo json_encode($monthlyCustomers); ?>;
-
-    // Pie Chart for Monthly Total Customers
-    const ctxCustomers = document.getElementById('customersChart').getContext('2d');
-    new Chart(ctxCustomers, {
-        type: 'pie', // Pie chart type
-        data: {
-            labels: [
-                'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
-            ],
-            datasets: [{
-                label: 'Monthly Total Customers',
-                data: monthlyCustomers,  // Use dynamic customer count data
-                backgroundColor: [
-                    '#FF6384',
-                    '#36A2EB',
-                    '#FFCE56',
-                    '#4BC0C0',
-                    '#9966FF',
-                    '#FF9F40',
-                    '#FF6384',
-                    '#36A2EB',
-                    '#FFCE56',
-                    '#4BC0C0',
-                    '#9966FF',
-                    '#FF9F40'
-                ],
-                borderColor: 'rgba(255, 255, 255, 0.5)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    display: true,
-                    labels: {
-                        color: '#333' // Color of legend text
-                    }
-                },
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            let label = context.label || '';
-                            if (label) {
-                                label += ': ';
-                            }
-                            if (context.raw !== null) {
-                                label += context.raw; 
-                            }
-                            return label;
-                        }
-                    }
-                }
-            }
-        }
-    });
-});
-</script>
-
-<?php
+// Fetch monthly sales data
 $salesData = [];
 for ($i = 1; $i <= 12; $i++) {
     $startDate = date("Y-$i-01");
     $endDate = date("Y-$i-t");
-    $result = mysqli_query($conn, "SELECT SUM(total_amount) AS monthly_sales FROM orders WHERE order_date BETWEEN '$startDate' AND '$endDate'");
-    $row = mysqli_fetch_assoc($result);
     
-    $salesData[] = $row['monthly_sales'] ? number_format($row['monthly_sales'], 2, '.', '') : 0.00;
+    $query = "SELECT COALESCE(SUM(total_amount), 0) AS monthly_sales 
+              FROM orders 
+              WHERE order_date BETWEEN ? AND ?";
+    
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("ss", $startDate, $endDate);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    $row = $result->fetch_assoc();
+    $salesData[] = number_format($row['monthly_sales'], 2, '.', '');
+    $stmt->close();
 }
+
+// Fetch monthly customers
+$monthlyCustomers = [];
+for ($i = 1; $i <= 12; $i++) {
+    $startDate = date("Y-$i-01");
+    $endDate = date("Y-$i-t");
+    
+    $query = "SELECT COUNT(*) AS monthly_customers 
+              FROM customers 
+              WHERE created_at BETWEEN ? AND ?";
+    
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("ss", $startDate, $endDate);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    $row = $result->fetch_assoc();
+    $monthlyCustomers[] = $row['monthly_customers'];
+    $stmt->close();
+}
+
+// Total sales
+$totalSalesQuery = "SELECT COALESCE(SUM(total_amount), 0) AS total_sales FROM orders";
+$totalSalesResult = $conn->query($totalSalesQuery);
+$totalSales = $totalSalesResult ? $totalSalesResult->fetch_assoc()['total_sales'] : 0;
+
+$conn->close();
 ?>
 
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    const monthlySales = <?php echo json_encode($salesData); ?>;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JiSu Ebike Dashboard</title>
+    
+    <!-- Bootstrap and Chart.js CDN links -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* Your existing CSS styles here */
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Dashboard Cards -->
+            <div class="col-md-3 mb-3">
+                <div class="card" style="background-color: #D3E5E2;">
+                    <div class="card-header" style="background-color: #28a745; color: white;">
+                        <i class="fas fa-list-alt"></i> Total Categories
+                    </div>
+                    <div class="card-body text-center">
+                        <h3 id="categoryText"><?= getCount('categories') ?></h3>
+                    </div>
+                </div>
+            </div>
 
-    const ctx = document.getElementById('salesChart').getContext('2d');
-    new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-            datasets: [{
-                label: 'Monthly Sales',
-                data: monthlySales, 
-                backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                borderColor: 'rgba(54, 162, 235, 1)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: {
-                        callback: function(value) {
-                            return '₱' + value; 
-                        }
-                    }
-                }
+            <div class="col-md-3 mb-3">
+                <div class="card" style="background-color: #FCE6B2;">
+                    <div class="card-header" style="background-color: #ffc107; color: white;">
+                        <i class="fas fa-boxes"></i> Total Products
+                    </div>
+                    <div class="card-body text-center">
+                        <h3 id="productText"><?= $products ?></h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 mb-3">
+                <div class="card" style="background-color: #B3E5D6;"> 
+                    <div class="card-header" style="background-color: #17a2b8; color: white;">
+                        <i class="fas fa-receipt"></i> Total Orders
+                    </div>
+                    <div class="card-body text-center">
+                        <h3 id="totalOrdersText"><?= $totalOrders ?></h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 mb-3">
+                <div class="card" style="background-color: #C8E6F5;"> 
+                    <div class="card-header" style="background-color: #007bff; color: white;">
+                        <i class="fas fa-shopping-cart"></i> Today's Orders
+                    </div>
+                    <div class="card-body text-center">
+                        <h3 id="todayOrdersText"><?= $todayOrders ?></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <div class="card" style="background-color: #e2e3e5;">
+                    <div class="card-header" style="background-color: #6c757d; color: white;">
+                        Monthly Sales Report
+                    </div>
+                    <div class="card-body">
+                        <canvas id="salesChart" width="400" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-3"> 
+                <div class="card" style="background-color: #B3E5D6;">
+                    <div class="card-header" style="background-color: #17a2b8; color: white;">
+                        <i class="fas fa-users"></i> Monthly Customers
+                    </div>
+                    <div class="card-body">
+                        <canvas id="customersChart" style="max-width: 500px; max-height: 300px; width: 100%; height: auto;"></canvas> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Monthly Sales Chart
+        const monthlySales = <?= json_encode($salesData) ?>;
+        const ctx = document.getElementById('salesChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                datasets: [{
+                    label: 'Monthly Sales (₱)',
+                    data: monthlySales, 
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
             },
-            plugins: {
-                legend: {
-                    display: true,
-                    labels: {
-                        color: 'rgba(54, 162, 235, 1)',
-                    }
-                },
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            let label = context.dataset.label || '';
-                            if (label) {
-                                label += ': ';
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return '₱' + value; 
                             }
-                            if (context.raw !== null) {
-                                label += '₱' + context.raw;
-                            }
-                            return label;
                         }
                     }
                 }
             }
-        }
+        });
+
+        // Monthly Customers Chart
+        const monthlyCustomers = <?= json_encode($monthlyCustomers) ?>;
+        const ctxCustomers = document.getElementById('customersChart').getContext('2d');
+        new Chart(ctxCustomers, {
+            type: 'pie',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                datasets: [{
+                    label: 'Monthly Customers',
+                    data: monthlyCustomers,
+                    backgroundColor: [
+                        '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', 
+                        '#FF9F40', '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', 
+                        '#9966FF', '#FF9F40'
+                    ]
+                }]
+            }
+        });
     });
-});
-</script>
-
-<input type="hidden" id="categoryCount" value="<?= getCount('categories'); ?>">
-<input type="hidden" id="productCount" value="<?= getCount('products'); ?>">
-<input type="hidden" id="customerCount" value="<?= getCount('customers'); ?>">
-<input type="hidden" id="salesAmount" value="<?php
-    $totalSales = mysqli_query($conn, "SELECT SUM(total_amount) AS total_sales FROM orders");
-    echo $totalSales ? mysqli_fetch_assoc($totalSales)['total_sales'] : 0.00;
-?>">
-<input type="hidden" id="todayOrders" value="<?php
-    $todayDate = date('Y-m-d');
-    $todayOrders = mysqli_query($conn, "SELECT * FROM orders WHERE order_date='$todayDate'");
-    echo $todayOrders ? mysqli_num_rows($todayOrders) : 0;
-?>">
-<input type="hidden" id="totalOrders" value="<?= getCount('orders'); ?>">
-
-<?php include('includes/footer.php'); ?>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const categoryCount = document.getElementById("categoryCount").value;
-        const productCount = document.getElementById("productCount").value;
-        const customerCount = document.getElementById("customerCount").value;
-        const salesAmount = document.getElementById("salesAmount").value;
-        const todayOrders = document.getElementById("todayOrders").value;
-        const totalOrders = document.getElementById("totalOrders").value;
-
-        document.getElementById('categoryText').innerHTML = categoryCount;
-        document.getElementById('productText').innerHTML = productCount;
-        document.getElementById('customerText').innerHTML = customerCount;
-        document.getElementById('todayOrdersText').innerHTML = todayOrders;
-        document.getElementById('totalOrdersText').innerHTML = totalOrders;
-
-        const createBarChart = (context, label, data, bgColor, brColor) => {
-            new Chart(context, {
-                type: 'bar',
-                data: {
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                    datasets: [{
-                        label: label,
-                        data: data, 
-                        backgroundColor: bgColor,
-                        borderColor: brColor,
-                        borderWidth: 2
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: { display: false },
-                        tooltip: {
-                            backgroundColor: '#f8f9fa',
-                            titleColor: '#343a40',
-                            bodyColor: '#343a40',
-                        }
-                    },
-                    scales: {
-                        x: {
-                            ticks: {
-                                font: {
-                                    size: 16,
-                                    family: "'Comic Sans MS', 'Cursive'"
-                                },
-                                color: '#495057'
-                            }
-                        },
-                        y: {
-                            ticks: {
-                                font: {
-                                    size: 16,
-                                    family: "'Comic Sans MS', 'Cursive'"
-                                },
-                                color: '#495057'
-                            },
-                            beginAtZero: true 
-                        }
-                    }
-                }
-            });
-        };
-
-        createBarChart(
-            document.getElementById("salesChart"),
-            "Sales (Total)",
-            [12000, 15000, 13000, 17000, 14000, 16000, 18000, 19000, 17000, 21000, 22000, 24000], 
-            'rgba(54, 162, 235, 0.7)',  
-            'rgba(54, 162, 235, 1)'     
-        );
-    });
-</script>
+    </script>
+</body>
+</html>
