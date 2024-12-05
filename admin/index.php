@@ -1,5 +1,5 @@
 <?php
-include ('../config/dbcon.php');
+include ('../config/conn.php');
 // session_start();
 // if(!isset($_SESSION['loggedInUser'])){
 //     header('location: ../login.php');
@@ -16,7 +16,7 @@ if ($result && $row = $result->fetch_assoc()) {
 $sql = "SELECT COUNT(*) AS total FROM orders WHERE payment_mode = 'Cash Payment'"; // Count visible categories
 $result = $conn->query($sql);
 
-$orders = 0; // Default count
+$orders = 0; // Default counta
 if ($result && $row = $result->fetch_assoc()) {
     $orders = $row['total'];
 }
@@ -37,6 +37,8 @@ if ($resultToday && $row = $resultToday->fetch_assoc()) {
     $totalToday = $row['total'];
 }
 
+// Assign the value to $todayOrders
+$todayOrders = $totalToday; 
 $stmtToday->close();
 
 $conn->close();
@@ -240,7 +242,7 @@ $conn->close();
             </div>
             <div class="card-body text-center">
                 <h3 id="todayOrdersText">
-                <?php    echo htmlspecialchars($todayOrders);  ?>   
+                <?php echo isset($todayOrders) ? htmlspecialchars($todayOrders) : 0; ?>
                 </h3>
             </div>
         </div>
