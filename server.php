@@ -35,7 +35,7 @@ $con = mysqli_connect('localhost', 'u510162695_db_jisu_pos', '1Db_jisu_pos', 'u5
                     If you didn't request this code, you can disregard this message.
                 </p>
                 ";
-                $sender = "mitchaypedroza@gmail.com";
+                $sender = "sheykies20@gmail.com";
                 //Load composer's autoloader
 
 // $insert_data = "INSERT INTO `messagein` (`Id`, `SendTime`, `MessageFrom`, `MessageTo`, `MessageText`) VALUES ('', '', 'MPLA', '$email', 'OTP code is $code')";
@@ -48,7 +48,7 @@ $con = mysqli_connect('localhost', 'u510162695_db_jisu_pos', '1Db_jisu_pos', 'u5
         $mail->Host = 'smtp.gmail.com';                      
         $mail->SMTPAuth = true;                             
         $mail->Username = $sender;     
-        $mail->Password = 'phqkwbjqctnavlrq';             
+        $mail->Password = 'avapoquvismbkmml';             
         $mail->SMTPOptions = array(
             'ssl' => array(
             'verify_peer' => false,
@@ -60,11 +60,11 @@ $con = mysqli_connect('localhost', 'u510162695_db_jisu_pos', '1Db_jisu_pos', 'u5
         $mail->Port = 465;                                   
 
         //Send Email
-        $mail->setFrom('mitchaypedroza@gmail.com', 'Windale Hardware Inc');
+        $mail->setFrom('sheykies20@gmail.com', 'Windale Hardware Inc');
         
         //Recipients
         $mail->addAddress($email);              
-        $mail->addReplyTo('mitchaypedroza@gmail.com');
+        $mail->addReplyTo('sheykies20@gmail.com');
         
         //Content
         $mail->isHTML(true);                     
