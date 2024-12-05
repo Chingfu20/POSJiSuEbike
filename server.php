@@ -137,7 +137,7 @@ $con = mysqli_connect('localhost', 'u510162695_db_jisu_pos', '1Db_jisu_pos', 'u5
             if($run_query){
                 $info = "Your password has been reset. You can now login with your new password.";
                 $_SESSION['info'] = $info;
-                header('Location: backtologin');
+                header('Location: backtologin.php');
             }else{
                 $errors['db-error'] = "Failed to change your password!";
             }
