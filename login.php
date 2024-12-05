@@ -3,10 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://www.google.com/recaptcha/api.js?render=6LcxSJIqAAAAABwEaDzDQ85Z8bClNZY7nhY2-jDD"></script>
     <title>JiSu Ebike POS System</title>
     <link rel="stylesheet" href="login.css">
     <!-- SweetAlert Library -->
 </head>
+<link rel="icon" type="image/x-icon" href="assets/img/logo.jpg">
+
 <body>
     <?php 
     include('includes/header.php'); 
@@ -20,7 +23,7 @@
                     <div class="card shadow rounded-4 custom-card">
                         <div class="p-5">
                             <center><h4 class="text-dark mb-3">Login Admin</h4></center>
-                            <form action="login-code.php" method="POST" class="login-form" onsubmit="return validateForm()">
+                            <form id="myForm" action="login-code.php" method="POST" class="login-form" onsubmit="return validateForm()">
                                 <div class="mb-3">
                                     <label class="form-label">Enter Email</label>
                                     <input type="text" name="email" id="email" class="form-control" />
@@ -32,6 +35,7 @@
                                   <span class="input-group-text">
                                   <i class="fa fa-eye" id="togglePassword" style="cursor: pointer;"></i>
                               </span>
+                              <input type="hidden" name="recaptcha_token" id="recaptcha_token">
                          </div>
                       </div>
                                 <div class="my-3">
@@ -48,6 +52,7 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
                             <script>
 <?php if(isset($_SESSION['sweet_alert'])) : ?>
@@ -122,6 +127,24 @@ function validateForm() {
         this.classList.toggle('fa-eye-slash'); 
     });
 </script>
-
+<script>
+    $(document).ready(function () {
+        $('#myForm').submit(async function (event) {
+            event.preventDefault(); // Prevent default form submission for custom logic
+            
+            // Wait for grecaptcha to be ready and execute it
+            const token = await grecaptcha.execute('6LcxSJIqAAAAABwEaDzDQ85Z8bClNZY7nhY2-jDD', {action: 'submit'});
+            $('input[name=recaptcha_token]').val(token);
+            
+            // Call the form validation and wait for its result
+            const validate = validateForm();
+            
+            if (validate) {
+                // Proceed with form submission if validation passes
+                this.submit();
+            }
+        });
+    });
+</script>
 </body>
 </html>
