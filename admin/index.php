@@ -3,6 +3,7 @@ session_start();
 if(!isset($_SESSION['loggedInUser'])){
     header('location: ../login.php');
 }
+include ('../config/dbcon.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
