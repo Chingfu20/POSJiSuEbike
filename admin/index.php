@@ -245,7 +245,7 @@ $conn->close();
     </div>
 </div>
 
-            <div class="col-md-3 mb-3">
+<div class="col-md-3 mb-3">
     <div class="card" style="background-color: #B3E5D6;"> 
         <div class="card-header" style="background-color: #17a2b8; color: white;">
            <center> Total Orders </center>
@@ -254,14 +254,13 @@ $conn->close();
         <i class="fas fa-list"></i>
             <h3>
             <?php
-         
-         echo htmlspecialchars($orders);
-         ?>
+            echo htmlspecialchars($totalOrders);
+            ?>
             </h3>
-        </div>
         </div>
     </div>
 </div>
+
 
 <div class="row">
     <div class="col-md-6 mb-3">
@@ -449,6 +448,7 @@ document.addEventListener("DOMContentLoaded", function () {
     echo $totalSales ? mysqli_fetch_assoc($totalSales)['total_sales'] : 0.00;
 ?>">
 <input type="hidden" id="todayOrders" value="<?php
+$totalOrders = $row['order_count'];
     $todayDate = date('Y-m-d');
     $todayOrders = mysqli_query($conn, "SELECT * FROM orders WHERE order_date='$todayDate'");
     echo $todayOrders ? mysqli_num_rows($todayOrders) : 0;
