@@ -157,7 +157,7 @@ if (isset($_POST['loginBtn'])) {
                 ];
 
                 setFlashMessage('success', 'Login Successful, ' . $row['name'] . '!');
-                redirect('admin/index.php', 'Logged In Successfully');
+                redirect('admin/index', 'Logged In Successfully');
             } else {
                 // Track login attempts
                 $attempts = LoginAttemptTracker::trackAttempt($email);
