@@ -38,7 +38,7 @@
     <div class="card mt-4 shadow-sm">
         <div class="card-header">
             <h4 class="mb-0">Create Order
-                <a href="orders" class="btn btn-danger float-end">Back</a>
+                <a href="orders." class="btn btn-danger float-end">Back</a>
             </h4>
         </div>
         <div class="card-body">
@@ -120,7 +120,7 @@ foreach ($sessionProducts as $key => $item) :
         <td><?= $item['quantity']; ?></td>
         <td class="totalPrice"><?= number_format($item['price'] * $item['quantity'], 2); ?></td>
         <td>
-            <a href="order-item-delete?index=<?= $key; ?>" class="btn btn-danger">
+            <a href="order-item-delete.php?index=<?= $key; ?>" class="btn btn-danger">
                 Remove
             </a>
         </td>
