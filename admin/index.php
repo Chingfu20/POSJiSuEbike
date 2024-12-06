@@ -221,19 +221,34 @@ $conn->close();
         </div>
     </div>
 
-<div class="col-md-3 mb-3">
+    <div class="col-md-3 mb-3">
     <div class="card" style="background-color: #B3E5D6;"> 
         <div class="card-header" style="background-color: #17a2b8; color: white;">
             <i class="fas fa-receipt"></i> Total Orders
         </div>
         <div class="card-body text-center">
             <h3 id="totalOrdersText">
-                  <?php    echo htmlspecialchars($totalToday); ?>
+                <?php echo htmlspecialchars($totalOrders); ?>
             </h3>
         </div>
     </div>
 </div>
 
+<?php
+include ('../config/conn.php');
+
+// Fetch Total Orders from the Database
+$sql = "SELECT COUNT(*) AS total FROM orders"; 
+$result = $conn->query($sql);
+
+$totalOrders = 0; // Default count
+if ($result && $row = $result->fetch_assoc()) {
+    $totalOrders = $row['total'];
+}
+
+// Close the database connection
+$conn->close();
+?>
 
     <div class="col-md-3 mb-3">
         <div class="card" style="background-color: #C8E6F5;"> 
