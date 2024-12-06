@@ -67,7 +67,7 @@
                                     </div>
                                 </div>
                                 <div class="my-3">
-                                    <a href="chooseway.php">Forgot Password?</a>
+                                    <a href="chooseway">Forgot Password?</a>
                                 </div>
                                 <input type="hidden" name="recaptcha_token" id="recaptcha_token">
                                 <div class="my-3">
