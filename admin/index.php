@@ -370,30 +370,6 @@ for ($i = 1; $i <= 12; $i++) {
     
     $salesData[] = $row['monthly_sales'] ? number_format($row['monthly_sales'], 2, '.', '') : 0.00;
 }
-
-// Fetch today's orders count
-$sqlToday = "SELECT COUNT(*) AS total FROM orders WHERE order_date = ?";
-$stmtToday = $conn->prepare($sqlToday);
-$stmtToday->bind_param("s", $today);
-$stmtToday->execute();
-$resultToday = $stmtToday->get_result();
-$todayOrders = 0;
-
-if ($resultToday && $row = $resultToday->fetch_assoc()) {
-    $todayOrders = $row['total'];
-}
-$stmtToday->close();
-
-// Fetch total orders count
-$sqlTotalOrders = "SELECT COUNT(*) AS total FROM orders";
-$resultTotalOrders = $conn->query($sqlTotalOrders);
-$totalOrders = 0;
-
-if ($resultTotalOrders && $row = $resultTotalOrders->fetch_assoc()) {
-    $totalOrders = $row['total'];
-}
-$conn->close();
-
 ?>
 
 <script>
