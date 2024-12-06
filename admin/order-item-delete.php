@@ -12,14 +12,14 @@ if(is_numeric($paramResult)){
         unset($_SESSION['productItems'][$indexValue]);
         unset($_SESSION['productItemIds'][$indexValue]);
 
-        redirect('order-create.php', 'Item Removed');
+        redirect('order-create', 'Item Removed');
     }else{
 
-        redirect('order-create.php', 'There is no item');
+        redirect('order-create', 'There is no item');
     }
 
 }else{
-    redirect('order-create.php', 'param not numeric');
+    redirect('order-create', 'param not numeric');
 }
 
 ?>

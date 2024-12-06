@@ -1,6 +1,6 @@
 <?php
 
-include('../config/function.php');
+include('../config/function');
 
 if (!isset($_SESSION['productItems'])) {
     $_SESSION['productItems'] = [];
@@ -18,9 +18,9 @@ if (isset($_POST['addItem'])) {
         if (mysqli_num_rows($checkProduct) > 0) {
             $row = mysqli_fetch_assoc($checkProduct);
             if ($row['quantity'] == 0) {
-                redirect('order-create.php', 'No product available');
+                redirect('order-create', 'No product available');
             } elseif ($row['quantity'] < $quantity) {
-                redirect('order-create.php', 'Only ' . $row['quantity'] . ' product available');
+                redirect('order-create', 'Only ' . $row['quantity'] . ' product available');
             }
 
             $productData = [
@@ -44,12 +44,12 @@ if (isset($_POST['addItem'])) {
                 }
             }
 
-            redirect('order-create.php', 'Item Added ' . $row['name']);
+            redirect('order-create', 'Item Added ' . $row['name']);
         } else {
-            redirect('order-create.php', 'No Such product found!');
+            redirect('order-create', 'No Such product found!');
         }
     } else {
-        redirect('order-create.php', 'Something Went Wrong!');
+        redirect('order-create', 'Something Went Wrong!');
     }
 }
 
