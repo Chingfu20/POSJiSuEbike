@@ -45,8 +45,8 @@
                                     ?>
                                 </td>
                                 <td>
-                                    <a href="categories-edit.php?id=<?= htmlspecialchars($item['id']); ?>" class="btn btn-success btn-sm">Edit</a>
-                                    <a href="categories-delete.php?id=<?= htmlspecialchars($item['id']); ?>" class="btn btn-danger btn-sm">Delete</a>
+                                    <a href="categories-edit?id=<?= htmlspecialchars($item['id']); ?>" class="btn btn-success btn-sm">Edit</a>
+                                    <a href="categories-delete?id=<?= htmlspecialchars($item['id']); ?>" class="btn btn-danger btn-sm">Delete</a>
                                 </td>
                             </tr>
                             <?php
