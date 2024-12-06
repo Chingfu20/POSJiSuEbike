@@ -1,6 +1,6 @@
 <?php // Check if user is logged in
 if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
-    redirect('../login.php', 'Please login first');
+    redirect('../login', 'Please login first');
 }
 ?>
 <!DOCTYPE html>
@@ -54,7 +54,7 @@ if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
                 cancelButtonText: 'No, stay logged in'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = '../logout.php';
+                    window.location.href = '../logout';
                 }
             });
         });

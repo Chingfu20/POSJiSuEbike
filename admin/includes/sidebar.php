@@ -8,7 +8,7 @@
             <div class="nav">
                 <div class="sb-sidenav-menu-heading">JISU</div>
 
-                <a class="nav-link <?= $page == 'index.php' ? 'active' : ''; ?>" href="index">
+                <a class="nav-link <?= $page == 'index' ? 'active' : ''; ?>" href="index">
                     <div class="sb-nav-link-icon"><i class="fas fa-chart-line"></i></div>
                     Dashboard
                 </a>

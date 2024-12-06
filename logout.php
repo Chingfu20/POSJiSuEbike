@@ -12,7 +12,7 @@ if(isset($_SESSION['loggedIn'])){
 
     logoutSession();
     setFlashMessage('success', 'Logout Successfully, ' . $row['name'] . '!');
-    redirect('login.php','Logged Out Successfully.');
+    redirect('login','Logged Out Successfully.');
 }
 
 ?>
