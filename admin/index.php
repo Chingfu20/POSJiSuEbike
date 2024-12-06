@@ -456,10 +456,7 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById('productText').innerHTML = productCount;
         document.getElementById('customerText').innerHTML = customerCount;
         document.getElementById('todayOrdersText').innerHTML = todayOrders;
-        document.addEventListener("DOMContentLoaded", function () {
-    const totalOrders = <?php echo json_encode($totalOrders); ?>;
-    document.getElementById('totalOrdersText').innerHTML = totalOrders;
-});
+        document.getElementById('totalOrdersText').innerHTML = totalOrders;
 
         const createBarChart = (context, label, data, bgColor, brColor) => {
             new Chart(context, {
