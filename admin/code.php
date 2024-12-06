@@ -12,11 +12,11 @@ if (isset($_POST['saveAdmin'])) {
         $emailCheck = mysqli_query($conn, "SELECT * FROM admins WHERE email='$email'");
         if ($emailCheck) {
             if (mysqli_num_rows($emailCheck) > 0) {
-                redirect('admins-create.php', 'Email already used by another user.');
+                redirect('admins-create', 'Email already used by another user.');
             }
         } else {
             error_log("Email check query failed: " . mysqli_error($conn));
-            redirect('admins-create.php', 'Something went wrong during email check.');
+            redirect('admins-create', 'Something went wrong during email check.');
         }
 
         $bcrypt_password = password_hash($password, PASSWORD_BCRYPT);
@@ -31,13 +31,13 @@ if (isset($_POST['saveAdmin'])) {
         $result = insert('admins', $data);
 
         if ($result) {
-            redirect('admins.php', 'Admin Created Successfully!');
+            redirect('admins', 'Admin Created Successfully!');
         } else {
             error_log("Insert query failed: " . mysqli_error($conn));
-            redirect('admins-create.php', 'Something Went Wrong!');
+            redirect('admins-create', 'Something Went Wrong!');
         }
     } else {
-        redirect('admins-create.php', 'Please fill required fields.');
+        redirect('admins-create', 'Please fill required fields.');
     }
 }
 
@@ -100,13 +100,13 @@ if (isset($_POST['saveCategory'])) {
         $result = insert('categories', $data);
 
         if ($result) {
-            redirect('categories.php', 'Category Created Successfully!');
+            redirect('categories', 'Category Created Successfully!');
         } else {
             error_log("Insert query failed: " . mysqli_error($conn));
-            redirect('categories-create.php', 'Something Went Wrong!');
+            redirect('categories-create', 'Something Went Wrong!');
         }
     } else {
-        redirect('categories-create.php', 'Please fill required fields.');
+        redirect('categories-create', 'Please fill required fields.');
     }
 }
 
@@ -169,10 +169,10 @@ if (isset($_POST['saveProduct'])) {
     $result = insert('products', $data);
 
     if ($result) {
-        redirect('products.php', 'Product Created Successfully!');
+        redirect('products', 'Product Created Successfully!');
     } else {
         error_log("Insert query failed: " . mysqli_error($conn));
-        redirect('products-create.php', 'Something Went Wrong!');
+        redirect('products-create', 'Something Went Wrong!');
     }
 }
 
@@ -181,7 +181,7 @@ if (isset($_POST['updateProduct'])) {
 
     $productData = getById('products', $product_id);
     if ($productData['status'] != 200) {
-        redirect('products.php', 'No such product found');
+        redirect('products', 'No such product found');
     }
 
     $category_id = validate($_POST['category_id']);
@@ -241,11 +241,11 @@ if (isset($_POST['saveCustomer'])) {
         $emailCheck = mysqli_query($conn, "SELECT * FROM customers WHERE email='$email'");
         if ($emailCheck) {
             if (mysqli_num_rows($emailCheck) > 0) {
-                redirect('customers-create.php', 'Email already used by another user');
+                redirect('customers-create', 'Email already used by another user');
             }
         } else {
             error_log("Email check query failed: " . mysqli_error($conn));
-            redirect('customers-create.php', 'Something went wrong during email check.');
+            redirect('customers-create', 'Something went wrong during email check.');
         }
 
         $data = [
@@ -259,13 +259,13 @@ if (isset($_POST['saveCustomer'])) {
         $result = insert('customers', $data);
 
         if ($result) {
-            redirect('customers.php', 'Customer Created Successfully');
+            redirect('customers', 'Customer Created Successfully');
         } else {
             error_log("Insert query failed: " . mysqli_error($conn));
-            redirect('customers-create.php', 'Something Went Wrong!');
+            redirect('customers-create', 'Something Went Wrong!');
         }
     } else {
-        redirect('customers-create.php', 'Please fill required fields');
+        redirect('customers-create', 'Please fill required fields');
     }
 }
 
