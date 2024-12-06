@@ -5,7 +5,7 @@
           <div class="card-header">
                <h4 class="mb-0">Order View
                 <a href="orders-view-print.php?track=<?= $_GET['track'] ?>" class="btn btn-info mx-2 btn-sm float-end">Print</a>
-                <a href="orders.php" class="btn btn-danger mx-2 btn-sm float-end">Back</a>
+                <a href="orders" class="btn btn-danger mx-2 btn-sm float-end">Back</a>
                </h4>
           </div>
           <div class="card-body">
@@ -20,7 +20,7 @@
                        <div class="text-center pyp-5">
                     <h5>No Tracking Number Found</h5>
                     <div>
-                        <a href="orders.php" class="btn btn-primary mt-4 w-25">Go back to orders</a>
+                        <a href="orders" class="btn btn-primary mt-4 w-25">Go back to orders</a>
                     </div>
                 </div>
                        <?php
@@ -167,7 +167,7 @@
                 <div class="text-center pyp-5">
                     <h5>No Tracking Number Found</h5>
                     <div>
-                        <a href="orders.php" class="btn btn-primary mt-4 w-25">Go back to orders</a>
+                        <a href="orders" class="btn btn-primary mt-4 w-25">Go back to orders</a>
                     </div>
                 </div>
                 <?php

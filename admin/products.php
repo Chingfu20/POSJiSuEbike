@@ -10,7 +10,7 @@
                     <input type="text" name="search" class="form-control" placeholder="Search product..." value="<?= isset($_GET['search']) ? htmlspecialchars($_GET['search']) : '' ?>">
                     <button type="submit" class="btn btn-secondary ms-2">Search</button>
                 </form>
-                <a href="products-create.php" class="btn btn-primary">Add Product</a>
+                <a href="products-create" class="btn btn-primary">Add Product</a>
             </div>
         </div>
         <div class="card-body">

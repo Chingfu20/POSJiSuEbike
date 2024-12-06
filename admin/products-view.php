@@ -4,7 +4,7 @@
     <div class="card mt-4 shadow-sm">
         <div class="card-header">
             <h4 class="mb-0">Product View
-                <a href="products.php" class="btn btn-danger mx-2 btn-sm float-end">Back</a>
+                <a href="products" class="btn btn-danger mx-2 btn-sm float-end">Back</a>
             </h4>
         </div>
         <div class="card-body text-center">
@@ -52,7 +52,7 @@
                 <div class="text-center py-5">
                     <h5>No Product ID Provided</h5>
                     <div>
-                        <a href="products.php" class="btn btn-primary mt-4 w-25">Go back to products</a>
+                        <a href="products" class="btn btn-primary mt-4 w-25">Go back to products</a>
                     </div>
                 </div>
                 <?php

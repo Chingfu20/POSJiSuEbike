@@ -4,7 +4,7 @@
     <div class="card mt-4 shadow-sm">
         <div class="card-header">
             <h4 class="mb-0">Add Product
-                <a href="products.php" class="btn btn-danger float-end">Back</a>
+                <a href="products" class="btn btn-danger float-end">Back</a>
             </h4>
         </div>
         <div class="card-body">

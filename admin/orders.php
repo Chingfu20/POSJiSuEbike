@@ -22,7 +22,7 @@
                             </div>
                             <div class="col-md-4">
                                 <button type="submit" class="btn btn-primary">Filter</button>
-                                <a href="orders.php" class="btn btn-danger">Reset</a>
+                                <a href="orders" class="btn btn-danger">Reset</a>
                             </div>
                         </div>
                     </form>

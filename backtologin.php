@@ -68,7 +68,7 @@ if($_SESSION['info'] == false){
                 <?php
             }
             ?>
-        <a href="login.php" class="btn btn-danger w-100">Login Now</a>
+        <a href="login" class="btn btn-danger w-100">Login Now</a>
     </div>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

@@ -11,10 +11,10 @@
         <h2 class="text-2xl font-bold text-gray-700 text-center mb-4">Reset Your Password</h2>
         <p class="text-gray-600 text-center mb-6">Choose a method to reset your password:</p>
         <div class="space-y-4">
-            <a href="forgot-password.php" class="block w-full text-center bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md">
+            <a href="forgot-password" class="block w-full text-center bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md">
                 Reset via Email
             </a>
-            <a href="sms/send-otp.php" class="block w-full text-center bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg shadow-md">
+            <a href="sms/send-otp" class="block w-full text-center bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg shadow-md">
                 Reset via SMS
             </a>
         </div>
