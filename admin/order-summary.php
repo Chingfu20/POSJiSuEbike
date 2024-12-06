@@ -179,7 +179,7 @@ document.getElementById('saveOrder').addEventListener('click', function() {
                 confirmButtonText: 'OK'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = 'orders.php';
+                    window.location.href = 'orders';
                 }
             });
         } else {
