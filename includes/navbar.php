@@ -12,10 +12,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active text-white" href="index.php">Home</a>
+          <a class="nav-link active text-white" href="index">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active text-white" href="about_us.php">About us</a>
+          <a class="nav-link active text-white" href="about_us">About us</a>
         </li>
         <li class="nav-item dropdown active">
             <a class="nav-link dropdown-toggle active text-white" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -28,14 +28,14 @@
             </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link active text-white" href="contact.php">Contact us</a>
+          <a class="nav-link active text-white" href="contact">Contact us</a>
         </li>
         <?php if(isset($_SESSION['loggedIn'])) : ?>
           <li class="nav-item">
             <a class="nav-link text-white" href="#"><?= $_SESSION['loggedInUser']['name']; ?></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active text-white" href="logout.php">Logout</a>
+            <a class="nav-link active text-white" href="logout">Logout</a>
           </li>
         <?php else: ?>
           <li class="nav-item dropdown active">
@@ -43,7 +43,7 @@
               Login
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="login.php">Admin</a></li>
+              <li><a class="dropdown-item" href="login">Admin</a></li>
             </ul>
           </li>
         <?php endif; ?>
