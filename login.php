@@ -98,7 +98,6 @@
         var email = document.getElementById('email').value;
         var password = document.getElementById('password').value;
 
-        // Simple email validation pattern
         var emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
 
         if (email == '') {
