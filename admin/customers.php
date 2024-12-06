@@ -43,8 +43,8 @@
                                 <td><?= htmlspecialchars($item['phone']) ?></td>
                                 <td><?= htmlspecialchars($item['address']) ?></td>
                                 <td>
-                                    <a href="customers-edit.php?id=<?= urlencode($item['id']); ?>" class="btn btn-success btn-sm">Edit</a>
-                                    <a href="customers-delete.php?id=<?= urlencode($item['id']); ?>" class="btn btn-danger btn-sm">Delete</a>
+                                    <a href="customers-edit?id=<?= urlencode($item['id']); ?>" class="btn btn-success btn-sm">Edit</a>
+                                    <a href="customers-delete?id=<?= urlencode($item['id']); ?>" class="btn btn-danger btn-sm">Delete</a>
                                 </td>
                             </tr>
                             <?php endforeach; ?>

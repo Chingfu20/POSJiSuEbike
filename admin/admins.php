@@ -48,8 +48,8 @@
                                     ?>
                                 </td>
                                 <td>
-                                    <a href="admins-edit.php?id=<?= urlencode($adminItem['id']); ?>" class="btn btn-success btn-sm">Edit</a>
-                                    <a href="admins-delete.php?id=<?= urlencode($adminItem['id']); ?>" class="btn btn-danger btn-sm">Delete</a>
+                                    <a href="admins-edit?id=<?= urlencode($adminItem['id']); ?>" class="btn btn-success btn-sm">Edit</a>
+                                    <a href="admins-delete?id=<?= urlencode($adminItem['id']); ?>" class="btn btn-danger btn-sm">Delete</a>
                                 </td>
                             </tr>
                             <?php endforeach; ?>

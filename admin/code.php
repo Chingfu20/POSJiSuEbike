@@ -46,7 +46,7 @@ if (isset($_POST['updateAdmin'])) {
 
     $adminData = getById('admins', $adminId);
     if ($adminData['status'] != 200) {
-        redirect('admins-edit.php?id=' . $adminId, 'Please fill required fields.');
+        redirect('admins-edit.?id=' . $adminId, 'Please fill required fields.');
     }
 
     $name = validate($_POST['name']);
@@ -59,7 +59,7 @@ if (isset($_POST['updateAdmin'])) {
     $checkResult = mysqli_query($conn, $EmailCheckQuery);
     if ($checkResult) {
         if (mysqli_num_rows($checkResult) > 0) {
-            redirect('admins-edit.php?id=' . $adminId, 'Email already used by another user');
+            redirect('admins-edit.?id=' . $adminId, 'Email already used by another user');
         }
     }
 
@@ -76,13 +76,13 @@ if (isset($_POST['updateAdmin'])) {
         $result = update('admins', $adminId, $data);
 
         if ($result) {
-            redirect('admins-edit.php?id=' . $adminId, 'Admin Updated Successfully!');
+            redirect('admins-edit.?id=' . $adminId, 'Admin Updated Successfully!');
         } else {
             error_log("Update query failed: " . mysqli_error($conn));
-            redirect('admins-edit.php?id=' . $adminId, 'Something Went Wrong!');
+            redirect('admins-edit.?id=' . $adminId, 'Something Went Wrong!');
         }
     } else {
-        redirect('admins-edit.php?id=' . $adminId, 'Please fill required fields.');
+        redirect('admins-edit.?id=' . $adminId, 'Please fill required fields.');
     }
 }
 
@@ -125,13 +125,13 @@ if (isset($_POST['updateCategory'])) {
         $result = update('categories', $categoryId, $data);
 
         if ($result) {
-            redirect('categories-edit.php?id=' . $categoryId, 'Category Updated Successfully!');
+            redirect('categories-edit.?id=' . $categoryId, 'Category Updated Successfully!');
         } else {
             error_log("Update query failed: " . mysqli_error($conn));
-            redirect('categories-edit.php?id=' . $categoryId, 'Something Went Wrong!');
+            redirect('categories-edit.?id=' . $categoryId, 'Something Went Wrong!');
         }
     } else {
-        redirect('categories-edit.php?id=' . $categoryId, 'Please fill required fields.');
+        redirect('categories-edit.?id=' . $categoryId, 'Please fill required fields.');
     }
 }
 
@@ -222,10 +222,10 @@ if (isset($_POST['updateProduct'])) {
     $result = update('products', $product_id, $data);
 
     if ($result) {
-        redirect('products-edit.php?id=' . $product_id, 'Product Updated Successfully!');
+        redirect('products-edit.?id=' . $product_id, 'Product Updated Successfully!');
     } else {
         error_log("Update query failed: " . mysqli_error($conn));
-        redirect('products-edit.php?id=' . $product_id, 'Something Went Wrong!');
+        redirect('products-edit.?id=' . $product_id, 'Something Went Wrong!');
     }
 }
 
@@ -241,11 +241,11 @@ if (isset($_POST['saveCustomer'])) {
         $emailCheck = mysqli_query($conn, "SELECT * FROM customers WHERE email='$email'");
         if ($emailCheck) {
             if (mysqli_num_rows($emailCheck) > 0) {
-                redirect('customers-create', 'Email already used by another user');
+                redirect('customers-createproduct', 'Email already used by another user');
             }
         } else {
             error_log("Email check query failed: " . mysqli_error($conn));
-            redirect('customers-create', 'Something went wrong during email check.');
+            redirect('customers-createproduct', 'Something went wrong during email check.');
         }
 
         $data = [
@@ -259,13 +259,13 @@ if (isset($_POST['saveCustomer'])) {
         $result = insert('customers', $data);
 
         if ($result) {
-            redirect('customers', 'Customer Created Successfully');
+            redirect('customersproduct', 'Customer Created Successfully');
         } else {
             error_log("Insert query failed: " . mysqli_error($conn));
-            redirect('customers-create', 'Something Went Wrong!');
+            redirect('customers-createproduct', 'Something Went Wrong!');
         }
     } else {
-        redirect('customers-create', 'Please fill required fields');
+        redirect('customers-createproduct', 'Please fill required fields');
     }
 }
 
@@ -282,11 +282,11 @@ if (isset($_POST['updateCustomer'])) {
         $emailCheck = mysqli_query($conn, "SELECT * FROM customers WHERE email='$email' AND id != '$customerId'");
         if ($emailCheck) {
             if (mysqli_num_rows($emailCheck) > 0) {
-                redirect('customers-edit.php?id=' . $customerId, 'Email already used by another user');
+                redirect('customers-edit.?id=' . $customerId, 'Email already used by another user');
             }
         } else {
             error_log("Email check query failed: " . mysqli_error($conn));
-            redirect('customers-edit.php?id=' . $customerId, 'Something went wrong during email check.');
+            redirect('customers-edit.?id=' . $customerId, 'Something went wrong during email check.');
         }
 
         $data = [
@@ -300,13 +300,13 @@ if (isset($_POST['updateCustomer'])) {
         $result = update('customers', $customerId, $data);
 
         if ($result) {
-            redirect('customers-edit.php?id=' . $customerId, 'Customer updated Successfully');
+            redirect('customers-edit.?id=' . $customerId, 'Customer updated Successfully');
         } else {
             error_log("Update query failed: " . mysqli_error($conn));
-            redirect('customers-edit.php?id=' . $customerId, 'Something Went Wrong!');
+            redirect('customers-edit.?id=' . $customerId, 'Something Went Wrong!');
         }
     } else {
-        redirect('customers-edit.php?id=' . $customerId, 'Please fill required fields');
+        redirect('customers-edit.?id=' . $customerId, 'Please fill required fields');
     }
 }
 
