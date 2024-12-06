@@ -18,9 +18,9 @@ if (isset($_POST['addItem'])) {
         if (mysqli_num_rows($checkProduct) > 0) {
             $row = mysqli_fetch_assoc($checkProduct);
             if ($row['quantity'] == 0) {
-                redirect('order-create.php', 'No product available');
+                redirect('order-create', 'No product available');
             } elseif ($row['quantity'] < $quantity) {
-                redirect('order-create.php', 'Only ' . $row['quantity'] . ' product available');
+                redirect('order-create', 'Only ' . $row['quantity'] . ' product available');
             }
 
             $productData = [
