@@ -1,7 +1,7 @@
 <?php 
 include('includes/header.php'); 
 if(!isset($_SESSION['productItems'])){
-    echo '<script> window.location.href = "order-create.php"; </script>';
+    echo '<script> window.location.href = "order-create"; </script>';
 }
 ?>
 
