@@ -4,7 +4,7 @@
         <div class="card mt-4 shadow-sm">
           <div class="card-hear">
                <h4 class="mb-0">Edit Admin
-                    <a href="admins.php" class="btn btn-danger float-end">Back</a>
+                    <a href="admins" class="btn btn-danger float-end">Back</a>
                </h4>
           </div>
           <div class="card-body">
