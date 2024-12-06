@@ -228,7 +228,7 @@ $conn->close();
         </div>
         <div class="card-body text-center">
             <h3 id="totalOrdersText">
-                  <?php    echo htmlspecialchars($totalOrders); ?>
+                  <?php    echo htmlspecialchars($totalToday); ?>
             </h3>
         </div>
     </div>
