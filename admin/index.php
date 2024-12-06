@@ -221,18 +221,19 @@ $conn->close();
         </div>
     </div>
 
-<div class="col-md-3 mb-3">
+    <div class="col-md-3 mb-3">
     <div class="card" style="background-color: #B3E5D6;"> 
         <div class="card-header" style="background-color: #17a2b8; color: white;">
             <i class="fas fa-receipt"></i> Total Orders
         </div>
         <div class="card-body text-center">
             <h3 id="totalOrdersText">
-                  <?php    echo htmlspecialchars($totalToday); ?>
+                <?php echo htmlspecialchars($totalOrders); ?>
             </h3>
         </div>
     </div>
 </div>
+
 
     <div class="col-md-3 mb-3">
         <div class="card" style="background-color: #C8E6F5;"> 
@@ -369,6 +370,30 @@ for ($i = 1; $i <= 12; $i++) {
     
     $salesData[] = $row['monthly_sales'] ? number_format($row['monthly_sales'], 2, '.', '') : 0.00;
 }
+
+// Fetch today's orders count
+$sqlToday = "SELECT COUNT(*) AS total FROM orders WHERE order_date = ?";
+$stmtToday = $conn->prepare($sqlToday);
+$stmtToday->bind_param("s", $today);
+$stmtToday->execute();
+$resultToday = $stmtToday->get_result();
+$todayOrders = 0;
+
+if ($resultToday && $row = $resultToday->fetch_assoc()) {
+    $todayOrders = $row['total'];
+}
+$stmtToday->close();
+
+// Fetch total orders count
+$sqlTotalOrders = "SELECT COUNT(*) AS total FROM orders";
+$resultTotalOrders = $conn->query($sqlTotalOrders);
+$totalOrders = 0;
+
+if ($resultTotalOrders && $row = $resultTotalOrders->fetch_assoc()) {
+    $totalOrders = $row['total'];
+}
+$conn->close();
+
 ?>
 
 <script>
@@ -455,7 +480,10 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById('productText').innerHTML = productCount;
         document.getElementById('customerText').innerHTML = customerCount;
         document.getElementById('todayOrdersText').innerHTML = todayOrders;
-        document.getElementById('totalOrdersText').innerHTML = totalOrders;
+        document.addEventListener("DOMContentLoaded", function () {
+    const totalOrders = <?php echo json_encode($totalOrders); ?>;
+    document.getElementById('totalOrdersText').innerHTML = totalOrders;
+});
 
         const createBarChart = (context, label, data, bgColor, brColor) => {
             new Chart(context, {
