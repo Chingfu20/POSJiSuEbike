@@ -4,7 +4,7 @@
         <div class="card mt-4 shadow-sm">
           <div class="card-header">
                <h4 class="mb-0">Print Order
-                <a href="orders.php" class="btn btn-danger btn-sm float-end">Back</a>
+                <a href="orders" class="btn btn-danger btn-sm float-end">Back</a>
                </h4>
           </div>
           <div class="card-body">
@@ -20,7 +20,7 @@
                  <div class="text-center pyp-5">
                     <h5>Please prodive Tracking Number</h5>
                     <div>
-                        <a href="orders.php" class="btn btn-primary mt-4 w-25">Go back to orders</a>
+                        <a href="orders" class="btn btn-primary mt-4 w-25">Go back to orders</a>
                     </div>
                  </div>
                  <?php
@@ -164,7 +164,7 @@
                     <div class="text-center pyp-5">
                     <h5>No Tracking Number Parameter Found</h5>
                     <div>
-                        <a href="orders.php" class="btn btn-primary mt-4 w-25">Go back to orders</a>
+                        <a href="orders" class="btn btn-primary mt-4 w-25">Go back to orders</a>
                     </div>
                 </div>
                     <?php
