@@ -19,19 +19,19 @@ if (is_numeric($paraResultId)){
                 unlink($deleteImage);
             }
             
-            redirect('products.php', 'Product Deleted Successfully');
+            redirect('products', 'Product Deleted Successfully');
         }
         else
         {
-            redirect('products.php', 'Something Went Wrong.');
+            redirect('products', 'Something Went Wrong.');
         }
     }
     else
     {
-        redirect('products.php',$product['message']);   
+        redirect('products',$product['message']);   
     }
 }else{
-    redirect('products.php', 'Something Went Wrong.');
+    redirect('products', 'Something Went Wrong.');
 }
 
 ?>

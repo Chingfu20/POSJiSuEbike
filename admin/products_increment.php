@@ -12,11 +12,11 @@ if(isset($_GET['id'])) {
     mysqli_stmt_bind_param($stmt, "i", $productId);
     
     if(mysqli_stmt_execute($stmt)) {
-        redirect('products.php', 'Quantity updated successfully.');
+        redirect('products', 'Quantity updated successfully.');
     } else {
-        redirect('products.php', 'Something went wrong while updating quantity.');
+        redirect('products', 'Something went wrong while updating quantity.');
     }
 } else {
-    redirect('products.php', 'Product ID not found.');
+    redirect('products', 'Product ID not found.');
 }
 ?>
