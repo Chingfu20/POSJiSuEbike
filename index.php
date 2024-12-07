@@ -1,6 +1,18 @@
-<?php
 
-;?>
+<?php 
+include 'config/conn.php';
+$sql = "SELECT name, image, description FROM products WHERE status = 0 ORDER BY created_at ";
+$result = $conn->query($sql);
+
+// Prepare an array for the products
+$products = [];
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $products[] = $row;
+    }
+}
+$conn->close();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,32 +26,67 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"> <!-- AOS CSS -->
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Navbar custom color */
-        .navbar-custom {
-            background-color: #497ecf; /* Gloss Glacier Blue */
-        }
-        /* Section background */
-        .section-background {
-            background-color: #497ecf; /* Blue background for all sections */
-            color: #fff; /* White text for readability */
-        }
-        /* Carousel image styling */
-        .carousel-item img {
-            height: 100vh; /* Full viewport height */
-            object-fit: cover;
-        }
-        /* Gallery image styling */
-        .gallery-item img {
-            height: 300px; /* Adjusted gallery image height */
-            object-fit: cover;
-        }
+       /* Navbar custom color */
+       .navbar-custom {
+        background-color: #497ecf; /* Gloss Glacier Blue */
+    }
+
+    /* Carousel image styling */
+    .carousel-item img {
+        height: 100vh; /* Full viewport height */
+        object-fit: cover;
+    }
+    /* Gallery and product image styling */
+    .gallery-item img,
+    .section-background img {
+        height: 300px; /* Adjusted image height */
+        object-fit: cover;
+        border-radius: 8px; /* Slight rounding of corners for aesthetics */
+        padding: 10px; /* Add padding around images */
+        margin: 10px;
+        margin-left:10px; /* Add margin to ensure space between images */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Add subtle shadow */
+    }
+    /* General section spacing */
+    .section-background {
+        padding: 5% 10px; /* Padding for consistent section spacing */
+    }
+
+    .footer-link a:hover {
+    text-decoration: underline;
+  }
+     .footer-link{
+        text-decoration:none;
+     }
+
+     .footer-link a{
+      font-weight:bold;
+      color:black;
+     }
+
+     .product-image-wrapper {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    max-height: 250px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.product-image-wrapper img {
+    transition: transform 0.3s ease-in-out;
+}
+
+.product-image-wrapper:hover img {
+    transform: scale(1.1); /* Zoom effect on hover */
+}
     </style>
 </head>
-<body>
+<body style="background-color:#497ecf;">
 <?php include('includes/header.php'); ?>
 
 <!-- Carousel Section -->
-<div class="py-5 section-background">
+<div>
     <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000" data-bs-pause="false">
         <ol class="carousel-indicators">
             <!-- Carousel indicators if any -->
@@ -67,31 +114,26 @@
 </div>
 
 <!-- Product Section -->
-<div class="container py-5 section-background">
+<div class="section-background">
     <h2 class="text-center text-white" data-aos="fade-up">Units</h2>
     <div class="row">
-        <div class="col-md-3" data-aos="fade-up" data-aos-delay="100">
-            <img src="assets/images/1.jpg" alt="Product 1" class="img-fluid w-100" style="object-fit: cover; height: 300px;">
-            <p class="text-center text-white">SG 5</p>
-        </div>
-        <div class="col-md-3" data-aos="fade-up" data-aos-delay="200">
-            <img src="assets/images/2.jpg" alt="Product 2" class="img-fluid w-100" style="object-fit: cover; height: 300px;">
-            <p class="text-center text-white">DRAGON</p>
-        </div>
-        <div class="col-md-3" data-aos="fade-up" data-aos-delay="300">
-            <img src="assets/images/bike3.jpg" alt="Product 3" class="img-fluid w-100" style="object-fit: cover; height: 300px;">
-            <p class="text-center text-white">CLASSY PRO 5 SEATERS</p>
-        </div>
-        <div class="col-md-3" data-aos="fade-up" data-aos-delay="400">
-            <img src="assets/images/3.jpg" alt="Product 4" class="img-fluid w-100" style="object-fit: cover; height: 300px;">
-            <p class="text-center text-white">EAGLE SCOOTER</p>
-        </div>
+        <?php foreach ($products as $index => $product): ?>
+            <div class="col-12 col-sm-6 col-md-6 col-lg-3 d-flex flex-column align-items-center mb-4" data-aos="fade-up" data-aos-delay="<?= ($index + 1) * 100 ?>">
+                <div class="product-image-wrapper">
+                    <img 
+                        src="<?= htmlspecialchars($product['image']) ?>" 
+                        alt="<?= htmlspecialchars($product['name']) ?>" 
+                        class="img-fluid w-100 rounded shadow-sm" 
+                        style="object-fit: cover; max-height: 250px;">
+                </div>
+                <p class="text-center text-white mt-2"><?= htmlspecialchars($product['name']) ?></p>
+            </div>
+        <?php endforeach; ?>
     </div>
 </div>
-
 <!-- Gallery Section -->
-<div class="container py-5 section-background">
-    <h2 class="text-center" data-aos="fade-up">Gallery</h2>
+<div class="section-background ">
+    <h2 class="text-center text-white" data-aos="fade-up">Gallery</h2>
     <div class="row">
         <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="100">
             <div class="gallery-item">
@@ -127,7 +169,7 @@
 </div>
 
 <!-- Contact Us Section -->
-<div class="container py-5 section-background">
+<div class="section-background">
     <h2 class="text-center text-white" data-aos="fade-up">Contact Us</h2>
     <div class="row text-center text-white">
         <div class="col-md-4" data-aos="fade-left">
@@ -145,7 +187,7 @@
     </div>
 </div>
 
-    <?php include('includes/footer.php'); ?>
+
 
     <!-- Include Bootstrap JS and dependencies -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -161,8 +203,6 @@
         once: true // Animation occurs only once when scrolling down
     });
 </script>
-</body>
-</html>
 <!-- Footer Section -->
 <footer class="footer bg-primary text-white py-4">
   <div class="container text-center">
@@ -185,20 +225,6 @@
   </div>
 </footer>
 
+<?php include('includes/footer.php'); ?>
 <!-- Include Bootstrap CSS -->
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
-
-<!-- Custom CSS for Footer -->
-<style>
-  .footer {
-    background-color: #497ecf; /* Gloss Glacier Blue */
-    font-size: 14px;
-  }
-  .footer a {
-    text-decoration: none;
-    font-weight: bold;
-  }
-  .footer-link a:hover {
-    text-decoration: underline;
-  }
-</style>
