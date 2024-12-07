@@ -21,31 +21,25 @@ if ($result && $row = $result->fetch_assoc()) {
     $orders = $row['total'];
 }
 
-
-//fetch total orders
-$sqlTotalOrders = "SELECT COUNT(*) AS total FROM orders";
-$resultTotalOrders = $conn->query($sqlTotalOrders);
-$totalOrders = 0;
-if ($resultTotalOrders && $row = $resultTotalOrders->fetch_assoc()) {
-    $totalOrders = $row['total'];
-}
-
 // Get today's date
 // Get today's date
 $today = date('Y-m-d');
 
-// Fetch Today's Orders
-$today = date('Y-m-d');
-$sqlTodayOrders = "SELECT COUNT(*) AS total FROM orders WHERE order_date = ?";
-$stmtTodayOrders = $conn->prepare($sqlTodayOrders);
-$stmtTodayOrders->bind_param("s", $today);
-$stmtTodayOrders->execute();
-$resultTodayOrders = $stmtTodayOrders->get_result();
-$todayOrders = 0;
-if ($resultTodayOrders && $row = $resultTodayOrders->fetch_assoc()) {
-    $todayOrders = $row['total'];
+// Fetch today's orders count
+$sqlToday = "SELECT COUNT(*) AS total FROM orders WHERE order_date = ?";
+$stmtToday = $conn->prepare($sqlToday);
+$stmtToday->bind_param("s", $today);
+$stmtToday->execute();
+$resultToday = $stmtToday->get_result();
+$totalToday = 0;
+
+if ($resultToday && $row = $resultToday->fetch_assoc()) {
+    $totalToday = $row['total'];
 }
-$stmtTodayOrders->close();
+
+// Assign the value to $todayOrders
+$todayOrders = $totalToday; 
+$stmtToday->close();
 
 $conn->close();
 ?>
@@ -234,11 +228,12 @@ $conn->close();
         </div>
         <div class="card-body text-center">
             <h3 id="totalOrdersText">
-                <?php echo htmlspecialchars($totalToday); ?>
+                <?php echo htmlspecialchars($totalOrders); ?>
             </h3>
         </div>
     </div>
 </div>
+
 
     <div class="col-md-3 mb-3">
         <div class="card" style="background-color: #C8E6F5;"> 
@@ -451,18 +446,17 @@ document.addEventListener("DOMContentLoaded", function () {
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const categoryCount = document.getElementById("categoryCount").value;
-    const productCount = document.getElementById("productCount").value;
-    const customerCount = document.getElementById("customerCount").value;
-    const salesAmount = document.getElementById("salesAmount").value;
-    const todayOrders = document.getElementById("todayOrders").value;
-    const totalOrders = document.getElementById("totalOrders").value;
+        const productCount = document.getElementById("productCount").value;
+        const customerCount = document.getElementById("customerCount").value;
+        const salesAmount = document.getElementById("salesAmount").value;
+        const todayOrders = document.getElementById("todayOrders").value;
+        const totalOrders = document.getElementById("totalOrders").value;
 
-    // Update UI elements with fetched data
-    document.getElementById('categoryText').innerHTML = categoryCount;
-    document.getElementById('productText').innerHTML = productCount;
-    document.getElementById('customerText').innerHTML = customerCount;
-    document.getElementById('todayOrdersText').innerHTML = todayOrders;
-    document.getElementById('totalOrdersText').innerHTML = totalOrders;
+        document.getElementById('categoryText').innerHTML = categoryCount;
+        document.getElementById('productText').innerHTML = productCount;
+        document.getElementById('customerText').innerHTML = customerCount;
+        document.getElementById('todayOrdersText').innerHTML = todayOrders;
+        document.getElementById('totalOrdersText').innerHTML = totalOrders;
 
         const createBarChart = (context, label, data, bgColor, brColor) => {
             new Chart(context, {
