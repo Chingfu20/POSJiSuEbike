@@ -13,40 +13,13 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// SQL query to fetch all records from the 'orders' table
-$sql = "SELECT * FROM orders";
-$result = $conn->query($sql);
+// SQL query to delete all records from the 'orders' table
+$sql = "DELETE FROM orders";
 
-// Check if there are any records
-if ($result->num_rows > 0) {
-    // Output data of each row
-    echo "<table border='1'>
-            <tr>
-                <th>ID</th>
-                <th>Customer ID</th>
-                <th>Tracking No</th>
-                <th>Invoice No</th>
-                <th>Total Amount</th>
-                <th>Order Date</th>
-                <th>Payment Mode</th>
-                <th>Order Placed By ID</th>
-            </tr>";
-    
-    while($row = $result->fetch_assoc()) {
-        echo "<tr>
-                <td>" . $row["id"] . "</td>
-                <td>" . $row["customer_id"] . "</td>
-                <td>" . $row["tracking_no"] . "</td>
-                <td>" . $row["invoice_no"] . "</td>
-                <td>" . $row["total_amount"] . "</td>
-                <td>" . $row["order_date"] . "</td>
-                <td>" . $row["payment_mode"] . "</td>
-                <td>" . $row["order_placed_by_id"] . "</td>
-              </tr>";
-    }
-    echo "</table>";
+if ($conn->query($sql) === TRUE) {
+    echo "All records have been deleted from the 'orders' table.";
 } else {
-    echo "No records found";
+    echo "Error deleting records: " . $conn->error;
 }
 
 // Close the connection
