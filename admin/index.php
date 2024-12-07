@@ -21,6 +21,8 @@ if ($result && $row = $result->fetch_assoc()) {
     $orders = $row['total'];
 }
 
+
+// Get total orders (overall)
 // Get total orders (overall)
 $sqlTotalOrders = "SELECT COUNT(*) AS total FROM orders";
 $resultTotalOrders = $conn->query($sqlTotalOrders);
@@ -223,14 +225,14 @@ $conn->close();
         </div>
     </div>
 
-    <div class="col-md-3 mb-3">
+<div class="col-md-3 mb-3">
     <div class="card" style="background-color: #B3E5D6;"> 
         <div class="card-header" style="background-color: #17a2b8; color: white;">
             <i class="fas fa-receipt"></i> Total Orders
         </div>
         <div class="card-body text-center">
             <h3 id="totalOrdersText">
-                <?php echo htmlspecialchars($totalOrders); ?>
+                  <?php    echo htmlspecialchars($totalOrders); ?>
             </h3>
         </div>
     </div>
@@ -436,12 +438,7 @@ document.addEventListener("DOMContentLoaded", function () {
     $totalSales = mysqli_query($conn, "SELECT SUM(total_amount) AS total_sales FROM orders");
     echo $totalSales ? mysqli_fetch_assoc($totalSales)['total_sales'] : 0.00;
 ?>">
-<input type="hidden" id="todayOrders" value="<?php
-    $todayDate = date('Y-m-d');
-    $todayOrders = mysqli_query($conn, "SELECT * FROM orders WHERE order_date='$todayDate'");
-    echo $todayOrders ? mysqli_num_rows($todayOrders) : 0;
-?>">
-<input type="hidden" id="totalOrders" value="<?= getCount('orders'); ?>">
+
 
 <?php include('includes/footer.php'); ?>
 
@@ -451,15 +448,11 @@ document.addEventListener("DOMContentLoaded", function () {
         const productCount = document.getElementById("productCount").value;
         const customerCount = document.getElementById("customerCount").value;
         const salesAmount = document.getElementById("salesAmount").value;
-        const todayOrders = document.getElementById("todayOrders").value;
-        const totalOrders = document.getElementById("totalOrders").value;
+      
 
         document.getElementById('categoryText').innerHTML = categoryCount;
         document.getElementById('productText').innerHTML = productCount;
         document.getElementById('customerText').innerHTML = customerCount;
-        document.getElementById('todayOrdersText').innerHTML = todayOrders;
-        document.getElementById('totalOrdersText').innerHTML = totalOrders;
-
         const createBarChart = (context, label, data, bgColor, brColor) => {
             new Chart(context, {
                 type: 'bar',
