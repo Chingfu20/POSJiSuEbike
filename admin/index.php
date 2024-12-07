@@ -234,7 +234,6 @@ $conn->close();
     </div>
 </div>
 
-
     <div class="col-md-3 mb-3">
         <div class="card" style="background-color: #C8E6F5;"> 
             <div class="card-header" style="background-color: #007bff; color: white;">
