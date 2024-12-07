@@ -17,7 +17,7 @@
         <li class="nav-item">
           <a class="nav-link active text-white" href="about_us">About us</a>
         </li>
-        <li class="nav-item dropdown active">
+        <!-- <li class="nav-item dropdown active">
             <a class="nav-link dropdown-toggle active text-white" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Units
             </a>
@@ -26,7 +26,7 @@
               <li><a class="dropdown-item" href="scooter.php">3 Wheel</a></li>
               <li><a class="dropdown-item" href="classy.php">4 Wheel</a></li>
             </ul>
-        </li>
+        </li> -->
         <li class="nav-item">
           <a class="nav-link active text-white" href="contact">Contact us</a>
         </li>
