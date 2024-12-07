@@ -144,15 +144,41 @@ if (isset($_POST['saveProduct'])) {
     $status = isset($_POST['status']) ? 1 : 0;
 
     $finalImage = '';
+    
+    // File size validation (5 MB = 5 * 1024 * 1024 bytes)
+    $maxFileSize = 5 * 1024 * 1024; // 5 MB
+    
     if ($_FILES['image']['size'] > 0) {
+        // Check file size
+        if ($_FILES['image']['size'] > $maxFileSize) {
+            redirect('products-create.php', 'File size must be less than 5 MB!');
+            exit;
+        }
+
         $path = "../assets/uploads/products";
+        
+        // Optional: Validate file type
+        $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+        $fileType = mime_content_type($_FILES['image']['tmp_name']);
+        if (!in_array($fileType, $allowedTypes)) {
+            redirect('products-create.php', 'Invalid file type. Only JPG, PNG, and GIF are allowed!');
+            exit;
+        }
+
         $image_ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
         $filename = time() . '.' . $image_ext;
+
+        // Ensure uploads directory exists
+        if (!is_dir($path)) {
+            mkdir($path, 0755, true);
+        }
 
         if (move_uploaded_file($_FILES['image']['tmp_name'], $path . "/" . $filename)) {
             $finalImage = "assets/uploads/products/" . $filename;
         } else {
             error_log("Failed to move uploaded file.");
+            redirect('products-create.php', 'File upload failed!');
+            exit;
         }
     }
 
@@ -169,10 +195,10 @@ if (isset($_POST['saveProduct'])) {
     $result = insert('products', $data);
 
     if ($result) {
-        redirect('products', 'Product Created Successfully!');
+        redirect('products.php', 'Product Created Successfully!');
     } else {
         error_log("Insert query failed: " . mysqli_error($conn));
-        redirect('products-create', 'Something Went Wrong!');
+        redirect('products-create.php', 'Something Went Wrong!');
     }
 }
 

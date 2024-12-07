@@ -21,25 +21,27 @@ if ($result && $row = $result->fetch_assoc()) {
     $orders = $row['total'];
 }
 
-// Get today's date
-// Get today's date
+// Get total orders (overall)
+$sqlTotalOrders = "SELECT COUNT(*) AS total FROM orders";
+$resultTotalOrders = $conn->query($sqlTotalOrders);
+$totalOrders = 0; // Default count
+if ($resultTotalOrders && $row = $resultTotalOrders->fetch_assoc()) {
+    $totalOrders = $row['total'];
+}
+
 $today = date('Y-m-d');
 
 // Fetch today's orders count
-$sqlToday = "SELECT COUNT(*) AS total FROM orders WHERE order_date = ?";
-$stmtToday = $conn->prepare($sqlToday);
-$stmtToday->bind_param("s", $today);
-$stmtToday->execute();
-$resultToday = $stmtToday->get_result();
-$totalToday = 0;
-
-if ($resultToday && $row = $resultToday->fetch_assoc()) {
-    $totalToday = $row['total'];
+$sqlTodayOrders = "SELECT COUNT(*) AS total FROM orders WHERE order_date = ?";
+$stmtTodayOrders = $conn->prepare($sqlTodayOrders);
+$stmtTodayOrders->bind_param("s", $today);
+$stmtTodayOrders->execute();
+$resultTodayOrders = $stmtTodayOrders->get_result();
+$todayOrders = 0; // Default count
+if ($resultTodayOrders && $row = $resultTodayOrders->fetch_assoc()) {
+    $todayOrders = $row['total'];
 }
-
-// Assign the value to $todayOrders
-$todayOrders = $totalToday; 
-$stmtToday->close();
+$stmtTodayOrders->close();
 
 $conn->close();
 ?>
@@ -242,7 +244,7 @@ $conn->close();
             </div>
             <div class="card-body text-center">
                 <h3 id="todayOrdersText">
-                <?php echo isset($todayOrders) ? htmlspecialchars($todayOrders) : 0; ?>
+                <?php echo htmlspecialchars($todayOrders); ?>
                 </h3>
             </div>
         </div>
