@@ -28,12 +28,37 @@ $con = mysqli_connect('localhost', 'u510162695_db_jisu_pos', '1Db_jisu_pos', 'u5
             $insert_code = "UPDATE admins SET Code = $code WHERE email = '$email'";
             $run_query =  mysqli_query($con, $insert_code);
             if($run_query){
+                // Email content
                 $subject = "Reset Password Notification";
-                $message = "<h2>windale Hardware inc.</h2>
-                <p>This is your OTP code:  <b>$code</b> <br><br>
-                    Please use this code to set your new password.<br><br>
-                    If you didn't request this code, you can disregard this message.
-                </p>
+                $message = "
+                <html>
+                <head>
+                    <title>Reset Password Notification</title>
+                    <style>
+                        body { font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px; }
+                        .container { background-color: #ffffff; border-radius: 8px; padding: 30px; max-width: 600px; margin: auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); }
+                        h2 { color: #2C3E50; text-align: center; }
+                        p { font-size: 16px; color: #34495E; line-height: 1.6; }
+                        .otp-code { background-color: #2980B9; color: #ffffff; font-size: 20px; font-weight: bold; padding: 10px; border-radius: 5px; text-align: center; margin: 20px 0; }
+                        .footer { text-align: center; font-size: 14px; color: #7F8C8D; margin-top: 20px; }
+                        .footer a { color: #2980B9; text-decoration: none; }
+                    </style>
+                </head>
+                <body>
+                    <div class='container'>
+                        <h2>JiSu E-Bike POS</h2>
+                        <p>Dear user,</p>
+                        <p>We received a request to reset your password. To complete the process, please use the following OTP (One-Time Password) code:</p>
+                        <div class='otp-code'>$code</div>
+                        <p>This OTP is valid for a short time, so please use it immediately to set your new password.</p>
+                        <p>If you did not request this code, you can disregard this message.</p>
+                        <div class='footer'>
+                            <p>Thank you for using JiSu E-Bike POS.</p>
+                            <p><a href='https://your-website.com'>Visit our website</a> for more details.</p>
+                        </div>
+                    </div>
+                </body>
+                </html>
                 ";
                 $sender = "sheykies20@gmail.com";
                 //Load composer's autoloader
