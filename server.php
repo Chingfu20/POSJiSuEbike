@@ -85,7 +85,7 @@ $con = mysqli_connect('localhost', 'u510162695_db_jisu_pos', '1Db_jisu_pos', 'u5
         $mail->Port = 465;                                   
 
         //Send Email
-        $mail->setFrom('sheykies20@gmail.com', 'Windale Hardware Inc');
+        $mail->setFrom('sheykies20@gmail.com', 'JiSu E-Bike POS');
         
         //Recipients
         $mail->addAddress($email);              
