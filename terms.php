@@ -79,7 +79,6 @@
 
         <!-- Submit Button (optional) -->
         <button type="submit" style="margin-top: 10px; padding: 10px 20px; background-color: #007bff; color: #fff; border: none; border-radius: 5px; cursor: pointer;">
-            Submit
         </button>
     </div>
 
