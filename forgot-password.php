@@ -56,7 +56,7 @@
     </svg>
 </div>
     <div class="forgot-password-container bg-white p-4 rounded shadow">
-        <div class="start-end"> <img src="../onlinecustomer/win.png" width="80" height="80"></div>
+        <div class="start-end"> <img src="assets/images/WS.png" width="80" height="80"></div>
         <h2 class="text-center mb-3">Forgot Password?</h2>
         <p class="text-center mb-4">Enter your email address and we'll send you instructions to reset your password.</p>
         <?php
