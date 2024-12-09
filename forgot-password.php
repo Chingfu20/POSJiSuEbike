@@ -49,9 +49,9 @@
 }
 .start-end {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%; /* Optional: Ensures the div has height to center the image vertically */
+    justify-content: left;
+    align-items: left;
+    height: 100%; 
 }
 
     </style>
