@@ -67,7 +67,6 @@
         <h2>6. Contact</h2>
         <p>If you have any questions about these terms, please contact us at <a href="mailto:support@jisu-ebike.com">support@jisu-ebike.com</a>.</p>
 
-        <p><a href="javascript:history.back()">Go Back</a></p>
 
         <!-- Add checkbox for agreeing to Terms and Conditions -->
         <div class="my-3">
@@ -76,5 +75,8 @@
                 I agree to the <a href="terms.php" class="text-secondary">Terms & Conditions</a>.
             </label>
         </div>
+        <button
+        ><a href="javascript:history.back()">Go Back</a></button>
+
     </div>
 
