@@ -159,7 +159,7 @@ foreach ($sessionProducts as $key => $item) :
                     </div>
                     <div class="col-md-4">
                         <br/>
-                        <button type="button" class="btn btn-success w-100 proceedToPlace">Proceed to place order</button>
+                        <button type="button" class="btn btn-warning w-100 proceedToPlace">Proceed to place order</button>
                     </div>
                 </div>
             </div>
