@@ -67,10 +67,10 @@
                                     </div>
                                 </div>
                                 <div class="my-3">
+                                <a href="terms.php" class="text-secondary">Terms & Conditions</a>
+                                </div>
     <a href="chooseway">Forgot Password?</a>
     <br>
-    <a href="terms.php" class="text-secondary">Terms & Conditions</a>
-</div>
                                 <input type="hidden" name="recaptcha_token" id="recaptcha_token">
                                 <div class="my-3">
                                     <button type="submit" name="loginBtn" class="btn btn-primary w-100 mt-2">
