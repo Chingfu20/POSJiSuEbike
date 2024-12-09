@@ -10,13 +10,19 @@
             line-height: 1.6;
             margin: 0;
             padding: 20px;
+            background-color: #f5f5f5; /* Light background for contrast */
         }
         h1, h2, h3 {
             color: #333;
         }
         .container {
             max-width: 800px;
-            margin: 0 auto;
+            margin: 50px auto; /* Center the box with margin */
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: #fff; /* White background for the box */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
         }
         a {
             color: #007bff;
@@ -24,6 +30,12 @@
         }
         a:hover {
             text-decoration: underline;
+        }
+        ul {
+            margin-left: 20px; /* Indent list items */
+        }
+        p {
+            margin: 10px 0; /* Space between paragraphs */
         }
     </style>
 </head>
