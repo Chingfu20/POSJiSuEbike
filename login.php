@@ -67,8 +67,12 @@
                                     </div>
                                 </div>
                                 <div class="my-3">
-                                <a href="terms.php" class="text-secondary">Terms & Conditions</a>
-                                </div>
+    <input type="checkbox" id="termsCheckbox" name="terms" value="agree" required>
+    <label for="termsCheckbox" class="text-secondary">
+        I agree to the <a href="terms.php" class="text-secondary">Terms & Conditions</a>
+    </label>
+</div>
+
     <a href="chooseway">Forgot Password?</a>
     <br>
                                 <input type="hidden" name="recaptcha_token" id="recaptcha_token">
