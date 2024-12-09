@@ -5,17 +5,17 @@
     <div class="row text-center">
         <div class="col-md-4">
             <p><i class="fas fa-map-marker-alt fa-2x"></i></p>
-            <p>Address</p>
+            <p> Address</p>
             <p>Located at Campo, Bantigue, Bantayan Island, Cebu</p>
         </div>
         <div class="col-md-4">
             <p><i class="fas fa-phone fa-2x"></i></p>
-            <p>Customer Service:</p>
+            <p> Customer Service:</p>
             <p>0923-377-4667</p>
         </div>
         <div class="col-md-4">
             <p><i class="fas fa-envelope fa-2x"></i></p>
-            <p>Complaint:</p>
+            <p> Complaint:</p>
             <p>0947-209-8888</p>
         </div>
     </div>
@@ -36,7 +36,9 @@
     </div>
     <div class="row mt-3">
       <div class="col-12">
-        <p>Add: Campo, Bantigue, Bantayan Island, Cebu. Tel: 0947-209-8888 Complaint: 0947-209-8888</p>
+        <p>Add: Campo, Bantigue, Bantayan Island, Cebu. Tel: 0947-209-8888 Complaint:
+
+0947-209-8888</p>
       </div>
     </div>
   </div>
@@ -45,11 +47,10 @@
 <!-- Include Bootstrap CSS -->
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
 
-<!-- Custom CSS -->
+<!-- Custom CSS for Footer -->
 <style>
-  /* Update the footer background color here */
   .footer {
-    background-color: #your-new-color; /* Replace with your desired color, e.g., #0056b3 */
+    background-color: #497ecf; /* Gloss Glacier Blue */
     font-size: 14px;
   }
   .footer a {
@@ -60,3 +61,4 @@
     text-decoration: underline;
   }
 </style>
+
