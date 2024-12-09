@@ -47,6 +47,13 @@
 .custom-shape-divider-bottom-1728231997 .shape-fill {
     fill: #FD2323;
 }
+.start-end {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Optional: Ensures the div has height to center the image vertically */
+}
+
     </style>
 </head>
 <body style="background-color:hsl(49 26.8% 92% /1);" class="d-flex align-items-center justify-content-center">
@@ -56,7 +63,9 @@
     </svg>
 </div>
     <div class="forgot-password-container bg-white p-4 rounded shadow">
-        <div class="start-end"> <img src="../assets/images/logo.fb51b8e1.png" width="80" height="80"></div>
+    <div class="start-end">
+    <img src="../assets/images/logo.fb51b8e1.png" width="80" height="80">
+</div>
         <h2 class="text-center mb-3">Forgot Password?</h2>
         <p class="text-center mb-4">Enter your email address and we'll send you instructions to reset your password.</p>
         <?php
