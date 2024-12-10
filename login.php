@@ -30,7 +30,7 @@
 </head>
 <body>
     <?php include('includes/header.php'); ?>
-
+    <?php include('assets/script.php'); ?>
     <div class="py-5 bg-light">
         <div class="container mt-5">
             <div class="row justify-content-center">
