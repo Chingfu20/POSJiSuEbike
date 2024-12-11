@@ -7,6 +7,26 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.12/sweetalert2.all.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.12/sweetalert2.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+<body class="p-6 bg-gray-100">
+    <div class="max-w-md mx-auto bg-white p-6 rounded shadow-md">
+        <div class="my-3">     
+            <input 
+                type="checkbox" 
+                id="termsCheckbox" 
+                name="terms" 
+                value="agree" 
+                required 
+                class="mr-2"
+            >     
+            <label 
+                for="termsCheckbox" 
+                class="text-secondary"
+            >         
+                I agree to the <a href="terms.php" class="text-blue-500 hover:underline">Terms & Conditions</a>
+            </label> 
+        </div>
+    </div>
     <style>
         body {
             font-family: Arial, sans-serif;
