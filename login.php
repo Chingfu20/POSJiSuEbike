@@ -67,31 +67,12 @@
                                         </span>
                                     </div>
                                 </div>
-                                <body class="p-6 bg-gray-100">
-    <div class="max-w-md mx-auto bg-white p-6 rounded shadow-md">
-        <div class="my-3">     
-            <input 
-                type="checkbox" 
-                id="termsCheckbox" 
-                name="terms" 
-                value="agree" 
-                required 
-                class="mr-2"
-            >     
-            <label 
-                for="termsCheckbox" 
-                class="text-secondary"
-            >         
-                I agree to the <a href="terms.php" class="text-blue-500 hover:underline">Terms & Conditions</a>
-            </label> 
-        </div>
-        <button 
-            id="submitBtn" 
-            class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-        >
-            Submit
-        </button>
-    </div>
+                                <div class="my-3">
+    <input type="checkbox" id="termsCheckbox" name="terms" value="agree" required>
+    <label for="termsCheckbox" class="text-secondary">
+        I agree to the <a href="terms.php" class="text-secondary">Terms & Conditions</a>
+    </label>
+</div>
 
     <a href="chooseway">Forgot Password?</a>
     <br>
