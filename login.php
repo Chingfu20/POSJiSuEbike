@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="login.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script src="https://www.google.com/recaptcha/api.js?render=6LdeBZMqAAAAAKAMeLNRPYEX1PsYJRtDRBsEAQVl"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.12/sweetalert2.all.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.12/sweetalert2.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .lockout-container {
             background-color: #f8d7da;
@@ -232,5 +235,26 @@
     });
 });
   </script>
+  <script>
+        document.getElementById('submitBtn').addEventListener('click', function() {
+            const termsCheckbox = document.getElementById('termsCheckbox');
+            
+            if (!termsCheckbox.checked) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Oops...',
+                    text: 'Please agree to the Terms & Conditions before submitting.',
+                    confirmButtonText: 'OK'
+                });
+            } else {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Terms Accepted!',
+                    text: 'Thank you for agreeing to our Terms & Conditions.',
+                    confirmButtonText: 'Continue'
+                });
+            }
+        });
+    </script>
 </body>
 </html>
