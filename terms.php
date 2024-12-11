@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Terms and Conditions</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.12/sweetalert2.all.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.12/sweetalert2.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -72,3 +75,26 @@
 
     </div>
 
+    <script>
+        document.getElementById('submitBtn').addEventListener('click', function() {
+            const termsCheckbox = document.getElementById('termsCheckbox');
+            
+            if (!termsCheckbox.checked) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Oops...',
+                    text: 'Please agree to the Terms & Conditions before submitting.',
+                    confirmButtonText: 'OK'
+                });
+            } else {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Terms Accepted!',
+                    text: 'Thank you for agreeing to our Terms & Conditions.',
+                    confirmButtonText: 'Continue'
+                });
+            }
+        });
+    </script>
+</body>
+</html>
