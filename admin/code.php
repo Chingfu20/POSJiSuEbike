@@ -271,7 +271,7 @@ if (isset($_POST['saveCustomer'])) {
         $emailCheck = mysqli_query($conn, "SELECT * FROM customers WHERE email='$email'");
         if ($emailCheck) {
             if (mysqli_num_rows($emailCheck) > 0) {
-                redirect('customers-createproduct', 'Email already used by another user');
+                redirect('customers-create', 'Email already used by another user');
             }
         } else {
             error_log("Email check query failed: " . mysqli_error($conn));
