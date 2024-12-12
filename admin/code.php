@@ -100,13 +100,13 @@ if (isset($_POST['saveCategory'])) {
         $result = insert('categories', $data);
 
         if ($result) {
-            redirect('categories', 'Category Created Successfully!');
+            redirect('categories.php', 'Category Created Successfully!');
         } else {
             error_log("Insert query failed: " . mysqli_error($conn));
-            redirect('categories-create', 'Something Went Wrong!');
+            redirect('categories-create.php', 'Something Went Wrong!');
         }
     } else {
-        redirect('categories-create', 'Please fill required fields.');
+        redirect('categories-create.php', 'Please fill required fields.');
     }
 }
 
@@ -125,13 +125,13 @@ if (isset($_POST['updateCategory'])) {
         $result = update('categories', $categoryId, $data);
 
         if ($result) {
-            redirect('categories-edit.?id=' . $categoryId, 'Category Updated Successfully!');
+            redirect('categories-edit.php?id=' . $categoryId, 'Category Updated Successfully!');
         } else {
             error_log("Update query failed: " . mysqli_error($conn));
-            redirect('categories-edit.?id=' . $categoryId, 'Something Went Wrong!');
+            redirect('categories-edit.php?id=' . $categoryId, 'Something Went Wrong!');
         }
     } else {
-        redirect('categories-edit.?id=' . $categoryId, 'Please fill required fields.');
+        redirect('categories-edit.php?id=' . $categoryId, 'Please fill required fields.');
     }
 }
 
