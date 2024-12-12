@@ -78,16 +78,6 @@ if (isset($_POST['proceedToPlaceBtn'])) {
     $amountPaid = validate($_POST['amountPaid']);
     $changeAmount = validate($_POST['changeAmount']);
 
-      $totalAmount = 0;
-    foreach ($_SESSION['productItems'] as $item) {
-        $totalAmount += $item['price'] * $item['quantity'];
-    }
-
-    // Check if the amount paid is less than the total amount
-    if ($amountPaid < $totalAmount) {
-        jsonResponse(422, 'warning', 'Amount paid is insufficient to place the order.');
-    }
-
     $checkCustomer = mysqli_query($conn, "SELECT * FROM customers WHERE phone='$phone' LIMIT 1");
     if ($checkCustomer) {
         if (mysqli_num_rows($checkCustomer) > 0) {
