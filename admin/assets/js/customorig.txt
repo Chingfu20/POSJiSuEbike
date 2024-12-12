@@ -1,0 +1,65 @@
+ $(document).on('click', '.proceedToPlace', function () {
+        var cphone = $('#cphone').val();
+        var payment_mode = $('#payment_mode').val();
+        var amountPaid = $('#amountPaid').val();
+        var changeAmount = $('#changeAmount').val();
+    
+        if(payment_mode == '') {
+            swal("Select Payment Mode","Select your paymasdasdasent mode","warning");
+            return false;
+        }
+    
+        if(cphone == '' && !$.isNumeric(cphone)) {
+            swal("Enter Phone Number","Enter Valid Phone Number","warning");
+            return false;
+        }
+    
+        var data = {
+            'proceedToPlaceBtn': true,
+            'cphone': cphone,
+            'payment_mode': payment_mode,
+            'amountPaid': amountPaid,
+            'changeAmount': changeAmount
+        };
+    
+        $.ajax({
+            type: "POST",
+            url: "orders-code.php",
+            data: data,
+            success: function (response) {
+                var res = JSON.parse(response);
+                if(res.status == 200){
+                    window.location.href = "order-summary";
+
+                }else if(res.status = 404){
+
+                    swal(res.message, res.message, res.status_type, {
+                        buttons: {
+                            catch: {
+                                text: "Add Customer",
+                                value: "catch"
+                            },
+                            cancel: "Cancel"
+                        }
+                    })
+                    .then((value) => {
+                        switch(value){
+
+                            case "catch":
+                                $('#c_phone').val(cphone);
+                                $('#addCustomerModal').modal('show');
+                                // console.log('Pop the customer add modal');
+                                break;
+                            default:
+                        }
+                    });
+
+                }else{
+                    swal(res.message, res.message, res.status_type);
+                }
+
+            }
+        })
+
+
+    });
