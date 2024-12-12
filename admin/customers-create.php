@@ -24,7 +24,7 @@
                     </div>
                     <div class="col-md-12 mb-3">
                         <label for="">Phone</label>
-                        <input type="number" name="phone" class="form-control"  maxlength="11" />
+                        <input type="number" name="phone" id="phone" class="form-control"  maxlength="11" />
                     </div>
                     <div class="col-md-12 mb-3">
                         <label for="">Address</label>
@@ -40,5 +40,14 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.getElementById('phone').addEventListener('input', function (e) {
+        let value = e.target.value;
+        if (value.length > 11) {
+            e.target.value = value.slice(0, 11);
+        }
+    });
+</script>
 
 <?php include('includes/footer.php'); ?>
