@@ -271,7 +271,7 @@ if (isset($_POST['saveCustomer'])) {
             }
         } else {
             error_log("Email check query failed: " . mysqli_error($conn));
-            redirect('customers-createproduct', 'Something went wrong during email check.');
+            redirect('customers-create', 'Something went wrong during email check.');
         }
 
         $data = [
