@@ -251,7 +251,23 @@ foreach ($sessionProducts as $key => $item) :
     }
 });
 
+document.querySelector('.proceedToPlace').addEventListener('click', function () {
+    const totalAmount = parseFloat(document.getElementById('totalAmount').value.replace(/,/g, ''));
+    const amountPaid = parseFloat(document.getElementById('amountPaid').value) || 0;
 
+    if (amountPaid < totalAmount) {
+        // Show an error using SweetAlert
+        Swal.fire({
+            icon: 'error',
+            title: 'Insufficient Payment',
+            text: `Amount paid (${amountPaid.toFixed(2)}) is less than the total amount (${totalAmount.toFixed(2)}).`,
+        });
+        return; // Stop further processing
+    }
+
+    // Proceed with placing the order
+    document.getElementById('orderForm').submit();
+});
 </script>
 
 <?php include('includes/footer.php'); ?>

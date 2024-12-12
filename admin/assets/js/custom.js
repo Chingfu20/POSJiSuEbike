@@ -64,24 +64,11 @@ $(document).ready(function () {
     $(document).on('click', '.proceedToPlace', function () {
         var cphone = $('#cphone').val();
         var payment_mode = $('#payment_mode').val();
-        // var amountPaid = $('#amountPaid').val();
+        var amountPaid = $('#amountPaid').val();
         var changeAmount = $('#changeAmount').val();
     
-        const totalAmount = parseFloat(document.getElementById('totalAmount').value.replace(/,/g, ''));
-        const amountPaid = parseFloat(document.getElementById('amountPaid').value) || 0;
-    
-        if (amountPaid < totalAmount) {
-            // Show an error using SweetAlert
-            Swal.fire({
-                icon: 'error',
-                title: 'Insufficient Payment',
-                text: `Amount paid (${amountPaid.toFixed(2)}) is less than the total amount (${totalAmount.toFixed(2)}).`,
-            });
-            return; // Stop further processing
-        } 
-
         if(payment_mode == '') {
-            swal("Select Payment Mode","Select your paymasdasdasent mode","warning");
+            swal("Select Payment Mode","Select your payment mode","warning");
             return false;
         }
     
