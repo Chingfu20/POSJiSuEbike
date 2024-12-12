@@ -150,8 +150,8 @@ foreach ($sessionProducts as $key => $item) :
                         <input type="text" id="totalAmount" class="form-control" value="" readonly />
                     </div>
                     <div class="col-md-4">
-                        <label>Enter Amount</label>
-                        <input type="number" id="amountPaid" class="form-control" value="0" class="form-control" min="0" required/>
+                        <label>Enter asdAmount</label>
+                        <input type="number" id="amountPaid" class="form-control" value="0" class="form-control" min="0" require/>
                     </div>
                     <div class="col-md-4">
                         <label>Change</label>
