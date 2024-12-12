@@ -92,7 +92,7 @@ $(document).ready(function () {
             success: function (response) {
                 var res = JSON.parse(response);
                 if(res.status == 200){
-                    window.location.href = "order-summary";
+                    window.location.href = "order-summary.php";
 
                 }else if(res.status = 404){
 
