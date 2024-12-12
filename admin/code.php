@@ -285,13 +285,13 @@ if (isset($_POST['saveCustomer'])) {
         $result = insert('customers', $data);
 
         if ($result) {
-            redirect('customersproduct', 'Customer Created Successfully');
+            redirect('customers', 'Customer Created Successfully');
         } else {
             error_log("Insert query failed: " . mysqli_error($conn));
-            redirect('customers-createproduct', 'Something Went Wrong!');
+            redirect('customers', 'Something Went Wrong!');
         }
     } else {
-        redirect('customers-createproduct', 'Please fill required fields');
+        redirect('customers', 'Please fill required fields');
     }
 }
 
