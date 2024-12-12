@@ -261,7 +261,11 @@ if (isset($_POST['saveCustomer'])) {
     $phone = validate($_POST['phone']);
     $address = validate($_POST['address']);
     $status = isset($_POST['status']) ? 1 : 0;
-    
+      // Validate phone number length
+      if (strlen($phone) !== 11 || !is_numeric($phone)) {
+        redirect('customers-create', 'Phone number must be exactly 11 digits.');
+        exit;
+    }
 
     if ($name) {
         $emailCheck = mysqli_query($conn, "SELECT * FROM customers WHERE email='$email'");
