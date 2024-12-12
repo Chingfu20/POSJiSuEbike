@@ -248,10 +248,10 @@ if (isset($_POST['updateProduct'])) {
     $result = update('products', $product_id, $data);
 
     if ($result) {
-        redirect('products-edit.?id=' . $product_id, 'Product Updated Successfully!');
+        redirect('products-edit?id=' . $product_id, 'Product Updated Successfully!');
     } else {
         error_log("Update query failed: " . mysqli_error($conn));
-        redirect('products-edit.?id=' . $product_id, 'Something Went Wrong!');
+        redirect('products-edit?id=' . $product_id, 'Something Went Wrong!');
     }
 }
 
