@@ -22,7 +22,7 @@ function redirect($url, $status){
 // Display messages or status after any process
 function alertMessage(){
     if(isset($_SESSION['status'])){
-         echo  '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+         echo  '<div class="alert alert-success alert-dismissible fade show" role="alert">
             <h6> '.$_SESSION['status'].' </h6>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>';
