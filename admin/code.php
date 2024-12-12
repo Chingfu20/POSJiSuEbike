@@ -46,7 +46,7 @@ if (isset($_POST['updateAdmin'])) {
 
     $adminData = getById('admins', $adminId);
     if ($adminData['status'] != 200) {
-        redirect('admins-edit.?id=' . $adminId, 'Please fill required fields.');
+        redirect('admins-edit?id=' . $adminId, 'Please fill required fields.');
     }
 
     $name = validate($_POST['name']);
@@ -59,7 +59,7 @@ if (isset($_POST['updateAdmin'])) {
     $checkResult = mysqli_query($conn, $EmailCheckQuery);
     if ($checkResult) {
         if (mysqli_num_rows($checkResult) > 0) {
-            redirect('admins-edit.?id=' . $adminId, 'Email already used by another user');
+            redirect('admins-edit?id=' . $adminId, 'Email already used by another user');
         }
     }
 
@@ -76,13 +76,13 @@ if (isset($_POST['updateAdmin'])) {
         $result = update('admins', $adminId, $data);
 
         if ($result) {
-            redirect('admins-edit.?id=' . $adminId, 'Admin Updated Successfully!');
+            redirect('admins-edit?id=' . $adminId, 'Admin Updated Successfully!');
         } else {
             error_log("Update query failed: " . mysqli_error($conn));
-            redirect('admins-edit.?id=' . $adminId, 'Something Went Wrong!');
+            redirect('admins-edit?id=' . $adminId, 'Something Went Wrong!');
         }
     } else {
-        redirect('admins-edit.?id=' . $adminId, 'Please fill required fields.');
+        redirect('admins-edit?id=' . $adminId, 'Please fill required fields.');
     }
 }
 
@@ -100,13 +100,13 @@ if (isset($_POST['saveCategory'])) {
         $result = insert('categories', $data);
 
         if ($result) {
-            redirect('categories.php', 'Category Created Successfully!');
+            redirect('categories', 'Category Created Successfully!');
         } else {
             error_log("Insert query failed: " . mysqli_error($conn));
-            redirect('categories-create.php', 'Something Went Wrong!');
+            redirect('categories-create', 'Something Went Wrong!');
         }
     } else {
-        redirect('categories-create.php', 'Please fill required fields.');
+        redirect('categories-create', 'Please fill required fields.');
     }
 }
 
@@ -125,13 +125,13 @@ if (isset($_POST['updateCategory'])) {
         $result = update('categories', $categoryId, $data);
 
         if ($result) {
-            redirect('categories-edit.php?id=' . $categoryId, 'Category Updated Successfully!');
+            redirect('categories-edit?id=' . $categoryId, 'Category Updated Successfully!');
         } else {
             error_log("Update query failed: " . mysqli_error($conn));
-            redirect('categories-edit.php?id=' . $categoryId, 'Something Went Wrong!');
+            redirect('categories-edit?id=' . $categoryId, 'Something Went Wrong!');
         }
     } else {
-        redirect('categories-edit.php?id=' . $categoryId, 'Please fill required fields.');
+        redirect('categories-edit?id=' . $categoryId, 'Please fill required fields.');
     }
 }
 
@@ -151,7 +151,7 @@ if (isset($_POST['saveProduct'])) {
     if ($_FILES['image']['size'] > 0) {
         // Check file size
         if ($_FILES['image']['size'] > $maxFileSize) {
-            redirect('products-create.php', 'File size must be less than 5 MB!');
+            redirect('products-create', 'File size must be less than 5 MB!');
             exit;
         }
 
@@ -161,7 +161,7 @@ if (isset($_POST['saveProduct'])) {
         $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
         $fileType = mime_content_type($_FILES['image']['tmp_name']);
         if (!in_array($fileType, $allowedTypes)) {
-            redirect('products-create.php', 'Invalid file type. Only JPG, PNG, and GIF are allowed!');
+            redirect('products-create', 'Invalid file type. Only JPG, PNG, and GIF are allowed!');
             exit;
         }
 
@@ -177,7 +177,7 @@ if (isset($_POST['saveProduct'])) {
             $finalImage = "assets/uploads/products/" . $filename;
         } else {
             error_log("Failed to move uploaded file.");
-            redirect('products-create.php', 'File upload failed!');
+            redirect('products-create', 'File upload failed!');
             exit;
         }
     }
@@ -198,7 +198,7 @@ if (isset($_POST['saveProduct'])) {
         redirect('products.php', 'Product Created Successfully!');
     } else {
         error_log("Insert query failed: " . mysqli_error($conn));
-        redirect('products-create.php', 'Something Went Wrong!');
+        redirect('products-create', 'Something Went Wrong!');
     }
 }
 
@@ -312,11 +312,11 @@ if (isset($_POST['updateCustomer'])) {
         $emailCheck = mysqli_query($conn, "SELECT * FROM customers WHERE email='$email' AND id != '$customerId'");
         if ($emailCheck) {
             if (mysqli_num_rows($emailCheck) > 0) {
-                redirect('customers-edit.?id=' . $customerId, 'Email already used by another user');
+                redirect('customers-edit?id=' . $customerId, 'Email already used by another user');
             }
         } else {
             error_log("Email check query failed: " . mysqli_error($conn));
-            redirect('customers-edit.?id=' . $customerId, 'Something went wrong during email check.');
+            redirect('customers-edit?id=' . $customerId, 'Something went wrong during email check.');
         }
 
         $data = [
@@ -330,13 +330,13 @@ if (isset($_POST['updateCustomer'])) {
         $result = update('customers', $customerId, $data);
 
         if ($result) {
-            redirect('customers-edit.?id=' . $customerId, 'Customer updated Successfully');
+            redirect('customers-edit?id=' . $customerId, 'Customer updated Successfully');
         } else {
             error_log("Update query failed: " . mysqli_error($conn));
-            redirect('customers-edit.?id=' . $customerId, 'Something Went Wrong!');
+            redirect('customers-edit?id=' . $customerId, 'Something Went Wrong!');
         }
     } else {
-        redirect('customers-edit.?id=' . $customerId, 'Please fill required fields');
+        redirect('customers-edit?id=' . $customerId, 'Please fill required fields');
     }
 }
 
