@@ -64,68 +64,68 @@ $(document).ready(function () {
     $(document).on('click', '.proceedToPlace', function () {
         var cphone = $('#cphone').val();
         var payment_mode = $('#payment_mode').val();
-        var amountPaid = parseFloat($('#amountPaid').val());
-        var totalAmount = parseFloat($('#totalAmount').val().replace(/,/g, ''));
+        var amountPaid = $('#amountPaid').val();
+        var changeAmount = $('#changeAmount').val();
     
-        // Check if payment mode is selected
-        if (payment_mode == '') {
-            swal("Select Payment Mode", "Select your payment mode", "warning");
+        if(payment_mode == '') {
+            swal("Select Payment Mode","Select your paymasdasdasent mode","warning");
             return false;
         }
     
-        // Validate phone number (must be 11 digits)
-        if (cphone == '' || !$.isNumeric(cphone) || cphone.length !== 11) {
-            swal("Enter Phone Number", "Enter a valid 11-digit phone number", "warning");
+        if(cphone == '' && !$.isNumeric(cphone)) {
+            swal("Enter Phone Number","Enter Valid Phone Number","warning");
             return false;
         }
     
-        // Check if amount paid is greater than or equal to total amount
-        if (isNaN(amountPaid) || amountPaid < totalAmount) {
-            swal("Insufficient Amount", "The amount paid must be greater than or equal to the total amount", "warning");
-            return false;
-        }
-    
-        // Prepare data to send via AJAX
         var data = {
             'proceedToPlaceBtn': true,
             'cphone': cphone,
             'payment_mode': payment_mode,
             'amountPaid': amountPaid,
-            'changeAmount': $('#changeAmount').val()
+            'changeAmount': changeAmount
         };
     
-        // Send AJAX request to process the order
         $.ajax({
             type: "POST",
             url: "orders-code.php",
             data: data,
             success: function (response) {
                 var res = JSON.parse(response);
-                if (res.status == 200) {
-                    window.location.href = "order-summary"; // Redirect to order summary page
-                } else if (res.status == 404) {
+                if(res.status == 200){
+                    window.location.href = "order-summary";
+
+                }else if(res.status = 404){
+
                     swal(res.message, res.message, res.status_type, {
                         buttons: {
-                            catch: { text: "Add Customer", value: "catch" },
+                            catch: {
+                                text: "Add Customer",
+                                value: "catch"
+                            },
                             cancel: "Cancel"
                         }
-                    }).then((value) => {
-                        switch(value) {
+                    })
+                    .then((value) => {
+                        switch(value){
+
                             case "catch":
                                 $('#c_phone').val(cphone);
-                                $('#addCustomerModal').modal('show'); // Show customer modal
+                                $('#addCustomerModal').modal('show');
+                                // console.log('Pop the customer add modal');
                                 break;
                             default:
-                                break;
                         }
                     });
-                } else {
+
+                }else{
                     swal(res.message, res.message, res.status_type);
                 }
+
             }
-        });
+        })
+
+
     });
-    
 
 
     // Add Customer to customers table
