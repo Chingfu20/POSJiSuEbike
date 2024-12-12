@@ -68,7 +68,7 @@ $(document).ready(function () {
         var changeAmount = $('#changeAmount').val();
     
         if(payment_mode == '') {
-            swal("Seleasdct Paymenasdasdt Mode","Select your payment mode","warning");
+            swal("Select Payment Mode","Select your paymasdasdasent mode","warning");
             return false;
         }
     
