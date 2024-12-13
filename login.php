@@ -63,10 +63,7 @@
                                     <div class="input-group">
                                         <input type="password" name="password" id="password" class="form-control" />
                                         <span class="input-group-text" style="cursor: pointer;">
-    <svg id="togglePassword" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-        <circle cx="12" cy="12" r="3"></circle>
-    </svg>
+    <i class="fa fa-eye" id="togglePassword" style="font-size: 1.2rem; color: #5a5a5a;"></i>
 </span>
                                     </div>
                                 </div>
@@ -223,16 +220,16 @@
         const isPassword = passwordField.getAttribute('type') === 'password';
         passwordField.setAttribute('type', isPassword ? 'text' : 'password');
 
-        // Change the SVG design for better toggle effect (optional).
-        this.innerHTML = isPassword 
-            ? `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                   <path d="M17.94 17.94A10.72 10.72 0 0 1 12 20c-7 0-11-8-11-8a18.74 18.74 0 0 1 3-4.6"/>
-                   <path d="M1 1l22 22"/>
-               </svg>`
-            : `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                   <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                   <circle cx="12" cy="12" r="3"/>
-               </svg>`;
+        // Update the icon
+        this.className = isPassword ? 'fa fa-eye-slash' : 'fa fa-eye';
+    });
+
+    togglePassword.addEventListener('mouseover', function () {
+        this.style.color = '#0078d7'; // Edge-like blue hover effect
+    });
+
+    togglePassword.addEventListener('mouseout', function () {
+        this.style.color = '#5a5a5a'; // Default grey color
     });
     </script>
   <script>
