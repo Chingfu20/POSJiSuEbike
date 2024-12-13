@@ -63,10 +63,13 @@
                                     <div class="input-group">
                                         <input type="password" name="password" id="password" class="form-control" />
                                         <div class="password-container">
-        <input type="password" placeholder="Enter password">
-        <span class="password-toggle">
-            <i class="fas fa-eye" id="togglePassword"></i>
-        </span>
+        <input type="password" class="password-input" placeholder="Enter password">
+        <button class="password-toggle" id="togglePassword" aria-label="Toggle password visibility">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path id="eyePath" d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                <circle id="eyeCircle" cx="12" cy="12" r="3"/>
+            </svg>
+        </button>
     </div>
                                     </div>
                                 </div>
@@ -217,22 +220,44 @@
     }
 
     const togglePassword = document.getElementById('togglePassword');
-        const passwordField = document.querySelector('input[type="password"]');
+        const passwordField = document.querySelector('.password-input');
+        const eyePath = document.getElementById('eyePath');
+        const eyeCircle = document.getElementById('eyeCircle');
 
         togglePassword.addEventListener('click', function () {
-            const isPassword = passwordField.getAttribute('type') === 'password';
-            passwordField.setAttribute('type', isPassword ? 'text' : 'password');
+            const isPassword = passwordField.type === 'password';
+            passwordField.type = isPassword ? 'text' : 'password';
 
-            // Update the icon
-            this.className = isPassword ? 'fas fa-eye-slash' : 'fas fa-eye';
+            // Animate icon
+            if (isPassword) {
+                eyePath.setAttribute('d', 'M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24');
+                eyeCircle.setAttribute('cx', '12');
+                eyeCircle.setAttribute('cy', '12');
+                eyeCircle.setAttribute('r', '3');
+            } else {
+                eyePath.setAttribute('d', 'M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z');
+                eyeCircle.setAttribute('cx', '12');
+                eyeCircle.setAttribute('cy', '12');
+                eyeCircle.setAttribute('r', '3');
+            }
         });
-    </script>
-  <script>
-    grecaptcha.ready(function() {
-    grecaptcha.execute('6LdeBZMqAAAAAKAMeLNRPYEX1PsYJRtDRBsEAQVl', {action: 'login'}).then(function(token) {
-        document.getElementById('recaptcha_token').value = token;
-    });
-});
+
+        // Hover and active states
+        togglePassword.addEventListener('mouseenter', function() {
+            togglePassword.style.backgroundColor = 'rgba(0,0,0,0.05)';
+        });
+
+        togglePassword.addEventListener('mouseleave', function() {
+            togglePassword.style.backgroundColor = 'transparent';
+        });
+
+        togglePassword.addEventListener('mousedown', function() {
+            togglePassword.style.backgroundColor = 'rgba(0,0,0,0.1)';
+        });
+
+        togglePassword.addEventListener('mouseup', function() {
+            togglePassword.style.backgroundColor = 'transparent';
+        });
   </script>
 </body>
 </html>
