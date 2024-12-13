@@ -63,8 +63,8 @@
                                     <div class="input-group">
                                         <input type="password" name="password" id="password" class="form-control" />
                                         <span class="input-group-text">
-                                            <i class="fa fa-eye" id="togglePassword" style="cursor: pointer;"></i>
-                                        </span>
+    <i class="fa fa-eye" id="togglePassword" style="cursor: pointer; color: #007bff; font-size: 1.2rem; transition: color 0.3s;"></i>
+</span>
                                     </div>
                                 </div>
                                 <div class="my-3">
@@ -213,16 +213,23 @@
         updateCountdown();
     }
 
-    // Password toggle functionality
-    const togglePassword = document.querySelector('#togglePassword');
-    const password = document.querySelector('#password');
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordField = document.querySelector('input[type="password"]');
 
     togglePassword.addEventListener('click', function () {
-        const isPasswordVisible = password.getAttribute('type') === 'password';
-        password.setAttribute('type', isPasswordVisible ? 'text' : 'password');
+        const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordField.setAttribute('type', type);
+        
+        // Toggle icon
+        this.classList.toggle('fa-eye-slash');
+    });
 
-        this.classList.toggle('fa-eye');
-        this.classList.toggle('fa-eye-slash'); 
+    togglePassword.addEventListener('mouseover', function () {
+        this.style.color = '#0056b3';
+    });
+
+    togglePassword.addEventListener('mouseout', function () {
+        this.style.color = '#007bff';
     });
     </script>
   <script>
