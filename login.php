@@ -62,9 +62,12 @@
                                     <label class="form-label">Enter Password</label>
                                     <div class="input-group">
                                         <input type="password" name="password" id="password" class="form-control" />
-                                        <span class="input-group-text" style="cursor: pointer;">
-    <i class="fa fa-eye" id="togglePassword" style="font-size: 1.2rem; color: #5a5a5a;"></i>
-</span>
+                                        <div class="password-container">
+        <input type="password" placeholder="Enter password">
+        <span class="password-toggle">
+            <i class="fas fa-eye" id="togglePassword"></i>
+        </span>
+    </div>
                                     </div>
                                 </div>
                                 <div class="my-3">
@@ -214,23 +217,15 @@
     }
 
     const togglePassword = document.getElementById('togglePassword');
-    const passwordField = document.querySelector('input[type="password"]');
+        const passwordField = document.querySelector('input[type="password"]');
 
-    togglePassword.addEventListener('click', function () {
-        const isPassword = passwordField.getAttribute('type') === 'password';
-        passwordField.setAttribute('type', isPassword ? 'text' : 'password');
+        togglePassword.addEventListener('click', function () {
+            const isPassword = passwordField.getAttribute('type') === 'password';
+            passwordField.setAttribute('type', isPassword ? 'text' : 'password');
 
-        // Update the icon
-        this.className = isPassword ? 'fa fa-eye-slash' : 'fa fa-eye';
-    });
-
-    togglePassword.addEventListener('mouseover', function () {
-        this.style.color = '#0078d7'; // Edge-like blue hover effect
-    });
-
-    togglePassword.addEventListener('mouseout', function () {
-        this.style.color = '#5a5a5a'; // Default grey color
-    });
+            // Update the icon
+            this.className = isPassword ? 'fas fa-eye-slash' : 'fas fa-eye';
+        });
     </script>
   <script>
     grecaptcha.ready(function() {
