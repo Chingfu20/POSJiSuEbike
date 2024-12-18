@@ -182,19 +182,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <h2 class="text-center mb-3" style="color: #69B2FF;">Enter Your Phone Number</h2>
         <p class="text-center mb-4">Please enter your phone number to receive an OTP.</p>
 
-        <?php if (isset($error)): ?>
-            <div class="alert alert-danger text-center"><?php echo htmlspecialchars($error); ?></div>
+        <?php if ($error): ?>
+        <div class="error"><?php echo htmlspecialchars($error); ?></div>
         <?php endif; ?>
-
-        <?php if (isset($success)): ?>
-            <div class="alert alert-success text-center"><?php echo htmlspecialchars($success); ?></div>
+        
+        <?php if ($success): ?>
+            <div class="success"><?php echo htmlspecialchars($success); ?></div>
         <?php endif; ?>
 
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
-            <div class="mb-3">
-                <input type="tel" id="phone" name="phone" class="form-control text-center" placeholder="Enter your phone number (e.g., 09123456789)" maxlength="11" pattern="[0-9]*" required>
-            </div>
-            <button type="submit" class="btn btn-primary w-100">Send OTP</button>
+            <input type="tel" id="phone" name="phone" pattern="[0-9]*" required placeholder="Enter your phone number (e.g., 09123456789)"  maxlength="11">
+            <button type="submit">Send OTP</button>
         </form>
 
         <div class="text-center mt-3">
