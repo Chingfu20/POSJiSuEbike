@@ -126,112 +126,82 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        html, body {
+            height: 100%;
             background-color: #f4f9ff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
         }
-        .container {
-            background-color: #fff;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            width: 100%;
+        .otp-container {
             max-width: 400px;
+            width: 90%;
         }
-        h2 {
-            margin-bottom: 20px;
-            font-size: 24px;
-            color: #69B2FF;
-        }
-        label {
-            font-size: 16px;
-            color: #333;
-            display: block;
-            margin-bottom: 8px;
-        }
-        input[type="tel"] {
-            padding: 10px;
-            width: 85%;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-bottom: 20px;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            color: white;
-            background-color:  #69B2FF;
+        .btn-primary {
+            background-color: #69B2FF;
             border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
         }
-        button:hover {
+        .btn-primary:hover {
             background-color: #58A1E8;
-            transform: translateY(-2px);
         }
-        button:active {
-            transform: translateY(0);
+        .custom-shape-divider-bottom {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+            transform: rotate(180deg);
         }
-        .instructions {
+        .custom-shape-divider-bottom svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 110px;
+        }
+        .custom-shape-divider-bottom .shape-fill {
+            fill: #69B2FF;
+        }
+        .countdown {
             font-size: 14px;
             color: #555;
-            margin-top: 10px;
         }
-
-        .error {
+        .expired {
             color: red;
-            margin-bottom: 10px;
-        }
-        .success {
-            color: green;
-            margin-bottom: 10px;
-        }
-
-        .login {
-            font-size: 14px;
-            color: black;
-            margin-top: 10px;
-            font-weight:bold;
-            cursor:pointer;
-        }
-
-        .login a{
-            text-decoration:none;
-            color: grey;
         }
     </style>
 </head>
-<body>
+<body class="d-flex align-items-center justify-content-center">
+    <div class="custom-shape-divider-bottom">
+        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M1200,0H0V120H281.94C572.9,116.24,602.45,3.86,602.45,3.86h0S632,116.24,923,120h277Z" class="shape-fill"></path>
+        </svg>
+    </div>
 
-    <div class="container">
-        <h2>Enter Your Phone Number</h2>
-        <?php if ($error): ?>
-        <div class="error"><?php echo htmlspecialchars($error); ?></div>
-        <?php endif; ?>
-        
-        <?php if ($success): ?>
-            <div class="success"><?php echo htmlspecialchars($success); ?></div>
-        <?php endif; ?>
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
-            <input type="tel" id="phone" name="phone" pattern="[0-9]*" required placeholder="Enter your phone number (e.g., 09123456789)"  maxlength="11">
-            <button type="submit">Send OTP</button>
-        </form>
-        <div class="instructions">
-            <p>Please enter your 11-digit phone number. An OTP will be sent to this number.</p>
+    <div class="otp-container bg-white p-4 rounded shadow">
+        <div class="text-center mb-3">
+            <img src="../assets/images/logo.fb51b8e1.png" width="80" height="80" alt="Logo">
         </div>
+        <h2 class="text-center mb-3" style="color: #69B2FF;">Enter Your Phone Number</h2>
+        <p class="text-center mb-4">Please enter your phone number to receive an OTP.</p>
 
-        <div class="login">
-            <a href="../login.php"> Back to Login</a>
+        <?php if (isset($error)): ?>
+            <div class="alert alert-danger text-center"><?php echo htmlspecialchars($error); ?></div>
+        <?php endif; ?>
+
+        <?php if (isset($success)): ?>
+            <div class="alert alert-success text-center"><?php echo htmlspecialchars($success); ?></div>
+        <?php endif; ?>
+
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
+            <div class="mb-3">
+                <input type="tel" id="phone" name="phone" class="form-control text-center" placeholder="Enter your phone number (e.g., 09123456789)" maxlength="11" pattern="[0-9]*" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Send OTP</button>
+        </form>
+
+        <div class="text-center mt-3">
+            <a href="../login.php" class="text-primary">Back to Login</a>
         </div>
     </div>
+
     <script>
         // SweetAlert for Success
         <?php if (isset($_SESSION['success_message'])): ?>
@@ -243,7 +213,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             });
             <?php unset($_SESSION['success_message']); ?>
         <?php endif; ?>
-        
+
         document.getElementById('phone').addEventListener('input', function (e) {
             this.value = this.value.replace(/[^0-9]/g, ''); // Remove any non-numeric characters
         });
