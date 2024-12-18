@@ -39,131 +39,88 @@ $otpExpirationTime = strtotime('+15 minutes', strtotime($_SESSION['otp_generated
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Enter OTP</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f7f6;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
+        html, body {
+            height: 100%;
+            background-color: #faf9f6;
         }
-        .container {
-            background-color: #fff;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            width: 100%;
+        .otp-container {
             max-width: 400px;
+            width: 90%;
         }
-        h2 {
-            margin-bottom: 20px;
-            font-size: 24px;
-            color: #333;
-        }
-        label {
-            font-size: 16px;
-            color: #333;
-            display: block;
-            margin-bottom: 8px;
-        }
-        input[type="text"] {
-            padding: 10px;
-            width: 100%;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            color: white;
+        .btn-danger {
             background-color: #fd2323;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
         }
-        button:hover {
-            background-color: #45a049;
-            transform: translateY(-2px);
+        .btn-danger:hover {
+            background-color: #f71d1d;
         }
-        button:active {
-            transform: translateY(0);
+        .custom-shape-divider-bottom {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+            transform: rotate(180deg);
         }
-        button:disabled {
-            background-color: #ccc;
-            cursor: not-allowed;
+        .custom-shape-divider-bottom svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 110px;
         }
-        .instructions {
-            font-size: 14px;
-            color: #555;
-            margin-top: 10px;
-        }
-        .error {
-            color: red;
-            margin-bottom: 20px;
-        }
-        .success {
-            color: green;
-            margin-bottom: 20px;
-            padding: 10px;
-            background-color: #e8f5e9;
-            border-radius: 5px;
-            border: 1px solid #c8e6c9;
+        .custom-shape-divider-bottom .shape-fill {
+            fill: #FD2323;
         }
         .countdown {
-            font-size: 16px;
+            font-size: 14px;
             color: #555;
-            margin-top: 10px;
         }
         .expired {
             color: red;
         }
     </style>
 </head>
-<body>
-
-    <div class="container">
-        <h2>Enter OTP</h2>
-        <?php if (isset($_SESSION['success_message'])): ?>
-            <div class="success">
-                <?php 
-                    echo htmlspecialchars($_SESSION['success_message']); 
-                    unset($_SESSION['success_message']); 
-                ?>
-            </div>
-        <?php endif; ?>
-
-        <?php if (isset($error)): ?>
-            <div class="error"><?php echo htmlspecialchars($error); ?></div>
-        <?php endif; ?>
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
-            <label for="otp">One-Time Password (OTP):</label>
-            <input type="text" id="otp" name="otp" required placeholder="Enter OTP" maxlength="6" pattern="[0-9]{6}">
-            <button type="submit" id="submit-button">Verify OTP</button>
-        </form>
-        <div class="instructions">
-            <p>The OTP was sent to your phone. Please enter it above to proceed.</p>
-
-            <div class="login">
-            <a href="../login.php"> Back to Login</a>
-        </div>
-        </div>
-        <div class="countdown" id="countdown-timer"></div>
+<body class="d-flex align-items-center justify-content-center">
+    <div class="custom-shape-divider-bottom">
+        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M1200,0H0V120H281.94C572.9,116.24,602.45,3.86,602.45,3.86h0S632,116.24,923,120h277Z" class="shape-fill"></path>
+        </svg>
     </div>
 
-    
+    <div class="otp-container bg-white p-4 rounded shadow">
+        <div class="text-center mb-3">
+            <img src="../assets/images/logo.fb51b8e1.png" width="80" height="80" alt="Logo">
+        </div>
+        <h2 class="text-center mb-3">Enter OTP</h2>
+        <p class="text-center mb-4">Please enter the OTP sent to your phone number.</p>
+
+        <?php if (isset($error)): ?>
+            <div class="alert alert-danger text-center"><?php echo htmlspecialchars($error); ?></div>
+        <?php endif; ?>
+
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
+            <div class="mb-3">
+                <input type="text" id="otp" name="otp" class="form-control text-center" placeholder="Enter OTP" maxlength="6" pattern="[0-9]{6}" required>
+            </div>
+            <button type="submit" id="submit-button" class="btn btn-danger w-100">Verify OTP</button>
+        </form>
+
+        <div class="countdown text-center mt-3" id="countdown-timer"></div>
+
+        <div class="text-center mt-3">
+            <p class="mb-1">OTP expired? <a href="resend-otp.php" class="text-danger">Resend OTP</a></p>
+            <a href="../login.php" class="text-danger">Back to Login</a>
+        </div>
+    </div>
 
     <script>
         // Pass OTP expiration time to JavaScript
         const otpExpirationTime = <?php echo json_encode($otpExpirationTime * 1000); ?>; // Convert to milliseconds
 
-        // Countdown Timer
         const countdownTimer = document.getElementById('countdown-timer');
         const submitButton = document.getElementById('submit-button');
 
@@ -174,16 +131,25 @@ $otpExpirationTime = strtotime('+15 minutes', strtotime($_SESSION['otp_generated
             if (timeLeft > 0) {
                 const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-                countdownTimer.innerHTML = `Time left to enter OTP: ${minutes}m ${seconds}s`;
+                countdownTimer.innerHTML = `Time left to enter OTP: <strong>${minutes}m ${seconds}s</strong>`;
             } else {
                 countdownTimer.innerHTML = `<span class="expired">OTP has expired. Please request a new one.</span>`;
                 submitButton.disabled = true;
             }
         }
 
-        // Update timer every second
         setInterval(updateTimer, 1000);
-    </script>
 
+        // SweetAlert for Success
+        <?php if (isset($_SESSION['verification_success'])): ?>
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: '<?php echo $_SESSION['verification_success']; ?>',
+                confirmButtonColor: '#fd2323'
+            });
+            <?php unset($_SESSION['verification_success']); ?>
+        <?php endif; ?>
+    </script>
 </body>
 </html>
