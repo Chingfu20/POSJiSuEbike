@@ -21,13 +21,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $clear_stmt->close();
         
         $_SESSION['verification_success'] = "OTP Verified Successfully! You can now change your password.";
-    header("Location: newpassword.php");
-    exit();
+        header("Location: newpassword.php");
+        exit();
     } else {
         $error = "Invalid OTP or OTP has expired.";
     }
     $stmt->close();
 }
+
+// Calculate OTP expiration time (15 minutes from OTP generation)
+$otpExpirationTime = strtotime('+15 minutes', strtotime($_SESSION['otp_generated_time'] ?? date("Y-m-d H:i:s"))); // Replace with actual OTP timestamp if available
 ?>
 
 <!DOCTYPE html>
@@ -92,6 +95,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         button:active {
             transform: translateY(0);
         }
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
         .instructions {
             font-size: 14px;
             color: #555;
@@ -101,8 +108,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             color: red;
             margin-bottom: 20px;
         }
-    /* Add this to your existing styles */
-    .success {
+        .success {
             color: green;
             margin-bottom: 20px;
             padding: 10px;
@@ -110,7 +116,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             border-radius: 5px;
             border: 1px solid #c8e6c9;
         }
-        
+        .countdown {
+            font-size: 16px;
+            color: #555;
+            margin-top: 10px;
+        }
+        .expired {
+            color: red;
+        }
     </style>
 </head>
 <body>
@@ -132,12 +145,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
             <label for="otp">One-Time Password (OTP):</label>
             <input type="text" id="otp" name="otp" required placeholder="Enter OTP" maxlength="6" pattern="[0-9]{6}">
-            <button type="submit">Verify OTP</button>
+            <button type="submit" id="submit-button">Verify OTP</button>
         </form>
         <div class="instructions">
             <p>The OTP was sent to your phone/email. Please enter it above to proceed.</p>
         </div>
+        <div class="countdown" id="countdown-timer"></div>
     </div>
+
+    <script>
+        // Pass OTP expiration time to JavaScript
+        const otpExpirationTime = <?php echo json_encode($otpExpirationTime * 1000); ?>; // Convert to milliseconds
+
+        // Countdown Timer
+        const countdownTimer = document.getElementById('countdown-timer');
+        const submitButton = document.getElementById('submit-button');
+
+        function updateTimer() {
+            const now = new Date().getTime();
+            const timeLeft = otpExpirationTime - now;
+
+            if (timeLeft > 0) {
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+                countdownTimer.innerHTML = `Time left to enter OTP: ${minutes}m ${seconds}s`;
+            } else {
+                countdownTimer.innerHTML = `<span class="expired">OTP has expired. Please request a new one.</span>`;
+                submitButton.disabled = true;
+            }
+        }
+
+        // Update timer every second
+        setInterval(updateTimer, 1000);
+    </script>
 
 </body>
 </html>
