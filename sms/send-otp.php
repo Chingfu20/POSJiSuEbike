@@ -211,30 +211,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
 
-<body class="d-flex align-items-center justify-content-center">
-    <div class="custom-shape-divider-bottom">
-        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-            <path d="M1200,0H0V120H281.94C572.9,116.24,602.45,3.86,602.45,3.86h0S632,116.24,923,120h277Z" class="shape-fill"></path>
-        </svg>
-    </div> 
     <div class="container">
         <h2>Enter Your Phone Number</h2>
         <?php if ($error): ?>
-            <div class="error"><?php echo htmlspecialchars($error); ?></div>
+        <div class="error"><?php echo htmlspecialchars($error); ?></div>
         <?php endif; ?>
         
         <?php if ($success): ?>
             <div class="success"><?php echo htmlspecialchars($success); ?></div>
         <?php endif; ?>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
-            <input type="tel" id="phone" name="phone" pattern="[0-9]*" required placeholder="Enter your phone number (e.g., 09123456789)" maxlength="11">
+            <input type="tel" id="phone" name="phone" pattern="[0-9]*" required placeholder="Enter your phone number (e.g., 09123456789)"  maxlength="11">
             <button type="submit">Send OTP</button>
         </form>
         <div class="instructions">
             <p>Please enter your 11-digit phone number. An OTP will be sent to this number.</p>
         </div>
+
         <div class="login">
-            <a href="../login.php">Back to Login</a>
+            <a href="../login.php"> Back to Login</a>
         </div>
     </div>
     <script>
@@ -248,11 +243,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             });
             <?php unset($_SESSION['success_message']); ?>
         <?php endif; ?>
-
+        
         document.getElementById('phone').addEventListener('input', function (e) {
             this.value = this.value.replace(/[^0-9]/g, ''); // Remove any non-numeric characters
         });
     </script>
 </body>
-
 </html>
