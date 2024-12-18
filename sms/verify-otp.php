@@ -113,7 +113,7 @@ $otpExpirationTime = strtotime('+15 minutes', strtotime($_SESSION['otp_generated
         <div class="countdown text-center mt-3" id="countdown-timer"></div>
 
         <div class="text-center mt-3">
-            <p class="mb-1">OTP expired? <a href="resend-otp.php" class="text-primary">Resend OTP</a></p>
+            <p class="mb-1">OTP expired? <a href="send-otp.php" class="text-primary">Resend OTP</a></p>
             <a href="../login.php" class="text-primary">Back to Login</a>
         </div>
     </div>
