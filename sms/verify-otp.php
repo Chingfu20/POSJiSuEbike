@@ -2,14 +2,6 @@
 include '../conn.php';
 session_start();
 
-// Initialize or increment OTP attempt counter
-if (!isset($_SESSION['otp_attempts'])) {
-    $_SESSION['otp_attempts'] = 0;
-}
-
-// Maximum allowed OTP attempts
-$MAX_OTP_ATTEMPTS = 3;
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $otp = $_POST['otp'];
     $phone = $_SESSION['reset_phone']; // Assuming this is set when the OTP is sent
@@ -21,10 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = $stmt->get_result();
     
     if ($result->num_rows > 0) {
-        // Reset OTP attempts on successful verification
-        $_SESSION['otp_attempts'] = 0;
         $_SESSION['otp_verified'] = true;
-        
         // Clear the OTP in the database to prevent reuse
         $clear_stmt = $conn->prepare("UPDATE admins SET OTP = NULL, OTP_TIMESTAMP = NULL WHERE phone = ?");
         $clear_stmt->bind_param("s", $phone);
@@ -32,23 +21,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $clear_stmt->close();
         
         $_SESSION['verification_success'] = "OTP Verified Successfully! You can now change your password.";
-        header("Location: newpassword.php");
-        exit();
+    header("Location: newpassword.php");
+    exit();
     } else {
-        // Increment OTP attempts
-        $_SESSION['otp_attempts']++;
-
-        // Check if maximum attempts reached
-        if ($_SESSION['otp_attempts'] >= $MAX_OTP_ATTEMPTS) {
-            // Destroy the session and redirect to reset page with a message
-            session_unset();
-            session_destroy();
-            header("Location: send-otp.php?error=max_attempts");
-            exit();
-        }
-
-        $remaining_attempts = $MAX_OTP_ATTEMPTS - $_SESSION['otp_attempts'];
-        $error = "Invalid OTP. " . ($remaining_attempts > 0 ? "You have {$remaining_attempts} attempt(s) left." : "No attempts remaining.");
+        $error = "Invalid OTP or OTP has expired.";
     }
     $stmt->close();
 }
@@ -125,7 +101,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             color: red;
             margin-bottom: 20px;
         }
-        .success {
+    /* Add this to your existing styles */
+    .success {
             color: green;
             margin-bottom: 20px;
             padding: 10px;
@@ -133,14 +110,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             border-radius: 5px;
             border: 1px solid #c8e6c9;
         }
-        .attempts-counter {
-            font-size: 12px;
-            color: #666;
-            margin-top: 10px;
-        }
+        
     </style>
 </head>
 <body>
+
     <div class="container">
         <h2>Enter OTP</h2>
         <?php if (isset($_SESSION['success_message'])): ?>
@@ -155,20 +129,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <?php if (isset($error)): ?>
             <div class="error"><?php echo htmlspecialchars($error); ?></div>
         <?php endif; ?>
-        
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
             <label for="otp">One-Time Password (OTP):</label>
             <input type="text" id="otp" name="otp" required placeholder="Enter OTP" maxlength="6" pattern="[0-9]{6}">
             <button type="submit">Verify OTP</button>
         </form>
-        
-        <div class="attempts-counter">
-            Remaining Attempts: <?php echo $MAX_OTP_ATTEMPTS - ($_SESSION['otp_attempts'] ?? 0); ?>
-        </div>
-        
         <div class="instructions">
             <p>The OTP was sent to your phone/email. Please enter it above to proceed.</p>
         </div>
     </div>
+
 </body>
 </html>
