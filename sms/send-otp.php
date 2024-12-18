@@ -193,7 +193,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
             <input type="tel" id="phone" name="phone" pattern="[0-9]*" required placeholder="Enter your phone number (e.g., 09123456789)"  maxlength="11">
             <button type="submit">Send OTP</button>
-        </form>
+        </form> 
 
         <div class="text-center mt-3">
             <a href="../login.php" class="text-primary">Back to Login</a>
