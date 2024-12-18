@@ -114,114 +114,126 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (isset($update_stmt)) $update_stmt->close();
     }
 }
-?>
 
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OTP Verification</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+        }
+        h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+        label {
+            font-size: 16px;
+            color: #333;
+            display: block;
+            margin-bottom: 8px;
+        }
+        input[type="tel"] {
+            padding: 10px;
+            width: 85%;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color:  #fd2323;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        button:hover {
+            background-color: #45a049;
+            transform: translateY(-2px);
+        }
+        button:active {
+            transform: translateY(0);
+        }
+        .instructions {
+            font-size: 14px;
+            color: #555;
+            margin-top: 10px;
+        }
+
+        .error {
+            color: red;
+            margin-bottom: 10px;
+        }
+        .success {
+            color: green;
+            margin-bottom: 10px;
+        }
+
+        .login {
+            font-size: 14px;
+            color: black;
+            margin-top: 10px;
+            font-weight:bold;
+            cursor:pointer;
+        }
+
+        .login a{
+            text-decoration:none;
+            color: grey;
+        }
+    </style>
 </head>
-<body class="bg-gray-100 flex items-center justify-center h-screen">
-    <div class="bg-white shadow-md rounded-lg p-8 w-full max-w-md">
-        <h2 class="text-2xl font-bold text-gray-700 text-center mb-4">Enter Your Phone Number</h2>
+<body>
+
+    <div class="container">
+        <h2>Enter Your Phone Number</h2>
         <?php if ($error): ?>
-            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4" role="alert">
-                <?php echo htmlspecialchars($error); ?>
-            </div>
-        <?php endif; ?>
-        
-        <?php if ($success): ?>
-            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4" role="alert">
-                <?php echo htmlspecialchars($success); ?>
-            </div>
-        <?php endif; ?>
-        
+        <div class="error"><?php echo htmlspecialchars($error); ?></div>
+    <?php endif; ?>
+    
+    <?php if ($success): ?>
+        <div class="success"><?php echo htmlspecialchars($success); ?></div>
+    <?php endif; ?>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
-            <div class="mb-4">
-                <label for="phone" class="block text-gray-700 font-medium mb-2">Phone Number</label>
-                <input type="tel" id="phone" name="phone" pattern="[0-9]*" required placeholder="Enter your phone number (e.g., 09123456789)" maxlength="11" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-            </div>
-            <button type="submit" class="w-full bg-red-500 hover:bg-red-600 text-white font-medium py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50">
-                Send OTP
-            </button>
+            <input type="tel" id="phone" name="phone" pattern="[0-9]*" required placeholder="Enter your phone number (e.g., 09123456789)"  maxlength="11">
+            <button type="submit">Send OTP</button>
         </form>
-        
-        <div class="mt-4 text-gray-600 text-center">
+        <div class="instructions">
             <p>Please enter your 11-digit phone number. An OTP will be sent to this number.</p>
         </div>
-        
-        <div class="mt-4 text-center">
-            <a href="../login.php" class="text-blue-500 hover:text-blue-600 font-medium">Back to Login</a>
+
+        <div class="login">
+            <a href="../login.php"> Back to Login</a>
         </div>
     </div>
-    
     <script>
-        // OTP expiration time in minutes
-        const otpExpirationMinutes = 5;
-        
-        document.addEventListener('DOMContentLoaded', function() {
-            // Get the OTP timestamp from the session
-            const otpTimestamp = <?php echo isset($_SESSION['OTP_TIMESTAMP']) ? $_SESSION['OTP_TIMESTAMP'] : 'null'; ?>;
-            
-            if (otpTimestamp) {
-                // Calculate the remaining time in seconds
-                const currentTime = Math.floor(Date.now() / 1000);
-                const expirationTime = otpTimestamp + (otpExpirationMinutes * 60);
-                const remainingTime = expirationTime - currentTime;
-                
-                if (remainingTime > 0) {
-                    // Display the OTP counter
-                    displayOTPCounter(remainingTime);
-                } else {
-                    // OTP has expired, clear the session
-                    clearSession();
-                }
-            }
-        });
-        
-        function displayOTPCounter(remainingTime) {
-            const counterElement = document.createElement('div');
-            counterElement.classList.add('mt-4', 'text-center', 'text-gray-600');
-            counterElement.innerHTML = `OTP expires in ${remainingTime} seconds`;
-            
-            const formElement = document.querySelector('form');
-            formElement.parentNode.insertBefore(counterElement, formElement.nextSibling);
-            
-            const countdown = setInterval(function() {
-                remainingTime--;
-                counterElement.innerHTML = `OTP expires in ${remainingTime} seconds`;
-                
-                if (remainingTime <= 0) {
-                    clearInterval(countdown);
-                    clearSession();
-                }
-            }, 1000);
-        }
-        
-        function clearSession() {
-            // Clear the OTP timestamp from the session
-            <?php unset($_SESSION['OTP_TIMESTAMP']); ?>
-            
-            // Display a message or redirect to the login page
-            Swal.fire({
-                icon: 'error',
-                title: 'OTP Expired',
-                text: 'The OTP has expired. Please request a new one.',
-                confirmButtonText: 'OK'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = '../login.php';
-                }
-            });
-        }
-        
-        document.getElementById('phone').addEventListener('input', function (e) {
-            this.value = this.value.replace(/[^0-9]/g, ''); // Remove any non-numeric characters
-        });
-    </script>
+    document.getElementById('phone').addEventListener('input', function (e) {
+        this.value = this.value.replace(/[^0-9]/g, ''); // Remove any non-numeric characters
+    });
+</script>
 </body>
 </html>
