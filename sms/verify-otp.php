@@ -45,17 +45,18 @@ $otpExpirationTime = strtotime('+15 minutes', strtotime($_SESSION['otp_generated
     <style>
         html, body {
             height: 100%;
-            background-color: #faf9f6;
+            background-color: #f4f9ff;
         }
         .otp-container {
             max-width: 400px;
             width: 90%;
         }
-        .btn-danger {
-            background-color: #fd2323;
+        .btn-primary {
+            background-color: #69B2FF;
+            border: none;
         }
-        .btn-danger:hover {
-            background-color: #f71d1d;
+        .btn-primary:hover {
+            background-color: #58A1E8;
         }
         .custom-shape-divider-bottom {
             position: absolute;
@@ -73,7 +74,7 @@ $otpExpirationTime = strtotime('+15 minutes', strtotime($_SESSION['otp_generated
             height: 110px;
         }
         .custom-shape-divider-bottom .shape-fill {
-            fill: #FD2323;
+            fill: #69B2FF;
         }
         .countdown {
             font-size: 14px;
@@ -95,7 +96,7 @@ $otpExpirationTime = strtotime('+15 minutes', strtotime($_SESSION['otp_generated
         <div class="text-center mb-3">
             <img src="../assets/images/logo.fb51b8e1.png" width="80" height="80" alt="Logo">
         </div>
-        <h2 class="text-center mb-3">Enter OTP</h2>
+        <h2 class="text-center mb-3" style="color: #69B2FF;">Enter OTP</h2>
         <p class="text-center mb-4">Please enter the OTP sent to your phone number.</p>
 
         <?php if (isset($error)): ?>
@@ -106,14 +107,14 @@ $otpExpirationTime = strtotime('+15 minutes', strtotime($_SESSION['otp_generated
             <div class="mb-3">
                 <input type="text" id="otp" name="otp" class="form-control text-center" placeholder="Enter OTP" maxlength="6" pattern="[0-9]{6}" required>
             </div>
-            <button type="submit" id="submit-button" class="btn btn-danger w-100">Verify OTP</button>
+            <button type="submit" id="submit-button" class="btn btn-primary w-100">Verify OTP</button>
         </form>
 
         <div class="countdown text-center mt-3" id="countdown-timer"></div>
 
         <div class="text-center mt-3">
-            <p class="mb-1">OTP expired? <a href="resend-otp.php" class="text-danger">Resend OTP</a></p>
-            <a href="../login.php" class="text-danger">Back to Login</a>
+            <p class="mb-1">OTP expired? <a href="resend-otp.php" class="text-primary">Resend OTP</a></p>
+            <a href="../login.php" class="text-primary">Back to Login</a>
         </div>
     </div>
 
@@ -146,7 +147,7 @@ $otpExpirationTime = strtotime('+15 minutes', strtotime($_SESSION['otp_generated
                 icon: 'success',
                 title: 'Success!',
                 text: '<?php echo $_SESSION['verification_success']; ?>',
-                confirmButtonColor: '#fd2323'
+                confirmButtonColor: '#69B2FF'
             });
             <?php unset($_SESSION['verification_success']); ?>
         <?php endif; ?>
