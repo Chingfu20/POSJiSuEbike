@@ -40,105 +40,90 @@ $otpExpirationTime = strtotime('+15 minutes', strtotime($_SESSION['otp_generated
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Enter OTP</title>
     <style>
-       body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #f2f7ff, #e0f2f1);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-}
-
-.container {
-    background-color: #ffffff;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-    text-align: center;
-    width: 100%;
-    max-width: 400px;
-}
-
-h2 {
-    margin-bottom: 20px;
-    font-size: 26px;
-    color: #333333;
-}
-
-label {
-    font-size: 16px;
-    color: #555555;
-    display: block;
-    margin-bottom: 8px;
-}
-
-input[type="text"] {
-    padding: 12px;
-    width: 100%;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    text-align: center;
-    outline: none;
-    transition: box-shadow 0.3s, border-color 0.3s;
-}
-
-input[type="text"]:focus {
-    box-shadow: 0 0 8px rgba(0, 150, 136, 0.3);
-    border-color: #009688;
-}
-
-button {
-    padding: 12px 20px;
-    font-size: 16px;
-    color: white;
-    background: #ff5252;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background 0.3s, transform 0.2s;
-}
-
-button:hover {
-    background: #e53935;
-    transform: translateY(-2px);
-}
-
-button:disabled {
-    background: #bdbdbd;
-    cursor: not-allowed;
-}
-
-.success {
-    color: #2e7d32;
-    background: #e8f5e9;
-    border: 1px solid #c8e6c9;
-    padding: 10px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-}
-
-.error {
-    color: #d32f2f;
-    background: #ffebee;
-    border: 1px solid #ffcdd2;
-    padding: 10px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-}
-
-.countdown {
-    font-size: 14px;
-    color: #555555;
-    margin-top: 10px;
-}
-
-.expired {
-    color: #d32f2f;
-}
-
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+        }
+        h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+        label {
+            font-size: 16px;
+            color: #333;
+            display: block;
+            margin-bottom: 8px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            width: 100%;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #fd2323;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        button:hover {
+            background-color: #45a049;
+            transform: translateY(-2px);
+        }
+        button:active {
+            transform: translateY(0);
+        }
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        .instructions {
+            font-size: 14px;
+            color: #555;
+            margin-top: 10px;
+        }
+        .error {
+            color: red;
+            margin-bottom: 20px;
+        }
+        .success {
+            color: green;
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #e8f5e9;
+            border-radius: 5px;
+            border: 1px solid #c8e6c9;
+        }
+        .countdown {
+            font-size: 16px;
+            color: #555;
+            margin-top: 10px;
+        }
+        .expired {
+            color: red;
+        }
     </style>
 </head>
 <body>
@@ -163,7 +148,7 @@ button:disabled {
             <button type="submit" id="submit-button">Verify OTP</button>
         </form>
         <div class="instructions">
-            <p>The OTP was sent to your phone. Please enter it above to proceed.</p>
+            <p>The OTP was sent to your phone/email. Please enter it above to proceed.</p>
         </div>
         <div class="countdown" id="countdown-timer"></div>
     </div>
