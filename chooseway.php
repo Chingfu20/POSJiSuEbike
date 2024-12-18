@@ -36,7 +36,7 @@
             <a href="sms/send-otp" class="block w-full text-center bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg shadow-md">
                 Reset via SMS
             </a>
-            <a href="login.php" class="block w-full text-center bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded-lg shadow-md">
+            <a href="login.php" class="text-gray-500 hover:text-gray-600 text-sm">
                 Back to Login
             </a>
         </div>
