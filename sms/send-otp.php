@@ -126,86 +126,45 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        html, body {
+            height: 100%;
             background-color: #f4f9ff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
         }
-        .container {
-            background-color: #fff;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            width: 100%;
+        .otp-container {
             max-width: 400px;
+            width: 90%;
         }
-        h2 {
-            margin-bottom: 20px;
-            font-size: 24px;
-            color: #69B2FF;
-        }
-        label {
-            font-size: 16px;
-            color: #333;
-            display: block;
-            margin-bottom: 8px;
-        }
-        input[type="tel"] {
-            padding: 10px;
-            width: 85%;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-bottom: 20px;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            color: white;
-            background-color:  #69B2FF;
+        .btn-primary {
+            background-color: #69B2FF;
             border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
         }
-        button:hover {
+        .btn-primary:hover {
             background-color: #58A1E8;
-            transform: translateY(-2px);
         }
-        button:active {
-            transform: translateY(0);
+        .custom-shape-divider-bottom {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+            transform: rotate(180deg);
         }
-        .instructions {
+        .custom-shape-divider-bottom svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 110px;
+        }
+        .custom-shape-divider-bottom .shape-fill {
+            fill: #69B2FF;
+        }
+        .countdown {
             font-size: 14px;
             color: #555;
-            margin-top: 10px;
         }
-
-        .error {
+        .expired {
             color: red;
-            margin-bottom: 10px;
-        }
-        .success {
-            color: green;
-            margin-bottom: 10px;
-        }
-
-        .login {
-            font-size: 14px;
-            color: black;
-            margin-top: 10px;
-            font-weight:bold;
-            cursor:pointer;
-        }
-
-        .login a{
-            text-decoration:none;
-            color: grey;
         }
     </style>
 </head>
