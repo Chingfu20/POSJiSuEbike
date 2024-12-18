@@ -114,6 +114,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (isset($update_stmt)) $update_stmt->close();
     }
 }
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -163,14 +165,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             padding: 10px 20px;
             font-size: 16px;
             color: white;
-            background-color:  #00bfff; /* Glacier Blue */
+            background-color:  #fd2323;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s, transform 0.3s;
         }
         button:hover {
-            background-color: #00a3cc; /* Darker Glacier Blue */
+            background-color: #45a049;
             transform: translateY(-2px);
         }
         button:active {
@@ -217,7 +219,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="success"><?php echo htmlspecialchars($success); ?></div>
     <?php endif; ?>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
-            <input type="tel" id="phone" name="phone" pattern="[0-9]*" required placeholder="Enter your phone number (e.g., 09123456789)" maxlength="11">
+            <input type="tel" id="phone" name="phone" pattern="[0-9]*" required placeholder="Enter your phone number (e.g., 09123456789)"  maxlength="11">
             <button type="submit">Send OTP</button>
         </form>
         <div class="instructions">
