@@ -158,28 +158,15 @@ button:disabled {
             <div class="error"><?php echo htmlspecialchars($error); ?></div>
         <?php endif; ?>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
-    <label for="otp">One-Time Password (OTP):</label>
-    <input type="text" id="otp" name="otp" required placeholder="Enter OTP" maxlength="6" pattern="[0-9]{6}">
-    <button type="submit">Verify OTP</button>
-</form>
-
-<!-- Back to Login Button -->
-<div style="margin-top: 20px;">
-    <a href="login" style="text-decoration: none;">
-        <button type="button" style="
-            background: #607d8b; 
-            color: #fff; 
-            border: none; 
-            border-radius: 8px; 
-            padding: 10px 20px; 
-            font-size: 16px; 
-            cursor: pointer; 
-            transition: background 0.3s, transform 0.2s;">
-            Back to Login
-        </button>
-    </a>
-</div>
-
+            <label for="otp">One-Time Password (OTP):</label>
+            <input type="text" id="otp" name="otp" required placeholder="Enter OTP" maxlength="6" pattern="[0-9]{6}">
+            <button type="submit" id="submit-button">Verify OTP</button>
+        </form>
+        <div class="instructions">
+            <p>The OTP was sent to your phone. Please enter it above to proceed.</p>
+        </div>
+        <div class="countdown" id="countdown-timer"></div>
+    </div>
 
     <script>
         // Pass OTP expiration time to JavaScript
