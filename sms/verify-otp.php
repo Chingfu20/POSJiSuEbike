@@ -163,11 +163,26 @@ button:disabled {
             <button type="submit" id="submit-button">Verify OTP</button>
         </form>
         <div class="instructions">
-            <p>The OTP was sent to your phone/email. Please enter it above to proceed.</p>
+            <p>The OTP was sent to your phone. Please enter it above to proceed.</p>
         </div>
         <div class="countdown" id="countdown-timer"></div>
     </div>
 
+    <div style="margin-top: 20px;">
+    <a href="login.php" style="text-decoration: none;">
+        <button type="button" style="
+            background: #607d8b; 
+            color: #fff; 
+            border: none; 
+            border-radius: 8px; 
+            padding: 10px 20px; 
+            font-size: 16px; 
+            cursor: pointer; 
+            transition: background 0.3s, transform 0.2s;">
+            Back to Login
+        </button>
+    </a>
+</div>
     <script>
         // Pass OTP expiration time to JavaScript
         const otpExpirationTime = <?php echo json_encode($otpExpirationTime * 1000); ?>; // Convert to milliseconds
