@@ -149,14 +149,15 @@ $otpExpirationTime = strtotime('+15 minutes', strtotime($_SESSION['otp_generated
         </form>
         <div class="instructions">
             <p>The OTP was sent to your phone. Please enter it above to proceed.</p>
+
+            <div class="login">
+            <a href="../login.php"> Back to Login</a>
+        </div>
         </div>
         <div class="countdown" id="countdown-timer"></div>
     </div>
 
-    <div class="login">
-            <a href="../login.php"> Back to Login</a>
-        </div>
-    </div>
+    
 
     <script>
         // Pass OTP expiration time to JavaScript
