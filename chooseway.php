@@ -4,41 +4,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Password Reset</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <style>
-        body {
-            background: linear-gradient(45deg, #1a73e8, #4285f4, #34a853, #fbbc05);
-            background-size: 200% 200%;
-            animation: gradient 15s ease infinite;
+        html, body {
+            height: 100%;
+            background-color: #f4f9ff;
         }
-
-        @keyframes gradient {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
+        .reset-container {
+            max-width: 400px;
+            width: 90%;
+        }
+        .btn-primary {
+            background-color: #69B2FF;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #58A1E8;
+        }
+        .custom-shape-divider-bottom {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+            transform: rotate(180deg);
+        }
+        .custom-shape-divider-bottom svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 110px;
+        }
+        .custom-shape-divider-bottom .shape-fill {
+            fill: #69B2FF;
         }
     </style>
 </head>
-<body class="min-h-screen flex items-center justify-center">
-    <div class="bg-white shadow-md rounded-lg p-8 max-w-sm w-full">
-        <h2 class="text-2xl font-bold text-gray-700 text-center mb-4">Reset Your Password</h2>
-        <p class="text-gray-600 text-center mb-6">Choose a method to reset your password:</p>
-        <div class="space-y-6">
-            <a href="forgot-password" class="block w-full text-center bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md">
-                Reset via Email
-            </a>
-            <a href="sms/send-otp" class="block w-full text-center bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg shadow-md">
-                Reset via SMS
-            </a>
-            <a href="login.php" class="text-gray-500 hover:text-gray-600 text-sm font-bold">
-                Back to Login
-            </a>
+<body class="d-flex align-items-center justify-content-center">
+    <div class="custom-shape-divider-bottom">
+        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M1200,0H0V120H281.94C572.9,116.24,602.45,3.86,602.45,3.86h0S632,116.24,923,120h277Z" class="shape-fill"></path>
+        </svg>
+    </div>
+
+    <div class="reset-container bg-white p-4 rounded shadow">
+        <div class="text-center mb-3">
+            <img src="../assets/images/logo.fb51b8e1.png" width="80" height="80" alt="Logo">
+        </div>
+        <h2 class="text-center mb-3" style="color: #69B2FF;">Reset Your Password</h2>
+        <p class="text-center mb-4">Choose a method to reset your password:</p>
+
+        <div class="d-grid gap-3">
+            <a href="forgot-password.php" class="btn btn-primary btn-block">Reset via Email</a>
+            <a href="sms/send-otp.php" class="btn btn-success btn-block">Reset via SMS</a>
+        </div>
+
+        <div class="text-center mt-3">
+            <a href="login.php" class="text-primary">Back to Login</a>
         </div>
     </div>
 </body>
