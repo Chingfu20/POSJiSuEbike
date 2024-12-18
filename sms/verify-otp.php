@@ -21,13 +21,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $clear_stmt->close();
         
         $_SESSION['verification_success'] = "OTP Verified Successfully! You can now change your password.";
-    header("Location: newpassword.php");
-    exit();
+        header("Location: newpassword.php");
+        exit();
     } else {
         $error = "Invalid OTP or OTP has expired.";
     }
     $stmt->close();
 }
+
+// Get the OTP timestamp from the session
+$otpTimestamp = isset($_SESSION['OTP_TIMESTAMP']) ? $_SESSION['OTP_TIMESTAMP'] : null;
+$otpExpirationMinutes = 15; // OTP expiration time in minutes
 ?>
 
 <!DOCTYPE html>
@@ -37,84 +41,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Enter OTP</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f7f6;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .container {
-            background-color: #fff;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            width: 100%;
-            max-width: 400px;
-        }
-        h2 {
-            margin-bottom: 20px;
-            font-size: 24px;
-            color: #333;
-        }
-        label {
-            font-size: 16px;
-            color: #333;
-            display: block;
-            margin-bottom: 8px;
-        }
-        input[type="text"] {
-            padding: 10px;
-            width: 100%;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            color: white;
-            background-color: #fd2323;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
-        }
-        button:hover {
-            background-color: #45a049;
-            transform: translateY(-2px);
-        }
-        button:active {
-            transform: translateY(0);
-        }
-        .instructions {
-            font-size: 14px;
-            color: #555;
-            margin-top: 10px;
-        }
-        .error {
-            color: red;
-            margin-bottom: 20px;
-        }
-    /* Add this to your existing styles */
-    .success {
-            color: green;
-            margin-bottom: 20px;
-            padding: 10px;
-            background-color: #e8f5e9;
-            border-radius: 5px;
-            border: 1px solid #c8e6c9;
-        }
-        
+        /* Your existing CSS styles */
     </style>
 </head>
 <body>
-
     <div class="container">
         <h2>Enter OTP</h2>
         <?php if (isset($_SESSION['success_message'])): ?>
@@ -129,15 +59,65 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <?php if (isset($error)): ?>
             <div class="error"><?php echo htmlspecialchars($error); ?></div>
         <?php endif; ?>
+        
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
             <label for="otp">One-Time Password (OTP):</label>
             <input type="text" id="otp" name="otp" required placeholder="Enter OTP" maxlength="6" pattern="[0-9]{6}">
             <button type="submit">Verify OTP</button>
         </form>
+        
         <div class="instructions">
             <p>The OTP was sent to your phone/email. Please enter it above to proceed.</p>
         </div>
+        
+        <!-- OTP Counter -->
+        <div class="mt-4 text-center" id="otp-counter" style="display: none;">
+            OTP expires in <span id="remaining-time"></span>
+        </div>
     </div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (<?php echo json_encode($otpTimestamp); ?>) {
+                // Calculate the remaining time in seconds
+                const currentTime = Math.floor(Date.now() / 1000);
+                const expirationTime = <?php echo $otpTimestamp; ?> + (<?php echo $otpExpirationMinutes; ?> * 60);
+                const remainingTime = expirationTime - currentTime;
+                
+                if (remainingTime > 0) {
+                    // Display the OTP counter
+                    displayOTPCounter(remainingTime);
+                } else {
+                    // OTP has expired, clear the session
+                    clearSession();
+                }
+            }
+        });
+        
+        function displayOTPCounter(remainingTime) {
+            const counterElement = document.getElementById('remaining-time');
+            const counterContainerElement = document.getElementById('otp-counter');
+            counterContainerElement.style.display = 'block';
+            
+            const countdown = setInterval(function() {
+                remainingTime--;
+                counterElement.textContent = `${remainingTime} seconds`;
+                
+                if (remainingTime <= 0) {
+                    clearInterval(countdown);
+                    clearSession();
+                }
+            }, 1000);
+        }
+        
+        function clearSession() {
+            // Clear the OTP timestamp from the session
+            <?php unset($_SESSION['OTP_TIMESTAMP']); ?>
+            
+            // Display a message or redirect to the login page
+            alert("OTP has expired. Please request a new one.");
+            window.location.href = '../login.php';
+        }
+    </script>
 </body>
 </html>
