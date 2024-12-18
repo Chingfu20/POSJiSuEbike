@@ -114,19 +114,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (isset($update_stmt)) $update_stmt->close();
     }
 }
-
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OTP Verification</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f7f6;
+            background-color: #f4f9ff;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -145,7 +147,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         h2 {
             margin-bottom: 20px;
             font-size: 24px;
-            color: #333;
+            color: #69B2FF;
         }
         label {
             font-size: 16px;
@@ -165,14 +167,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             padding: 10px 20px;
             font-size: 16px;
             color: white;
-            background-color:  #fd2323;
+            background-color:  #69B2FF;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s, transform 0.3s;
         }
         button:hover {
-            background-color: #45a049;
+            background-color: #58A1E8;
             transform: translateY(-2px);
         }
         button:active {
@@ -213,11 +215,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <h2>Enter Your Phone Number</h2>
         <?php if ($error): ?>
         <div class="error"><?php echo htmlspecialchars($error); ?></div>
-    <?php endif; ?>
-    
-    <?php if ($success): ?>
-        <div class="success"><?php echo htmlspecialchars($success); ?></div>
-    <?php endif; ?>
+        <?php endif; ?>
+        
+        <?php if ($success): ?>
+            <div class="success"><?php echo htmlspecialchars($success); ?></div>
+        <?php endif; ?>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
             <input type="tel" id="phone" name="phone" pattern="[0-9]*" required placeholder="Enter your phone number (e.g., 09123456789)"  maxlength="11">
             <button type="submit">Send OTP</button>
@@ -231,9 +233,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </div>
     <script>
-    document.getElementById('phone').addEventListener('input', function (e) {
-        this.value = this.value.replace(/[^0-9]/g, ''); // Remove any non-numeric characters
-    });
-</script>
+        // SweetAlert for Success
+        <?php if (isset($_SESSION['success_message'])): ?>
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: '<?php echo $_SESSION['success_message']; ?>',
+                confirmButtonColor: '#69B2FF'
+            });
+            <?php unset($_SESSION['success_message']); ?>
+        <?php endif; ?>
+        
+        document.getElementById('phone').addEventListener('input', function (e) {
+            this.value = this.value.replace(/[^0-9]/g, ''); // Remove any non-numeric characters
+        });
+    </script>
 </body>
 </html>
