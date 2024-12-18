@@ -165,7 +165,7 @@ button:disabled {
 
 <!-- Back to Login Button -->
 <div style="margin-top: 20px;">
-    <a href="login.php" style="text-decoration: none;">
+    <a href="login" style="text-decoration: none;">
         <button type="button" style="
             background: #607d8b; 
             color: #fff; 
